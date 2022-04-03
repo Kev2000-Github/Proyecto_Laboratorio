@@ -8,7 +8,7 @@ public interface IDao<T> {
     
     T get(long id);
     
-    Vector<T> getAll();
+    List<T> getAll();
     
     void save(T t);
     

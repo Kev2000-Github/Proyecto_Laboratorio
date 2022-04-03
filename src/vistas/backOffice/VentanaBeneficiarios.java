@@ -13,6 +13,8 @@ import javax.swing.event.ListSelectionListener;
 
 import org.w3c.dom.events.MouseEvent;
 
+import modelos.Persona;
+import modelos.Usuario;
 import vistas.general.VentanaGeneral;
 import vistas.general.InputField;
 
@@ -23,19 +25,31 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
+import java.util.Vector;
 
 public class VentanaBeneficiarios extends VentanaGeneral{
     private JLabel lblTitulo;
-	private JList<String> userList;
+	private JList<String> personaList;
     private JButton edit;
     private JButton delete;
     private JButton gotoRegisterUser;
 	private String selectedUser;
-
-    public VentanaBeneficiarios(){
+	private Persona[] personas;
+	
+    public VentanaBeneficiarios(Persona[] personas){
         super();
+		this.personas = personas;
         initGUI();
     }
+
+	private String[] convertListToString(){
+		String[] personaList = new String[personas.length];
+		for(int i = 0; i < personaList.length; i++){
+			String item = personas[i].getCedula() + " " + personas[i].getNombre() + " " + personas[i].getApellido();
+			personaList[i] = item;
+		}
+		return personaList;
+	} 
 	
 	private void initGUI() {
 		try {
@@ -50,17 +64,17 @@ public class VentanaBeneficiarios extends VentanaGeneral{
                     lblTitulo.setBorder(new EtchedBorder());
 				}
 				{
-					String[] data = {"one", "two", "three", "four"};
-					userList = new JList<String>(data);
-					userList.setVisibleRowCount(20);
-					userList.addListSelectionListener(new ListSelectionListener() {
+					String[] personasDetalles = convertListToString();
+					personaList = new JList<String>(personasDetalles);
+					personaList.setVisibleRowCount(20);
+					personaList.addListSelectionListener(new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e){
-							selectedUser = (String) userList.getSelectedValue();
+							selectedUser = (String) personaList.getSelectedValue();
 							System.out.println(selectedUser); 
 						}
 					});
-					mainContainer.add(new JScrollPane(userList));
+					mainContainer.add(new JScrollPane(personaList));
 				}
 				{
 					edit = new JButton();

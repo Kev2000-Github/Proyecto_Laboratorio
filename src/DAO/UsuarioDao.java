@@ -1,14 +1,19 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Vector;
 
 import modelos.Usuario;
-
+import config.Connection.Conne;
 //MOCK IMPLEMENTATION, se necesita conexion a bd para obtener la data real
 public class UsuarioDao implements IDao<Usuario> {
-    
     private Vector<Usuario> usuarios = new Vector();
     
     public UsuarioDao() {
@@ -22,8 +27,29 @@ public class UsuarioDao implements IDao<Usuario> {
     }
     
     @Override
-    public Vector<Usuario> getAll() {
-        return usuarios;
+    public List<Usuario> getAll() {
+		PreparedStatement stmt = null;
+        Connection conn = null;
+		List<Usuario> list = new ArrayList<Usuario>();
+		try {
+			conn = Conne.Conexion();
+			stmt = conn.prepareStatement("SELECT username FROM usuario");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+                String username = rs.getString("username");
+				Usuario user = new Usuario(username, "");				
+				list.add(user);
+			}
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			Conne.cerrarConexion(conn);
+            Conne.cerrarStatement(stmt);
+		}
+		
+		return list;
     }
     
     @Override

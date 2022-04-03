@@ -9,9 +9,9 @@ public class Conne {
 
     // Variables de control.
     private static final String driver = "com.postgresql.jdbc.Driver";
-    private static final String url = "jdbc:postgresql://localhost/aquideberiairlarutaalabd";
+    private static final String url = "jdbc:postgresql://172.20.0.3:5432/lab";
     private static final String user = "root";
-    private static final String password = "";
+    private static final String password = "root";
 
     public static Connection Conexion() {
 
@@ -35,6 +35,16 @@ public class Conne {
         try {
             // Cerramos la conexión
             conex.close();
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage().toString());
+        }
+    }
+
+    public static void cerrarStatement(Statement stmt) {
+        try {
+            // Cerramos la conexión
+            stmt.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage().toString());

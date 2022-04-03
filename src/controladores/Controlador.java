@@ -30,9 +30,9 @@ public class Controlador implements ActionListener {
 		JButton btn = (JButton)e.getSource();
 		String name = btn.getName();
 		if(name == "gotoBeneficiarios"){
-			window.dispose();
-			beneficiariosBackOffice = new VentanaBeneficiarios();
-			beneficiariosBackOffice.agregarListener(this);
+			//window.dispose();
+			//beneficiariosBackOffice = new VentanaBeneficiarios();
+			//beneficiariosBackOffice.agregarListener(this);
 		}
 		else if(name == "gotoEmpleados"){
 			window.dispose();
