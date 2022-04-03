@@ -2,19 +2,20 @@ package modelos;
 
 public class Persona {
 	public String nombre;
-    public String apellido;
-    public String cedula;
-    public String direccion;
-    public String telefono;
+	public String apellido;
+	public String cedula;
+	public String direccion;
+	public String telefono;
 
-    public Persona(String nombre, String apellido, String cedula, String direccion, String telefono){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
-    public String getNombre() {
+	public Persona(String nombre, String apellido, String cedula, String direccion, String telefono) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.cedula = cedula;
+		this.direccion = direccion;
+		this.telefono = telefono;
+	}
+
+	public String getNombre() {
 		return nombre;
 	}
 
@@ -53,5 +54,5 @@ public class Persona {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-    
+
 }
