@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import DAO.UsuarioDao;
 import modelos.Usuario;
+import controladores.Controlador;
 import vistas.VentanaLogin;
 
 public class ControladorLogin implements ActionListener {
@@ -35,7 +36,8 @@ public class ControladorLogin implements ActionListener {
             window.mostrarMensaje("Credenciales incorrectas");
         }
         else{
-            
+			window.dispose();
+            new Controlador();
         }
 	}
 }

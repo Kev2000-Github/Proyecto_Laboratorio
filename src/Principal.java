@@ -1,4 +1,5 @@
 import config.Config;
+import controladores.Controlador;
 import controladores.ControladorLogin;
 
 public class Principal {

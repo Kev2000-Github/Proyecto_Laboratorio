@@ -19,10 +19,8 @@ import java.awt.Color;
 
 public class VentanaHome extends VentanaGeneral{
     private JLabel lblTitulo;
-    private InputField usernameInput;
-    private InputField passwordInput;
-    private JButton sendBtn;
-    private JPanel header;
+    private JButton goEmpleados;
+    private JButton goBeneficiarios;
 
     public VentanaHome(){
         super();
@@ -37,9 +35,21 @@ public class VentanaHome extends VentanaGeneral{
 					lblTitulo = new JLabel();
 					mainContainer.add(lblTitulo);
 
-					lblTitulo.setText("Login");
+					lblTitulo.setText("Home");
 					lblTitulo.setFont(new java.awt.Font("Dialog",1,16));
                     lblTitulo.setBorder(new EtchedBorder());
+				}
+				{
+					goEmpleados = new JButton();
+					mainContainer.add(goEmpleados);
+					goEmpleados.setText("Empleados");
+					goEmpleados.setName("gotoEmpleados");
+				}
+				{
+					goBeneficiarios = new JButton();
+					mainContainer.add(goBeneficiarios);
+					goBeneficiarios.setText("Beneficiarios");
+					goBeneficiarios.setName("gotoBeneficiarios");
 				}
 			}
 		} catch (Exception e) {
@@ -48,15 +58,8 @@ public class VentanaHome extends VentanaGeneral{
 		}
 	}
 
-    public String getUsername(){
-        return usernameInput.getValue();
-    }
-
-    public String getPassword(){
-        return passwordInput.getValue();
-    }
-
     public void agregarListener(ActionListener accion){
-        sendBtn.addActionListener(accion);
+        goEmpleados.addActionListener(accion);
+		goBeneficiarios.addActionListener(accion);
     }
 }

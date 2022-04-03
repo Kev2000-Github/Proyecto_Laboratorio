@@ -15,6 +15,8 @@ public class VentanaGeneral extends javax.swing.JFrame {
 	
 	public VentanaGeneral() {
 		super();
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 		background = Color.green;
 		initGUI();
 	}
