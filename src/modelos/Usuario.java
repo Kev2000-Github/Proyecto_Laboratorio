@@ -9,6 +9,8 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario(){}
+
     public String getUsername(){
         return username;
     }

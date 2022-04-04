@@ -24,7 +24,7 @@ public class ControladorLogin implements ActionListener {
 	
 	private Usuario autenticar(String username, String password){
         UsuarioDao userDao = new UsuarioDao();
-        return userDao.get(0);
+        return userDao.get("test");
     }
 
 	@Override

@@ -9,7 +9,7 @@ public class Conne {
 
     // Variables de control.
     private static final String driver = "com.postgresql.jdbc.Driver";
-    private static final String url = "jdbc:postgresql://172.20.0.3:5432/lab";
+    private static final String url = "jdbc:postgresql://localhost:5432/lab";
     private static final String user = "root";
     private static final String password = "root";
 
@@ -19,7 +19,7 @@ public class Conne {
 
         try {
 
-            Class.forName(driver);
+            //Class.forName(driver);
             // Se crea la conexion.
             conex = DriverManager.getConnection(url, user, password);
 

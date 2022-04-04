@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public interface IDao<T> {
     
-    T get(long id);
+    T get(String id);
     
     List<T> getAll();
     

@@ -16,8 +16,8 @@ public class EmpleadoDao implements IDao<Usuario> {
     }
     
     @Override
-    public Usuario get(long id) {
-        return usuarios.get((int) id);
+    public Usuario get(String id) {
+        return usuarios.get(1);
     }
     
     @Override
