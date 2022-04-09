@@ -2,7 +2,6 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\ASRock\\Downloads\\postgresql-42.3.3.jar"
+        "lib/**/*.jar"
     ]
 }

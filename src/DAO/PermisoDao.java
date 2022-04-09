@@ -32,15 +32,15 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM permiso where id =\"?\"";
+            String sql = "SELECT * FROM permiso where id =?";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
-            rs.next();
+            if(con.isResultSetEmpty(rs)) return null;
             Permiso permiso = setEntity(rs);
             return permiso;	
 		} 
-        catch (SQLException e) {
+        catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             return null;
@@ -58,10 +58,11 @@ public class PermisoDao implements IDao<Permiso> {
             con.open();
 			String sql = "SELECT * FROM permiso";
 			ResultSet rs = con.execQuery(sql);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Permiso permiso = setEntity(rs);
 				list.add(permiso);
-			}
+			}while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -81,15 +82,16 @@ public class PermisoDao implements IDao<Permiso> {
             con.open();
 			String sql = "SELECT p.id, p.descripcion FROM rol_permiso rp"
                 + " JOIN permiso p ON rp.permiso_id = p.id"
-                + " WHERE rol_id = \"?\"";
+                + " WHERE rol_id = ?";
             String[] params = {
                 rolId
             };
 			ResultSet rs = con.execQuery(sql, params);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Permiso permiso = setEntity(rs);
 				list.add(permiso);
-			}
+			}while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -126,7 +128,7 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE permiso SET descripcion=\"?\"";
+            String sql = "UPDATE permiso SET descripcion=?";
             String[] params = {
                 permiso.getDescripcion()
             };
@@ -144,7 +146,7 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM permiso WHERE id = \"?\"";
+			String sql = "DELETE FROM permiso WHERE id = ?";
             String[] params = {permiso.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {

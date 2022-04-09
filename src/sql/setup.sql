@@ -14,6 +14,15 @@ DROP TABLE IF EXISTS solicitud_status CASCADE;
 DROP TABLE IF EXISTS solicitud CASCADE;
 DROP TABLE IF EXISTS detalle_solicitud_servicio CASCADE;
 
+--ENUM
+DROP TYPE IF EXISTS tipo_servicio;
+DROP TYPE IF EXISTS solicitud_prioridad;
+DROP TYPE IF EXISTS solicitud_status;
+CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
+CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
+CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
+
+
 --BUSINESS LOGIC TABLES
 CREATE TABLE IF NOT EXISTS fundacion(
 	id VARCHAR(40) PRIMARY KEY,
@@ -22,8 +31,6 @@ CREATE TABLE IF NOT EXISTS fundacion(
 	porcentaje_partido_anual FLOAT NOT NULL DEFAULT 0,
 	deleted_at DATE DEFAULT NULL
 );
-
-CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
 
 CREATE TABLE IF NOT EXISTS servicio(
 	id VARCHAR(40) PRIMARY KEY,
@@ -61,8 +68,6 @@ CREATE TABLE IF NOT EXISTS empleado(
 	deleted_at DATE DEFAULT NULL
 );
 
-CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
-CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 CREATE TABLE IF NOT EXISTS solicitud(
 	id VARCHAR(40) PRIMARY KEY,

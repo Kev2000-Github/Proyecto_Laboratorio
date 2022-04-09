@@ -42,7 +42,6 @@ public class Conne {
         try{
             Statement queryExecutor = con.createStatement();
             ResultSet result = queryExecutor.executeQuery(sql);
-            queryExecutor.close();
             return result;
         }
         catch(Exception e){
@@ -56,16 +55,31 @@ public class Conne {
         try{
             PreparedStatement queryExecutor = con.prepareStatement(sql);
             for(int i = 1; i <= args.length; i++){
-                queryExecutor.setString(i, args[i]);
+                queryExecutor.setString(i, args[i - 1]);
             }
-            ResultSet result = queryExecutor.executeQuery(sql);
-            queryExecutor.close();
+            ResultSet result = queryExecutor.executeQuery();
             return result;
         }
         catch(Exception e){
             String msg = "Error obteniendo los datos\n" + e.getMessage();
             System.out.println(msg);
             return null;
+        }
+    }
+
+    //beware this, it moves cursor one step forward
+    public boolean isResultSetEmpty(ResultSet rs){
+        try{
+            boolean isEmpty = false;
+            if(rs.next() == false){
+                isEmpty = true;
+            }
+            return isEmpty;
+        }
+        catch(Exception e){
+            String msg = "Error revisando si el resultSet esta vacio\n" + e.getMessage();
+            System.out.println(msg);
+            return false;
         }
     }
 }

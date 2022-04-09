@@ -35,15 +35,15 @@ public class PersonaDao implements IDao<Persona> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM persona where cedula =\"?\"";
+            String sql = "SELECT * FROM persona where cedula =?";
             String[] params = {cedula};
             ResultSet rs = con.execQuery(sql, params);
             
-            rs.next();
+            if(con.isResultSetEmpty(rs)) return null;
             Persona persona = setEntity(rs);
             return persona;	
 		} 
-        catch (SQLException e) {
+        catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             return null;
@@ -61,10 +61,11 @@ public class PersonaDao implements IDao<Persona> {
             con.open();
 			String sql = "SELECT * FROM persona";
 			ResultSet rs = con.execQuery(sql);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Persona persona = setEntity(rs);
 				list.add(persona);
-			}
+			} while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -104,8 +105,8 @@ public class PersonaDao implements IDao<Persona> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                + " nombre=\"?\" apellido=\"?\" telefono=\"?\" direccion=\"?\""
-                + " WHERE cedula = \"?\"";
+                + " nombre=? apellido=? telefono=? direccion=?"
+                + " WHERE cedula = ?";
             String[] params = {
                 persona.getNombre(),
                 persona.getApellido(),
@@ -127,7 +128,7 @@ public class PersonaDao implements IDao<Persona> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM persona WHERE cedula = \"?\"";
+			String sql = "DELETE FROM persona WHERE cedula = ?";
             String[] params = {person.getCedula()};
             con.execQuery(sql, params);
 		} catch (Exception e) {

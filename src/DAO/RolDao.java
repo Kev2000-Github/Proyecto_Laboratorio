@@ -36,15 +36,15 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM rol where id =\"?\"";
+            String sql = "SELECT * FROM rol where id =?";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
-            rs.next();
+            if(con.isResultSetEmpty(rs)) return null;
             Rol rol = setEntity(rs);
             return rol;	
 		} 
-        catch (SQLException e) {
+        catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             return null;
@@ -62,10 +62,11 @@ public class RolDao implements IDao<Rol> {
             con.open();
 			String sql = "SELECT * FROM rol";
 			ResultSet rs = con.execQuery(sql);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Rol rol = setEntity(rs);
 				list.add(rol);
-			}
+			} while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -102,7 +103,7 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE rol SET nombre=\"?\"";
+            String sql = "UPDATE rol SET nombre=?";
             String[] params = {
                 rol.getNombre()
             };
@@ -120,7 +121,7 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM rol WHERE id = \"?\"";
+			String sql = "DELETE FROM rol WHERE id = ?";
             String[] params = {rol.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {

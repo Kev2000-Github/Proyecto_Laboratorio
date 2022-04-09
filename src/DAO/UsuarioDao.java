@@ -42,15 +42,14 @@ public class UsuarioDao implements IDao<Usuario> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM usuario where id =\"?\"";
+            String sql = "SELECT * FROM usuario where id =?";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
-            
-            rs.next();
+            if(con.isResultSetEmpty(rs)) return null;
             Usuario usuario = setEntity(rs);
             return usuario;	
 		} 
-        catch (SQLException e) {
+        catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             return null;
@@ -68,10 +67,11 @@ public class UsuarioDao implements IDao<Usuario> {
             con.open();
 			String sql = "SELECT * FROM usuario";
 			ResultSet rs = con.execQuery(sql);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Usuario usuario = setEntity(rs);
 				list.add(usuario);
-			}
+			} while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -112,7 +112,7 @@ public class UsuarioDao implements IDao<Usuario> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE usuario SET"
-                + " empleado_id=\"?\", rol_id=\"?\", username=\"?\", password=\"?\"";
+                + " empleado_id=?, rol_id=?, username=?, password=?";
             String[] params = {
                 usuario.getEmpleado().getId(),
                 usuario.getRol().getId(),
@@ -133,7 +133,7 @@ public class UsuarioDao implements IDao<Usuario> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM usuario WHERE id = \"?\"";
+			String sql = "DELETE FROM usuario WHERE id = ?";
             String[] params = {usuario.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {

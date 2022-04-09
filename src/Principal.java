@@ -1,10 +1,16 @@
 import java.util.List;
 
+import DAO.EmpleadoDao;
+import DAO.PermisoDao;
+import DAO.PersonaDao;
 import DAO.UsuarioDao;
 import config.Config;
 import config.Connection.Conne;
 import controladores.Controlador;
 import controladores.ControladorLogin;
+import modelos.Empleado;
+import modelos.Permiso;
+import modelos.Persona;
 import modelos.Usuario;
 
 public class Principal {
@@ -14,6 +20,8 @@ public class Principal {
     //init global config
     Config config = Config.getConfig();
     System.out.println(config.get("database"));
-    ControladorLogin controladorLogin = new ControladorLogin();
+    PermisoDao dao = new PermisoDao();
+    List<Permiso> obj = dao.getAll();
+    System.out.println("done!");
   }
 }

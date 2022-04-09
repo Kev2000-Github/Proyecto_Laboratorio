@@ -38,16 +38,16 @@ public class EmpleadoDao implements IDao<Empleado> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =\"?\"";
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
+                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =?";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
-            rs.next();
+            if(con.isResultSetEmpty(rs)) return null;
             Empleado empleado = setEntity(rs);
             return empleado;	
 		} 
-        catch (SQLException e) {
+        catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             return null;
@@ -63,13 +63,14 @@ public class EmpleadoDao implements IDao<Empleado> {
             List<Empleado> list = new ArrayList<Empleado>();
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, cedula, direccion, telefono"
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
                 + " FROM empleado e JOIN persona p ON e.cedula = p.cedula";			
             ResultSet rs = con.execQuery(sql);
-			while (rs.next()) {
+            if(con.isResultSetEmpty(rs)) return null;
+			do {
                 Empleado empleado = setEntity(rs);
 				list.add(empleado);
-			}
+			}while (rs.next());
             return list;
 		} 
         catch (SQLException e) {
@@ -109,8 +110,8 @@ public class EmpleadoDao implements IDao<Empleado> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                + " nombre=\"?\" apellido=\"?\" telefono=\"?\" direccion=\"?\""
-                + " WHERE cedula = \"?\"";
+                + " nombre=? apellido=? telefono=? direccion=?"
+                + " WHERE cedula = ?";
             String[] params = {
                 empleado.getNombre(),
                 empleado.getApellido(),
@@ -132,7 +133,7 @@ public class EmpleadoDao implements IDao<Empleado> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM persona WHERE id = \"?\"";
+			String sql = "DELETE FROM persona WHERE id = ?";
             String[] params = {empleado.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {
