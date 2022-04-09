@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Vector;
 
 import modelos.Usuario;
@@ -18,6 +17,27 @@ public class UsuarioDao implements IDao<Usuario> {
     
     @Override
     public Usuario get(String id) {
+		PreparedStatement stmt = null;
+        Connection conn = null;
+		Usuario usuario = null;
+		try {
+			conn = Conne.Conexion();
+            //TODO: cambiarlo porque es propenso a SQL injection
+			stmt = conn.prepareStatement("SELECT * FROM usuario where id =\"" + id + "\"");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+                usuario = new Usuario();
+			}
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			Conne.cerrarConexion(conn);
+            Conne.cerrarStatement(stmt);
+		}
+		
+		return usuario;
     }
     
     @Override
