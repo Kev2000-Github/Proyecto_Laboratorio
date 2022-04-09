@@ -23,18 +23,13 @@ CREATE TABLE IF NOT EXISTS fundacion(
 	deleted_at DATE DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS tipo_servicio(
-	id VARCHAR(40) PRIMARY KEY,
-	nombre VARCHAR(40) NOT NULL,
-	deleted_at DATE DEFAULT NULL
-);
+CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
 
 CREATE TABLE IF NOT EXISTS servicio(
 	id VARCHAR(40) PRIMARY KEY,
 	nombre VARCHAR(80) NOT NULL,
-	tipo_servicio_id VARCHAR(40) NOT NULL,
+	tipo tipo_servicio NOT NULL,
 	deleted_at DATE DEFAULT NULL,
-	CONSTRAINT fk_tipo_servicio FOREIGN KEY(tipo_servicio_id) REFERENCES tipo_servicio(id)
 );
 
 CREATE TABLE IF NOT EXISTS fundacion_servicio(
@@ -66,34 +61,23 @@ CREATE TABLE IF NOT EXISTS empleado(
 	deleted_at DATE DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS prioridad(
-	id VARCHAR(40) PRIMARY KEY,
-	nombre VARCHAR(40) NOT NULL,
-	deleted_at DATE NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS solicitud_status(
-	id VARCHAR(40) PRIMARY KEY,
-	nombre VARCHAR(40) NOT NULL,
-	deleted_at DATE NOT NULL
-);
+CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
+CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 CREATE TABLE IF NOT EXISTS solicitud(
 	id VARCHAR(40) PRIMARY KEY,
 	cedula VARCHAR(10) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
-	prioridad_id VARCHAR(40) NOT NULL,
+	prioridad solicitud_prioridad NOT NULL
+	status solicitud_status NOT NULL,
 	costo_total FLOAT NOT NULL,
-	solicitud_status_id VARCHAR(40) NOT NULL,
 	created_at DATE NOT NULL,
 	updated_at DATE NOT NULL,
 	deleted_at DATE DEFAULT NULL,
 	CONSTRAINT fk_persona FOREIGN KEY(cedula) REFERENCES persona(cedula),
 	CONSTRAINT fk_empleado FOREIGN KEY(empleado_id) REFERENCES empleado(id),
 	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id),
-	CONSTRAINT fk_prioridad FOREIGN KEY(prioridad_id) REFERENCES prioridad(id),
-	CONSTRAINT fk_solicitud_status FOREIGN KEY(solicitud_status_id) REFERENCES solicitud_status(id)
 );
 
 CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
