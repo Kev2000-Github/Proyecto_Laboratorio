@@ -10,13 +10,10 @@ public class PersonaDao implements IDao<Usuario> {
     
     private Vector<Usuario> usuarios = new Vector();
     
-    public PersonaDao() {
-        usuarios.add(new Usuario("kevin","admin"));
-        usuarios.add(new Usuario("oswald","root"));
-    }
+    public PersonaDao() {}
     
     @Override
-    public Usuario get(long id) {
+    public Usuario get(String id) {
         return usuarios.get((int) id);
     }
     

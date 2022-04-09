@@ -2,37 +2,26 @@ package modelos;
 
 public class Empleado extends Persona {
 
-	private String codigo;
-    private String codigoCargo;
+	private String id;
 	
-	public Empleado(String nombre, 
+	public Empleado(
+		String nombre, 
 		String apellido, 
 		String cedula, 
 		String direccion, 
 		String telefono,
-		String codigo, 
-		String codigoCargo)
+		String id)
 	{
 		super(nombre,apellido,cedula,direccion,telefono);
-        this.codigo = codigo;
-        this.codigoCargo = codigoCargo;
+        this.id = id;
     }
 	
-	public String getCodigo() {
-		return codigo;
+	public String getid() {
+		return id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setid(String id) {
+		this.id = id;
 	}
-
-	public String getCodigoCargo() {
-		return codigoCargo;
-	}
-
-	public void setCodigoCargo(String codigoCargo) {
-		this.codigoCargo = codigoCargo;
-	}
-
 
 	}

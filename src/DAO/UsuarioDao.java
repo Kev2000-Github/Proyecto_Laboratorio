@@ -13,17 +13,11 @@ import java.util.Vector;
 import modelos.Usuario;
 import config.Connection.Conne;
 //MOCK IMPLEMENTATION, se necesita conexion a bd para obtener la data real
-public class UsuarioDao implements IDao<Usuario> {
-    private Vector<Usuario> usuarios = new Vector();
-    
-    public UsuarioDao() {
-        usuarios.add(new Usuario("kevin","admin"));
-        usuarios.add(new Usuario("oswald","root"));
-    }
+public class UsuarioDao implements IDao<Usuario> {    
+    public UsuarioDao() {}
     
     @Override
-    public Usuario get(long id) {
-        return usuarios.get((int) id);
+    public Usuario get(String id) {
     }
     
     @Override
