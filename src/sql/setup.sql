@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS servicio(
 	id VARCHAR(40) PRIMARY KEY,
 	nombre VARCHAR(80) NOT NULL,
 	tipo tipo_servicio NOT NULL,
-	deleted_at DATE DEFAULT NULL,
+	deleted_at DATE DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS fundacion_servicio(
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	cedula VARCHAR(10) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
-	prioridad solicitud_prioridad NOT NULL
+	prioridad solicitud_prioridad NOT NULL,
 	status solicitud_status NOT NULL,
 	costo_total FLOAT NOT NULL,
 	created_at DATE NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	deleted_at DATE DEFAULT NULL,
 	CONSTRAINT fk_persona FOREIGN KEY(cedula) REFERENCES persona(cedula),
 	CONSTRAINT fk_empleado FOREIGN KEY(empleado_id) REFERENCES empleado(id),
-	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id),
+	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id)
 );
 
 CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
@@ -156,3 +156,4 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
 	VALUES('5c84c51a-0470-4fef-8456-c4f61822c610','e81a71bf-413a-4554-bcd7-834f7d4fafd8','c603f913-2ac5-4353-b2aa-776d222af6ca','admin','admin');
+	
