@@ -6,29 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.general.IDao;
-import modelos.Empleado;
-import modelos.Rol;
-import modelos.Usuario;
 import config.Connection.Conne;
+import modelos.Permiso;
+import modelos.Rol;
 
-public class UsuarioDao implements IDao<Usuario> {    
+public class RolDao implements IDao<Rol> {
     private Conne con;
-    
-    @Override
-    public Usuario setEntity(ResultSet rs){
-        try{
-            RolDao rolDao = new RolDao();
-            Rol rol = rolDao.get(rs.getString("rol_id"));
-            EmpleadoDao empleadoDao = new EmpleadoDao();
-            Empleado emp = empleadoDao.get(rs.getString("empleado_id"));
 
-            Usuario usuario = new Usuario();
-            usuario.setId(rs.getString("id"));	
-            usuario.setUsername(rs.getString("username"));
-            usuario.setPassword(rs.getString("password"));
-            usuario.setRol(rol);
-            usuario.setEmpleado(emp);
-            return usuario;
+    @Override
+    public Rol setEntity(ResultSet rs){
+        try{
+            Rol rol = new Rol();
+            rol.setId(rs.getString("id"));
+            rol.setNombre(rs.getString("nombre"));	
+            PermisoDao permisoDao = new PermisoDao();
+            List<Permiso> permisos = permisoDao.getPermisoDeRol(rol.getId());
+            rol.setPermisos(permisos);
+            return rol;
         }
         catch(SQLException e){
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -38,17 +32,17 @@ public class UsuarioDao implements IDao<Usuario> {
     }
 
     @Override
-    public Usuario get(String id) {
+    public Rol get(String id) {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM usuario where id =\"?\"";
+            String sql = "SELECT * FROM rol where id =\"?\"";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
             rs.next();
-            Usuario usuario = setEntity(rs);
-            return usuario;	
+            Rol rol = setEntity(rs);
+            return rol;	
 		} 
         catch (SQLException e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
@@ -57,20 +51,20 @@ public class UsuarioDao implements IDao<Usuario> {
 		} 
         finally {
             con.close();
-        }
+        }		
     }
-    
+
     @Override
-    public List<Usuario> getAll() {
+    public List<Rol> getAll() {
 		try {
-            List<Usuario> list = new ArrayList<Usuario>();
+            List<Rol> list = new ArrayList<Rol>();
 			con = new Conne();
             con.open();
-			String sql = "SELECT * FROM usuario";
+			String sql = "SELECT * FROM rol";
 			ResultSet rs = con.execQuery(sql);
 			while (rs.next()) {
-                Usuario usuario = setEntity(rs);
-				list.add(usuario);
+                Rol rol = setEntity(rs);
+				list.add(rol);
 			}
             return list;
 		} 
@@ -85,17 +79,14 @@ public class UsuarioDao implements IDao<Usuario> {
     }
 
     @Override
-    public void save(Usuario usuario) {
+    public void save(Rol rol) {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO usuario(id, empleado_id, rol_id, username, password) VALUE(?,?,?,?,?)";
+			String sql = "INSERT INTO Rol(id, nombre) VALUE(?,?)";
             String[] params = {
-                usuario.getId(),
-                usuario.getEmpleado().getId(),
-                usuario.getRol().getId(),
-                usuario.getUsername(),
-                usuario.getPassword()
+                rol.getId(),
+                rol.getNombre()
             };
             con.execQuery(sql, params);
 		} catch (Exception e) {
@@ -107,17 +98,13 @@ public class UsuarioDao implements IDao<Usuario> {
     }
 
     @Override
-    public void update(Usuario usuario) {
+    public void update(Rol rol) {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE usuario SET"
-                + " empleado_id=\"?\", rol_id=\"?\", username=\"?\", password=\"?\"";
+            String sql = "UPDATE rol SET nombre=\"?\"";
             String[] params = {
-                usuario.getEmpleado().getId(),
-                usuario.getRol().getId(),
-                usuario.getUsername(),
-                usuario.getPassword()
+                rol.getNombre()
             };
             con.execQuery(sql, params);
         } catch (Exception e) {
@@ -129,12 +116,12 @@ public class UsuarioDao implements IDao<Usuario> {
     }
 
     @Override
-    public void delete(Usuario usuario) {
+    public void delete(Rol rol) {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM usuario WHERE id = \"?\"";
-            String[] params = {usuario.getId()};
+			String sql = "DELETE FROM rol WHERE id = \"?\"";
+            String[] params = {rol.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();

@@ -3,7 +3,9 @@ package modelos;
 public class Empleado extends Persona {
 
 	private String id;
-	
+
+	public Empleado(){}
+
 	public Empleado(
 		String nombre, 
 		String apellido, 
@@ -16,11 +18,11 @@ public class Empleado extends Persona {
         this.id = id;
     }
 	
-	public String getid() {
+	public String getId() {
 		return id;
 	}
 
-	public void setid(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

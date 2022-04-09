@@ -1,124 +1,141 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.Vector;
 
+import DAO.general.IDao;
 import config.Connection.Conne;
 import modelos.Persona;
 
 public class PersonaDao implements IDao<Persona> {
-
-    private Vector<Persona> personas = new Vector();
+    private Conne con;
 
     @Override
-    public Persona get(String cedula) {
-		PreparedStatement stmt = null;
-        Connection conn = null;
-		Persona persona = null;
-		try {
-			conn = Conne.Conexion();
-			stmt = conn.prepareStatement("SELECT * FROM usuario where cedula =\"?\"");
-            stmt.setString(1,cedula);
-            
-			ResultSet rs = stmt.executeQuery();
-            persona = new Persona();
-            rs.next();
+    public Persona setEntity(ResultSet rs){
+        try{
+            Persona persona = new Persona();
             persona.setCedula(rs.getString("cedula"));	
             persona.setNombre(rs.getString("nombre"));	
             persona.setApellido(rs.getString("apellido"));	
             persona.setDireccion(rs.getString("direccion"));	
-            persona.setTelefono(rs.getString("telefono"));	
-		} catch (SQLException e) {
-			// e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Conne.cerrarConexion(conn);
-            Conne.cerrarStatement(stmt);
-		}
-		
-		return persona;
+            persona.setTelefono(rs.getString("telefono"));
+            return persona;
+        }
+        catch(SQLException e){
+            String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        }
+    }
+
+    @Override
+    public Persona get(String cedula) {
+		try {
+			con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM persona where cedula =\"?\"";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+            
+            rs.next();
+            Persona persona = setEntity(rs);
+            return persona;	
+		} 
+        catch (SQLException e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+		} 
+        finally {
+            con.close();
+        }		
     }
 
     @Override
     public List<Persona> getAll() {
-		PreparedStatement stmt = null;
-        Connection conn = null;
-		List<Persona> list = new ArrayList<Persona>();
 		try {
-			conn = Conne.Conexion();
-			stmt = conn.prepareStatement("SELECT * FROM usuario");
-			ResultSet rs = stmt.executeQuery();
+            List<Persona> list = new ArrayList<Persona>();
+			con = new Conne();
+            con.open();
+			String sql = "SELECT * FROM persona";
+			ResultSet rs = con.execQuery(sql);
 			while (rs.next()) {
-                Persona persona = new Persona();
-                persona.setCedula(rs.getString("cedula"));	
-                persona.setNombre(rs.getString("nombre"));	
-                persona.setApellido(rs.getString("apellido"));	
-                persona.setDireccion(rs.getString("direccion"));	
-                persona.setTelefono(rs.getString("telefono"));	
-
+                Persona persona = setEntity(rs);
 				list.add(persona);
 			}
-		} catch (SQLException e) {
-			// e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Conne.cerrarConexion(conn);
-            Conne.cerrarStatement(stmt);
+            return list;
+		} 
+        catch (SQLException e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
 		}
-		
-		return list;
+        finally {
+            con.close();
+        }
     }
 
     @Override
     public void save(Persona persona) {
-		PreparedStatement stmt = null;
-        Connection conn = null;
 		try {
-			conn = Conne.Conexion();
-			stmt = conn.prepareStatement("INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUE(?,?,?,?,?)");
-			UUID uuid = UUID.randomUUID();
-            stmt.setString(1, uuid.toString());
-			stmt.setString(2, persona.getNombre());
-            stmt.setString(3, persona.getApellido());
-			stmt.setString(4, persona.getDireccion());
-			stmt.setString(5, persona.getTelefono());
-            stmt.executeQuery();
-		} catch (SQLException e) {
+			con = new Conne();
+            con.open();
+			String sql = "INSERT INTO Persona(nombre, apellido, direccion, telefono) VALUE(?,?,?,?)";
+            String[] params = {
+                persona.getNombre(),
+                persona.getApellido(),
+                persona.getDireccion(),
+                persona.getTelefono()
+            };
+            con.execQuery(sql, params);
+		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			Conne.cerrarConexion(conn);
-            Conne.cerrarStatement(stmt);
-		}		
+			con.close();
+		}
     }
 
     @Override
-    public void update(Persona person, String[] params) {
-        person.setCedula(Objects.requireNonNull(
-                params[0], "Cedula cannot be null"));
-        person.setNombre(Objects.requireNonNull(
-                params[1], "Nombre cannot be null"));
-        person.setApellido(Objects.requireNonNull(
-                params[2], "Apellido cannot be null"));
-        person.setDireccion(Objects.requireNonNull(
-                params[3], "Direccion cannot be null"));
-        person.setTelefono(Objects.requireNonNull(
-                params[4], "Direccion cannot be null"));
-
-        personas.add(person);
+    public void update(Persona persona) {
+		try {
+			con = new Conne();
+            con.open();
+            String sql = "UPDATE persona SET"
+                + " nombre=\"?\" apellido=\"?\" telefono=\"?\" direccion=\"?\""
+                + " WHERE cedula = \"?\"";
+            String[] params = {
+                persona.getNombre(),
+                persona.getApellido(),
+                persona.getTelefono(),
+                persona.getDireccion(),
+                persona.getCedula()
+            };
+            con.execQuery(sql, params);
+        } catch (Exception e) {
+			// e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			con.close();
+		}
     }
 
     @Override
     public void delete(Persona person) {
-        personas.remove(person);
+		try {
+			con = new Conne();
+            con.open();
+			String sql = "DELETE FROM persona WHERE cedula = \"?\"";
+            String[] params = {person.getCedula()};
+            con.execQuery(sql, params);
+		} catch (Exception e) {
+			// e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			con.close();
+		}    
     }
 
 }
