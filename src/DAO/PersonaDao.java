@@ -2,7 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DAO.general.IDao;
@@ -35,7 +37,7 @@ public class PersonaDao implements IDao<Persona> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM persona where cedula =?";
+            String sql = "SELECT * FROM persona where cedula =? AND deleted_at IS NULL";
             String[] params = {cedula};
             ResultSet rs = con.execQuery(sql, params);
             
@@ -59,7 +61,7 @@ public class PersonaDao implements IDao<Persona> {
             List<Persona> list = new ArrayList<Persona>();
 			con = new Conne();
             con.open();
-			String sql = "SELECT * FROM persona";
+			String sql = "SELECT * FROM persona WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return null;
 			do {
@@ -83,14 +85,15 @@ public class PersonaDao implements IDao<Persona> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Persona(nombre, apellido, direccion, telefono) VALUE(?,?,?,?)";
+			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUES(?, ?,?,?,?)";
             String[] params = {
+                persona.getCedula(),
                 persona.getNombre(),
                 persona.getApellido(),
                 persona.getDireccion(),
                 persona.getTelefono()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -105,8 +108,8 @@ public class PersonaDao implements IDao<Persona> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                + " nombre=? apellido=? telefono=? direccion=?"
-                + " WHERE cedula = ?";
+                + " nombre=?, apellido=?, telefono=?, direccion=?"
+                + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
                 persona.getNombre(),
                 persona.getApellido(),
@@ -114,7 +117,7 @@ public class PersonaDao implements IDao<Persona> {
                 persona.getDireccion(),
                 persona.getCedula()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
         } catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -124,13 +127,16 @@ public class PersonaDao implements IDao<Persona> {
     }
 
     @Override
-    public void delete(Persona person) {
+    public void delete(Persona persona) {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM persona WHERE cedula = ?";
-            String[] params = {person.getCedula()};
-            con.execQuery(sql, params);
+            Timestamp now = new Timestamp(new Date().getTime());
+			String sql = "UPDATE persona SET deleted_at = '" + now.toString() +  "' WHERE cedula = ? AND deleted_at IS NULL";
+            String[] params = {
+                persona.getCedula()
+            };
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);

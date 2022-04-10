@@ -20,8 +20,10 @@ public class Principal {
     //init global config
     Config config = Config.getConfig();
     System.out.println(config.get("database"));
-    PermisoDao dao = new PermisoDao();
-    List<Permiso> obj = dao.getAll();
+    EmpleadoDao dao = new EmpleadoDao();
+    Empleado obj = dao.get("e81a71bf-413a-4554-bcd7-834f7d4fafd8");
+    obj.setNombre("kevin alterado");
+    dao.update(obj);
     System.out.println("done!");
   }
 }

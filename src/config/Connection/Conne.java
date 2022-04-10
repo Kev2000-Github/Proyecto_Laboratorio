@@ -55,7 +55,7 @@ public class Conne {
         try{
             PreparedStatement queryExecutor = con.prepareStatement(sql);
             for(int i = 1; i <= args.length; i++){
-                queryExecutor.setString(i, args[i - 1]);
+                queryExecutor.setObject(i, args[i - 1]);
             }
             ResultSet result = queryExecutor.executeQuery();
             return result;
@@ -64,6 +64,20 @@ public class Conne {
             String msg = "Error obteniendo los datos\n" + e.getMessage();
             System.out.println(msg);
             return null;
+        }
+    }
+
+    public void execMutation(String sql,String[] args){
+        try{
+            PreparedStatement queryExecutor = con.prepareStatement(sql);
+            for(int i = 1; i <= args.length; i++){
+                queryExecutor.setObject(i, args[i - 1]);
+            }
+            queryExecutor.executeUpdate();
+        }
+        catch(Exception e){
+            String msg = "Error obteniendo los datos\n" + e.getMessage();
+            System.out.println(msg);
         }
     }
 

@@ -2,7 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DAO.general.IDao;
@@ -39,7 +41,7 @@ public class EmpleadoDao implements IDao<Empleado> {
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =?";
+                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =? AND e.deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
@@ -64,7 +66,7 @@ public class EmpleadoDao implements IDao<Empleado> {
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula";			
+                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula WHERE e.deleted_at IS NULL";			
             ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return null;
 			do {
@@ -88,14 +90,15 @@ public class EmpleadoDao implements IDao<Empleado> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Persona(nombre, apellido, direccion, telefono) VALUE(?,?,?,?)";
+			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUES(?, ?,?,?,?)";
             String[] params = {
+                empleado.getCedula(),
                 empleado.getNombre(),
                 empleado.getApellido(),
                 empleado.getDireccion(),
                 empleado.getTelefono()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -110,8 +113,8 @@ public class EmpleadoDao implements IDao<Empleado> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                + " nombre=? apellido=? telefono=? direccion=?"
-                + " WHERE cedula = ?";
+                + " nombre=?, apellido=?, telefono=?, direccion=?"
+                + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
                 empleado.getNombre(),
                 empleado.getApellido(),
@@ -119,7 +122,7 @@ public class EmpleadoDao implements IDao<Empleado> {
                 empleado.getDireccion(),
                 empleado.getCedula()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
         } catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -133,9 +136,12 @@ public class EmpleadoDao implements IDao<Empleado> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM persona WHERE id = ?";
-            String[] params = {empleado.getId()};
-            con.execQuery(sql, params);
+            Timestamp now = new Timestamp(new Date().getTime());
+			String sql = "UPDATE empleado SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
+            String[] params = {
+                empleado.getId()
+            };
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);

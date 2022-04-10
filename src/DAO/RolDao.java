@@ -2,7 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DAO.general.IDao;
@@ -36,7 +38,7 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM rol where id =?";
+            String sql = "SELECT * FROM rol where id =? AND deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
@@ -60,7 +62,7 @@ public class RolDao implements IDao<Rol> {
             List<Rol> list = new ArrayList<Rol>();
 			con = new Conne();
             con.open();
-			String sql = "SELECT * FROM rol";
+			String sql = "SELECT * FROM rol WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return null;
 			do {
@@ -84,12 +86,12 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Rol(id, nombre) VALUE(?,?)";
+			String sql = "INSERT INTO Rol(id, nombre) VALUES(?,?)";
             String[] params = {
                 rol.getId(),
                 rol.getNombre()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -103,11 +105,12 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE rol SET nombre=?";
+            String sql = "UPDATE rol SET nombre=? WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                rol.getNombre()
+                rol.getNombre(),
+                rol.getId()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
         } catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -121,9 +124,10 @@ public class RolDao implements IDao<Rol> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM rol WHERE id = ?";
+            Timestamp now = new Timestamp(new Date().getTime());
+			String sql = "UPDATE rol SET deleted_at = " + now.toString() + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {rol.getId()};
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);

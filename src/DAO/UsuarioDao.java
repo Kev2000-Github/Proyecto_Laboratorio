@@ -2,7 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DAO.general.IDao;
@@ -42,7 +44,7 @@ public class UsuarioDao implements IDao<Usuario> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM usuario where id =?";
+            String sql = "SELECT * FROM usuario where id =? AND deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             if(con.isResultSetEmpty(rs)) return null;
@@ -65,7 +67,7 @@ public class UsuarioDao implements IDao<Usuario> {
             List<Usuario> list = new ArrayList<Usuario>();
 			con = new Conne();
             con.open();
-			String sql = "SELECT * FROM usuario";
+			String sql = "SELECT * FROM usuario WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return null;
 			do {
@@ -89,7 +91,7 @@ public class UsuarioDao implements IDao<Usuario> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO usuario(id, empleado_id, rol_id, username, password) VALUE(?,?,?,?,?)";
+			String sql = "INSERT INTO usuario(id, empleado_id, rol_id, username, password) VALUES(?,?,?,?,?)";
             String[] params = {
                 usuario.getId(),
                 usuario.getEmpleado().getId(),
@@ -97,7 +99,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 usuario.getUsername(),
                 usuario.getPassword()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -112,14 +114,15 @@ public class UsuarioDao implements IDao<Usuario> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE usuario SET"
-                + " empleado_id=?, rol_id=?, username=?, password=?";
+                + " empleado_id=?, rol_id=?, username=?, password=? WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
                 usuario.getEmpleado().getId(),
                 usuario.getRol().getId(),
                 usuario.getUsername(),
-                usuario.getPassword()
+                usuario.getPassword(),
+                usuario.getId()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
         } catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -133,9 +136,10 @@ public class UsuarioDao implements IDao<Usuario> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM usuario WHERE id = ?";
+            Timestamp now = new Timestamp(new Date().getTime());
+			String sql = "UPDATE usuario SET deleted_at = " + now.toString() + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {usuario.getId()};
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);

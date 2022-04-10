@@ -2,7 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DAO.general.IDao;
@@ -32,7 +34,7 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT * FROM permiso where id =?";
+            String sql = "SELECT * FROM permiso where id =? AND deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
@@ -56,7 +58,7 @@ public class PermisoDao implements IDao<Permiso> {
             List<Permiso> list = new ArrayList<Permiso>();
 			con = new Conne();
             con.open();
-			String sql = "SELECT * FROM permiso";
+			String sql = "SELECT * FROM permiso WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return null;
 			do {
@@ -82,7 +84,7 @@ public class PermisoDao implements IDao<Permiso> {
             con.open();
 			String sql = "SELECT p.id, p.descripcion FROM rol_permiso rp"
                 + " JOIN permiso p ON rp.permiso_id = p.id"
-                + " WHERE rol_id = ?";
+                + " WHERE rol_id = ? AND p.deleted_at IS NULL";
             String[] params = {
                 rolId
             };
@@ -109,12 +111,12 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Permiso(id, descripcion) VALUE(?,?)";
+			String sql = "INSERT INTO Permiso(id, descripcion) VALUES(?,?)";
             String[] params = {
                 permiso.getId(),
                 permiso.getDescripcion()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -128,11 +130,12 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE permiso SET descripcion=?";
+            String sql = "UPDATE permiso SET descripcion=? WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                permiso.getDescripcion()
+                permiso.getDescripcion(),
+                permiso.getId()
             };
-            con.execQuery(sql, params);
+            con.execMutation(sql, params);
         } catch (Exception e) {
 			// e.printStackTrace();
 			throw new RuntimeException(e);
@@ -146,7 +149,8 @@ public class PermisoDao implements IDao<Permiso> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "DELETE FROM permiso WHERE id = ?";
+            Timestamp now = new Timestamp(new Date().getTime());
+			String sql = "UPDATE permiso SET deleted_at = " + now.toString() + " WHERE id = ? AND deleted_at IS NULL" ;
             String[] params = {permiso.getId()};
             con.execQuery(sql, params);
 		} catch (Exception e) {
