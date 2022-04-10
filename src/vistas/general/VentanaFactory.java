@@ -5,7 +5,6 @@ import java.util.List;
 
 import modelos.Empleado;
 import modelos.Persona;
-import modelos.Usuario;
 import vistas.VentanaHome;
 import vistas.backOffice.VentanaBeneficiarios;
 import vistas.backOffice.VentanaEmpleados;

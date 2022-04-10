@@ -9,19 +9,17 @@ import java.util.List;
 public class VentanaBeneficiarios extends VentanaGeneralLista<Persona>{
 	
     public VentanaBeneficiarios(ActionListener accion, List<Persona> personas){
-        super(accion, personas);
+        super(accion, personas, "persona");
     }
 
-	public String[] getItemList(){
-		String[] personaList = new String[items.size()];
-		for(int i = 0; i < personaList.length; i++){
+	public void fillListModel(){
+		for(int i = 0; i < items.size(); i++){
 			String cedula = items.get(i).getCedula();
 			String nombre = items.get(i).getNombre();
 			String apellido = items.get(i).getApellido();
 			String item = cedula + " " + nombre + " " + apellido;
-			personaList[i] = item;
+			listModel.addElement(item);
 		}
-		return personaList;
 	}
 	
 }

@@ -1,20 +1,23 @@
 package vistas.general;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 
 public class VentanaGeneralLista<T> extends VentanaGeneral {
+	private String entityName = "default";
     private JLabel lblTitulo;
 	private JList<String> itemList;
     private JButton edit;
@@ -23,26 +26,29 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 	private JButton goHome;
 	private String selectedItem;
 	protected List<T> items;
-	
-    public VentanaGeneralLista(ActionListener accion, List<T> items){
+	protected DefaultListModel<String> listModel;
+
+    public VentanaGeneralLista(ActionListener accion, List<T> items, String entity){
         super();
 		this.items = items;
+		this.entityName = entity;
+		this.listModel = new DefaultListModel<String>();
+		fillListModel();
         initGUI();
 		this.agregarListener(accion);
     }
 
 	public void updateList(List<T> items){
 		this.items = items;
-		itemList.updateUI();
+		listModel.removeAllElements();
+		fillListModel();
 	}
 
-	public String[] getItemList(){
-		String[] itemList = new String[items.size()];
-		for(int i = 0; i < itemList.length; i++){
+	public void fillListModel(){
+		for(int i = 0; i < items.size(); i++){
 			String item = "mock item";
-			itemList[i] = item;
+			listModel.addElement(item);
 		}
-		return itemList;
 	} 
 	
 	private void initGUI() {
@@ -53,40 +59,45 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 					lblTitulo = new JLabel();
 					mainContainer.add(lblTitulo);
 
-					lblTitulo.setText("Usuarios");
+					lblTitulo.setText(entityName);
 					lblTitulo.setFont(new java.awt.Font("Dialog",1,16));
                     lblTitulo.setBorder(new EtchedBorder());
 				}
 				{
-					String[] itemDetails = getItemList();
-					itemList = new JList<String>(itemDetails);
+					itemList = new JList<String>(listModel);
 					itemList.setVisibleRowCount(20);
-					itemList.addListSelectionListener(new ListSelectionListener() {
-						@Override
-						public void valueChanged(ListSelectionEvent e){
+					MouseAdapter mouseListener = new MouseAdapter() {
+						public void mouseClicked(MouseEvent e) {
 							selectedItem = (String) itemList.getSelectedValue();
-							System.out.println(selectedItem); 
+							String id = selectedItem.split(" ")[0];
+							delete.putClientProperty("itemId", id);
+							edit.putClientProperty("itemId", id);
 						}
-					});
+					};
+					itemList.addMouseListener(mouseListener);
 					mainContainer.add(new JScrollPane(itemList));
 				}
 				{
 					edit = new JButton();
 					mainContainer.add(edit);
 					edit.setText("edit");
-					edit.setName("edit");
+					edit.setName("edit-" + entityName);
+					edit.putClientProperty("listId", "-1");
+					edit.putClientProperty("itemId", "-1");
 				}
 				{
 					delete = new JButton();
 					mainContainer.add(delete);
 					delete.setText("delete");
-					delete.setName("delete");
+					delete.setName("delete-" + entityName);
+					delete.putClientProperty("listId", "-1");
+					delete.putClientProperty("itemId", "-1");
 				}
 				{
 					create = new JButton();
 					mainContainer.add(create);
 					create.setText("registrar");
-					create.setName("go-rus001");
+					create.setName("go-register_" + entityName);
 				}
 				{
 					goHome = new JButton();

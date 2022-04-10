@@ -63,7 +63,7 @@ public class PersonaDao implements IDao<Persona> {
             con.open();
 			String sql = "SELECT * FROM persona WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
-            if(con.isResultSetEmpty(rs)) return null;
+            if(con.isResultSetEmpty(rs)) return list;
 			do {
                 Persona persona = setEntity(rs);
 				list.add(persona);

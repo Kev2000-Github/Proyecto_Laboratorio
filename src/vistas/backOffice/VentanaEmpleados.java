@@ -9,19 +9,17 @@ import java.util.List;
 public class VentanaEmpleados extends VentanaGeneralLista<Empleado>{
 	
     public VentanaEmpleados(ActionListener accion, List<Empleado> empleados){
-        super(accion, empleados);
+        super(accion, empleados, "empleado");
     }
 
-	public String[] getItemList(){
-		String[] empleadoList = new String[items.size()];
-		for(int i = 0; i < empleadoList.length; i++){
+	public void fillListModel(){
+		for(int i = 0; i < items.size(); i++){
 			String id = items.get(i).getId();
 			String nombre = items.get(i).getNombre();
 			String apellido = items.get(i).getApellido();
 			String item = id + " " + nombre + " " + apellido;
-			empleadoList[i] = item;
+			listModel.addElement(item);
 		}
-		return empleadoList;
 	} 
 	
 }

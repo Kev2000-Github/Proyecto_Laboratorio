@@ -64,7 +64,7 @@ public class RolDao implements IDao<Rol> {
             con.open();
 			String sql = "SELECT * FROM rol WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
-            if(con.isResultSetEmpty(rs)) return null;
+            if(con.isResultSetEmpty(rs)) return list;
 			do {
                 Rol rol = setEntity(rs);
 				list.add(rol);

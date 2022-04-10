@@ -90,7 +90,7 @@ public class UsuarioDao implements IDao<Usuario> {
             con.open();
 			String sql = "SELECT * FROM usuario WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
-            if(con.isResultSetEmpty(rs)) return null;
+            if(con.isResultSetEmpty(rs)) return list;
 			do {
                 Usuario usuario = setEntity(rs);
 				list.add(usuario);

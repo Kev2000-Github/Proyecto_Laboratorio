@@ -60,7 +60,7 @@ public class PermisoDao implements IDao<Permiso> {
             con.open();
 			String sql = "SELECT * FROM permiso WHERE deleted_at IS NULL";
 			ResultSet rs = con.execQuery(sql);
-            if(con.isResultSetEmpty(rs)) return null;
+            if(con.isResultSetEmpty(rs)) return list;
 			do {
                 Permiso permiso = setEntity(rs);
 				list.add(permiso);

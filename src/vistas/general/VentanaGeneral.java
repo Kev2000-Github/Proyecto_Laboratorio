@@ -1,6 +1,5 @@
 package vistas.general;
 import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;

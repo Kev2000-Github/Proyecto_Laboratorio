@@ -17,6 +17,7 @@ import vistas.backOffice.VentanaBeneficiarios;
 import vistas.backOffice.VentanaEmpleados;
 import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
+import vistas.general.VentanaGeneralLista;
 public class Controlador implements ActionListener {
 	VentanaGeneral window;
 	VentanaFactory ventanaFactory;
@@ -57,25 +58,16 @@ public class Controlador implements ActionListener {
 				window = ventanaFactory.getVentanaList(ventanaCode, this, empleados);
 			}
 		}
-		else if(action.equals("edit")){
-			String entity = actionName[1];
-			if(actionName.length < 3){
-				window.mostrarMensaje("ningun " + entity + " seleccionado");
-				return;
-			}
-			String id = actionName[2];
-			IDao entityDao = daoFactory.getDao(entity);
-			entityDao.update(entityDao.get(id));
-		}
 		else if(action.equals("delete")){
 			String entity = actionName[1];
-			if(actionName.length < 3){
+			String id = (String)((JButton)e.getSource()).getClientProperty("itemId");
+			if(id == null){
 				window.mostrarMensaje("ningun " + entity + " seleccionado");
 				return;
 			}
-			String id = actionName[2];
 			IDao entityDao = daoFactory.getDao(entity);
 			entityDao.delete(entityDao.get(id));
+			((VentanaGeneralLista<?>) window).updateList(entityDao.getAll());
 		}
 	}
 }
