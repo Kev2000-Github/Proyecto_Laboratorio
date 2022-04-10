@@ -18,18 +18,18 @@ public class UsuarioDao implements IDao<Usuario> {
     
     @Override
     public Usuario setEntity(ResultSet rs){
+        Rol rol = new Rol();
+        Empleado empleado = new Empleado();
         try{
-            RolDao rolDao = new RolDao();
-            Rol rol = rolDao.get(rs.getString("rol_id"));
-            EmpleadoDao empleadoDao = new EmpleadoDao();
-            Empleado emp = empleadoDao.get(rs.getString("empleado_id"));
+            rol.setId(rs.getString("rol_id"));
+            empleado.setId(rs.getString("empleado_id"));
 
             Usuario usuario = new Usuario();
             usuario.setId(rs.getString("id"));	
             usuario.setUsername(rs.getString("username"));
             usuario.setPassword(rs.getString("password"));
             usuario.setRol(rol);
-            usuario.setEmpleado(emp);
+            usuario.setEmpleado(empleado);
             return usuario;
         }
         catch(SQLException e){

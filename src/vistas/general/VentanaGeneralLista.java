@@ -6,11 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -42,6 +39,8 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 		this.items = items;
 		listModel.removeAllElements();
 		fillListModel();
+		delete.putClientProperty("itemId", null);
+		edit.putClientProperty("itemId", null);
 	}
 
 	public void fillListModel(){
@@ -82,16 +81,14 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 					mainContainer.add(edit);
 					edit.setText("edit");
 					edit.setName("edit-" + entityName);
-					edit.putClientProperty("listId", "-1");
-					edit.putClientProperty("itemId", "-1");
+					edit.putClientProperty("itemId", null);
 				}
 				{
 					delete = new JButton();
 					mainContainer.add(delete);
 					delete.setText("delete");
 					delete.setName("delete-" + entityName);
-					delete.putClientProperty("listId", "-1");
-					delete.putClientProperty("itemId", "-1");
+					delete.putClientProperty("itemId", null);
 				}
 				{
 					create = new JButton();

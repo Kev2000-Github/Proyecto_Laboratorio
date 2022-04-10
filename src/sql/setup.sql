@@ -174,3 +174,4 @@ INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '2', 20),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40);
+		  

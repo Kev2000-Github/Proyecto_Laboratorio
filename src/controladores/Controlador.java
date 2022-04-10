@@ -13,8 +13,6 @@ import modelos.Empleado;
 import modelos.Persona;
 import modelos.Usuario;
 import vistas.VentanaHome;
-import vistas.backOffice.VentanaBeneficiarios;
-import vistas.backOffice.VentanaEmpleados;
 import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
 import vistas.general.VentanaGeneralLista;
