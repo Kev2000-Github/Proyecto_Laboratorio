@@ -5,21 +5,29 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import DAO.EmpleadoDao;
 import DAO.PersonaDao;
+import DAO.general.DaoFactory;
+import DAO.general.IDao;
+import modelos.Empleado;
 import modelos.Persona;
 import modelos.Usuario;
 import vistas.VentanaHome;
 import vistas.backOffice.VentanaBeneficiarios;
 import vistas.backOffice.VentanaEmpleados;
+import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
 public class Controlador implements ActionListener {
 	VentanaGeneral window;
-	VentanaEmpleados empleadosBackOffice;
+	VentanaFactory ventanaFactory;
+	DaoFactory daoFactory;
 
     Usuario user;	
 	
 	public Controlador(Usuario user) {
 		super();
+		ventanaFactory = new VentanaFactory();
+		daoFactory = new DaoFactory();
 		this.user = user;
 		window = new VentanaHome(this);
 	}
@@ -28,37 +36,46 @@ public class Controlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
 		String name = btn.getName();
-		if(name == "gotoBeneficiarios"){
+		String[] actionName = name.split("-");
+		String action = actionName[0];
+		if(action.equals("go")){
+			String ventanaCode = actionName[1];
 			window.dispose();
-			PersonaDao personaDao = new PersonaDao();
-			List<Persona> personas = personaDao.getAll();
-			window = new VentanaBeneficiarios(this, personas);
+			window = ventanaFactory.getVentana(ventanaCode, this);
 		}
-		else if(name == "gotoEmpleados"){
+		else if(action.equals("goList")){
+			String ventanaCode = actionName[1];
 			window.dispose();
-			window = new VentanaEmpleados(this);
+			if(ventanaCode.equals("ben001")){
+				PersonaDao personaDao = new PersonaDao();
+				List<Persona> personas = personaDao.getAll();
+				window = ventanaFactory.getVentanaList(ventanaCode, this, personas);
+			}
+			if(ventanaCode.equals("emp001")){
+				EmpleadoDao empleadoDao = new EmpleadoDao();
+				List<Empleado> empleados = empleadoDao.getAll();
+				window = ventanaFactory.getVentanaList(ventanaCode, this, empleados);
+			}
 		}
-		else if(name == "deleteBeneficiario"){
-			window.mostrarMensaje("Are you sure about that?");
+		else if(action.equals("edit")){
+			String entity = actionName[1];
+			if(actionName.length < 3){
+				window.mostrarMensaje("ningun " + entity + " seleccionado");
+				return;
+			}
+			String id = actionName[2];
+			IDao entityDao = daoFactory.getDao(entity);
+			entityDao.update(entityDao.get(id));
 		}
-		else if(name == "editBeneficiario"){
-			window.mostrarMensaje("Editar");
-		}
-		else if(name == "gotoRegisterPerson"){
-			window.mostrarMensaje("gotoRegisterPerson");
-		}
-		else if(name == "deleteEmpleado"){
-			window.mostrarMensaje("Are you sure about that?");
-		}
-		else if(name == "editEmpleado"){
-			window.mostrarMensaje("Editar");
-		}
-		else if(name == "gotoRegisterEmpleado"){
-			window.mostrarMensaje("gotoRegisterPerson");
-		}
-		else if(name == "goHome"){
-			window.dispose();
-			window = new VentanaHome(this);
+		else if(action.equals("delete")){
+			String entity = actionName[1];
+			if(actionName.length < 3){
+				window.mostrarMensaje("ningun " + entity + " seleccionado");
+				return;
+			}
+			String id = actionName[2];
+			IDao entityDao = daoFactory.getDao(entity);
+			entityDao.delete(entityDao.get(id));
 		}
 	}
 }

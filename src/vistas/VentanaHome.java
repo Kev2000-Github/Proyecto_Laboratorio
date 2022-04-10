@@ -44,13 +44,13 @@ public class VentanaHome extends VentanaGeneral{
 					goEmpleados = new JButton();
 					mainContainer.add(goEmpleados);
 					goEmpleados.setText("Empleados");
-					goEmpleados.setName("gotoEmpleados");
+					goEmpleados.setName("goList-emp001");
 				}
 				{
 					goBeneficiarios = new JButton();
 					mainContainer.add(goBeneficiarios);
 					goBeneficiarios.setText("Beneficiarios");
-					goBeneficiarios.setName("gotoBeneficiarios");
+					goBeneficiarios.setName("goList-ben001");
 				}
 			}
 		} catch (Exception e) {
