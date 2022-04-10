@@ -22,11 +22,11 @@ public class VentanaLogin extends VentanaGeneral{
     private InputField usernameInput;
     private InputField passwordInput;
     private JButton sendBtn;
-    private JPanel header;
 
-    public VentanaLogin(){
+    public VentanaLogin(ActionListener accion){
         super();
         initGUI();
+        this.agregarListener(accion);
     }
 	
 	private void initGUI() {

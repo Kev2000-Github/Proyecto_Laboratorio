@@ -61,6 +61,27 @@ public class UsuarioDao implements IDao<Usuario> {
         }
     }
     
+    public Usuario login(String username, String password){
+		try {
+			con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM usuario where username=? AND password =? AND deleted_at IS NULL";
+            String[] params = {username, password};
+            ResultSet rs = con.execQuery(sql, params);
+            if(con.isResultSetEmpty(rs)) return null;
+            Usuario usuario = setEntity(rs);
+            return usuario;	
+		} 
+        catch (Exception e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+		} 
+        finally {
+            con.close();
+        }
+    }
+
     @Override
     public List<Usuario> getAll() {
 		try {

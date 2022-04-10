@@ -162,3 +162,15 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
 	VALUES('5c84c51a-0470-4fef-8456-c4f61822c610','e81a71bf-413a-4554-bcd7-834f7d4fafd8','c603f913-2ac5-4353-b2aa-776d222af6ca','admin','admin');
 	
+-- ids are placeholders at the moment
+INSERT INTO servicio(id, nombre, tipo)
+	VALUES('1', 'examen', 'medico'),
+		  ('2', 'consula medica general', 'medico'),
+		  ('3', 'consulta psicologica', 'medico'),
+		  ('4', 'consulta odontologica', 'medico');
+
+INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
+	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a', '1', 10),
+		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '2', 20),
+		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
+		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40);

@@ -22,9 +22,10 @@ public class VentanaHome extends VentanaGeneral{
     private JButton goEmpleados;
     private JButton goBeneficiarios;
 
-    public VentanaHome(){
+    public VentanaHome(ActionListener accion){
         super();
         initGUI();
+		this.agregarListener(accion);
     }
 	
 	private void initGUI() {

@@ -30,11 +30,13 @@ public class VentanaEmpleados extends VentanaGeneral{
     private JButton edit;
     private JButton delete;
     private JButton gotoRegisterUser;
+	private JButton goHome;
 	private String selectedUser;
 
-    public VentanaEmpleados(){
+    public VentanaEmpleados(ActionListener accion){
         super();
         initGUI();
+		this.agregarListener(accion);
     }
 	
 	private void initGUI() {
@@ -80,6 +82,12 @@ public class VentanaEmpleados extends VentanaGeneral{
 					gotoRegisterUser.setText("registrar");
 					gotoRegisterUser.setName("gotoRegisterEmpleado");
 				}
+				{
+					goHome = new JButton();
+					mainContainer.add(goHome);
+					goHome.setText("home");
+					goHome.setName("goHome");
+				}
 			}
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -91,5 +99,6 @@ public class VentanaEmpleados extends VentanaGeneral{
         edit.addActionListener(accion);
 		delete.addActionListener(accion);
 		gotoRegisterUser.addActionListener(accion);
+		goHome.addActionListener(accion);
     }
 }

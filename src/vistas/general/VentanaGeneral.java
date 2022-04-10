@@ -17,7 +17,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
 		super();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		background = Color.green;
 		initGUI();
 	}
 	
@@ -41,5 +40,4 @@ public class VentanaGeneral extends javax.swing.JFrame {
 	public void mostrarMensaje(String mensaje){
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
-
 }

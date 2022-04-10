@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
+import java.util.List;
 import java.util.Vector;
 
 public class VentanaBeneficiarios extends VentanaGeneral{
@@ -33,19 +34,21 @@ public class VentanaBeneficiarios extends VentanaGeneral{
     private JButton edit;
     private JButton delete;
     private JButton gotoRegisterUser;
+	private JButton goHome;
 	private String selectedUser;
-	private Persona[] personas;
+	private List<Persona> personas;
 	
-    public VentanaBeneficiarios(Persona[] personas){
+    public VentanaBeneficiarios(ActionListener accion, List<Persona> personas){
         super();
 		this.personas = personas;
         initGUI();
+		this.agregarListener(accion);
     }
 
-	private String[] convertListToString(){
-		String[] personaList = new String[personas.length];
+	private String[] getPersonasList(){
+		String[] personaList = new String[personas.size()];
 		for(int i = 0; i < personaList.length; i++){
-			String item = personas[i].getCedula() + " " + personas[i].getNombre() + " " + personas[i].getApellido();
+			String item = personas.get(i).getCedula() + " " + personas.get(i).getNombre() + " " + personas.get(i).getApellido();
 			personaList[i] = item;
 		}
 		return personaList;
@@ -64,7 +67,7 @@ public class VentanaBeneficiarios extends VentanaGeneral{
                     lblTitulo.setBorder(new EtchedBorder());
 				}
 				{
-					String[] personasDetalles = convertListToString();
+					String[] personasDetalles = getPersonasList();
 					personaList = new JList<String>(personasDetalles);
 					personaList.setVisibleRowCount(20);
 					personaList.addListSelectionListener(new ListSelectionListener() {
@@ -94,6 +97,12 @@ public class VentanaBeneficiarios extends VentanaGeneral{
 					gotoRegisterUser.setText("registrar");
 					gotoRegisterUser.setName("gotoRegisterPerson");
 				}
+				{
+					goHome = new JButton();
+					mainContainer.add(goHome);
+					goHome.setText("home");
+					goHome.setName("goHome");
+				}
 			}
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -105,5 +114,6 @@ public class VentanaBeneficiarios extends VentanaGeneral{
         edit.addActionListener(accion);
 		delete.addActionListener(accion);
 		gotoRegisterUser.addActionListener(accion);
+		goHome.addActionListener(accion);
     }
 }

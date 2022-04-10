@@ -3,19 +3,25 @@ package config.Connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import config.Config;
+
 import java.sql.*;
 
 public class Conne {
 
     // Variables de control.
-    private String driver = "com.postgresql.jdbc.Driver";
-    private String url = "jdbc:postgresql://localhost:5432/lab";
-    private String user = "root";
-    private String password = "root";
+    private String url;
+    private String user;
+    private String password;
     private Connection con;
 
     public Conne(){
+        Config config = Config.getConfig();
         this.con = null;
+        this.url = config.get("DATABASE_CONNECTION");
+        this.user = config.get("DATABASE_USER");
+        this.password = config.get("DATABASE_PASS");
     }
 
     public Connection open(){

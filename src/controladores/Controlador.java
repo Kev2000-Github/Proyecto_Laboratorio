@@ -1,28 +1,27 @@
 package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 
+import DAO.PersonaDao;
+import modelos.Persona;
 import modelos.Usuario;
 import vistas.VentanaHome;
 import vistas.backOffice.VentanaBeneficiarios;
 import vistas.backOffice.VentanaEmpleados;
+import vistas.general.VentanaGeneral;
 public class Controlador implements ActionListener {
-        
-	VentanaHome window;
-	VentanaBeneficiarios beneficiariosBackOffice;
+	VentanaGeneral window;
 	VentanaEmpleados empleadosBackOffice;
 
-    Usuario user = null;	
+    Usuario user;	
 	
-	public Controlador() {
+	public Controlador(Usuario user) {
 		super();
-		// TODO Auto-generated constructor stub
-		window = new VentanaHome();
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-		window.agregarListener(this);
+		this.user = user;
+		window = new VentanaHome(this);
 	}
 
 	@Override
@@ -30,32 +29,36 @@ public class Controlador implements ActionListener {
 		JButton btn = (JButton)e.getSource();
 		String name = btn.getName();
 		if(name == "gotoBeneficiarios"){
-			//window.dispose();
-			//beneficiariosBackOffice = new VentanaBeneficiarios();
-			//beneficiariosBackOffice.agregarListener(this);
+			window.dispose();
+			PersonaDao personaDao = new PersonaDao();
+			List<Persona> personas = personaDao.getAll();
+			window = new VentanaBeneficiarios(this, personas);
 		}
 		else if(name == "gotoEmpleados"){
 			window.dispose();
-			empleadosBackOffice = new VentanaEmpleados();
-			empleadosBackOffice.agregarListener(this);
+			window = new VentanaEmpleados(this);
 		}
 		else if(name == "deleteBeneficiario"){
-			beneficiariosBackOffice.mostrarMensaje("Are you sure about that?");
+			window.mostrarMensaje("Are you sure about that?");
 		}
 		else if(name == "editBeneficiario"){
-			beneficiariosBackOffice.mostrarMensaje("Editar");
+			window.mostrarMensaje("Editar");
 		}
 		else if(name == "gotoRegisterPerson"){
-			beneficiariosBackOffice.mostrarMensaje("gotoRegisterPerson");
+			window.mostrarMensaje("gotoRegisterPerson");
 		}
 		else if(name == "deleteEmpleado"){
-			empleadosBackOffice.mostrarMensaje("Are you sure about that?");
+			window.mostrarMensaje("Are you sure about that?");
 		}
 		else if(name == "editEmpleado"){
-			empleadosBackOffice.mostrarMensaje("Editar");
+			window.mostrarMensaje("Editar");
 		}
 		else if(name == "gotoRegisterEmpleado"){
-			empleadosBackOffice.mostrarMensaje("gotoRegisterPerson");
+			window.mostrarMensaje("gotoRegisterPerson");
+		}
+		else if(name == "goHome"){
+			window.dispose();
+			window = new VentanaHome(this);
 		}
 	}
 }
