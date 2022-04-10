@@ -58,7 +58,7 @@ public class Controlador implements ActionListener {
 		}
 		else if(action.equals("delete")){
 			String entity = actionName[1];
-			String id = (String)((JButton)e.getSource()).getClientProperty("itemId");
+			String id = (String)btn.getClientProperty("itemId");
 			if(id == null){
 				window.mostrarMensaje("ningun " + entity + " seleccionado");
 				return;
