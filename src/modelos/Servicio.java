@@ -2,25 +2,25 @@ package modelos;
 
 public class Servicio {
 
-	private String codigo;
+	private String id;
 	private String nombre;
 	private String tipo;
 
 	public Servicio() {
 	};
 
-	public Servicio(String codigo, String nombre, String tipo) {
-		this.codigo = codigo;
+	public Servicio(String id, String nombre, String tipo) {
+		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getId() {
+		return id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
