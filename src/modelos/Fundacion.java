@@ -4,13 +4,13 @@ public class Fundacion {
 
     private String id;
     private String nombre;
-    private String presupuesto;
-    private String porcentajePartidoAnual;
+    private float presupuesto;
+    private float porcentajePartidoAnual;
 
     public Fundacion() {
     };
 
-    public Fundacion(String id, String nombre, String presupuesto, String porcentajePartidoAnual) {
+    public Fundacion(String id, String nombre, float presupuesto, float porcentajePartidoAnual) {
         this.id = id;
         this.nombre = nombre;
         this.presupuesto = presupuesto;
@@ -34,18 +34,18 @@ public class Fundacion {
     }
 
     public String getPresupuesto() {
-        return presupuesto;
+        return String.valueOf(presupuesto);
     }
 
-    public void setPresupuesto(String presupuesto) {
+    public void setPresupuesto(float presupuesto) {
         this.presupuesto = presupuesto;
     }
 
     public String getPorcentajePartidoAnual() {
-        return porcentajePartidoAnual;
+        return String.valueOf(porcentajePartidoAnual);
     }
 
-    public void setPorcentajePartidoAnual(String porcentajePartidoAnual) {
+    public void setPorcentajePartidoAnual(float porcentajePartidoAnual) {
         this.porcentajePartidoAnual = porcentajePartidoAnual;
     }
 

@@ -19,8 +19,8 @@ public class FundacionDao implements IDao<Fundacion> {
         try {
             Fundacion fundacion = new Fundacion();
             fundacion.setNombre(rs.getString("nombre"));
-            fundacion.setPresupuesto(rs.getString("presupuesto"));
-            fundacion.setPorcentajePartidoAnual(rs.getString("porcentajePartidoAnual"));
+            fundacion.setPresupuesto(rs.getFloat("presupuesto"));
+            fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentajePartidoAnual"));
             fundacion.setId(rs.getString("id"));
             return fundacion;
         } catch (SQLException e) {
