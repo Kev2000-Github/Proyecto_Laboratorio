@@ -33,16 +33,16 @@ public class Fundacion {
         this.nombre = nombre;
     }
 
-    public String getPresupuesto() {
-        return String.valueOf(presupuesto);
+    public float getPresupuesto() {
+        return presupuesto;
     }
 
     public void setPresupuesto(float presupuesto) {
         this.presupuesto = presupuesto;
     }
 
-    public String getPorcentajePartidoAnual() {
-        return String.valueOf(porcentajePartidoAnual);
+    public float getPorcentajePartidoAnual() {
+        return porcentajePartidoAnual;
     }
 
     public void setPorcentajePartidoAnual(float porcentajePartidoAnual) {

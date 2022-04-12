@@ -20,7 +20,7 @@ public class FundacionDao implements IDao<Fundacion> {
             Fundacion fundacion = new Fundacion();
             fundacion.setNombre(rs.getString("nombre"));
             fundacion.setPresupuesto(rs.getFloat("presupuesto"));
-            fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentajePartidoAnual"));
+            fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentaje_partido_anual"));
             fundacion.setId(rs.getString("id"));
             return fundacion;
         } catch (SQLException e) {
@@ -90,8 +90,8 @@ public class FundacionDao implements IDao<Fundacion> {
             String[] params = {
                     fundacion.getId(),
                     fundacion.getNombre(),
-                    fundacion.getPresupuesto(),
-                    fundacion.getPorcentajePartidoAnual()
+                    String.valueOf(fundacion.getPresupuesto()),
+                    String.valueOf(fundacion.getPorcentajePartidoAnual())
 
             };
             con.execMutation(sql, params);
@@ -113,8 +113,8 @@ public class FundacionDao implements IDao<Fundacion> {
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
                     fundacion.getNombre(),
-                    fundacion.getPresupuesto(),
-                    fundacion.getPorcentajePartidoAnual()
+                    String.valueOf(fundacion.getPresupuesto()),
+                    String.valueOf(fundacion.getPorcentajePartidoAnual())
 
             };
             con.execMutation(sql, params);
