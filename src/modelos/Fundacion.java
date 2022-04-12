@@ -4,17 +4,17 @@ public class Fundacion {
 
     private String id;
     private String nombre;
-    private double presupuesto;
-    private double porcentaje_partido_anual;
+    private String presupuesto;
+    private String porcentajePartidoAnual;
 
     public Fundacion() {
     };
 
-    public Fundacion(String id, String nombre, double presupuesto, double porcentaje_partido_anual) {
+    public Fundacion(String id, String nombre, String presupuesto, String porcentajePartidoAnual) {
         this.id = id;
         this.nombre = nombre;
         this.presupuesto = presupuesto;
-        this.porcentaje_partido_anual = porcentaje_partido_anual;
+        this.porcentajePartidoAnual = porcentajePartidoAnual;
     }
 
     public String getId() {
@@ -33,20 +33,20 @@ public class Fundacion {
         this.nombre = nombre;
     }
 
-    public double getPresupuesto() {
+    public String getPresupuesto() {
         return presupuesto;
     }
 
-    public void setPresupuesto(double presupuesto) {
+    public void setPresupuesto(String presupuesto) {
         this.presupuesto = presupuesto;
     }
 
-    public double getPorcentaje_partido_anual() {
-        return Porcentaje_partido_anual;
+    public String getPorcentajePartidoAnual() {
+        return porcentajePartidoAnual;
     }
 
-    public void setPorcentaje_partido_anual(double porcentaje_partido_anual) {
-        this.Porcentaje_partido_anual = Porcentaje_partido_anual;
+    public void setPorcentajePartidoAnual(String porcentajePartidoAnual) {
+        this.porcentajePartidoAnual = porcentajePartidoAnual;
     }
 
 }

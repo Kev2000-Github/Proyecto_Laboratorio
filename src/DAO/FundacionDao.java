@@ -20,7 +20,7 @@ public class FundacionDao implements IDao<Fundacion> {
             Fundacion fundacion = new Fundacion();
             fundacion.setNombre(rs.getString("nombre"));
             fundacion.setPresupuesto(rs.getString("presupuesto"));
-            fundacion.setPorcentaje_partido_anual(rs.getString("porcentaje_partido_anual"));
+            fundacion.setPorcentajePartidoAnual(rs.getString("porcentajePartidoAnual"));
             fundacion.setId(rs.getString("id"));
             return fundacion;
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class FundacionDao implements IDao<Fundacion> {
             con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
-                    + " FROM fundacion WHERE e.deleted_at IS NULL";
+                    + " FROM fundacion f WHERE f.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
                 return list;
@@ -88,10 +88,10 @@ public class FundacionDao implements IDao<Fundacion> {
             con.open();
             String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual) VALUES(?,?,?,?)";
             String[] params = {
-                    fundacion.getId,
-                    fundacion.getNombre,
-                    fundacion.getPresupuesto,
-                    fundacion.getPorcentaje_partido_anual
+                    fundacion.getId(),
+                    fundacion.getNombre(),
+                    fundacion.getPresupuesto(),
+                    fundacion.getPorcentajePartidoAnual()
 
             };
             con.execMutation(sql, params);
@@ -114,7 +114,7 @@ public class FundacionDao implements IDao<Fundacion> {
             String[] params = {
                     fundacion.getNombre(),
                     fundacion.getPresupuesto(),
-                    fundacion.getPorcentaje_partido_anual()
+                    fundacion.getPorcentajePartidoAnual()
 
             };
             con.execMutation(sql, params);
