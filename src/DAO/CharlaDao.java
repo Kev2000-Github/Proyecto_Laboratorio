@@ -1,4 +1,5 @@
 package DAO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -18,8 +19,8 @@ public class CharlaDao implements IDao<Charla> {
         try {
             Charla charla = new Charla();
             charla.setTema(rs.getString("tema"));
-            charla.setTema(rs.getString("direccion"));
-            charla.setTema(rs.getString("organismo"));
+            charla.setDireccion(rs.getString("direccion"));
+            charla.setOrganismo(rs.getString("organismo"));
             charla.setFecha(rs.getDate("fecha"));
             charla.setId(rs.getString("id"));
             return charla;
