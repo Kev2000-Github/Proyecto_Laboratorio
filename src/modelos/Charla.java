@@ -24,7 +24,7 @@ public class Charla {
     this.fecha = fecha;
   }
 
-  public void setId(String codigo) {
+  public void setId(String id) {
     this.id = id;
   }
 
