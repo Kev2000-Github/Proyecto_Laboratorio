@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Charla {
 
-  public String codigo;
-  public String tema;
-  public String direccion;
-  public String organismo;
-  public Date fecha;
+  private String codigo;
+  private String tema;
+  private String direccion;
+  private String organismo;
+  private Date fecha;
 
   public Charla(
     String codigo,
