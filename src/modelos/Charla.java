@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Charla {
 
-  private String codigo;
+  private String id;
   private String tema;
   private String direccion;
   private String organismo;
