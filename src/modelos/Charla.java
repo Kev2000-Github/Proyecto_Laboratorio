@@ -10,13 +10,15 @@ public class Charla {
   private String organismo;
   private Date fecha;
 
+  public Charla() {
+  };
+
   public Charla(
-    String id,
-    String tema,
-    String direccion,
-    String organismo,
-    Date fecha
-  ) {
+      String id,
+      String tema,
+      String direccion,
+      String organismo,
+      Date fecha) {
     this.id = id;
     this.tema = tema;
     this.direccion = direccion;
