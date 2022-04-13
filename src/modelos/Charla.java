@@ -11,25 +11,25 @@ public class Charla {
   private Date fecha;
 
   public Charla(
-    String codigo,
+    String id,
     String tema,
     String direccion,
     String organismo,
     Date fecha
   ) {
-    this.codigo = codigo;
+    this.id = id;
     this.tema = tema;
     this.direccion = direccion;
     this.organismo = organismo;
     this.fecha = fecha;
   }
 
-  public void setCodigo(String codigo) {
-    this.codigo = codigo;
+  public void setId(String codigo) {
+    this.id = id;
   }
 
-  public String getCodigo() {
-    return this.codigo;
+  public String getId() {
+    return this.id;
   }
 
   public void setTema(String tema) {
