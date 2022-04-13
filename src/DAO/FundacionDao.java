@@ -114,7 +114,8 @@ public class FundacionDao implements IDao<Fundacion> {
             String[] params = {
                     fundacion.getNombre(),
                     String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual())
+                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
+                    fundacion.getId()
 
             };
             con.execMutation(sql, params);
