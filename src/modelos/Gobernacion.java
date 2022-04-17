@@ -5,13 +5,15 @@ public class Gobernacion {
 	
 	//atributos
 	private List<Fundacion> fundaciones;
+	private float fondos;
 	
 	//metodos de inicializacion - constructores
 	public Gobernacion() {};
 	
-	public Gobernacion(List<Fundacion> fundaciones) {
+	public Gobernacion(List<Fundacion> fundaciones, float fondos) {
 		
 		this.fundaciones = fundaciones;
+		this.fondos = fondos;
 	};
 	
 	//metodos sets y gets
@@ -21,6 +23,13 @@ public class Gobernacion {
 	}
 	
 	public List<Fundacion> getFundaciones() {return fundaciones; };
+	
+	public void setFondos(float fondos) {
+		
+		this.fondos = fondos;
+	}
+	
+	public float getFondos() { return fondos; };
 	
 	//Metodos de procesamiento 
 	//----Borrar si se harán en el controlador----//
