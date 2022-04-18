@@ -30,9 +30,6 @@ public class FundacionDao implements IDao<Fundacion> {
         }
     }
 
-    public FundacionDao() {
-    }
-
     @Override
     public Fundacion get(String id) {
         try {
