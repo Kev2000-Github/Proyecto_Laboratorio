@@ -150,4 +150,30 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
 
+    public List<Charla> getCharlasAsistidas(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            List<Charla> list = new ArrayList<Charla>();
+            String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
+                    + " FROM charla c JOIN asistenciaCharla ac ON c.id = ac.charlaId"
+                    + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
+            String[] params = { cedula };
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs))
+                return list;
+            do {
+                Charla charla = setEntity(rs);
+                list.add(charla);
+            } while (rs.next());            
+            return list;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
 }
