@@ -2,6 +2,8 @@ package modelos;
 
 public class Beneficiario extends Persona {
 	
+	public Beneficiario(){};
+	
 	public Beneficiario(String nombre, 
 		String apellido, 
 		String cedula, 
