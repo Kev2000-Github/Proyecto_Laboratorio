@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS prioridad CASCADE;
 DROP TABLE IF EXISTS solicitud_status CASCADE;
 DROP TABLE IF EXISTS solicitud CASCADE;
 DROP TABLE IF EXISTS detalle_solicitud_servicio CASCADE;
-
+DROP TABLE IF EXISTS charla CASCADE;
+DROP TABLE IF EXISTS asistenciaCharla CASCADE;
 --ENUM
 DROP TYPE IF EXISTS tipo_servicio;
 DROP TYPE IF EXISTS solicitud_prioridad;
@@ -134,6 +135,20 @@ CREATE TABLE IF NOT EXISTS usuario(
 	CONSTRAINT fk_empleado FOREIGN KEY(empleado_id) REFERENCES empleado(id),
 	CONSTRAINT fk_rol FOREIGN KEY(rol_id) REFERENCES rol(id),
 	deleted_at DATE DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS charla(
+	id VARCHAR(40) PRIMARY KEY,
+	tema VARCHAR(80) NOT NULL,
+	lugar VARCHAR(80) NOT NULL,
+	organismo VARCHAR(80) NOT NULL,
+	fecha VARCHAR(60) NOT NULL,
+	deleted_at DATE DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS asistenciaCharla(
+	cedula VARCHAR(40) NOT NULL,
+	charla_id VARCHAR(80) NOT NULL
 );
 
 

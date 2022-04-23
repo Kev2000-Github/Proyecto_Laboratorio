@@ -80,8 +80,10 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 					edit = new JButton();
 					mainContainer.add(edit);
 					edit.setText("edit");
-					edit.setName("edit-" + entityName);
-					edit.putClientProperty("itemId", null);
+					edit.putClientProperty("item", null);
+					String entityName3 = entityName.toLowerCase().substring(0, 3);
+					String btnName = String.join("-", "goEdit", entityName, entityName3 + "0E1");
+					edit.setName(btnName);
 				}
 				{
 					delete = new JButton();
@@ -94,7 +96,9 @@ public class VentanaGeneralLista<T> extends VentanaGeneral {
 					create = new JButton();
 					mainContainer.add(create);
 					create.setText("registrar");
-					create.setName("go-register_" + entityName);
+					String entityName3 = entityName.toLowerCase().substring(0, 3);
+					String btnName = String.join("-", "go", entityName3 + "0R1");
+					create.setName(btnName);
 				}
 				{
 					goHome = new JButton();
