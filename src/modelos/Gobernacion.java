@@ -5,11 +5,29 @@ public class Gobernacion {
 	
 	//atributos
 	private List<Fundacion> fundaciones;
+	private String id;
 	private float fondos;
+	private String nombre;
 	
 	//metodos de inicializacion - constructores
 	public Gobernacion() {};
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public Gobernacion(List<Fundacion> fundaciones, float fondos) {
 		
 		this.fundaciones = fundaciones;

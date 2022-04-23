@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS usuario CASCADE;
 DROP TABLE IF EXISTS empleado CASCADE;
 DROP TABLE IF EXISTS persona CASCADE;
 DROP TABLE IF EXISTS cargo CASCADE;
+DROP TABLE IF EXISTS gobernacion CASCADE;
 DROP TABLE IF EXISTS fundacion CASCADE;
 DROP TABLE IF EXISTS rol CASCADE;
 DROP TABLE IF EXISTS permiso CASCADE;
@@ -24,13 +25,23 @@ CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 
 --BUSINESS LOGIC TABLES
+CREATE TABLE IF NOT EXISTS gobernacion(
+	id VARCHAR(40) PRIMARY KEY,
+	nombre VARCHAR(80) NOT NULL,
+	fondos FLOAT NOT NULL DEFAULT 0,
+	deleted_at DATE DEFAULT NULL
+);
+
 CREATE TABLE IF NOT EXISTS fundacion(
 	id VARCHAR(40) PRIMARY KEY,
 	nombre VARCHAR(80) NOT NULL,
 	presupuesto FLOAT NOT NULL DEFAULT 0,
 	porcentaje_partido_anual FLOAT NOT NULL DEFAULT 0,
+	gobernacion_id VARCHAR(40) NOT NULL, --FOREIGN KEY
+	CONSTRAINT fk_gobernacion FOREIGN KEY(gobernacion_id) REFERENCES gobernacion(id), --FOREIGN KEY
 	deleted_at DATE DEFAULT NULL
 );
+
 
 CREATE TABLE IF NOT EXISTS servicio(
 	id VARCHAR(40) PRIMARY KEY,
@@ -132,10 +143,14 @@ INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
 		  ('27317964','Carmelo','Perez','584126796099',null,null),
 		  ('27317965','Theo','Bach',null,null,null);
 		  
-INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual)
-	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a','Fundacion de Ayuda a Niños, Niñas y Adolescentes',100,50),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82','Fundacion para la Atencion al Discapacitado',100,30),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43','Fundacion Regional de la Mujer',100,20);
+INSERT INTO gobernacion(id, nombre, fondos)
+	VALUES('gb001','Gobernacion de Lara', 10000);
+		  
+
+INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual, gobernacion_id)
+	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a','Fundacion de Ayuda a Niños, Niñas y Adolescentes',100,50, 'gb001'),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82','Fundacion para la Atencion al Discapacitado',100,30, 'gb001'),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43','Fundacion Regional de la Mujer',100,20, 'gb001');
 		  
 INSERT INTO empleado(id, cedula, fundacion_id)
 	VALUES('e81a71bf-413a-4554-bcd7-834f7d4fafd8','27317962','43422123-da06-4890-8e3a-7131e32e5c2a'),
