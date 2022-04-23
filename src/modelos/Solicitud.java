@@ -3,15 +3,18 @@ package modelos;
 public class Solicitud {
 
     //atributos
-    private enum prioridad { alta, media, baja };
-    private enum tipoAyuda { medica, donacion };
-    private enum estado { aprobado, negado, pendiente };
+    private enum prioridadEnum { alta, media, baja };
+    private enum tipoAyudaEnum { medica, donacion };
+    private enum estadoEnum { aprobado, negado, pendiente };
 
     private String fundacionDestino;
 
     private Servicio servicio;
     private Beneficiario beneficiario;
     private Empleado empleado;
+    private prioridadEnum prioridad;
+    private tipoAyudaEnum tipoAyuda;
+    private estadoEnum estado;
 
     //Constructores
     public Solicitud(){};
@@ -64,6 +67,28 @@ public class Solicitud {
         return empleado;
     }
 
+    public prioridadEnum getPrioridad(){
+        return prioridad;
+    }
 
+    public void setPrioridad(prioridadEnum prioridad){
+        this.prioridad = prioridad;
+    }
+
+    public tipoAyudaEnum getTipoAyuda(){
+        return tipoAyuda;
+    }
+
+    public void setEstado(tipoAyudaEnum tipoAyuda){
+        this.tipoAyuda = tipoAyuda;
+    }
+
+    public estadoEnum getEstado(){
+        return estado;
+    }
+
+    public void setPrioridad(estadoEnum estado){
+        this.estado = estado;
+    }
 
 }
