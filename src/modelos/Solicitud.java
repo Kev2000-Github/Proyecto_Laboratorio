@@ -19,7 +19,7 @@ public class Solicitud {
     //Constructores
     public Solicitud(){};
 
-    void Solicitud(String fundaciondestino){
+    public Solicitud(String fundaciondestino){
 
         this.fundacionDestino = fundaciondestino;
         this.servicio = new Servicio();
