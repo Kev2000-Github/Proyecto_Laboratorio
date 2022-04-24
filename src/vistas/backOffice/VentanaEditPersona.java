@@ -39,6 +39,9 @@ public class VentanaEditPersona extends VentanaEditGeneral<Persona>{
             else if(key.equals("telefono")){
                 input.setValue(persona.getTelefono());
             }
+            else if(key.equals("correo")){
+                input.setValue(persona.getCorreo());
+            }
         });
         setEnableFields(true);
     }
@@ -57,6 +60,9 @@ public class VentanaEditPersona extends VentanaEditGeneral<Persona>{
             }
             else if(key.equals("telefono")){
                 item.setTelefono(input.getValue());
+            }
+            else if(key.equals("correo")){
+                item.setCorreo(input.getValue());
             }
         });
         return item;

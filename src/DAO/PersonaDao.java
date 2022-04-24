@@ -23,6 +23,7 @@ public class PersonaDao implements IDao<Persona> {
             persona.setApellido(rs.getString("apellido"));	
             persona.setDireccion(rs.getString("direccion"));	
             persona.setTelefono(rs.getString("telefono"));
+            persona.setCorreo(rs.getString("correo"));
             return persona;
         }
         catch(SQLException e){
@@ -85,13 +86,14 @@ public class PersonaDao implements IDao<Persona> {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUES(?, ?,?,?,?)";
+			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono, correo) VALUES(?, ?,?,?,?,?)";
             String[] params = {
                 persona.getCedula(),
                 persona.getNombre(),
                 persona.getApellido(),
                 persona.getDireccion(),
-                persona.getTelefono()
+                persona.getTelefono(),
+                persona.getCorreo()
             };
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -108,13 +110,14 @@ public class PersonaDao implements IDao<Persona> {
 			con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                + " nombre=?, apellido=?, telefono=?, direccion=?"
+                + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?"
                 + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
                 persona.getNombre(),
                 persona.getApellido(),
                 persona.getTelefono(),
                 persona.getDireccion(),
+                persona.getCorreo(),
                 persona.getCedula()
             };
             con.execMutation(sql, params);
