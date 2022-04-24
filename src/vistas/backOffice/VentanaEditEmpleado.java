@@ -42,6 +42,9 @@ public class VentanaEditEmpleado extends VentanaEditGeneral<Empleado>{
             else if(key.equals("telefono")){
                 input.setValue(empleado.getTelefono());
             }
+            else if(key.equals("correo")){
+                input.setValue(empleado.getCorreo());
+            }
         });
         setEnableFields(true);
     }
@@ -60,6 +63,9 @@ public class VentanaEditEmpleado extends VentanaEditGeneral<Empleado>{
             }
             else if(key.equals("telefono")){
                 item.setTelefono(input.getValue());
+            }
+            else if(key.equals("correo")){
+                item.setCorreo(input.getValue());
             }
         });
         return item;

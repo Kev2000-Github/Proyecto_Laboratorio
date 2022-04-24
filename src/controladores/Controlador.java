@@ -80,7 +80,7 @@ public class Controlador implements ActionListener {
 			if(entity.equals("persona")){
 				Persona newPersona = ((VentanaAddPersona) window).getPersona();
 				IDao entityDao = daoFactory.getDao(entity);
-				Persona existentPersona = (Persona) entityDao.get(newPersona.cedula);
+				Persona existentPersona = (Persona) entityDao.get(newPersona.getCedula());
 				if(existentPersona != null){
 					window.mostrarMensaje("Ya existe un registro de esta " + entity);
 					return;
@@ -103,7 +103,7 @@ public class Controlador implements ActionListener {
 				IDao entityDao = daoFactory.getDao(entity);
 				Object item = entityDao.get(id);
 				ArrayList<String> inmutableFields = new ArrayList<String>(List.of("cedula"));
-				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono");
+				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono", "correo");
 				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
 				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
 			}
@@ -112,7 +112,7 @@ public class Controlador implements ActionListener {
 				IDao entityDao = daoFactory.getDao(entity);
 				Object item = entityDao.get(id);
 				ArrayList<String> inmutableFields = new ArrayList<>(List.of("id","cedula"));
-				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono");
+				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono", "correo");
 				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
 				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
 			}
