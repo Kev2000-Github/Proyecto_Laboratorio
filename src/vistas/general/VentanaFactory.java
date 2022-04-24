@@ -15,43 +15,42 @@ import vistas.backOffice.VentanaEditPersona;
 import vistas.backOffice.VentanaEmpleados;
 
 public class VentanaFactory {
-    public VentanaGeneral getVentana(String code, ActionListener accion){
-        if(code.equals("hom001")){
+    public VentanaGeneral getVentana(String code, ActionListener accion) {
+        if (code.equals("hom001")) {
             return new VentanaRegistros(accion);
         }
-        if(code.equals("per0R1")){
+        if (code.equals("per0R1")) {
             return new VentanaAddBeneficiario(accion);
         }
         return new VentanaGeneral();
     }
 
-    public VentanaGeneral getVentanaList(String code, ActionListener accion, List<?> list){
-        if(code.equals("ben001")){
-            List<Beneficiario> beneficiarios = (List<Beneficiario>)(Object) list;
+    public VentanaGeneral getVentanaList(String code, ActionListener accion, List<?> list) {
+        if (code.equals("ben001")) {
+            List<Beneficiario> beneficiarios = (List<Beneficiario>) (Object) list;
             return new VentanaBeneficiarios(accion, beneficiarios);
         }
-        if(code.equals("emp001")){
-            List<Empleado> empleados = (List<Empleado>)(Object) list;
+        if (code.equals("emp001")) {
+            List<Empleado> empleados = (List<Empleado>) (Object) list;
             return new VentanaEmpleados(accion, empleados);
         }
         return new VentanaGeneral();
     }
 
     public VentanaEditGeneral<?> getVentanaEdit(
-        String code, 
-        ActionListener accion, 
-        Object entity, 
-        String entityName, 
-        ArrayList<String> inmutableFields,
-        ArrayList<String> mutableFields
-        ){
-    if(code.equals("per0E1")){
-        return new VentanaEditPersona(accion, (Persona) entity, entityName, inmutableFields, mutableFields);
+            String code,
+            ActionListener accion,
+            Object entity,
+            String entityName,
+            ArrayList<String> inmutableFields,
+            ArrayList<String> mutableFields) {
+        if (code.equals("per0E1")) {
+            return new VentanaEditPersona(accion, (Persona) entity, entityName, inmutableFields, mutableFields);
+        }
+        if (code.equals("emp0E1")) {
+            return new VentanaEditEmpleado(accion, (Empleado) entity, entityName, inmutableFields, mutableFields);
+        }
+        return new VentanaEditGeneral<Object>(accion, entity, entityName, inmutableFields, mutableFields);
     }
-    if(code.equals("emp0E1")){
-        return new VentanaEditEmpleado(accion, (Empleado) entity, entityName, inmutableFields, mutableFields);
-    }
-    return new VentanaEditGeneral<Object>(accion, entity, entityName, inmutableFields, mutableFields);
-}
 
 }

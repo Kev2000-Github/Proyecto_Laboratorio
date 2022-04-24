@@ -9,20 +9,19 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Fundacion;
+import modelos.Servicio;
 
-public class FundacionDao implements IDao<Fundacion> {
+public class ServicioDao implements IDao<Servicio> {
     private Conne con;
 
     @Override
-    public Fundacion setEntity(ResultSet rs) {
+    public Servicio setEntity(ResultSet rs) {
         try {
-            Fundacion fundacion = new Fundacion();
-            fundacion.setNombre(rs.getString("nombre"));
-            fundacion.setPresupuesto(rs.getFloat("presupuesto"));
-            fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentaje_partido_anual"));
-            fundacion.setId(rs.getString("id"));
-            return fundacion;
+            Servicio servicio = new Servicio();
+            servicio.setId(rs.getString("id"));
+            servicio.setNombre(rs.getString("nombre"));
+            servicio.setTipo(rs.getString("tipo"));
+            return servicio;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
             System.out.println(msg);
@@ -31,19 +30,19 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public Fundacion get(String id) {
+    public Servicio get(String id) {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
-                    + " FROM fundacion f WHERE id = ? AND f.deleted_at IS NULL";
+            String sql = "SELECT id, nombre, tipo"
+                    + " FROM servicio f WHERE id = ? AND f.deleted_at IS NULL";
             String[] params = { id };
             ResultSet rs = con.execQuery(sql, params);
 
             if (con.isResultSetEmpty(rs))
                 return null;
-            Fundacion fundacion = setEntity(rs);
-            return fundacion;
+            Servicio servicio = setEntity(rs);
+            return servicio;
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
@@ -54,19 +53,19 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public List<Fundacion> getAll() {
+    public List<Servicio> getAll() {
         try {
-            List<Fundacion> list = new ArrayList<Fundacion>();
+            List<Servicio> list = new ArrayList<Servicio>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
-                    + " FROM fundacion WHERE deleted_at IS NULL";
+            String sql = "SELECT id, nombre, tipo"
+                    + " FROM servicio WHERE deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
                 return list;
             do {
-                Fundacion fundacion = setEntity(rs);
-                list.add(fundacion);
+                Servicio servicio = setEntity(rs);
+                list.add(servicio);
             } while (rs.next());
             return list;
         } catch (SQLException e) {
@@ -79,17 +78,16 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void save(Fundacion fundacion) {
+    public void save(Servicio servicio) {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO servicio(id, nombre, tipo) VALUES(?,?,?)";
             String[] params = {
-                    fundacion.getId(),
-                    fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    String.valueOf(fundacion.getGobernacionId())
+                    servicio.getId(),
+                    servicio.getNombre(),
+                    String.valueOf(servicio.getTipo()),
+          
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -101,18 +99,17 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void update(Fundacion fundacion) {
+    public void update(Servicio servicio) {
         try {
             con = new Conne();
             con.open();
-            String sql = "UPDATE fundacion SET"
-                    + " nombre=?, presupuesto=?, porcentaje_partido_anual=?"
+            String sql = "UPDATE servicio SET"
+                    + " nombre=?, tipo=?"
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                    fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    fundacion.getId()
+                    servicio.getNombre(),
+                    String.valueOf(servicio.getTipo()),
+                    servicio.getId()
 
             };
             con.execMutation(sql, params);
@@ -125,15 +122,15 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void delete(Fundacion fundacion) {
+    public void delete(Servicio servicio) {
         try {
             con = new Conne();
             con.open();
             Timestamp now = new Timestamp(new Date().getTime());
-            String sql = "UPDATE fundacion SET deleted_at = '" + now.toString()
+            String sql = "UPDATE servicio SET deleted_at = '" + now.toString()
                     + "' WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                    fundacion.getId()
+                    servicio.getId()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

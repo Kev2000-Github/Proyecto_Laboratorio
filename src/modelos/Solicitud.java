@@ -1,24 +1,56 @@
 package modelos;
 
+import java.util.ArrayList;
+
 public class Solicitud {
 
-    private enum prioridadEnum {
+ 
+    private String id;
+
+   
+    private String empleadoId;
+    private String fundacionId;
+    private prioridadEnum prioridad;
+    private estadoEnum status;
+    private Float costoTotal;
+
+    private String beneficiarioId;
+
+    private ArrayList<Servicio> servicios;
+    
+    public enum prioridadEnum {
         alta, media, baja
     };
 
-    private enum estadoEnum {
+    public enum estadoEnum {
         aprobado, negado, pendiente
     }
 
-    private String beneficiarioId;
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getBeneficiarioId() {
         return this.beneficiarioId;
     }
 
+    public ArrayList<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
     public void setBeneficiarioId(String beneficiarioId) {
         this.beneficiarioId = beneficiarioId;
     }
+
 
     public String getEmpleadoId() {
         return this.empleadoId;
@@ -59,10 +91,14 @@ public class Solicitud {
     public void setCostoTotal(Float costoTotal) {
         this.costoTotal = costoTotal;
     }
-    private String empleadoId;
-    private String fundacionId;
-    private prioridadEnum prioridad;
-    private estadoEnum status;
-    private Float costoTotal;
+  
 
+    public void setCedula(Object selectedItem) {
+    }
+ 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return this.id + " - " + this.empleadoId + " - " + this.prioridad + " - " + this.status + " - " + this.costoTotal + " - " + this.beneficiarioId + " - " + this.servicios;
+    }
 }

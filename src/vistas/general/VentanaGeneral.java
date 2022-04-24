@@ -29,7 +29,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
 				mainContainer.setLayout(new BorderLayout());
 			}
 			pack();
-			setSize(400, 300);
+			setSize(300, 300);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();

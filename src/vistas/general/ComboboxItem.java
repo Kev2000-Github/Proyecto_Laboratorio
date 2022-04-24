@@ -16,17 +16,18 @@ public class ComboboxItem {
         this.i = i;
         this.description = description;
     }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub
         return description;
     }
 
-    public String getI() {
+    public String getId() {
         return this.i;
     }
 
-    public void setI(String i) {
+    public void setId(String i) {
         this.i = i;
     }
 

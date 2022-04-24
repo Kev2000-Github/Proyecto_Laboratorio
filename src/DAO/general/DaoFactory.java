@@ -5,6 +5,7 @@ import DAO.GobernacionDao;
 import DAO.PermisoDao;
 import DAO.PersonaDao;
 import DAO.RolDao;
+import DAO.SolicitudDao;
 import DAO.UsuarioDao;
 
 public class DaoFactory {
@@ -15,6 +16,7 @@ public class DaoFactory {
         if(entity.equals("usuario")) return new UsuarioDao();
         if(entity.equals("permiso")) return new PermisoDao();
         if(entity.equals("rol")) return new RolDao();
+        if(entity.equals("solicitud")) return new SolicitudDao();
         return null;
     }
 }
