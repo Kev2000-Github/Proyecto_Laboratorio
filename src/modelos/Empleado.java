@@ -12,9 +12,11 @@ public class Empleado extends Persona {
 		String cedula, 
 		String direccion, 
 		String telefono,
-		String id)
+		String id,
+		String correo
+		)
 	{
-		super(nombre,apellido,cedula,direccion,telefono);
+		super(nombre,apellido,cedula,direccion,telefono,correo);
         this.id = id;
     }
 	

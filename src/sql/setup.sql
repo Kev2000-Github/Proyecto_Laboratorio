@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS prioridad CASCADE;
 DROP TABLE IF EXISTS solicitud_status CASCADE;
 DROP TABLE IF EXISTS solicitud CASCADE;
 DROP TABLE IF EXISTS detalle_solicitud_servicio CASCADE;
+DROP TABLE IF EXISTS presupuesto;
 DROP TABLE IF EXISTS charla CASCADE;
 DROP TABLE IF EXISTS asistenciaCharla CASCADE;
 --ENUM
@@ -108,9 +109,10 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id)
 );
 
-CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
+CREATE TABLE IF NOT EXISTS presupuesto(
 	solicitud_id VARCHAR(40) NOT NULL,
 	servicio_id VARCHAR(40) NOT NULL,
+	costo_generado FLOAT NOT NULL,
 	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
 	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
 );
@@ -222,3 +224,21 @@ INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40);
 		  
+INSERT INTO charla(id, tema, lugar, organismo, fecha)
+	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
+		  ('2', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
+		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
+		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01')
+
+INSERT INTO asistenciaCharla(cedula, charla_id)
+	VALUES('27317962','1'),
+		  ('27317962','2'),
+		  ('27317962','3'),
+		  ('27317962','4'),
+		  ('27317963','4'),
+		  ('27317963','3'),
+		  ('27317963','2'),
+		  ('27317963','1'),
+		  ('27317964','3'),
+		  ('27317964','1'),
+		  ('27317965','3'),

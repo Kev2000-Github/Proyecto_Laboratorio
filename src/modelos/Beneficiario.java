@@ -14,7 +14,7 @@ public class Beneficiario extends Persona {
 		String telefono,
 		String id)
 	{
-		super(nombre,apellido,cedula,direccion,telefono);
+		super(nombre,apellido,cedula,direccion,telefono, id);
         this.id = id;
     }
 	
