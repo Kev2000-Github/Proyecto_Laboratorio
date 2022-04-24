@@ -21,6 +21,7 @@ public class FundacionDao implements IDao<Fundacion> {
             fundacion.setNombre(rs.getString("nombre"));
             fundacion.setPresupuesto(rs.getFloat("presupuesto"));
             fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentaje_partido_anual"));
+            fundacion.setGobernacionId(rs.getString("gobernacion_id"));
             fundacion.setId(rs.getString("id"));
             return fundacion;
         } catch (SQLException e) {
@@ -83,13 +84,13 @@ public class FundacionDao implements IDao<Fundacion> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual, gobernacion_id) VALUES(?,?,?,?,?)";
             String[] params = {
                     fundacion.getId(),
                     fundacion.getNombre(),
                     String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual())
-
+                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
+                    String.valueOf(fundacion.getGobernacionId())
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

@@ -9,7 +9,7 @@ import java.util.List;
 public class VentanaBeneficiarios extends VentanaGeneralLista<Persona>{
 	
     public VentanaBeneficiarios(ActionListener accion, List<Persona> personas){
-        super(accion, personas, "persona");
+        super(accion, personas, "Beneficiario");
     }
 
 	public void fillListModel(){
