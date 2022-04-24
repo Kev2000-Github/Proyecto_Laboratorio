@@ -9,22 +9,22 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Empleado;
+import modelos.Beneficiario;
 
-public class EmpleadoDao implements IDao<Empleado> {
+public class BeneficiarioDao implements IDao<Beneficiario> {
     private Conne con;
 
     @Override
-    public Empleado setEntity(ResultSet rs){
+    public Beneficiario setEntity(ResultSet rs){
         try{
-            Empleado empleado = new Empleado();
-            empleado.setCedula(rs.getString("cedula"));	
-            empleado.setNombre(rs.getString("nombre"));	
-            empleado.setApellido(rs.getString("apellido"));	
-            empleado.setDireccion(rs.getString("direccion"));	
-            empleado.setTelefono(rs.getString("telefono"));
-            empleado.setId(rs.getString("id"));
-            return empleado;
+            Beneficiario beneficiario = new Beneficiario();
+            beneficiario.setCedula(rs.getString("cedula"));	
+            beneficiario.setNombre(rs.getString("nombre"));	
+            beneficiario.setApellido(rs.getString("apellido"));	
+            beneficiario.setDireccion(rs.getString("direccion"));	
+            beneficiario.setTelefono(rs.getString("telefono"));
+            beneficiario.setId(rs.getString("id"));
+            return beneficiario;
         }
         catch(SQLException e){
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -33,22 +33,22 @@ public class EmpleadoDao implements IDao<Empleado> {
         }
     }
 
-    public EmpleadoDao() {}
+    public BeneficiarioDao() {}
     
     @Override
-    public Empleado get(String id) {
+    public Beneficiario get(String id) {
 		try {
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =?"
+                + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula where id =?"
                 + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
             if(con.isResultSetEmpty(rs)) return null;
-            Empleado empleado = setEntity(rs);
-            return empleado;	
+            Beneficiario beneficiario = setEntity(rs);
+            return beneficiario;	
 		} 
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
@@ -61,18 +61,18 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public List<Empleado> getAll() {
+    public List<Beneficiario> getAll() {
 		try {
-            List<Empleado> list = new ArrayList<Empleado>();
+            List<Beneficiario> list = new ArrayList<Beneficiario>();
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula AND e.deleted_at IS NULL AND p.deleted_at IS NULL";			
+                + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula AND e.deleted_at IS NULL AND p.deleted_at IS NULL";			
             ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return list;
 			do {
-                Empleado empleado = setEntity(rs);
-				list.add(empleado);
+                Beneficiario beneficiario = setEntity(rs);
+				list.add(beneficiario);
 			}while (rs.next());
             return list;
 		} 
@@ -87,17 +87,17 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void save(Empleado empleado) {
+    public void save(Beneficiario beneficiario) {
 		try {
 			con = new Conne();
             con.open();
 			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUES(?, ?,?,?,?)";
             String[] params = {
-                empleado.getCedula(),
-                empleado.getNombre(),
-                empleado.getApellido(),
-                empleado.getDireccion(),
-                empleado.getTelefono()
+                beneficiario.getCedula(),
+                beneficiario.getNombre(),
+                beneficiario.getApellido(),
+                beneficiario.getDireccion(),
+                beneficiario.getTelefono()
             };
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -109,7 +109,7 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void update(Empleado empleado) {
+    public void update(Beneficiario beneficiario) {
 		try {
 			con = new Conne();
             con.open();
@@ -117,11 +117,11 @@ public class EmpleadoDao implements IDao<Empleado> {
                 + " nombre=?, apellido=?, telefono=?, direccion=?"
                 + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
-                empleado.getNombre(),
-                empleado.getApellido(),
-                empleado.getTelefono(),
-                empleado.getDireccion(),
-                empleado.getCedula()
+                beneficiario.getNombre(),
+                beneficiario.getApellido(),
+                beneficiario.getTelefono(),
+                beneficiario.getDireccion(),
+                beneficiario.getCedula()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -133,14 +133,14 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void delete(Empleado empleado) {
+    public void delete(Beneficiario beneficiario) {
 		try {
 			con = new Conne();
             con.open();
             Timestamp now = new Timestamp(new Date().getTime());
-			String sql = "UPDATE empleado SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
+			String sql = "UPDATE beneficiario SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                empleado.getId()
+                beneficiario.getId()
             };
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -151,20 +151,20 @@ public class EmpleadoDao implements IDao<Empleado> {
 		}
     }
 
-    public List<Empleado> getAllFromFundacion(String fundacionId) {
+    public List<Beneficiario> getAllFromFundacion(String fundacionId) {
 		try {
-            List<Empleado> list = new ArrayList<Empleado>();
+            List<Beneficiario> list = new ArrayList<Beneficiario>();
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula"
+                + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula"
                 + " WHERE e.fundacion_id = ? AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
             String[] params = {fundacionId};
             ResultSet rs = con.execQuery(sql, params);
             if(con.isResultSetEmpty(rs)) return list;
 			do {
-                Empleado empleado = setEntity(rs);
-				list.add(empleado);
+                Beneficiario beneficiario = setEntity(rs);
+				list.add(beneficiario);
 			}while (rs.next());
             return list;
 		} 
@@ -173,6 +173,30 @@ public class EmpleadoDao implements IDao<Empleado> {
             System.out.println(msg);
             return null;
 		}
+        finally {
+            con.close();
+        }
+    }
+
+    public Beneficiario getByCedula(String cedula) {
+		try {
+			con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
+                + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula where p.cedula =?"
+                + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+            
+            if(con.isResultSetEmpty(rs)) return null;
+            Beneficiario beneficiario = setEntity(rs);
+            return beneficiario;	
+		} 
+        catch (Exception e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+		} 
         finally {
             con.close();
         }

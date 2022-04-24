@@ -10,6 +10,7 @@ import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
 import modelos.Fundacion;
+import modelos.Servicio;
 
 public class FundacionDao implements IDao<Fundacion> {
     private Conne con;

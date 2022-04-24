@@ -21,6 +21,7 @@ public class VentanaHome extends VentanaGeneral{
     private JLabel lblTitulo;
     private JButton goEmpleados;
     private JButton goBeneficiarios;
+    private JButton goSolicitudes;
 
     public VentanaHome(ActionListener accion){
         super();
@@ -51,6 +52,12 @@ public class VentanaHome extends VentanaGeneral{
 					mainContainer.add(goBeneficiarios);
 					goBeneficiarios.setText("Beneficiarios");
 					goBeneficiarios.setName("goList-ben001");
+				}
+				{
+					goBeneficiarios = new JButton();
+					mainContainer.add(goBeneficiarios);
+					goBeneficiarios.setText("Solicitudes");
+					goBeneficiarios.setName("go-solicitudes");
 				}
 			}
 		} catch (Exception e) {

@@ -3,16 +3,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.swing.JButton;
 
+import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
+import DAO.FundacionDao;
 import DAO.PersonaDao;
+import DAO.ServicioDao;
+import DAO.SolicitudDAO;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import modelos.Beneficiario;
 import modelos.Empleado;
+import modelos.Fundacion;
 import modelos.Persona;
+import modelos.Servicio;
+import modelos.Solicitud;
 import modelos.Usuario;
+import utils.Utils;
 import vistas.VentanaHome;
 import vistas.backOffice.VentanaAddPersona;
 import vistas.backOffice.VentanaEditEmpleado;
@@ -20,6 +30,7 @@ import vistas.backOffice.VentanaEditPersona;
 import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
 import vistas.general.VentanaGeneralLista;
+import utils.Constants.*;
 public class Controlador implements ActionListener {
 	VentanaGeneral window;
 	VentanaFactory ventanaFactory;
@@ -39,6 +50,38 @@ public class Controlador implements ActionListener {
 
 	}
 
+	public void generateRandomSolicitudes(){
+		SolicitudDAO solicitudDao = new SolicitudDAO();
+		EmpleadoDao empleadoDao = new EmpleadoDao();
+		FundacionDao fundacionDao = new FundacionDao();
+		ServicioDao servicioDao = new ServicioDao();
+		BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+		List<Fundacion> fundaciones = fundacionDao.getAll();
+		fundaciones.forEach(fundacion -> {
+			List<Beneficiario> beneficiarios = beneficiarioDao.getAll();
+			List<Empleado> empleados = empleadoDao.getAllFromFundacion(fundacion.getId());
+			List<Servicio> servicios = servicioDao.getAllFromFundacion(fundacion.getId());
+			int numberSolicitudes = Utils.randomInt(1, 6);
+
+			for(int i = 0; i < numberSolicitudes; i++){
+				Solicitud solicitud = new Solicitud();
+				String uuid = UUID.randomUUID().toString();
+				solicitud.setId(uuid);
+				solicitud.setBeneficiario((Beneficiario) Utils.getRandomFromList(beneficiarios));
+				solicitud.setCosto_total(Utils.randomInt(1, 100));
+				solicitud.setEmpleado((Empleado) Utils.getRandomFromList(empleados));
+				solicitud.setFundacionDestino(fundacion.getId());
+				solicitud.setPrioridad(Utils.randomEnum(prioridadEnum.class));
+				solicitud.setEstado(Utils.randomEnum(estadoEnum.class));
+				solicitud.setTipoAyuda(Utils.randomEnum(tipoAyudaEnum.class));
+				ArrayList<Servicio> serviciosRandom = new ArrayList<Servicio>();
+				serviciosRandom.add((Servicio) Utils.getRandomFromList(servicios));
+				solicitud.setServicios(serviciosRandom);
+				solicitudDao.save(solicitud);
+			}
+		});
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
@@ -48,7 +91,17 @@ public class Controlador implements ActionListener {
 		if(action.equals("go")){
 			String ventanaCode = actionName[1];
 			window.dispose();
-			window = ventanaFactory.getVentana(ventanaCode, this);
+			if(ventanaCode.equals("solicitudes")){
+				ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+				window = ventanaFactory.getVentanaSolicitudes(this, solicitudes);
+			}
+			else{
+				window = ventanaFactory.getVentana(ventanaCode, this);
+			}
+		}
+		else if(action.equals("goSolicitud")){
+			String id = (String)btn.getClientProperty("itemId");
+			System.out.println(id);
 		}
 		else if(action.equals("goList")){
 			String ventanaCode = actionName[1];

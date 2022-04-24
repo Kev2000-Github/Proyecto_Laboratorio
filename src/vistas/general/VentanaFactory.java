@@ -6,7 +6,9 @@ import java.util.List;
 
 import modelos.Empleado;
 import modelos.Persona;
+import modelos.Solicitud;
 import vistas.VentanaHome;
+import vistas.VentanaSolicitudes;
 import vistas.backOffice.VentanaAddPersona;
 import vistas.backOffice.VentanaBeneficiarios;
 import vistas.backOffice.VentanaEditEmpleado;
@@ -53,4 +55,7 @@ public class VentanaFactory {
     return new VentanaEditGeneral<Object>(accion, entity, entityName, inmutableFields, mutableFields);
 }
 
+    public VentanaSolicitudes getVentanaSolicitudes(ActionListener accion, ArrayList<Solicitud> solicitudes){
+        return new VentanaSolicitudes(accion, solicitudes);
+    }
 }

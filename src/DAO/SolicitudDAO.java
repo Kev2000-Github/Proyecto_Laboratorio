@@ -9,24 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
+import modelos.Beneficiario;
+import modelos.Empleado;
 import modelos.Servicio;//?
 import modelos.Solicitud;
+import java.util.Date;
 
-public abstract class SolicitudDAO implements IDao<Solicitud> {
+public class SolicitudDAO implements IDao<Solicitud> {
     
     private Conne con;
     
     @Override
     public Solicitud setEntity(ResultSet rs) {
         try {
-            
+            EmpleadoDao empleadoDao = new EmpleadoDao();
+            BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+            ServicioDao servicioDao = new ServicioDao();
             Solicitud solicitud = new Solicitud();
             
             //strings
             solicitud.setId(rs.getString("id"));
             solicitud.setFundacionDestino(rs.getString("fundacion_id"));
             solicitud.setCosto_total(rs.getFloat("costo_total"));
-           
+            Empleado empleado = empleadoDao.get(rs.getString("empleado_id"));
+            Beneficiario beneficiario = beneficiarioDao.get(rs.getString("cedula"));
+            solicitud.setBeneficiario(beneficiario);
+            solicitud.setEmpleado(empleado);
+            //solicitud.setServicios(servicios);
             //objetos
             Servicio servicio = new Servicio();
             String id_servicio = servicio.getId();
@@ -36,9 +45,9 @@ public abstract class SolicitudDAO implements IDao<Solicitud> {
             //solicitud.setEmpleado();
             
             //enums
-            solicitud.setPrioridad();
-            solicitud.setTipoAyuda();
-            solicitud.setEstado();
+            //solicitud.setPrioridad();
+            //solicitud.setTipoAyuda();
+            //solicitud.setEstado();
             
             return solicitud;
         } catch (SQLException e) {

@@ -1,27 +1,16 @@
 package vistas;
-import javax.swing.*;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.LabelUI;
 
 import vistas.general.VentanaGeneral;
 import vistas.general.InputField;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 
 public class VentanaSolicitud extends VentanaGeneral {
     private JLabel lblTitulo;

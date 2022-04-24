@@ -1,17 +1,15 @@
 package modelos;
 
+import java.util.ArrayList;
+
+import utils.Constants.*;
+
 public class Solicitud {
-
-    //atributos
-    private enum prioridadEnum { alta, media, baja };
-    private enum tipoAyudaEnum { medica, donacion };
-    private enum estadoEnum { aprobado, negado, pendiente };
-
     private String fundacionDestino;
     private String id;
     private float costo_total;
 
-    private Servicio servicio;
+    private ArrayList<Servicio> servicios;
     private Beneficiario beneficiario;
     private Empleado empleado;
     private prioridadEnum prioridad;
@@ -21,14 +19,20 @@ public class Solicitud {
     //Constructores
     public Solicitud(){};
 
-    public Solicitud(String fundaciondestino, String id, float costo_total){
-
+    public Solicitud(
+            String fundaciondestino, 
+            String id, 
+            float costo_total,
+            ArrayList<Servicio> servicios,
+            Beneficiario beneficiario,
+            Empleado empleado
+            ){
         this.fundacionDestino = fundaciondestino;
         this.id = id;
         this.costo_total = costo_total;
-        this.servicio = new Servicio();
-        this.beneficiario = new Beneficiario();
-        this.empleado = new Empleado();
+        this.servicios = servicios;
+        this.beneficiario = beneficiario;
+        this.empleado = empleado;
     }
 
     //Metodos sets y gets
@@ -48,14 +52,12 @@ public class Solicitud {
         return fundacionDestino;
     }
 
-    public void setServicio(Servicio servicio){
-
-        this.servicio = servicio;
+    public void setServicios(ArrayList<Servicio> servicios){
+        this.servicios = servicios;
     }
 
-    public Servicio getServicio(){
-
-        return servicio;
+    public ArrayList<Servicio> getServicios(){
+        return servicios;
     }
 
     public void setBeneficiario(Beneficiario beneficiario){

@@ -5,8 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
-import utils.Utils;
-
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

@@ -9,22 +9,19 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Empleado;
+import modelos.Servicio;
 
-public class EmpleadoDao implements IDao<Empleado> {
+public class ServicioDao implements IDao<Servicio> {
     private Conne con;
 
     @Override
-    public Empleado setEntity(ResultSet rs){
+    public Servicio setEntity(ResultSet rs){
         try{
-            Empleado empleado = new Empleado();
-            empleado.setCedula(rs.getString("cedula"));	
-            empleado.setNombre(rs.getString("nombre"));	
-            empleado.setApellido(rs.getString("apellido"));	
-            empleado.setDireccion(rs.getString("direccion"));	
-            empleado.setTelefono(rs.getString("telefono"));
-            empleado.setId(rs.getString("id"));
-            return empleado;
+            Servicio servicio = new Servicio();
+            servicio.setTipo(rs.getString("tipo"));	
+            servicio.setNombre(rs.getString("nombre"));	
+            servicio.setId(rs.getString("id"));
+            return servicio;
         }
         catch(SQLException e){
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -33,22 +30,22 @@ public class EmpleadoDao implements IDao<Empleado> {
         }
     }
 
-    public EmpleadoDao() {}
+    public ServicioDao() {}
     
     @Override
-    public Empleado get(String id) {
+    public Servicio get(String id) {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where id =?"
-                + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+            String sql = "SELECT *"
+                + " FROM servicio where id =?"
+                + " AND edeleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
             
             if(con.isResultSetEmpty(rs)) return null;
-            Empleado empleado = setEntity(rs);
-            return empleado;	
+            Servicio servicio = setEntity(rs);
+            return servicio;	
 		} 
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
@@ -61,18 +58,18 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public List<Empleado> getAll() {
+    public List<Servicio> getAll() {
 		try {
-            List<Empleado> list = new ArrayList<Empleado>();
+            List<Servicio> list = new ArrayList<Servicio>();
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula AND e.deleted_at IS NULL AND p.deleted_at IS NULL";			
+            String sql = "SELECT *"
+                + " FROM servicio WHERE deleted_at IS NULL";			
             ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return list;
 			do {
-                Empleado empleado = setEntity(rs);
-				list.add(empleado);
+                Servicio servicio = setEntity(rs);
+				list.add(servicio);
 			}while (rs.next());
             return list;
 		} 
@@ -87,17 +84,15 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void save(Empleado empleado) {
+    public void save(Servicio servicio) {
 		try {
 			con = new Conne();
             con.open();
-			String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono) VALUES(?, ?,?,?,?)";
+			String sql = "INSERT INTO servicio(id, nombre, tipo) VALUES(?, ?, ?)";
             String[] params = {
-                empleado.getCedula(),
-                empleado.getNombre(),
-                empleado.getApellido(),
-                empleado.getDireccion(),
-                empleado.getTelefono()
+                servicio.getId(),
+                servicio.getNombre(),
+                servicio.getTipo()
             };
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -109,19 +104,17 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void update(Empleado empleado) {
+    public void update(Servicio servicio) {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "UPDATE persona SET"
-                + " nombre=?, apellido=?, telefono=?, direccion=?"
-                + " WHERE cedula = ? AND deleted_at IS NULL";
+            String sql = "UPDATE servicio SET"
+                + " nombre=?, tipo=?"
+                + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                empleado.getNombre(),
-                empleado.getApellido(),
-                empleado.getTelefono(),
-                empleado.getDireccion(),
-                empleado.getCedula()
+                servicio.getNombre(),
+                servicio.getTipo(),
+                servicio.getId()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -133,14 +126,14 @@ public class EmpleadoDao implements IDao<Empleado> {
     }
     
     @Override
-    public void delete(Empleado empleado) {
+    public void delete(Servicio servicio) {
 		try {
 			con = new Conne();
             con.open();
             Timestamp now = new Timestamp(new Date().getTime());
-			String sql = "UPDATE empleado SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
+			String sql = "UPDATE servicio SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                empleado.getId()
+                servicio.getId()
             };
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -151,20 +144,21 @@ public class EmpleadoDao implements IDao<Empleado> {
 		}
     }
 
-    public List<Empleado> getAllFromFundacion(String fundacionId) {
+    public List<Servicio> getAllFromFundacion(String fundacionId) {
 		try {
-            List<Empleado> list = new ArrayList<Empleado>();
+            List<Servicio> list = new ArrayList<Servicio>();
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula"
-                + " WHERE e.fundacion_id = ? AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+            String sql = "SELECT * FROM servicio s"
+                + "JOIN fundacion_servicio fs"
+                + "ON s.id = fs.servicio_id"
+                + " WHERE fundacion_id = ? AND deleted_at IS NULL";
             String[] params = {fundacionId};
             ResultSet rs = con.execQuery(sql, params);
             if(con.isResultSetEmpty(rs)) return list;
 			do {
-                Empleado empleado = setEntity(rs);
-				list.add(empleado);
+                Servicio servicio = setEntity(rs);
+				list.add(servicio);
 			}while (rs.next());
             return list;
 		} 
