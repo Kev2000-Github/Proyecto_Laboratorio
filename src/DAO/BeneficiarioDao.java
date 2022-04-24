@@ -100,6 +100,14 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
                 beneficiario.getTelefono()
             };
             con.execMutation(sql, params);
+
+            String sqlRel = "INSERT INTO Beneficiario(cedula) VALUES(?)";
+            String[] paramsRel = {
+                beneficiario.getCedula(),
+            };
+            con.execMutation(sqlRel, paramsRel);
+
+            
             //falta insertar en beneficiario
 		} catch (Exception e) {
 			// e.printStackTrace();

@@ -25,6 +25,7 @@ import vistas.backOffice.VentanaEditPersona;
 import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
 import vistas.general.VentanaGeneralLista;
+import vistas.solicitudes.VentanaAddSolicitud;
 public class Controlador implements ActionListener {
 	VentanaGeneral window;
 	VentanaFactory ventanaFactory;
@@ -59,15 +60,12 @@ public class Controlador implements ActionListener {
 		else if(action.equals("goSection")){
 			String ventanaCode = actionName[1];
 			window.dispose();
-
 			if(ventanaCode.equals("home")){
 				window = new VentanaHome(this);
-				
 			}
-
 			//?secciones home
 			if(ventanaCode.equals("crearSolicitud")){
-			
+			  window = new VentanaAddSolicitud(this);
 				
 			}
 			if(ventanaCode.equals("gestSolicitud")){
