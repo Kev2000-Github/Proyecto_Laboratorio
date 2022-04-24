@@ -2,93 +2,67 @@ package modelos;
 
 public class Solicitud {
 
-    //atributos
-    private enum prioridadEnum { alta, media, baja };
-    private enum tipoAyudaEnum { medica, donacion };
-    private enum estadoEnum { aprobado, negado, pendiente };
+    private enum prioridadEnum {
+        alta, media, baja
+    };
 
-    private String fundacionDestino;
-
-    private Servicio servicio;
-    private Beneficiario beneficiario;
-    private Empleado empleado;
-    private prioridadEnum prioridad;
-    private tipoAyudaEnum tipoAyuda;
-    private estadoEnum estado;
-
-    //Constructores
-    public Solicitud(){};
-
-    public Solicitud(String fundaciondestino){
-
-        this.fundacionDestino = fundaciondestino;
-        this.servicio = new Servicio();
-        this.beneficiario = new Beneficiario();//no existe este constructor
-        this.empleado = new Empleado();
+    private enum estadoEnum {
+        aprobado, negado, pendiente
     }
 
-    //Metodos sets y gets
+    private String beneficiarioId;
 
-    public void setFundacionDestino(String fundacionDestino){
-        this.fundacionDestino = fundacionDestino;
-    }
-    
-    public String getFundacionDestino(){
-        return fundacionDestino;
+    public String getBeneficiarioId() {
+        return this.beneficiarioId;
     }
 
-    public void setServicio(Servicio servicio){
-
-        this.servicio = servicio;
+    public void setBeneficiarioId(String beneficiarioId) {
+        this.beneficiarioId = beneficiarioId;
     }
 
-    public Servicio getServicio(){
-
-        return servicio;
+    public String getEmpleadoId() {
+        return this.empleadoId;
     }
 
-    public void setBeneficiario(Beneficiario beneficiario){
-
-        this.beneficiario = beneficiario;
+    public void setEmpleadoId(String empleadoId) {
+        this.empleadoId = empleadoId;
     }
 
-    public Beneficiario getBeneficiario(){
-
-        return beneficiario;
+    public String getFundacionId() {
+        return this.fundacionId;
     }
 
-    public void setEmpleado(Empleado empleado){
-
-        this.empleado = empleado;
+    public void setFundacionId(String fundacionId) {
+        this.fundacionId = fundacionId;
     }
 
-    public Empleado getEmpleado(){
-
-        return empleado;
+    public prioridadEnum getPrioridad() {
+        return this.prioridad;
     }
 
-    public prioridadEnum getPrioridad(){
-        return prioridad;
-    }
-
-    public void setPrioridad(prioridadEnum prioridad){
+    public void setPrioridad(prioridadEnum prioridad) {
         this.prioridad = prioridad;
     }
 
-    public tipoAyudaEnum getTipoAyuda(){
-        return tipoAyuda;
+    public estadoEnum getStatus() {
+        return this.status;
     }
 
-    public void setTipoAyuda(tipoAyudaEnum tipoAyuda){
-        this.tipoAyuda = tipoAyuda;
+    public void setStatus(estadoEnum status) {
+        this.status = status;
     }
 
-    public estadoEnum getEstado(){
-        return estado;
+    public Float getCostoTotal() {
+        return this.costoTotal;
     }
 
-    public void setEstado(estadoEnum estado){
-        this.estado = estado;
+    public void setCostoTotal(Float costoTotal) {
+        this.costoTotal = costoTotal;
     }
+    private String empleadoId;
+    private String fundacionId;
+    private prioridadEnum prioridad;
+    private estadoEnum status;
+    private Float costoTotal;
 
 }

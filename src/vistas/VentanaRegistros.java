@@ -17,12 +17,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class VentanaHome extends VentanaGeneral{
+public class VentanaRegistros extends VentanaGeneral{
     private JLabel lblTitulo;
-    private JButton goCrearSolicitud;
-    private JButton goGestionarSolicitud;
-    private JButton goBackOffice;
-    public VentanaHome(ActionListener accion){
+    private JButton goEmpleados;
+    private JButton goBeneficiarios;
+
+    public VentanaRegistros(ActionListener accion){
         super();
         initGUI();
 		this.agregarListener(accion);
@@ -36,27 +36,21 @@ public class VentanaHome extends VentanaGeneral{
 					lblTitulo = new JLabel();
 					mainContainer.add(lblTitulo);
 
-					lblTitulo.setText("Home");
+					lblTitulo.setText("Registros");
 					lblTitulo.setFont(new java.awt.Font("Dialog",1,16));
                     lblTitulo.setBorder(new EtchedBorder());
 				}
 				{
-					goCrearSolicitud = new JButton();
-					mainContainer.add(goCrearSolicitud);
-					goCrearSolicitud.setText("Crear solicitud");
-					goCrearSolicitud.setName("goSection-crearSolicitud");
+					goEmpleados = new JButton();
+					mainContainer.add(goEmpleados);
+					goEmpleados.setText("Empleados");
+					goEmpleados.setName("goList-emp001");
 				}
 				{
-					goGestionarSolicitud = new JButton();
-					mainContainer.add(goGestionarSolicitud);
-					goGestionarSolicitud.setText("Gestionar Solicitud");
-					goGestionarSolicitud.setName("goSection-gestSolicitud");
-				}
-				{
-					goBackOffice = new JButton();
-					mainContainer.add(goBackOffice);
-					goBackOffice.setText("BackOffice");
-					goBackOffice.setName("goSection-backOffice");
+					goBeneficiarios = new JButton();
+					mainContainer.add(goBeneficiarios);
+					goBeneficiarios.setText("Beneficiarios");
+					goBeneficiarios.setName("goList-ben001");
 				}
 			}
 		} catch (Exception e) {
@@ -66,8 +60,7 @@ public class VentanaHome extends VentanaGeneral{
 	}
 
     public void agregarListener(ActionListener accion){
-        goCrearSolicitud.addActionListener(accion);
-		goGestionarSolicitud.addActionListener(accion);
-		goBackOffice.addActionListener(accion);
+        goEmpleados.addActionListener(accion);
+		goBeneficiarios.addActionListener(accion);
     }
 }

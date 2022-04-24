@@ -6,15 +6,20 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Persona;
 import modelos.Usuario;
+import vistas.VentanaBackOffice;
 import vistas.VentanaHome;
-import vistas.backOffice.VentanaAddPersona;
+import vistas.VentanaRegistros;
+import vistas.backOffice.VentanaAddBeneficiario;
+import vistas.backOffice.VentanaEditBeneficiario;
 import vistas.backOffice.VentanaEditEmpleado;
 import vistas.backOffice.VentanaEditPersona;
 import vistas.general.VentanaFactory;
@@ -46,17 +51,47 @@ public class Controlador implements ActionListener {
 		String[] actionName = name.split("-");
 		String action = actionName[0];
 		if(action.equals("go")){
+			
 			String ventanaCode = actionName[1];
 			window.dispose();
 			window = ventanaFactory.getVentana(ventanaCode, this);
+		}
+		else if(action.equals("goSection")){
+			String ventanaCode = actionName[1];
+			window.dispose();
+
+			if(ventanaCode.equals("home")){
+				window = new VentanaHome(this);
+				
+			}
+
+			//?secciones home
+			if(ventanaCode.equals("crearSolicitud")){
+			
+				
+			}
+			if(ventanaCode.equals("gestSolicitud")){
+				
+			}
+			if(ventanaCode.equals("backOffice")){
+				window = new VentanaBackOffice(this);
+			}
+			//?secciones backOffice
+			if(ventanaCode.equals("registros")){
+				window = new VentanaRegistros(this);
+			}
+			if(ventanaCode.equals("reportes")){
+			//	window = new Ventana(this);
+			}
+			
 		}
 		else if(action.equals("goList")){
 			String ventanaCode = actionName[1];
 			window.dispose();
 			if(ventanaCode.equals("ben001")){
-				PersonaDao personaDao = new PersonaDao();
-				List<Persona> personas = personaDao.getAll();
-				window = ventanaFactory.getVentanaList(ventanaCode, this, personas);
+				BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+				List<Beneficiario> beneficiarios = beneficiarioDao.getAll();
+				window = ventanaFactory.getVentanaList(ventanaCode, this, beneficiarios);
 			}
 			if(ventanaCode.equals("emp001")){
 				EmpleadoDao empleadoDao = new EmpleadoDao();
@@ -78,16 +113,16 @@ public class Controlador implements ActionListener {
 		else if(action.equals("add")){
 			String entity = actionName[1];
 			if(entity.equals("persona")){
-				Persona newPersona = ((VentanaAddPersona) window).getPersona();
+				Beneficiario newBeneficiario = ((VentanaAddBeneficiario) window).getBeneficiario();
 				IDao entityDao = daoFactory.getDao(entity);
-				Persona existentPersona = (Persona) entityDao.get(newPersona.cedula);
+				Persona existentPersona = (Persona) entityDao.get(newBeneficiario.cedula);
 				if(existentPersona != null){
 					window.mostrarMensaje("Ya existe un registro de esta " + entity);
 					return;
 				}
-				entityDao.save(newPersona);
+				entityDao.save(newBeneficiario);
 				window.mostrarMensaje("Se agrego el registro con exito ");
-				((VentanaAddPersona) window).clear();
+				((VentanaAddBeneficiario) window).clear();
 			}
 		}
 		else if(action.equals("goEdit")){
@@ -119,10 +154,10 @@ public class Controlador implements ActionListener {
 		}
 		else if(action.equals("edit")){
 			String entity = actionName[1];
-			if(entity.equals("persona")){
-				Persona persona = ((VentanaEditPersona) window).getItem();
-				IDao<Persona> entityDao = daoFactory.getDao(entity);
-				entityDao.update(persona);
+			if(entity.equals("beneficiario")){
+				Beneficiario beneficiario = ((VentanaEditBeneficiario) window).getItem();
+				IDao<Beneficiario> entityDao = daoFactory.getDao(entity);
+				entityDao.update(beneficiario);
 				window.dispose();
 				window = ventanaFactory.getVentana("hom001", this);
 			}

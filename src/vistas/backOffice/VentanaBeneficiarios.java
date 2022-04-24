@@ -1,15 +1,15 @@
 package vistas.backOffice;
 
-import modelos.Persona;
+import modelos.Beneficiario;
 import vistas.general.VentanaGeneralLista;
 
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class VentanaBeneficiarios extends VentanaGeneralLista<Persona>{
+public class VentanaBeneficiarios extends VentanaGeneralLista<Beneficiario>{
 	
-    public VentanaBeneficiarios(ActionListener accion, List<Persona> personas){
-        super(accion, personas, "Beneficiario");
+    public VentanaBeneficiarios(ActionListener accion, List<Beneficiario> beneficiario){
+        super(accion, beneficiario, "Beneficiario");
     }
 
 	public void fillListModel(){
