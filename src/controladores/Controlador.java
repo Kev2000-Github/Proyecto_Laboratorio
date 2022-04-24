@@ -1,6 +1,7 @@
 package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import modelos.Persona;
 import modelos.Usuario;
 import vistas.VentanaHome;
 import vistas.backOffice.VentanaAddPersona;
+import vistas.backOffice.VentanaEditEmpleado;
 import vistas.backOffice.VentanaEditPersona;
 import vistas.general.VentanaFactory;
 import vistas.general.VentanaGeneral;
@@ -91,25 +93,46 @@ public class Controlador implements ActionListener {
 		else if(action.equals("goEdit")){
 			String entity = actionName[1];
 			String ventanaCode = actionName[2];
-			if(entity == "persona"){
-				String id = (String)btn.getClientProperty("itemId");
-				if(id == null){
-					window.mostrarMensaje("ningun " + entity + " seleccionado");
-					return;
-				}
+			String id = (String)btn.getClientProperty("itemId");
+			if(id == null){
+				window.mostrarMensaje("ningun " + entity + " seleccionado");
+				return;
+			}
+			if(entity.equals("persona")){
 				window.dispose();
 				IDao entityDao = daoFactory.getDao(entity);
 				Object item = entityDao.get(id);
-				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item);
+				ArrayList<String> inmutableFields = new ArrayList<String>(List.of("cedula"));
+				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono");
+				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
+				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
+			}
+			if(entity.equals("empleado")){
+				window.dispose();
+				IDao entityDao = daoFactory.getDao(entity);
+				Object item = entityDao.get(id);
+				ArrayList<String> inmutableFields = new ArrayList<>(List.of("id","cedula"));
+				List<String> modifiableFields = List.of("nombre","apellido","direccion","telefono");
+				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
+				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
 			}
 		}
 		else if(action.equals("edit")){
 			String entity = actionName[1];
-			Persona persona = ((VentanaEditPersona) window).getPersona();
-			IDao entityDao = daoFactory.getDao(entity);
-			entityDao.update(persona);
-			window.dispose();
-			window = ventanaFactory.getVentana("hom001", this);
+			if(entity.equals("persona")){
+				Persona persona = ((VentanaEditPersona) window).getItem();
+				IDao<Persona> entityDao = daoFactory.getDao(entity);
+				entityDao.update(persona);
+				window.dispose();
+				window = ventanaFactory.getVentana("hom001", this);
+			}
+			else if(entity.equals("empleado")){
+				Empleado empleado = ((VentanaEditEmpleado) window).getItem();
+				IDao<Persona> entityDao = daoFactory.getDao("persona");
+				entityDao.update(empleado);
+				window.dispose();
+				window = ventanaFactory.getVentana("hom001", this);
+			}
 		}
 	}
 }

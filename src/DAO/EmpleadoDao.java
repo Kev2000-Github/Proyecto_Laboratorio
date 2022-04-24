@@ -67,7 +67,7 @@ public class EmpleadoDao implements IDao<Empleado> {
 			con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula WHERE e.deleted_at IS NULL";			
+                + " FROM empleado e JOIN persona p ON e.cedula = p.cedula AND e.deleted_at IS NULL AND p.deleted_at IS NULL";			
             ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return list;
 			do {
