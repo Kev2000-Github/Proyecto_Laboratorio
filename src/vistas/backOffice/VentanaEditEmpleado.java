@@ -1,49 +1,52 @@
 package vistas.backOffice;
 
-import modelos.Persona;
+import modelos.Empleado;
 import vistas.general.VentanaEditGeneral;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VentanaEditPersona extends VentanaEditGeneral<Persona>{
+public class VentanaEditEmpleado extends VentanaEditGeneral<Empleado>{
 
-    public VentanaEditPersona(
+    public VentanaEditEmpleado(
             ActionListener accion, 
-            Persona persona, 
+            Empleado empleado, 
             String entity,
             ArrayList<String> inmutableFields,
             ArrayList<String> mutableFields
             ){
-        super(accion, persona, entity, inmutableFields, mutableFields);
+        super(accion, empleado, entity, inmutableFields, mutableFields);
     }
 
-    public void setItemFields(Persona persona){
-        this.item = persona;
+    public void setItemFields(Empleado empleado){
+        this.item = empleado;
         //mock, ovewrite on child class
         inmutableInputs.forEach((key, input) -> {
-            if(key.equals("cedula")){
-                input.setValue(persona.getCedula());
+            if(key.equals("id")){
+                input.setValue(empleado.getId());
             }
-        });        
+            else if(key.equals("cedula")){
+                input.setValue(empleado.getCedula());
+            }
+        });
         inputs.forEach((key, input) -> {
             if(key.equals("nombre")){
-                input.setValue(persona.getNombre());
+                input.setValue(empleado.getNombre());
             }
             else if(key.equals("apellido")){
-                input.setValue(persona.getApellido());
+                input.setValue(empleado.getApellido());
             }
             else if(key.equals("direccion")){
-                input.setValue(persona.getDireccion());
+                input.setValue(empleado.getDireccion());
             }
             else if(key.equals("telefono")){
-                input.setValue(persona.getTelefono());
+                input.setValue(empleado.getTelefono());
             }
         });
         setEnableFields(true);
     }
 
-    public Persona getItem() {
+    public Empleado getItem() {
         //mock, ovewrite on child class
         inputs.forEach((key, input) -> {
             if(key.equals("nombre")){

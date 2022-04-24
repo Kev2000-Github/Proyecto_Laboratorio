@@ -1,9 +1,9 @@
 package modelos;
 
 public class Persona {
+	public String cedula;
 	public String nombre;
 	public String apellido;
-	public String cedula;
 	public String direccion;
 	public String telefono;
 

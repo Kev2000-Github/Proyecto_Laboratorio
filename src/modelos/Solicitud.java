@@ -79,7 +79,7 @@ public class Solicitud {
         return tipoAyuda;
     }
 
-    public void setEstado(tipoAyudaEnum tipoAyuda){
+    public void setTipoAyuda(tipoAyudaEnum tipoAyuda){
         this.tipoAyuda = tipoAyuda;
     }
 
@@ -87,7 +87,7 @@ public class Solicitud {
         return estado;
     }
 
-    public void setPrioridad(estadoEnum estado){
+    public void setEstado(estadoEnum estado){
         this.estado = estado;
     }
 
