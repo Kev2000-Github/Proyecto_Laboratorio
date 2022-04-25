@@ -9,21 +9,19 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Fundacion;
-import modelos.Servicio;
+import modelos.Gobernacion;
 
-public class FundacionDao implements IDao<Fundacion> {
+public class GobernacionDao implements IDao<Gobernacion> {
     private Conne con;
 
     @Override
-    public Fundacion setEntity(ResultSet rs) {
+    public Gobernacion setEntity(ResultSet rs) {
         try {
-            Fundacion fundacion = new Fundacion();
-            fundacion.setNombre(rs.getString("nombre"));
-            fundacion.setPresupuesto(rs.getFloat("presupuesto"));
-            fundacion.setPorcentajePartidoAnual(rs.getFloat("porcentaje_partido_anual"));
-            fundacion.setId(rs.getString("id"));
-            return fundacion;
+            Gobernacion gobernacion = new Gobernacion();
+            gobernacion.setNombre(rs.getString("nombre"));
+            gobernacion.setFondos(rs.getFloat("fondos"));
+            gobernacion.setId(rs.getString("id"));
+            return gobernacion;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
             System.out.println(msg);
@@ -32,19 +30,19 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public Fundacion get(String id) {
+    public Gobernacion get(String id) {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
-                    + " FROM fundacion f WHERE id = ? AND f.deleted_at IS NULL";
+            String sql = "SELECT id, nombre, fondos"
+                    + " FROM gobernacion f WHERE id = ? AND f.deleted_at IS NULL";
             String[] params = { id };
             ResultSet rs = con.execQuery(sql, params);
 
             if (con.isResultSetEmpty(rs))
                 return null;
-            Fundacion fundacion = setEntity(rs);
-            return fundacion;
+            Gobernacion gobernacion = setEntity(rs);
+            return gobernacion;
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
@@ -55,19 +53,19 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public List<Fundacion> getAll() {
+    public List<Gobernacion> getAll() {
         try {
-            List<Fundacion> list = new ArrayList<Fundacion>();
+            List<Gobernacion> list = new ArrayList<Gobernacion>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
-                    + " FROM fundacion WHERE deleted_at IS NULL";
+            String sql = "SELECT id, nombre, fondos"
+                    + " FROM gobernacion f WHERE f.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
                 return list;
             do {
-                Fundacion fundacion = setEntity(rs);
-                list.add(fundacion);
+                Gobernacion gobernacion = setEntity(rs);
+                list.add(gobernacion);
             } while (rs.next());
             return list;
         } catch (SQLException e) {
@@ -80,17 +78,15 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void save(Fundacion fundacion) {
+    public void save(Gobernacion fundacion) {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO gobernacion(id, nombre, fondos) VALUES(?,?,?)";
             String[] params = {
                     fundacion.getId(),
                     fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    String.valueOf(fundacion.getGobernacionId())
+                    String.valueOf(fundacion.getFondos()),
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -102,23 +98,22 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void update(Fundacion fundacion) {
+    public void update(Gobernacion gobernacion) {
         try {
             con = new Conne();
             con.open();
-            String sql = "UPDATE fundacion SET"
-                    + " nombre=?, presupuesto=?, porcentaje_partido_anual=?"
+            String sql = "UPDATE gobernacion SET"
+                    + " nombre=?, fondos=?"
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                    fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    fundacion.getId()
+                    gobernacion.getNombre(),
+                    String.valueOf(gobernacion.getNombre()),
+                    String.valueOf(gobernacion.getFondos()),
+                    gobernacion.getId()
 
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             con.close();
@@ -126,15 +121,15 @@ public class FundacionDao implements IDao<Fundacion> {
     }
 
     @Override
-    public void delete(Fundacion fundacion) {
+    public void delete(Gobernacion gobernacion) {
         try {
             con = new Conne();
             con.open();
             Timestamp now = new Timestamp(new Date().getTime());
-            String sql = "UPDATE fundacion SET deleted_at = '" + now.toString()
-                    + "' WHERE id = ? AND deleted_at IS NULL";
+            String sql = "UPDATE gobernacion SET deleted_at = '" + now.toString()
+                    + "' WHERE id = ?";
             String[] params = {
-                    fundacion.getId()
+                    gobernacion.getId()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

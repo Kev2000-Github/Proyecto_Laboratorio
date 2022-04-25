@@ -5,14 +5,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
-import modelos.Persona;
+import modelos.Beneficiario;
 import vistas.general.VentanaGeneral;
 import vistas.general.InputField;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-public class VentanaAddPersona extends VentanaGeneral{
+public class VentanaAddBeneficiario extends VentanaGeneral{
     private JLabel lblTitulo;
     private InputField cedulaInput;
     private InputField nombreInput;
@@ -22,7 +22,7 @@ public class VentanaAddPersona extends VentanaGeneral{
     private JButton sendBtn;
     private JButton goHome;
 
-    public VentanaAddPersona(ActionListener accion){
+    public VentanaAddBeneficiario(ActionListener accion){
         super();
         initGUI();
         this.agregarListener(accion);
@@ -85,14 +85,14 @@ public class VentanaAddPersona extends VentanaGeneral{
 		}
 	}
 
-    public Persona getPersona() {
-        Persona persona = new Persona();
-        persona.setCedula(cedulaInput.getValue());
-        persona.setNombre(nombreInput.getValue());
-        persona.setApellido(apellidoInput.getValue());
-        persona.setDireccion(direccionInput.getValue());
-        persona.setTelefono(telefonoInput.getValue());
-        return persona;
+    public Beneficiario getBeneficiario() {
+        Beneficiario beneficiario = new Beneficiario();
+        beneficiario.setCedula(cedulaInput.getValue());
+        beneficiario.setNombre(nombreInput.getValue());
+        beneficiario.setApellido(apellidoInput.getValue());
+        beneficiario.setDireccion(direccionInput.getValue());
+        beneficiario.setTelefono(telefonoInput.getValue());
+        return beneficiario;
     }
 
     public void clear(){

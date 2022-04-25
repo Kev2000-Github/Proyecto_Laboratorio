@@ -5,109 +5,101 @@ import java.util.ArrayList;
 import utils.Constants.*;
 
 public class Solicitud {
-    private String fundacionDestino;
     private String id;
-    private float costo_total;
 
-    private ArrayList<Servicio> servicios;
-    private Beneficiario beneficiario;
-    private Empleado empleado;
+    private String empleadoId;
+    private String fundacionId;
     private prioridadEnum prioridad;
-    private tipoAyudaEnum tipoAyuda;
-    private estadoEnum estado;
+    private estadoEnum status;
+    private Float costoTotal;
+    private ArrayList<Servicio> servicios;
+    private String beneficiarioId;
 
-    //Constructores
-    public Solicitud(){};
+    public Solicitud(){}
 
     public Solicitud(
             String fundaciondestino, 
             String id, 
-            float costo_total,
+            float costoTotal,
             ArrayList<Servicio> servicios,
-            Beneficiario beneficiario,
-            Empleado empleado
+            String beneficiarioId,
+            String empleadoId
             ){
-        this.fundacionDestino = fundaciondestino;
+        this.fundacionId = fundaciondestino;
         this.id = id;
-        this.costo_total = costo_total;
+        this.costoTotal = costoTotal;
         this.servicios = servicios;
-        this.beneficiario = beneficiario;
-        this.empleado = empleado;
+        this.beneficiarioId = beneficiarioId;
+        this.empleadoId = empleadoId;
     }
 
     //Metodos sets y gets
-        public float getCosto_total() {
-        return costo_total;
+    public String getId() {
+        return this.id;
     }
 
-    public void setCosto_total(float costo_total) {
-        this.costo_total = costo_total;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setFundacionDestino(String fundacionDestino){
-        this.fundacionDestino = fundacionDestino;
-    }
-    
-    public String getFundacionDestino(){
-        return fundacionDestino;
+    public String getBeneficiarioId() {
+        return this.beneficiarioId;
     }
 
-    public void setServicios(ArrayList<Servicio> servicios){
-        this.servicios = servicios;
-    }
-
-    public ArrayList<Servicio> getServicios(){
+    public ArrayList<Servicio> getServicios() {
         return servicios;
     }
 
-    public void setBeneficiario(Beneficiario beneficiario){
-
-        this.beneficiario = beneficiario;
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
     }
 
-    public Beneficiario getBeneficiario(){
-
-        return beneficiario;
+    public void setBeneficiarioId(String beneficiarioId) {
+        this.beneficiarioId = beneficiarioId;
     }
 
-    public void setEmpleado(Empleado empleado){
 
-        this.empleado = empleado;
+    public String getEmpleadoId() {
+        return this.empleadoId;
     }
 
-    public Empleado getEmpleado(){
-
-        return empleado;
+    public void setEmpleadoId(String empleadoId) {
+        this.empleadoId = empleadoId;
     }
 
-    public prioridadEnum getPrioridad(){
-        return prioridad;
+    public String getFundacionId() {
+        return this.fundacionId;
     }
 
-    public void setPrioridad(prioridadEnum prioridad){
+    public void setFundacionId(String fundacionId) {
+        this.fundacionId = fundacionId;
+    }
+
+    public prioridadEnum getPrioridad() {
+        return this.prioridad;
+    }
+
+    public void setPrioridad(prioridadEnum prioridad) {
         this.prioridad = prioridad;
     }
 
-    public tipoAyudaEnum getTipoAyuda(){
-        return tipoAyuda;
+    public estadoEnum getStatus() {
+        return this.status;
     }
 
-    public void setTipoAyuda(tipoAyudaEnum tipoAyuda){
-        this.tipoAyuda = tipoAyuda;
+    public void setStatus(estadoEnum status) {
+        this.status = status;
     }
 
-    public estadoEnum getEstado(){
-        return estado;
+    public Float getCostoTotal() {
+        return this.costoTotal;
     }
 
-    public void setEstado(estadoEnum estado){
-        this.estado = estado;
+    public void setCostoTotal(Float costoTotal) {
+        this.costoTotal = costoTotal;
     }
-    
-    public void setId(String id){
-        this.id = id;
-    }
-    
-    public String getId(){ return id; }
+  
 
+    public void setCedula(Object selectedItem) {
+    }
 }

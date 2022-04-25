@@ -22,7 +22,7 @@ public class Config {
                 String filteredLine = configFileContent.get(i).replaceAll(" ","");
                 String[] lineContent = filteredLine.split("=");
                 String key = lineContent[0];
-                String value = lineContent[1];
+                String value = lineContent.length > 1 ? lineContent[1] : null;
                 configData.put(key, value);
             }
         }

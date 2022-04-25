@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import DAO.UsuarioDao;
 import modelos.Usuario;
-import controladores.Controlador;
 import vistas.VentanaLogin;
 
 public class ControladorLogin implements ActionListener {

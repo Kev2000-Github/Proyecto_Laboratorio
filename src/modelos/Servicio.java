@@ -39,4 +39,9 @@ public class Servicio {
 		this.tipo = tipo;
 	}
 
+	@Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return nombre;
+    }
 }

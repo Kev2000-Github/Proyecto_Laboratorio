@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
@@ -14,41 +14,22 @@ import modelos.Empleado;
 import modelos.Servicio;//?
 import modelos.Solicitud;
 import java.util.Date;
+import utils.Constants;
 
-public class SolicitudDAO implements IDao<Solicitud> {
-    
+public class SolicitudDao implements IDao<Solicitud> {
     private Conne con;
-    
+
     @Override
     public Solicitud setEntity(ResultSet rs) {
         try {
-            EmpleadoDao empleadoDao = new EmpleadoDao();
-            BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
-            ServicioDao servicioDao = new ServicioDao();
             Solicitud solicitud = new Solicitud();
-            
-            //strings
             solicitud.setId(rs.getString("id"));
-            solicitud.setFundacionDestino(rs.getString("fundacion_id"));
-            solicitud.setCosto_total(rs.getFloat("costo_total"));
-            Empleado empleado = empleadoDao.get(rs.getString("empleado_id"));
-            Beneficiario beneficiario = beneficiarioDao.get(rs.getString("cedula"));
-            solicitud.setBeneficiario(beneficiario);
-            solicitud.setEmpleado(empleado);
-            //solicitud.setServicios(servicios);
-            //objetos
-            Servicio servicio = new Servicio();
-            String id_servicio = servicio.getId();
-            
-            //solicitud.setServicio();
-            //solicitud.setBeneficiario();
-            //solicitud.setEmpleado();
-            
-            //enums
-            //solicitud.setPrioridad();
-            //solicitud.setTipoAyuda();
-            //solicitud.setEstado();
-            
+            solicitud.setEmpleadoId(rs.getString("empleado_id"));
+            solicitud.setFundacionId(rs.getString("fundacion_id"));
+            solicitud.setBeneficiarioId(rs.getString("beneficiario_id"));
+            solicitud.setPrioridad(Constants.prioridadEnum.valueOf(rs.getString("prioridad")));
+            solicitud.setStatus(Constants.estadoEnum.valueOf(rs.getString("tipo")));
+            solicitud.setCostoTotal(rs.getFloat("costo_total"));
             return solicitud;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -57,16 +38,13 @@ public class SolicitudDAO implements IDao<Solicitud> {
         }
     }
 
-    public void SolicitudDao() {
-    }
-
     @Override
     public Solicitud get(String id) {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, cedula, empleado_id, fundacion_id, prioridad, status, costo_total"
-                    + " FROM solicitud s WHERE id = ? AND s.deleted_at IS NULL";
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
+                    + " FROM solicitud f WHERE id = ? AND f.deleted_at IS NULL";
             String[] params = { id };
             ResultSet rs = con.execQuery(sql, params);
 
@@ -89,8 +67,8 @@ public class SolicitudDAO implements IDao<Solicitud> {
             List<Solicitud> list = new ArrayList<Solicitud>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, cedula, empleado_id, fundacion_id, prioridad, status, costo_total"
-                    + " FROM solicitud s WHERE s.deleted_at IS NULL";
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
+                    + " FROM solicitud WHERE deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
                 return list;
@@ -113,15 +91,30 @@ public class SolicitudDAO implements IDao<Solicitud> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO solicitud(id, cedula, empleado_id,fundacion_id,prioridad,status, costo_total?, created_at?) VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total) VALUES(?,?,?,?,?,?,?)";
             String[] params = {
                     solicitud.getId(),
-                
-                
-                    solicitud.getFundacionDestino(),
+                    solicitud.getEmpleadoId(),
+                    solicitud.getFundacionId(),
+                    solicitud.getBeneficiarioId(),
+                    String.valueOf(solicitud.getPrioridad()),
+                    String.valueOf(solicitud.getStatus()),
+                    String.valueOf(solicitud.getCostoTotal())
 
             };
             con.execMutation(sql, params);
+
+            // ?servicio_id
+          
+            solicitud.getServicios().forEach(servicio -> {
+                String sql2 = "INSERT INTO solicitud_servicio(solicitud_id, servicio_id) VALUES(?,?)";
+                String[] params2 = {
+                        solicitud.getId(),
+                        servicio.getId()
+                };
+                con.execMutation(sql2, params2);
+            });
+
         } catch (Exception e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
@@ -130,29 +123,7 @@ public class SolicitudDAO implements IDao<Solicitud> {
         }
     }
 
-    @Override
-    public void update(Solicitud solicitud) {
-        try {
-            con = new Conne();
-            con.open();
-            String sql = "UPDATE solicitud SET"
-                    + " tema=?, direccion=?, organismo=?, fecha=?"
-                    + " WHERE id = ? AND deleted_at IS NULL";
-            String[] params = {
-                    
-                
-                
-                    solicitud.getId()
-
-            };
-            con.execMutation(sql, params);
-        } catch (Exception e) {
-            // e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            con.close();
-        }
-    }
+  
 
     @Override
     public void delete(Solicitud solicitud) {
@@ -174,6 +145,9 @@ public class SolicitudDAO implements IDao<Solicitud> {
         }
     }
 
-    
+    @Override
+    public void update(Solicitud t) {
+        // TODO Auto-generated method stub
+        
+    }
 }
-
