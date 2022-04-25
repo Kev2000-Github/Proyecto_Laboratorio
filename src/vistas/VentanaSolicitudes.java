@@ -21,6 +21,7 @@ public class VentanaSolicitudes extends VentanaGeneral {
     private JLabel lblTitulo;
     private JButton goSolicitud;
     private ArrayList<Solicitud> solicitudes;
+    private JButton goBackOffice;
 
     public VentanaSolicitudes(ActionListener accion, ArrayList<Solicitud> solicitudes){
         super();
@@ -47,9 +48,9 @@ public class VentanaSolicitudes extends VentanaGeneral {
                     solicitudes.forEach(solicitud -> {
                         List<String> row = List.of(
                             solicitud.getId(),
-                            solicitud.getFundacionDestino(),
-                            solicitud.getBeneficiario().getCedula(),
-                            solicitud.getEmpleado().getCedula()
+                            solicitud.getFundacionId(),
+                            solicitud.getBeneficiarioId(),
+                            solicitud.getEmpleadoId()
                         );
                         dataList.add(row);
                     });
@@ -78,6 +79,12 @@ public class VentanaSolicitudes extends VentanaGeneral {
 					goSolicitud.setText("Ver Solicitud");
 					goSolicitud.setName("goSolicitud");
 				}
+                {
+					goBackOffice = new JButton();
+					mainContainer.add(goBackOffice);
+					goBackOffice.setText("Home");
+					goBackOffice.setName("go-hom001");
+				}
 			}
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -87,5 +94,6 @@ public class VentanaSolicitudes extends VentanaGeneral {
 
     public void agregarListener(ActionListener accion){
         goSolicitud.addActionListener(accion);
+        goBackOffice.addActionListener(accion);
     }
 }

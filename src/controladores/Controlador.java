@@ -107,23 +107,16 @@ public class Controlador implements ActionListener {
 				window = ventanaFactory.getVentana(ventanaCode, this);
 			}
 		}
-		else if(action.equals("goSolicitud")){
-			String id = (String)btn.getClientProperty("itemId");
-			System.out.println(id);
-		}
-		else if(action.equals("goList")){
+		else if(action.equals("goSection")){
 			String ventanaCode = actionName[1];
 			window.dispose();
-			if (ventanaCode.equals("home")) {
-				window = new VentanaHome(this);
-			}
 			// ?secciones home
 			if (ventanaCode.equals("crearSolicitud")) {
 				window = new VentanaAddSolicitud(this);
-
 			}
 			if (ventanaCode.equals("gestSolicitud")) {
-
+				ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+				window = ventanaFactory.getVentanaSolicitudes(this, solicitudes);
 			}
 			if (ventanaCode.equals("backOffice")) {
 				window = new VentanaBackOffice(this);
@@ -135,8 +128,8 @@ public class Controlador implements ActionListener {
 			if (ventanaCode.equals("reportes")) {
 				// window = new Ventana(this);
 			}
-
-		} else if (action.equals("goSolicitud")) {
+		} 
+		else if (action.equals("goSolicitud")) {
 			String ventanaCode = actionName[1];
 			if (ventanaCode.equals("save")) {
 				String entity = "solicitud";
@@ -153,7 +146,8 @@ public class Controlador implements ActionListener {
 				window.mostrarMensaje("Se agrego el registro con exito ");
 				((VentanaAddSolicitud) window).clear();
 			}
-		} else if (action.equals("goList")) {
+		} 
+		else if (action.equals("goList")) {
 			String ventanaCode = actionName[1];
 			window.dispose();
 			if (ventanaCode.equals("ben001")) {
@@ -166,7 +160,8 @@ public class Controlador implements ActionListener {
 				List<Empleado> empleados = empleadoDao.getAll();
 				window = ventanaFactory.getVentanaList(ventanaCode, this, empleados);
 			}
-		} else if (action.equals("delete")) {
+		} 
+		else if (action.equals("delete")) {
 			String entity = actionName[1];
 			String id = (String) btn.getClientProperty("itemId");
 			if (id == null) {
@@ -176,7 +171,8 @@ public class Controlador implements ActionListener {
 			IDao entityDao = daoFactory.getDao(entity);
 			entityDao.delete(entityDao.get(id));
 			((VentanaGeneralLista<?>) window).updateList(entityDao.getAll());
-		} else if (action.equals("add")) {
+		} 
+		else if (action.equals("add")) {
 			String entity = actionName[1];
 			if (entity.equals("persona")) {
 				/*
@@ -193,7 +189,8 @@ public class Controlador implements ActionListener {
 				 * ((VentanaAddBeneficiario) window).clear();
 				 */
 			}
-		} else if (action.equals("goEdit")) {
+		} 
+		else if (action.equals("goEdit")) {
 			String entity = actionName[1];
 			String ventanaCode = actionName[2];
 			String id = (String) btn.getClientProperty("itemId");
@@ -201,11 +198,11 @@ public class Controlador implements ActionListener {
 				window.mostrarMensaje("ningun " + entity + " seleccionado");
 				return;
 			}
-			if (entity.equals("persona")) {
+			if (entity.equals("beneficiario")) {
 				window.dispose();
 				IDao entityDao = daoFactory.getDao(entity);
 				Object item = entityDao.get(id);
-				ArrayList<String> inmutableFields = new ArrayList<String>(List.of("cedula"));
+				ArrayList<String> inmutableFields = new ArrayList<String>(List.of("id","cedula"));
 				List<String> modifiableFields = List.of("nombre", "apellido", "direccion", "telefono", "correo");
 				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
 				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
@@ -219,7 +216,8 @@ public class Controlador implements ActionListener {
 				ArrayList<String> mutableFields = new ArrayList<String>(modifiableFields);
 				window = ventanaFactory.getVentanaEdit(ventanaCode, this, item, entity, inmutableFields, mutableFields);
 			}
-		} else if (action.equals("edit")) {
+		} 
+		else if (action.equals("edit")) {
 			String entity = actionName[1];
 			if (entity.equals("beneficiario")) {
 				Beneficiario beneficiario = ((VentanaEditBeneficiario) window).getItem();

@@ -1,5 +1,6 @@
 package DAO.general;
 
+import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.GobernacionDao;
 import DAO.PermisoDao;
@@ -17,6 +18,7 @@ public class DaoFactory {
         if(entity.equals("permiso")) return new PermisoDao();
         if(entity.equals("rol")) return new RolDao();
         if(entity.equals("solicitud")) return new SolicitudDao();
+        if(entity.equals("beneficiario")) return new BeneficiarioDao();
         return null;
     }
 }

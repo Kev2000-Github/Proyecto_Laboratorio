@@ -4,11 +4,9 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.border.EtchedBorder;
 
 import DAO.BeneficiarioDao;
@@ -32,11 +30,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-
+import utils.Constants;
 public class VentanaAddSolicitud extends VentanaGeneral {
 	private JLabel lblTitulo;
 	static JComboBox fundacionElement;
@@ -44,7 +40,6 @@ public class VentanaAddSolicitud extends VentanaGeneral {
 	static JComboBox beneficiarioElement;
 
 	static JList itemList;
-	private JLabel presupuesto;
 
 	private JButton goSave;
 	private JButton goBack;
@@ -147,7 +142,7 @@ public class VentanaAddSolicitud extends VentanaGeneral {
 				goBack = new JButton();
 				mainContainer.add(goBack);
 				goBack.setText("Atras");
-				goBack.setName("goSection-home");
+				goBack.setName("go-hom001");
 
 				goSave = new JButton();
 				goSave.setText("Guardar");
@@ -171,8 +166,8 @@ public class VentanaAddSolicitud extends VentanaGeneral {
 		solicitud.setEmpleadoId(((ComboboxItem) empleadoElement.getSelectedItem()).getId());
 		solicitud.setFundacionId(((ComboboxItem) fundacionElement.getSelectedItem()).getId());
 		solicitud.setServicios((ArrayList<Servicio>) itemList.getSelectedValuesList());
-		solicitud.setPrioridad(Solicitud.prioridadEnum.alta);
-		solicitud.setStatus(Solicitud.estadoEnum.pendiente);
+		solicitud.setPrioridad(Constants.prioridadEnum.alta);
+		solicitud.setStatus(Constants.estadoEnum.pendiente);
 		solicitud.setCostoTotal(calcCostoTotal());
 		return solicitud;
 	}
@@ -197,7 +192,6 @@ public class VentanaAddSolicitud extends VentanaGeneral {
 	}
 
 	public void agregarListener(ActionListener accion) {
-		beneficiarioElement.addActionListener(accion);
 		goSave.addActionListener(accion);
 		goBack.addActionListener(accion);
 	}

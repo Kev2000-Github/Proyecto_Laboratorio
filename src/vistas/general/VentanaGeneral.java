@@ -14,9 +14,9 @@ public class VentanaGeneral extends javax.swing.JFrame {
 	
 	public VentanaGeneral() {
 		super();
-		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		initGUI();
+		this.setLocationRelativeTo(null);
 	}
 	
 	private void initGUI() {
@@ -29,7 +29,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
 				mainContainer.setLayout(new BorderLayout());
 			}
 			pack();
-			setSize(300, 300);
+			setSize(500, 300);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();

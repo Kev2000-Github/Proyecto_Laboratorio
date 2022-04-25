@@ -228,7 +228,7 @@ INSERT INTO charla(id, tema, lugar, organismo, fecha)
 	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
 		  ('2', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
 		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
-		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01')
+		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01');
 
 INSERT INTO asistenciaCharla(cedula, charla_id)
 	VALUES('27317962','1'),
@@ -241,4 +241,4 @@ INSERT INTO asistenciaCharla(cedula, charla_id)
 		  ('27317963','1'),
 		  ('27317964','3'),
 		  ('27317964','1'),
-		  ('27317965','3'),
+		  ('27317965','3');

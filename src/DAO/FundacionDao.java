@@ -10,7 +10,6 @@ import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
 import modelos.Fundacion;
-import modelos.Servicio;
 
 public class FundacionDao implements IDao<Fundacion> {
     private Conne con;
@@ -89,8 +88,7 @@ public class FundacionDao implements IDao<Fundacion> {
                     fundacion.getId(),
                     fundacion.getNombre(),
                     String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    String.valueOf(fundacion.getGobernacionId())
+                    String.valueOf(fundacion.getPorcentajePartidoAnual())
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

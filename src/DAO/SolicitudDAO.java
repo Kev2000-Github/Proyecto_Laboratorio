@@ -91,14 +91,13 @@ public class SolicitudDao implements IDao<Solicitud> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total) VALUES(?,?,?,?,?,?,?)";
+            String sql =   "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total)"
+                         + " VALUES(?,?,?,?," + String.valueOf(solicitud.getPrioridad()) + "," + String.valueOf(solicitud.getStatus()) + ",?)";
             String[] params = {
                     solicitud.getId(),
                     solicitud.getEmpleadoId(),
                     solicitud.getFundacionId(),
                     solicitud.getBeneficiarioId(),
-                    String.valueOf(solicitud.getPrioridad()),
-                    String.valueOf(solicitud.getStatus()),
                     String.valueOf(solicitud.getCostoTotal())
 
             };

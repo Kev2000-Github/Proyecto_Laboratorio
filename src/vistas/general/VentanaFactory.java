@@ -13,6 +13,7 @@ import vistas.VentanaSolicitudes;
 import vistas.VentanaRegistros;
 import vistas.backOffice.VentanaAddBeneficiario;
 import vistas.backOffice.VentanaBeneficiarios;
+import vistas.backOffice.VentanaEditBeneficiario;
 import vistas.backOffice.VentanaEditEmpleado;
 import vistas.backOffice.VentanaEditPersona;
 import vistas.backOffice.VentanaEmpleados;
@@ -20,6 +21,9 @@ import vistas.backOffice.VentanaEmpleados;
 public class VentanaFactory {
     public VentanaGeneral getVentana(String code, ActionListener accion) {
         if (code.equals("hom001")) {
+            return new VentanaHome(accion);
+        }
+        if (code.equals("backOffice")) {
             return new VentanaRegistros(accion);
         }
         if (code.equals("per0R1")) {
@@ -52,6 +56,9 @@ public class VentanaFactory {
         }
         if (code.equals("emp0E1")) {
             return new VentanaEditEmpleado(accion, (Empleado) entity, entityName, inmutableFields, mutableFields);
+        }
+        if (code.equals("ben0E1")) {
+            return new VentanaEditBeneficiario(accion, (Beneficiario) entity, entityName, inmutableFields, mutableFields);
         }
         return new VentanaEditGeneral<Object>(accion, entity, entityName, inmutableFields, mutableFields);
     }

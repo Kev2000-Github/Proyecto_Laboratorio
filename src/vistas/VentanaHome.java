@@ -3,23 +3,14 @@ package vistas;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 import vistas.general.VentanaGeneral;
-import vistas.general.InputField;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 
 public class VentanaHome extends VentanaGeneral{
     private JLabel lblTitulo;
-	private JButton goBeneficiarios;
     private JButton goCrearSolicitud;
     private JButton goGestionarSolicitud;
     private JButton goBackOffice;
@@ -57,13 +48,7 @@ public class VentanaHome extends VentanaGeneral{
 					goBackOffice = new JButton();
 					mainContainer.add(goBackOffice);
 					goBackOffice.setText("BackOffice");
-					goBackOffice.setName("goSection-backOffice");
-				}
-				{
-					goBeneficiarios = new JButton();
-					mainContainer.add(goBeneficiarios);
-					goBeneficiarios.setText("Solicitudes");
-					goBeneficiarios.setName("go-solicitudes");
+					goBackOffice.setName("go-backOffice");
 				}
 			}
 		} catch (Exception e) {
