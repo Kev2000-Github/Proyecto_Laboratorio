@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import DAO.UsuarioDao;
 import modelos.Usuario;
-import vistas.VentanaLogin;
+import vistas.swing.VentanaLogin;
 
 public class ControladorLogin implements ActionListener {
 	VentanaLogin window;
@@ -13,12 +13,13 @@ public class ControladorLogin implements ActionListener {
 	public ControladorLogin() {
 		super();
 		window = new VentanaLogin(this);
+                window.setVisible(true);
 	}
 	
 	private Usuario autenticar(String username, String password){
         UsuarioDao userDao = new UsuarioDao();
         return userDao.login(username, password);
-    }
+        }
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -29,8 +30,8 @@ public class ControladorLogin implements ActionListener {
             window.mostrarMensaje("Credenciales incorrectas");
         }
         else{
-			window.dispose();
-            new Controlador(user);
+	   window.dispose();
+           new ControladorHome(user);
         }
 	}
 }

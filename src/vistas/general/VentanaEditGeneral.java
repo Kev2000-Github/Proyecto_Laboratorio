@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VentanaEditGeneral<T> extends VentanaGeneral{
+public class VentanaEditGeneral<T> extends MetodosGenerales{
     private JLabel lblTitulo;
     protected Map<String, InputField> inputs;
     protected Map<String, InputField> inmutableInputs;

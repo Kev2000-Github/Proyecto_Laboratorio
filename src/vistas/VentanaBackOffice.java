@@ -6,12 +6,12 @@ import javax.swing.JLabel;
 
 import javax.swing.border.EtchedBorder;
 
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class VentanaBackOffice extends VentanaGeneral {
+public class VentanaBackOffice extends MetodosGenerales {
 	private JLabel lblTitulo;
 	private JButton goRegistros;
 	private JButton goReportes;

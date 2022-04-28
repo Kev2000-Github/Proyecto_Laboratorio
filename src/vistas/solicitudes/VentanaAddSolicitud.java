@@ -19,7 +19,7 @@ import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Servicio;
 import modelos.Solicitud;
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 
 import vistas.general.ComboboxItem;
 
@@ -33,7 +33,7 @@ import java.util.Vector;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Constants;
-public class VentanaAddSolicitud extends VentanaGeneral {
+public class VentanaAddSolicitud extends MetodosGenerales {
 	private JLabel lblTitulo;
 	static JComboBox fundacionElement;
 	static JComboBox empleadoElement;

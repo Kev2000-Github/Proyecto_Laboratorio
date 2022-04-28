@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 import vistas.general.InputField;
 
 import java.awt.BorderLayout;
@@ -17,7 +17,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class VentanaLogin extends VentanaGeneral{
+public class VentanaLogin extends MetodosGenerales{
     private JLabel lblTitulo;
     private InputField usernameInput;
     private InputField passwordInput;

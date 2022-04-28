@@ -28,7 +28,7 @@ public class Conne {
         try {
             this.con = DriverManager.getConnection(url, user, password);
         } 
-        catch (Exception e) {
+        catch (SQLException e) {
             String errorMsg = "Error al conectar con la base de datos.\n" + e.getMessage().toString();
             System.out.println(errorMsg);
         }
@@ -91,7 +91,7 @@ public class Conne {
     public boolean isResultSetEmpty(ResultSet rs){
         try{
             boolean isEmpty = false;
-            if(rs.next() == false){
+            if(rs == null || rs.next() == false ){
                 isEmpty = true;
             }
             return isEmpty;

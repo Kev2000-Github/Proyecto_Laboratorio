@@ -76,6 +76,30 @@ public class ServicioDao implements IDao<Servicio> {
             con.close();
         }
     }
+    
+        public List<Servicio> getFundacionServiciosById(String id) {
+        try {
+            List<Servicio> list = new ArrayList<Servicio>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, tipo"
+                    + " FROM servicio WHERE deleted_at IS NULL";
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs))
+                return list;
+            do {
+                Servicio servicio = setEntity(rs);
+                list.add(servicio);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
 
     @Override
     public void save(Servicio servicio) {

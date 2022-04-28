@@ -25,20 +25,20 @@ import modelos.Solicitud;
 import modelos.Usuario;
 import vistas.VentanaBackOffice;
 import utils.Utils;
-import vistas.VentanaHome;
+
 import vistas.VentanaRegistros;
 import vistas.backOffice.VentanaAddBeneficiario;
 import vistas.backOffice.VentanaEditBeneficiario;
 import vistas.backOffice.VentanaEditEmpleado;
 import vistas.backOffice.VentanaEditPersona;
 import vistas.general.VentanaFactory;
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 import vistas.general.VentanaGeneralLista;
 import utils.Constants.*;
 import vistas.solicitudes.VentanaAddSolicitud;
 
 public class Controlador implements ActionListener {
-	VentanaGeneral window;
+	MetodosGenerales window;
 	VentanaFactory ventanaFactory;
 	DaoFactory daoFactory;
 
@@ -49,7 +49,7 @@ public class Controlador implements ActionListener {
 		ventanaFactory = new VentanaFactory();
 		daoFactory = new DaoFactory();
 		this.user = user;
-		window = new VentanaHome(this);
+	
 	}
 
 	public void aprobarSolicitud() {

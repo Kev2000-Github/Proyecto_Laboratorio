@@ -5,10 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 
 import java.awt.event.ActionListener;
-public class VentanaRegistros extends VentanaGeneral{
+public class VentanaRegistros extends MetodosGenerales{
     private JLabel lblTitulo;
     private JButton goEmpleados;
     private JButton goBeneficiarios;
