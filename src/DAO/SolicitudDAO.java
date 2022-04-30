@@ -1,9 +1,9 @@
-
 package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +15,12 @@ import modelos.Servicio;//?
 import modelos.Solicitud;
 import java.util.Date;
 import utils.Constants;
+import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SolicitudDao implements IDao<Solicitud> {
+
     private Conne con;
 
     @Override
@@ -45,11 +49,12 @@ public class SolicitudDao implements IDao<Solicitud> {
             con.open();
             String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
                     + " FROM solicitud f WHERE id = ? AND f.deleted_at IS NULL";
-            String[] params = { id };
+            String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
 
-            if (con.isResultSetEmpty(rs))
+            if (con.isResultSetEmpty(rs)) {
                 return null;
+            }
             Solicitud solicitud = setEntity(rs);
             return solicitud;
         } catch (Exception e) {
@@ -70,8 +75,9 @@ public class SolicitudDao implements IDao<Solicitud> {
             String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
                     + " FROM solicitud WHERE deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
-            if (con.isResultSetEmpty(rs))
+            if (con.isResultSetEmpty(rs)) {
                 return list;
+            }
             do {
                 Solicitud solicitud = setEntity(rs);
                 list.add(solicitud);
@@ -91,38 +97,42 @@ public class SolicitudDao implements IDao<Solicitud> {
         try {
             con = new Conne();
             con.open();
-            String sql =   "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total)"
-                         + " VALUES(?,?,?,?," + String.valueOf(solicitud.getPrioridad()) + "," + String.valueOf(solicitud.getStatus()) + ",?)";
-            String[] params = {
-                    solicitud.getId(),
-                    solicitud.getEmpleadoId(),
-                    solicitud.getFundacionId(),
-                    solicitud.getBeneficiarioId(),
-                    String.valueOf(solicitud.getCostoTotal())
+            String sql = "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total, created_at, updated_at)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?)";
 
-            };
-            con.execMutation(sql, params);
+            PreparedStatement st = con.con.prepareStatement(sql);
+            st.setString(1, solicitud.getId());
+            st.setString(2, solicitud.getEmpleadoId());
+            st.setString(3, solicitud.getFundacionId());
+            st.setString(4, solicitud.getBeneficiarioId());
+            st.setString(5, String.valueOf(solicitud.getPrioridad()));
+            st.setString(6, String.valueOf(solicitud.getStatus()));
+            st.setFloat(7, solicitud.getCostoTotal());
+            st.setTimestamp(8, new Timestamp(new Date().getTime()));
+            st.setTimestamp(9, new Timestamp(new Date().getTime()));
+            st.executeUpdate();
 
             // ?servicio_id
-          
             solicitud.getServicios().forEach(servicio -> {
-                String sql2 = "INSERT INTO solicitud_servicio(solicitud_id, servicio_id) VALUES(?,?)";
-                String[] params2 = {
-                        solicitud.getId(),
-                        servicio.getId()
-                };
-                con.execMutation(sql2, params2);
-            });
+                String sql2 = "INSERT INTO detalle_solicitud_servicio(solicitud_id, servicio_id) VALUES(?,?)";
+                PreparedStatement stFor;
+                try {
+                    stFor = con.con.prepareStatement(sql2);
+                    stFor.setString(1, solicitud.getId());
+                    stFor.setString(2, servicio.getId());
+                    stFor.executeUpdate();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
 
+            });
         } catch (Exception e) {
-            // e.printStackTrace();
+            e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             con.close();
         }
     }
-
-  
 
     @Override
     public void delete(Solicitud solicitud) {
@@ -133,7 +143,7 @@ public class SolicitudDao implements IDao<Solicitud> {
             String sql = "UPDATE solicitud SET deleted_at = '" + now.toString()
                     + "' WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
-                    solicitud.getId()
+                solicitud.getId()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -147,6 +157,6 @@ public class SolicitudDao implements IDao<Solicitud> {
     @Override
     public void update(Solicitud t) {
         // TODO Auto-generated method stub
-        
+
     }
 }

@@ -1,3 +1,4 @@
-/bin
-/extra
 .env
+bin/
+build/
+.DS_Store

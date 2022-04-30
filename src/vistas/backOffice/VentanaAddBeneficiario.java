@@ -6,13 +6,13 @@ import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
 import modelos.Beneficiario;
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 import vistas.general.InputField;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-public class VentanaAddBeneficiario extends VentanaGeneral{
+public class VentanaAddBeneficiario extends MetodosGenerales{
     private JLabel lblTitulo;
     private InputField cedulaInput;
     private InputField nombreInput;
