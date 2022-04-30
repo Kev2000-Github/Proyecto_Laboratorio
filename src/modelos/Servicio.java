@@ -14,6 +14,12 @@ public class Servicio {
 		this.nombre = nombre;
 		this.tipo = tipo;
 	}
+        
+        public Servicio(String id, String nombre) {
+		this.id = id;
+		this.nombre = nombre;
+	}
+
 
 	public String getId() {
 		return id;

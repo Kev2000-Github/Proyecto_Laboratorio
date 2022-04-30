@@ -10,14 +10,14 @@ import javax.swing.JTable;
 import javax.swing.border.EtchedBorder;
 
 import modelos.Solicitud;
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class VentanaSolicitudes extends VentanaGeneral {
+public class VentanaSolicitudes extends MetodosGenerales {
     private JLabel lblTitulo;
     private JButton goSolicitud;
     private ArrayList<Solicitud> solicitudes;
@@ -26,8 +26,8 @@ public class VentanaSolicitudes extends VentanaGeneral {
     public VentanaSolicitudes(ActionListener accion, ArrayList<Solicitud> solicitudes){
         super();
         this.solicitudes = solicitudes;
-        initGUI();
-		this.agregarListener(accion);
+            initGUI();
+	this.agregarListener(accion);
     }
 	
 	private void initGUI() {

@@ -8,7 +8,7 @@ import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Persona;
 import modelos.Solicitud;
-import vistas.VentanaHome;
+
 import vistas.VentanaSolicitudes;
 import vistas.VentanaRegistros;
 import vistas.backOffice.VentanaAddBeneficiario;
@@ -19,20 +19,18 @@ import vistas.backOffice.VentanaEditPersona;
 import vistas.backOffice.VentanaEmpleados;
 
 public class VentanaFactory {
-    public VentanaGeneral getVentana(String code, ActionListener accion) {
-        if (code.equals("hom001")) {
-            return new VentanaHome(accion);
-        }
+    public MetodosGenerales getVentana(String code, ActionListener accion) {
+       
         if (code.equals("backOffice")) {
             return new VentanaRegistros(accion);
         }
         if (code.equals("per0R1")) {
             return new VentanaAddBeneficiario(accion);
         }
-        return new VentanaGeneral();
+        return new MetodosGenerales();
     }
 
-    public VentanaGeneral getVentanaList(String code, ActionListener accion, List<?> list) {
+    public MetodosGenerales getVentanaList(String code, ActionListener accion, List<?> list) {
         if (code.equals("ben001")) {
             List<Beneficiario> beneficiarios = (List<Beneficiario>) (Object) list;
             return new VentanaBeneficiarios(accion, beneficiarios);
@@ -41,7 +39,7 @@ public class VentanaFactory {
             List<Empleado> empleados = (List<Empleado>) (Object) list;
             return new VentanaEmpleados(accion, empleados);
         }
-        return new VentanaGeneral();
+        return new MetodosGenerales();
     }
 
     public VentanaEditGeneral<?> getVentanaEdit(

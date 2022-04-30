@@ -5,14 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.border.EtchedBorder;
 
-import vistas.general.VentanaGeneral;
+import vistas.general.MetodosGenerales;
 import vistas.general.InputField;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-public class VentanaSolicitud extends VentanaGeneral {
+public class VentanaSolicitud extends MetodosGenerales {
     private JLabel lblTitulo;
     private InputField codigoInput;
     private InputField beneficiarioInput;
