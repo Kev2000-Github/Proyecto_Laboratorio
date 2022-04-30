@@ -10,10 +10,6 @@ import javax.swing.JButton;
 
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
-import DAO.FundacionDao;
-import DAO.PersonaDao;
-import DAO.ServicioDao;
-import DAO.SolicitudDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import modelos.Beneficiario;

@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import modelos.Usuario;
 import vistas.swing.VentanaHome;
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -49,10 +48,11 @@ public class ControladorHome extends ControladorGeneral {
         }
         if (source == window.getGestionar_solicitud()) {
             goGestionarSolicitud();
+            new ControladorGestionarSolicitudes(user);
         }
         if (source == window.getCrear_solicitud()) {
             goCrearSolicitud();
-            new ControladorAddSolicitud(this.user);
+            new ControladorAddSolicitud(user);
         }
 
     }

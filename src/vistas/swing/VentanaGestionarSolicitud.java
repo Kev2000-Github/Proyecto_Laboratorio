@@ -4,17 +4,22 @@
  */
 package vistas.swing;
 
+import vistas.general.MetodosGenerales;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
 /**
  *
  * @author ASRock
  */
-public class VentanaGestionarSolicitud extends javax.swing.JFrame {
+public class VentanaGestionarSolicitud extends MetodosGenerales {
 
     /**
      * Creates new form VentanaGestionarSolicitud
      */
-    public VentanaGestionarSolicitud() {
+    public VentanaGestionarSolicitud(ActionListener accion, MouseListener ml) {
         initComponents();
+        topMenu1.setMenuFunctions(this, ml, "");
     }
 
     /**
@@ -34,6 +39,7 @@ public class VentanaGestionarSolicitud extends javax.swing.JFrame {
         solicitudBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,6 +114,7 @@ public class VentanaGestionarSolicitud extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void solicitudBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitudBtnActionPerformed
@@ -144,7 +151,7 @@ public class VentanaGestionarSolicitud extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaGestionarSolicitud().setVisible(true);
+                //new VentanaGestionarSolicitud().setVisible(true);
             }
         });
     }

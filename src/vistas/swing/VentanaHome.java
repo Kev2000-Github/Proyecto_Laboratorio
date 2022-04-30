@@ -106,6 +106,7 @@ public class VentanaHome extends MetodosGenerales {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void crear_solicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_solicitudActionPerformed
