@@ -13,8 +13,12 @@ public class ControladorLogin implements ActionListener {
 
     public ControladorLogin() {
         super();
+    }
+
+    public void init(){
         window = new VentanaLogin(this);
         window.setVisible(true);
+        System.out.println("pase por aqui");
     }
 
     private Usuario autenticar(String username, String password) {
