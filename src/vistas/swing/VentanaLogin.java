@@ -4,9 +4,9 @@
  */
 package vistas.swing;
 
-
 import java.awt.event.ActionListener;
 import vistas.general.MetodosGenerales;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -20,7 +20,9 @@ public class VentanaLogin extends MetodosGenerales {
      */
     public VentanaLogin(ActionListener accion) {
         initComponents();
+        setLocationRelativeTo(null);
         this.agregarListener(accion);
+        topMenuLogin1.setMenuFunctions(this, "");
     }
 
     
@@ -51,8 +53,10 @@ public class VentanaLogin extends MetodosGenerales {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        topMenuLogin1 = new vistas.swing.componentes.topMenuLogin();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jToggleButton1.setText("Iniciar Sesion");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,11 +100,13 @@ public class VentanaLogin extends MetodosGenerales {
                                 .addComponent(jLabel2)
                                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addComponent(topMenuLogin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(topMenuLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -167,6 +173,7 @@ public class VentanaLogin extends MetodosGenerales {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField password;
+    private vistas.swing.componentes.topMenuLogin topMenuLogin1;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

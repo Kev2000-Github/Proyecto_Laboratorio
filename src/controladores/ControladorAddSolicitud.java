@@ -31,6 +31,7 @@ import vistas.general.ComboboxItem;
 import vistas.solicitudes.VentanaAddSolicitud;
 import vistas.swing.VentanaCrearSolicitud;
 import vistas.swing.VentanaHome;
+import javax.swing.JLabel;
 
 
 /*
@@ -213,7 +214,13 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        String source = e.getSource().getClass().getName();
+        if(source.equals("java.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                windowCrear.dispose();
+            }
+        }
     }
 
     @Override

@@ -20,7 +20,9 @@ public class VentanaHome extends MetodosGenerales {
      */
     public VentanaHome(ActionListener accion) {
         initComponents();
+        setLocationRelativeTo(null);
         this.agregarListener(accion);
+        topMenuLogin.setMenuFunctions(this, "");
     }
     
     private void agregarListener(ActionListener accion){
@@ -42,8 +44,10 @@ public class VentanaHome extends MetodosGenerales {
         crear_solicitud = new javax.swing.JButton();
         gestionar_solicitud = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        topMenuLogin = new vistas.swing.componentes.topMenuLogin();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         back_office.setText("BackOffice");
 
@@ -84,11 +88,13 @@ public class VentanaHome extends MetodosGenerales {
                                 .addGap(91, 91, 91)
                                 .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addComponent(topMenuLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -96,7 +102,7 @@ public class VentanaHome extends MetodosGenerales {
                     .addComponent(gestionar_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,5 +171,6 @@ public class VentanaHome extends MetodosGenerales {
     private javax.swing.JButton crear_solicitud;
     private javax.swing.JButton gestionar_solicitud;
     private javax.swing.JLabel jLabel1;
+    private vistas.swing.componentes.topMenuLogin topMenuLogin;
     // End of variables declaration//GEN-END:variables
 }
