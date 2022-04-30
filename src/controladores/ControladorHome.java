@@ -52,7 +52,7 @@ public class ControladorHome implements ActionListener {
         }
         if (source == window.getCrear_solicitud()) {
             goCrearSolicitud();
-                new ControladorSolicitud("crear");
+                new ControladorAddSolicitud();
         }
 
     }

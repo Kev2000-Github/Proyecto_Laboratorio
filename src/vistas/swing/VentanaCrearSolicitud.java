@@ -5,13 +5,23 @@
 package vistas.swing;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import modelos.Servicio;
+import modelos.Solicitud;
+import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.general.MetodosGenerales;
+import vistas.general.MyTableModel;
 
 /**
  *
@@ -23,16 +33,38 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
      * Creates new form VentanaHome
      *
      * @param accion
+     * @param listSelection
+     * @param ml
      */
-    public VentanaCrearSolicitud(ActionListener accion) {
+    public VentanaCrearSolicitud(ActionListener accion, ListSelectionListener listSelection, MouseListener ml) {
         initComponents();
-        this.agregarListener(accion);
+        this.agregarActionListener(accion);
+        this.agregarSelectionListener(listSelection);
+        this.agregarMouseListener(ml);
     }
 
-    private void agregarListener(ActionListener accion) {
-        crear_solicitud.addActionListener(accion);
-
+    private void agregarMouseListener(MouseListener ml) {
+        servicios.addMouseListener(ml);
     }
+
+    private void agregarSelectionListener(ListSelectionListener lsl) {
+        servicios.getSelectionModel().addListSelectionListener(lsl);
+    }
+
+    private void agregarActionListener(ActionListener accion) {
+        crearSolicitud.addActionListener(accion);
+        fundacion.addActionListener(accion);
+        crearSolicitud.addActionListener(accion);
+    }
+
+    public JLabel getPrecio() {
+        return precio;
+    }
+
+    public void setTextPrecio(String text) {
+        this.precio.setText(text);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,9 +85,9 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        servicios = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        crear_solicitud = new javax.swing.JButton();
+        crearSolicitud = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         precio = new javax.swing.JLabel();
 
@@ -89,19 +121,19 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
 
         jLabel4.setText("Beneficiario");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Servicio", "Precio"
+                "Seleccionar", "Id", "Servicio", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false
+                true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -112,11 +144,11 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(servicios);
 
         jLabel5.setText("Servicios");
 
-        crear_solicitud.setText("Crear Solicitud");
+        crearSolicitud.setText("Crear Solicitud");
 
         jLabel6.setText("Precio Total:");
 
@@ -135,7 +167,7 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(crear_solicitud)
+                            .addComponent(crearSolicitud)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
@@ -180,7 +212,7 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
                     .addComponent(jLabel6)
                     .addComponent(precio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(crear_solicitud)
+                .addComponent(crearSolicitud)
                 .addGap(12, 12, 12))
         );
 
@@ -227,13 +259,31 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
         });
     }
 
+    public JTable getServicios() {
+        return servicios;
+    }
+
     public JButton getCrear_solicitud() {
-        return crear_solicitud;
+        return crearSolicitud;
+    }
+
+    public JComboBox<ComboboxItem> getFundacion() {
+        return fundacion;
     }
 
     public JComboBox<ComboboxItem> getBeneficiario() {
         return beneficiario;
     }
+
+    public JComboBox<ComboboxItem> getEmpleado() {
+        return empleado;
+    }
+
+    public JButton getCrearSolicitud() {
+        return crearSolicitud;
+    }
+    
+    
 
     public void setBeneficiario(JComboBox<ComboboxItem> beneficiario) {
         this.beneficiario = beneficiario;
@@ -246,18 +296,20 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
 
     public void setModelEmpleado(DefaultComboBoxModel model) {
         this.empleado.setModel(model);
-
     }
 
     public void setModelFundacion(DefaultComboBoxModel model) {
         this.fundacion.setModel(model);
+    }
 
+    public void setModelServicio(DefaultTableModel model) {
+        this.servicios.setModel(model);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<ComboboxItem> beneficiario;
-    private javax.swing.JButton crear_solicitud;
+    private javax.swing.JButton crearSolicitud;
     private javax.swing.JComboBox<ComboboxItem> empleado;
     private javax.swing.JComboBox<ComboboxItem> fundacion;
     private javax.swing.JLabel jLabel1;
@@ -269,8 +321,8 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel precio;
+    private javax.swing.JTable servicios;
     // End of variables declaration//GEN-END:variables
 
 }

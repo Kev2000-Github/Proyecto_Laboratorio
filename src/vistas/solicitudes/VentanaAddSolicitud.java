@@ -162,8 +162,8 @@ public class VentanaAddSolicitud extends MetodosGenerales {
 		Solicitud solicitud = new Solicitud();
 		System.out.println("i: " + ((ArrayList<Servicio>) itemList.getSelectedValuesList()).toString());
 		solicitud.setId(getSaltString());
-     	solicitud.setBeneficiarioId(((ComboboxItem) beneficiarioElement.getSelectedItem()).getId());
-		solicitud.setEmpleadoId(((ComboboxItem) empleadoElement.getSelectedItem()).getId());
+                solicitud.setBeneficiarioId(((ComboboxItem) beneficiarioElement.getSelectedItem()).getId());
+            	solicitud.setEmpleadoId(((ComboboxItem) empleadoElement.getSelectedItem()).getId());
 		solicitud.setFundacionId(((ComboboxItem) fundacionElement.getSelectedItem()).getId());
 		solicitud.setServicios((ArrayList<Servicio>) itemList.getSelectedValuesList());
 		solicitud.setPrioridad(Constants.prioridadEnum.alta);
@@ -172,19 +172,7 @@ public class VentanaAddSolicitud extends MetodosGenerales {
 		return solicitud;
 	}
 
-	//move
-	protected String getSaltString() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 18) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        String saltStr = salt.toString();
-        return saltStr;
-
-    }
+	
 	
 	public void clear() {
 		// cedulaInput.clear();

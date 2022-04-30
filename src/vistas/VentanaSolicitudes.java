@@ -26,8 +26,8 @@ public class VentanaSolicitudes extends MetodosGenerales {
     public VentanaSolicitudes(ActionListener accion, ArrayList<Solicitud> solicitudes){
         super();
         this.solicitudes = solicitudes;
-        initGUI();
-		this.agregarListener(accion);
+            initGUI();
+	this.agregarListener(accion);
     }
 	
 	private void initGUI() {

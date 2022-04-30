@@ -20,11 +20,11 @@ DROP TABLE IF EXISTS charla CASCADE;
 DROP TABLE IF EXISTS asistenciaCharla CASCADE;
 --ENUM
 DROP TYPE IF EXISTS tipo_servicio;
-DROP TYPE IF EXISTS solicitud_prioridad;
-DROP TYPE IF EXISTS solicitud_status;
+--DROP TYPE IF EXISTS solicitud_prioridad;
+--DROP TYPE IF EXISTS solicitud_status;
 CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
-CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
-CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
+--CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
+--CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 
 --BUSINESS LOGIC TABLES
@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	beneficiario_id VARCHAR(10) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
-	prioridad solicitud_prioridad NOT NULL,
-	status solicitud_status NOT NULL,
+	prioridad VARCHAR(40) NULL,
+	status VARCHAR(40) NOT NULL,
 	costo_total FLOAT NOT NULL,
 	created_at DATE NOT NULL,
 	updated_at DATE NOT NULL,
@@ -164,6 +164,12 @@ CREATE TABLE IF NOT EXISTS asistenciaCharla(
 	charla_id VARCHAR(80) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
+	solicitud_id VARCHAR(40) NOT NULL,
+	servicio_id VARCHAR(40) NOT NULL,
+	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
+	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
+);
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
 	VALUES('27317962','kevin','cheng','584126796098','chengkev2000@gmail.com','direccion'),

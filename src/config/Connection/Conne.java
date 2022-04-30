@@ -14,7 +14,7 @@ public class Conne {
     private String url;
     private String user;
     private String password;
-    private Connection con;
+    public Connection con;
 
     public Conne(){
         Config config = Config.getConfig();
