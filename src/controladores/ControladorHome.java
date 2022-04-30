@@ -15,12 +15,12 @@ import vistas.swing.VentanaHome;
  *
  * @author juanperez
  */
-public class ControladorHome implements ActionListener {
+public class ControladorHome extends ControladorGeneral {
 
     VentanaHome window;
 
     public ControladorHome(Usuario user) {
-        super();
+        super(user);
         window = new VentanaHome(this);
         window.setVisible(true);
     }
@@ -52,7 +52,7 @@ public class ControladorHome implements ActionListener {
         }
         if (source == window.getCrear_solicitud()) {
             goCrearSolicitud();
-                new ControladorAddSolicitud();
+            new ControladorAddSolicitud(this.user);
         }
 
     }

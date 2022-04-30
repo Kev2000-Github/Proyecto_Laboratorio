@@ -12,10 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -28,11 +25,9 @@ import modelos.Solicitud;
 import modelos.Usuario;
 import utils.Constants;
 import vistas.general.ComboboxItem;
-import vistas.solicitudes.VentanaAddSolicitud;
 import vistas.swing.VentanaCrearSolicitud;
-import vistas.swing.VentanaHome;
 import javax.swing.JLabel;
-
+import controladores.ControladorHome;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -42,13 +37,13 @@ import javax.swing.JLabel;
  *
  * @author juanperez
  */
-public class ControladorAddSolicitud implements ActionListener, ListSelectionListener, MouseListener {
+public class ControladorAddSolicitud extends ControladorGeneral implements ListSelectionListener {
 
     VentanaCrearSolicitud windowCrear;
     DaoFactory daoFactory;
 
-    public ControladorAddSolicitud() {
-        super();
+    public ControladorAddSolicitud(Usuario user) {
+        super(user);
         daoFactory = new DaoFactory();
         windowCrear = new VentanaCrearSolicitud(this, this, this);
         windowCrear.setVisible(true);
@@ -215,10 +210,11 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
     @Override
     public void mouseClicked(MouseEvent e) {
         String source = e.getSource().getClass().getName();
-        if(source.equals("java.swing.JLabel")){
+        if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
                 windowCrear.dispose();
+                new ControladorHome(user);
             }
         }
     }
