@@ -2,26 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/VentanaBackOffice.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/DAO/UsuarioDao.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/config/.env</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/controladores/Controlador.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/controladores/ControladorSolicitud.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/VentanaSolicitud.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/VentanaLogin.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/controladores/ControladorHome.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/controladores/ControladorLogin.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/swing/VentanaHome.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/general/MetodosGenerales.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/swing/VentanaCrearSolicitud.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/solicitudes/VentanaAddSolicitud.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/swing/VentanaLogin.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/general/VentanaFactory.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/DAO/ServicioDao.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/vistas/general/VentanaGeneralLista.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/config/Connection/Conne.java</file>
-            <file>file:/Users/juanperez/NetBeansProjects/laboratorio1/src/Principal.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
