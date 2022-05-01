@@ -56,7 +56,6 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
     private void agregarActionListener(ActionListener accion) {
         crearSolicitud.addActionListener(accion);
         fundacion.addActionListener(accion);
-        crearSolicitud.addActionListener(accion);
     }
 
     public JLabel getPrecio() {

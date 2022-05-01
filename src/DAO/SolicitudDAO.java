@@ -33,7 +33,6 @@ public class SolicitudDao implements IDao<Solicitud> {
             solicitud.setBeneficiarioId(rs.getString("beneficiario_id"));
             solicitud.setPrioridad(Constants.prioridadEnum.valueOf(rs.getString("prioridad")));
             solicitud.setStatus(Constants.estadoEnum.valueOf(rs.getString("tipo")));
-            solicitud.setCostoTotal(rs.getFloat("costo_total"));
             return solicitud;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -47,7 +46,7 @@ public class SolicitudDao implements IDao<Solicitud> {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status"
                     + " FROM solicitud f WHERE id = ? AND f.deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
@@ -72,7 +71,7 @@ public class SolicitudDao implements IDao<Solicitud> {
             List<Solicitud> list = new ArrayList<Solicitud>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total"
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status"
                     + " FROM solicitud WHERE deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs)) {
@@ -97,34 +96,28 @@ public class SolicitudDao implements IDao<Solicitud> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, costo_total, created_at, updated_at)"
-                    + " VALUES(?,?,?,?,?,?,?,?,?)";
-
-            PreparedStatement st = con.con.prepareStatement(sql);
-            st.setString(1, solicitud.getId());
-            st.setString(2, solicitud.getEmpleadoId());
-            st.setString(3, solicitud.getFundacionId());
-            st.setString(4, solicitud.getBeneficiarioId());
-            st.setString(5, String.valueOf(solicitud.getPrioridad()));
-            st.setString(6, String.valueOf(solicitud.getStatus()));
-            st.setFloat(7, solicitud.getCostoTotal());
-            st.setTimestamp(8, new Timestamp(new Date().getTime()));
-            st.setTimestamp(9, new Timestamp(new Date().getTime()));
-            st.executeUpdate();
-
+            String now = "'" + (new Timestamp(new Date().getTime())).toString() + "'";
+            String prioridad = "'" + solicitud.getPrioridad().toString() + "'";
+            String status = "'" + solicitud.getStatus().toString() + "'";
+            String values = String.join(",","?","?","?","?", prioridad, status, now, now);
+            String sql = "INSERT INTO solicitud(id, empleado_id, fundacion_id, beneficiario_id, prioridad, status, created_at, updated_at)"
+                       + " VALUES(" + values + ")";
+            String[] params = {
+                solicitud.getId(),
+                solicitud.getEmpleadoId(),
+                solicitud.getFundacionId(),
+                solicitud.getBeneficiarioId()
+            };
+            con.execMutation(sql, params);
             // ?servicio_id
-            solicitud.getServicios().forEach(servicio -> {
-                String sql2 = "INSERT INTO detalle_solicitud_servicio(solicitud_id, servicio_id) VALUES(?,?)";
-                PreparedStatement stFor;
-                try {
-                    stFor = con.con.prepareStatement(sql2);
-                    stFor.setString(1, solicitud.getId());
-                    stFor.setString(2, servicio.getId());
-                    stFor.executeUpdate();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-
+            (solicitud.getServicios()).forEach(servicio -> {
+                String sql2 = "INSERT INTO solicitud_presupuesto(solicitud_id, servicio_id, costo_generado)"
+                            + "VALUES(?,?," + servicio.getCosto() +")";
+                String[] localParams = {
+                    solicitud.getId(),
+                    servicio.getId()
+                };
+                con.execMutation(sql2, localParams);
             });
         } catch (Exception e) {
             e.printStackTrace();

@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.FundacionServicio;
 import modelos.Servicio;
 import modelos.Solicitud;
 import modelos.Usuario;
@@ -70,7 +69,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         window.setModelFundacion(modelFundacion);
     }
 
-    public void fillServicios(String id) {
+    public void fillServicios(String fundacionId) {
         DefaultTableModel modelServicios = new DefaultTableModel() {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -78,12 +77,12 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
             }
         };
         ServicioDao servicioDao = new ServicioDao();
-        List<FundacionServicio> fsList = servicioDao.getFundacionServiciosById(id);
+        List<Servicio> fsList = servicioDao.getAllFromFundacion(fundacionId);
         modelServicios.setColumnCount(4);
         modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo"});
 
-        for (FundacionServicio fs : fsList) {
-            modelServicios.addRow(new Object[]{Boolean.FALSE, fs.getServicio_id(), fs.getNombre(), fs.getCosto()});
+        for (Servicio s : fsList) {
+            modelServicios.addRow(new Object[]{Boolean.FALSE, s.getId(), s.getNombre(), s.getCosto()});
         }
         window.setModelServicio(modelServicios);
     }
@@ -125,9 +124,11 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         for (int i = 0; i < window.getServicios().getRowCount(); i++) {
              Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
-                 serviciosArr.add(
-                    new Servicio(String.valueOf(window.getServicios().getValueAt(i, 1).toString()),
-                    String.valueOf(window.getServicios().getValueAt(i, 2).toString())));
+                Servicio serv = new Servicio();
+                serv.setId(window.getServicios().getValueAt(i, 1).toString());
+                serv.setNombre(window.getServicios().getValueAt(i, 2).toString());
+                serv.setCosto(Float.valueOf(window.getServicios().getValueAt(i, 3).toString()));
+                serviciosArr.add(serv);
             }
            
         }
@@ -135,7 +136,6 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         solicitud.setServicios(serviciosArr);
         solicitud.setPrioridad(Constants.prioridadEnum.alta);
         solicitud.setStatus(Constants.estadoEnum.pendiente);
-        solicitud.setCostoTotal(calcCosto());
         return solicitud;
     }
 
@@ -144,13 +144,13 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
             if (calcCosto() == 0){
                  window.mostrarMensaje("Debe seleccionar almenos un servicio");
             }else{
-               Solicitud newSolicitud = getSolicitud();
-            String entity = "solicitud";
-            System.out.println("save" + '-' + entity);
-          
-            System.out.println(newSolicitud.toString());
-            IDao entityDao = daoFactory.getDao(entity);
-            Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
+                Solicitud newSolicitud = getSolicitud();
+                String entity = "solicitud";
+                System.out.println("save" + '-' + entity);
+            
+                System.out.println(newSolicitud.toString());
+                IDao entityDao = daoFactory.getDao(entity);
+                Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
             if (existenteSolicitud != null) {
                 window.mostrarMensaje("Ya existe un registro de esta " + entity);
                 return;
