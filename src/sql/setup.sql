@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS solicitud_presupuesto(
 	solicitud_id VARCHAR(40) NOT NULL,
 	servicio_id VARCHAR(40) NOT NULL,
 	costo_generado FLOAT NOT NULL,
+	deleted_at DATE DEFAULT NULL,
 	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
 	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
 );

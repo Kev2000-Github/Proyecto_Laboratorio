@@ -7,19 +7,34 @@ package vistas.swing;
 import vistas.general.MetodosGenerales;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
 /**
  *
  * @author ASRock
  */
 public class VentanaGestionarSolicitud extends MetodosGenerales {
-
+    String selectedRow;
     /**
      * Creates new form VentanaGestionarSolicitud
      */
     public VentanaGestionarSolicitud(ActionListener accion, MouseListener ml) {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, "");
+        this.agregarActionListener(accion);
+    }
+
+    public void setModelSolicitudes(DefaultTableModel model){
+        this.tableSolicitudes.setModel(model);
+    }
+
+    private void agregarActionListener(ActionListener accion) {
+        solicitudBtn.addActionListener(accion);
+    }
+
+    public JTable getSolicitudes(){
+        return tableSolicitudes;
     }
 
     /**
@@ -34,27 +49,40 @@ public class VentanaGestionarSolicitud extends MetodosGenerales {
         topMenu1 = new vistas.swing.componentes.topMenu();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableSolicitudes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         solicitudBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "Solicitud", "Fundacion", "Servicio", "Beneficiario", "Encargado"
+                "Solicitud", "Fundacion", "Beneficiario", "Encargado"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableSolicitudes);
 
         solicitudBtn.setText("ver solicitud");
+        solicitudBtn.setName("verSolicitud"); // NOI18N
         solicitudBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solicitudBtnActionPerformed(evt);
@@ -160,8 +188,8 @@ public class VentanaGestionarSolicitud extends MetodosGenerales {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton solicitudBtn;
+    private javax.swing.JTable tableSolicitudes;
     private vistas.swing.componentes.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }
