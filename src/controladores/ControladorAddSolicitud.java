@@ -12,26 +12,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.FundacionServicio;
 import modelos.Servicio;
 import modelos.Solicitud;
 import modelos.Usuario;
 import utils.Constants;
 import vistas.general.ComboboxItem;
-import vistas.solicitudes.VentanaAddSolicitud;
 import vistas.swing.VentanaCrearSolicitud;
-import vistas.swing.VentanaHome;
-
+import javax.swing.JLabel;
+import controladores.ControladorHome;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -41,16 +36,16 @@ import vistas.swing.VentanaHome;
  *
  * @author juanperez
  */
-public class ControladorAddSolicitud implements ActionListener, ListSelectionListener, MouseListener {
+public class ControladorAddSolicitud extends ControladorGeneral implements ListSelectionListener {
 
-    VentanaCrearSolicitud windowCrear;
+    VentanaCrearSolicitud window;
     DaoFactory daoFactory;
 
-    public ControladorAddSolicitud() {
-        super();
+    public ControladorAddSolicitud(Usuario user) {
+        super(user);
         daoFactory = new DaoFactory();
-        windowCrear = new VentanaCrearSolicitud(this, this, this);
-        windowCrear.setVisible(true);
+        window = new VentanaCrearSolicitud(this, this, this);
+        window.setVisible(true);
         initCrear();
     }
 
@@ -58,7 +53,7 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
         fillFundacion();
         fillEmpleado();
         fillBeneficiario();
-        String fundacion_id = ((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId();
+        String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
         fillServicios(fundacion_id);
 
     }
@@ -71,10 +66,10 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
             modelFundacion.addElement(
                     new ComboboxItem(fund.getId(), fund.getNombre()));
         }
-        windowCrear.setModelFundacion(modelFundacion);
+        window.setModelFundacion(modelFundacion);
     }
 
-    public void fillServicios(String id) {
+    public void fillServicios(String fundacionId) {
         DefaultTableModel modelServicios = new DefaultTableModel() {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -82,14 +77,14 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
             }
         };
         ServicioDao servicioDao = new ServicioDao();
-        List<FundacionServicio> fsList = servicioDao.getFundacionServiciosById(id);
+        List<Servicio> fsList = servicioDao.getAllFromFundacion(fundacionId);
         modelServicios.setColumnCount(4);
         modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo"});
 
-        for (FundacionServicio fs : fsList) {
-            modelServicios.addRow(new Object[]{Boolean.FALSE, fs.getServicio_id(), fs.getNombre(), fs.getCosto()});
+        for (Servicio s : fsList) {
+            modelServicios.addRow(new Object[]{Boolean.FALSE, s.getId(), s.getNombre(), s.getCosto()});
         }
-        windowCrear.setModelServicio(modelServicios);
+        window.setModelServicio(modelServicios);
     }
 
     public void fillEmpleado() {
@@ -100,7 +95,7 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
             modelEmpleado.addElement(
                     new ComboboxItem(emp.getId(), emp.getCedula() + "-" + emp.getApellido()));
         }
-        windowCrear.setModelEmpleado(modelEmpleado);
+        window.setModelEmpleado(modelEmpleado);
     }
 
     public void fillBeneficiario() {
@@ -108,30 +103,30 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
         BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
         List<Beneficiario> beneficiariosList = beneficiarioDao.getAll();
         for (Beneficiario ben : beneficiariosList) {
-            // 1 - can call methods of element
             modelBeneficiario.addElement(
                     new ComboboxItem(ben.getId(),
                             ben.getCedula() + "-" + ben.getApellido()));
         }
-        windowCrear.setModelBeneficiario(modelBeneficiario);
+        window.setModelBeneficiario(modelBeneficiario);
 
     }
 
     public Solicitud getSolicitud() {
         Solicitud solicitud = new Solicitud();
-        //System.out.println("i: " + ((ArrayList<Servicio>) itemList.getSelectedValuesList()).toString());
-        solicitud.setId(windowCrear.getSaltString());
-        solicitud.setBeneficiarioId(((ComboboxItem) windowCrear.getBeneficiario().getSelectedItem()).getId());
-        solicitud.setEmpleadoId(((ComboboxItem) windowCrear.getEmpleado().getSelectedItem()).getId());
-        solicitud.setFundacionId(((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId());
+        solicitud.setId(window.getSaltString());
+        solicitud.setBeneficiarioId(((ComboboxItem) window.getBeneficiario().getSelectedItem()).getId());
+        solicitud.setEmpleadoId(((ComboboxItem) window.getEmpleado().getSelectedItem()).getId());
+        solicitud.setFundacionId(((ComboboxItem) window.getFundacion().getSelectedItem()).getId());
 
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();
-        for (int i = 0; i < windowCrear.getServicios().getRowCount(); i++) {
-             Boolean isChecked = Boolean.valueOf(windowCrear.getServicios().getValueAt(i, 0).toString());
+        for (int i = 0; i < window.getServicios().getRowCount(); i++) {
+             Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
-                 serviciosArr.add(
-                    new Servicio(String.valueOf(windowCrear.getServicios().getValueAt(i, 1).toString()),
-                    String.valueOf(windowCrear.getServicios().getValueAt(i, 2).toString())));
+                Servicio serv = new Servicio();
+                serv.setId(window.getServicios().getValueAt(i, 1).toString());
+                serv.setNombre(window.getServicios().getValueAt(i, 2).toString());
+                serv.setCosto(Float.valueOf(window.getServicios().getValueAt(i, 3).toString()));
+                serviciosArr.add(serv);
             }
            
         }
@@ -139,32 +134,31 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
         solicitud.setServicios(serviciosArr);
         solicitud.setPrioridad(Constants.prioridadEnum.alta);
         solicitud.setStatus(Constants.estadoEnum.pendiente);
-        solicitud.setCostoTotal(calcCosto());
         return solicitud;
     }
 
     public void save() {
         try {
             if (calcCosto() == 0){
-                 windowCrear.mostrarMensaje("Debe seleccionar almenos un servicio");
+                 window.mostrarMensaje("Debe seleccionar almenos un servicio");
             }else{
-               Solicitud newSolicitud = getSolicitud();
-            String entity = "solicitud";
-            System.out.println("save" + '-' + entity);
-          
-            System.out.println(newSolicitud.toString());
-            IDao entityDao = daoFactory.getDao(entity);
-            Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
+                Solicitud newSolicitud = getSolicitud();
+                String entity = "solicitud";
+                System.out.println("save" + '-' + entity);
+            
+                System.out.println(newSolicitud.toString());
+                IDao entityDao = daoFactory.getDao(entity);
+                Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
             if (existenteSolicitud != null) {
-                windowCrear.mostrarMensaje("Ya existe un registro de esta " + entity);
+                window.mostrarMensaje("Ya existe un registro de esta " + entity);
                 return;
             }
             entityDao.save(newSolicitud);
-            windowCrear.mostrarMensaje("Se agrego el registro con exito "); 
+            window.mostrarMensaje("Se agrego el registro con exito "); 
             initCrear();
             }
          
-            //((VentanaCrearSolicitud) windowCrear).clear();
+            //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {
             System.out.println("controladores.ControladorAddSolicitud.save()" + e);
         }
@@ -173,10 +167,10 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
 
     public float calcCosto() {
         float cost = 0;
-        for (int i = 0; i < windowCrear.getServicios().getRowCount(); i++) {
-            Boolean isChecked = Boolean.valueOf(windowCrear.getServicios().getValueAt(i, 0).toString());
+        for (int i = 0; i < window.getServicios().getRowCount(); i++) {
+            Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
-                cost += Float.valueOf(windowCrear.getServicios().getValueAt(i, 3).toString());
+                cost += Float.valueOf(window.getServicios().getValueAt(i, 3).toString());
                 //get the values of the columns you need.
             }
         }
@@ -187,20 +181,20 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
     public void valueChanged(ListSelectionEvent l) {
         //action
         // System.out.println("t" + String.valueOf(calcCosto()));
-        //  windowCrear.setTextPrecio(String.valueOf(calcCosto()));
+        //  window.setTextPrecio(String.valueOf(calcCosto()));
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
-        if (source == windowCrear.getFundacion()) {
-            String fundacion_id = ((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId();
+        if (source == window.getFundacion()) {
+            String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
             // System.out.println(fundacion_id);
             fillServicios(fundacion_id);
         }
         //mejorar
-          if (source == windowCrear.getCrearSolicitud()) {
+          if (source == window.getCrearSolicitud()) {
               save();
           }
         //  if (source == window.getGestionar_solicitud()) {
@@ -212,31 +206,22 @@ public class ControladorAddSolicitud implements ActionListener, ListSelectionLis
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void mouseEntered(MouseEvent e) {
         //  System.out.println("t" + String.valueOf(calcCosto()));
-        windowCrear.setTextPrecio(String.valueOf(calcCosto()));
+        window.setTextPrecio(String.valueOf(calcCosto()));
         //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
-        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void mouseClicked(MouseEvent e) {
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                window.dispose();
+                new ControladorHome(user);
+            }
+        }
     }
 
 }

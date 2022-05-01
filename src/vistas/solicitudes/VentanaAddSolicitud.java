@@ -168,7 +168,6 @@ public class VentanaAddSolicitud extends MetodosGenerales {
 		solicitud.setServicios((ArrayList<Servicio>) itemList.getSelectedValuesList());
 		solicitud.setPrioridad(Constants.prioridadEnum.alta);
 		solicitud.setStatus(Constants.estadoEnum.pendiente);
-		solicitud.setCostoTotal(calcCostoTotal());
 		return solicitud;
 	}
 

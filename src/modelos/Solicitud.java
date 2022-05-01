@@ -11,7 +11,6 @@ public class Solicitud {
     private String fundacionId;
     private prioridadEnum prioridad;
     private estadoEnum status;
-    private Float costoTotal;
     private ArrayList<Servicio> servicios;
     private String beneficiarioId;
 
@@ -27,7 +26,6 @@ public class Solicitud {
             ){
         this.fundacionId = fundaciondestino;
         this.id = id;
-        this.costoTotal = costoTotal;
         this.servicios = servicios;
         this.beneficiarioId = beneficiarioId;
         this.empleadoId = empleadoId;
@@ -91,15 +89,11 @@ public class Solicitud {
         this.status = status;
     }
 
-    public Float getCostoTotal() {
-        return this.costoTotal;
-    }
-
-    public void setCostoTotal(Float costoTotal) {
-        this.costoTotal = costoTotal;
-    }
-  
-
-    public void setCedula(Object selectedItem) {
+    public float calcularCosto(){
+        float costo = 0;
+        for(Servicio servicio : servicios){
+            costo += servicio.getCosto();
+        }
+        return costo;
     }
 }

@@ -10,10 +10,6 @@ import javax.swing.JButton;
 
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
-import DAO.FundacionDao;
-import DAO.PersonaDao;
-import DAO.ServicioDao;
-import DAO.SolicitudDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import modelos.Beneficiario;
@@ -36,6 +32,9 @@ import vistas.general.MetodosGenerales;
 import vistas.general.VentanaGeneralLista;
 import utils.Constants.*;
 import vistas.solicitudes.VentanaAddSolicitud;
+import vistas.swing.VentanaCrearSolicitud;
+import vistas.swing.VentanaHome;
+import vistas.swing.VentanaLogin;
 
 public class Controlador implements ActionListener {
 	MetodosGenerales window;
@@ -50,6 +49,10 @@ public class Controlador implements ActionListener {
 		daoFactory = new DaoFactory();
 		this.user = user;
 	
+	}
+
+	public void init() {
+		
 	}
 
 	public void aprobarSolicitud() {

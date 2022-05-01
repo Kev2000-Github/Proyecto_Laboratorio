@@ -18,13 +18,14 @@ DROP TABLE IF EXISTS detalle_solicitud_servicio CASCADE;
 DROP TABLE IF EXISTS presupuesto;
 DROP TABLE IF EXISTS charla CASCADE;
 DROP TABLE IF EXISTS asistenciaCharla CASCADE;
+DROP TABLE IF EXISTS solicitud_presupuesto CASCADE;
 --ENUM
 DROP TYPE IF EXISTS tipo_servicio;
---DROP TYPE IF EXISTS solicitud_prioridad;
---DROP TYPE IF EXISTS solicitud_status;
+DROP TYPE IF EXISTS solicitud_prioridad;
+DROP TYPE IF EXISTS solicitud_status;
 CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
---CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
---CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
+CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
+CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 
 --BUSINESS LOGIC TABLES
@@ -98,9 +99,8 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	beneficiario_id VARCHAR(10) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
-	prioridad VARCHAR(40) NULL,
-	status VARCHAR(40) NOT NULL,
-	costo_total FLOAT NOT NULL,
+	prioridad solicitud_prioridad NULL,
+	status solicitud_status NOT NULL,
 	created_at DATE NOT NULL,
 	updated_at DATE NOT NULL,
 	deleted_at DATE DEFAULT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id)
 );
 
-CREATE TABLE IF NOT EXISTS presupuesto(
+CREATE TABLE IF NOT EXISTS solicitud_presupuesto(
 	solicitud_id VARCHAR(40) NOT NULL,
 	servicio_id VARCHAR(40) NOT NULL,
 	costo_generado FLOAT NOT NULL,
@@ -162,13 +162,6 @@ CREATE TABLE IF NOT EXISTS charla(
 CREATE TABLE IF NOT EXISTS asistenciaCharla(
 	cedula VARCHAR(40) NOT NULL,
 	charla_id VARCHAR(80) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
-	solicitud_id VARCHAR(40) NOT NULL,
-	servicio_id VARCHAR(40) NOT NULL,
-	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
-	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
 );
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
@@ -243,8 +236,11 @@ INSERT INTO asistenciaCharla(cedula, charla_id)
 		  ('27317962','4'),
 		  ('27317963','4'),
 		  ('27317963','3'),
-		  ('27317963','2'),
+		  ('27317963','2'), 
 		  ('27317963','1'),
 		  ('27317964','3'),
 		  ('27317964','1'),
 		  ('27317965','3');
+
+INSERT INTO solicitud(id, beneficiario_id, empleado_id, fundacion_id, prioridad, status, created_at, updated_at)
+	VALUES('1','7552170102','e81a71bf-413a-4554-bcd7-834f7d4fafd8','43422123-da06-4890-8e3a-7131e32e5c2a', 'alta', 'aprobado','2022-01-01','2022-01-01')

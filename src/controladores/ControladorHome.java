@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import modelos.Usuario;
 import vistas.swing.VentanaHome;
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -15,12 +14,12 @@ import vistas.swing.VentanaHome;
  *
  * @author juanperez
  */
-public class ControladorHome implements ActionListener {
+public class ControladorHome extends ControladorGeneral {
 
     VentanaHome window;
 
     public ControladorHome(Usuario user) {
-        super();
+        super(user);
         window = new VentanaHome(this);
         window.setVisible(true);
     }
@@ -46,13 +45,16 @@ public class ControladorHome implements ActionListener {
 
         if (source == window.getBack_office()) {
             goBackOffice();
+            new ControladorBeneficiario(user);
+            
         }
         if (source == window.getGestionar_solicitud()) {
             goGestionarSolicitud();
+            new ControladorGestionarSolicitudes(user);
         }
         if (source == window.getCrear_solicitud()) {
             goCrearSolicitud();
-                new ControladorAddSolicitud();
+            new ControladorAddSolicitud(user);
         }
 
     }

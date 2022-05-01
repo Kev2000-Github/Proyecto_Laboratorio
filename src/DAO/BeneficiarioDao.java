@@ -23,6 +23,7 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             beneficiario.setApellido(rs.getString("apellido"));	
             beneficiario.setDireccion(rs.getString("direccion"));	
             beneficiario.setTelefono(rs.getString("telefono"));
+            beneficiario.setCorreo(rs.getString("correo"));
             beneficiario.setId(rs.getString("id"));
             return beneficiario;
         }
@@ -40,7 +41,7 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
 		try {
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono, p.correo"
                 + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula where id =?"
                 + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
             String[] params = {id};
@@ -66,7 +67,7 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             List<Beneficiario> list = new ArrayList<Beneficiario>();
 			con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono,p.correo"
                 + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula AND e.deleted_at IS NULL AND p.deleted_at IS NULL";			
             ResultSet rs = con.execQuery(sql);
             if(con.isResultSetEmpty(rs)) return list;
