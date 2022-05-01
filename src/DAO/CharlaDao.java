@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
+import javax.swing.table.DefaultTableModel;
 import modelos.Charla;
 
 public class CharlaDao implements IDao<Charla> {
@@ -33,7 +34,7 @@ public class CharlaDao implements IDao<Charla> {
 
     public CharlaDao() {
     }
-
+    
     @Override
     public Charla get(String id) {
         try {
@@ -57,6 +58,31 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
 
+    public List<Charla> getCharlasByType() {
+        try {
+            List<Charla> list = new ArrayList<Charla>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, tema, direccion,organismo,fecha"
+                    + " FROM charla c WHERE c.deleted_at IS NULL";
+            //SETEO TYPE : String[] params = {id};
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs))
+                return list;
+            do {
+                Charla charla = setEntity(rs);
+                list.add(charla);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error #7105 obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+    
     @Override
     public List<Charla> getAll() {
         try {

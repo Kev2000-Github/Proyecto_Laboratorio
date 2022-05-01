@@ -8,6 +8,7 @@ import DAO.PersonaDao;
 import DAO.RolDao;
 import DAO.SolicitudDao;
 import DAO.UsuarioDao;
+import DAO.CharlaDao;
 
 public class DaoFactory {
     public IDao getDao(String entity){
@@ -19,6 +20,7 @@ public class DaoFactory {
         if(entity.equals("rol")) return new RolDao();
         if(entity.equals("solicitud")) return new SolicitudDao();
         if(entity.equals("beneficiario")) return new BeneficiarioDao();
+        if(entity.equals("charla")) return new CharlaDao();
         return null;
     }
 }

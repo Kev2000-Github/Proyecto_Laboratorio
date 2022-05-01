@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import vistas.general.MetodosGenerales;
 import vistas.general.ComboboxItem;
 import vistas.general.MyTableModel;
@@ -239,9 +241,12 @@ public class VentanaCharlas extends MetodosGenerales {
             this.CmBoxTipodeCharla = tipocharla;
         }
 
-    public void setModelTipodeCharla(DefaultComboBoxModel model) {
+    public void setModelTipoCharla(DefaultComboBoxModel model) {
         this.CmBoxTipodeCharla.setModel(model);
-
+    }
+    
+    public void setModelTablaCharla(DefaultTableModel model) {
+    this.charlas.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
