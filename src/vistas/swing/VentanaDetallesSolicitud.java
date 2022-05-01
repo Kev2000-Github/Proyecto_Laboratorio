@@ -7,19 +7,74 @@ package vistas.swing;
 import vistas.general.MetodosGenerales;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.swing.table.DefaultTableModel;
+
+import modelos.Solicitud;
 
 /**
  *
  * @author ASRock
  */
 public class VentanaDetallesSolicitud extends MetodosGenerales {
-
+    String id;
     /**
      * Creates new form VentanaDetallesSolicitud
      */
     public VentanaDetallesSolicitud(ActionListener accion, MouseListener ml) {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, "");
+        this.agregarActionListener(accion);
+        this.agregarMouseListener(ml);
+        fundacionInput.setTextLabel("Fundacion:");
+        beneficiarioInput.setTextField("Beneficiario:");
+        encargadoInput.setTextField("Empleado:");
+        costoInput.setTextField("costo:");
+    }
+
+    private void agregarActionListener(ActionListener accion) {
+        aprobarBtn.addActionListener(accion);
+        rechazarBtn.addActionListener(accion);
+    }
+
+    private void agregarMouseListener(MouseListener ml) {
+        goBackLbl.addMouseListener(ml);
+    }
+    
+    public void setModelSolicitudes(DefaultTableModel model){
+        this.servicios.setModel(model);
+    }
+
+    public void setSolicitudInformation(
+        String id,
+        String fundacionName,
+        String beneficiarioName,
+        String encargadoName,
+        DefaultTableModel model
+    ){
+        this.id = id;
+        fundacionInput.setTextField(fundacionName);
+        beneficiarioInput.setTextField(beneficiarioName);
+        encargadoInput.setTextField(encargadoName);
+        setModelSolicitudes(model);
+        float costo = getCosto(model);
+        costoInput.setTextField(Float.toString(costo));
+        fundacionInput.setEnabled(false);
+        beneficiarioInput.setEnabled(false);
+        encargadoInput.setEnabled(false);
+        costoInput.setEnabled(false);
+    }
+
+    private float getCosto(DefaultTableModel model){
+        int rows = model.getRowCount();
+        float costo = 0;
+        for(int i = 0; i < rows; i++){
+            costo += Float.valueOf(model.getValueAt(i, 1).toString());
+        }
+        return costo;
+    }
+
+    public String getSolicitudId(){
+        return id;
     }
 
     /**
@@ -34,35 +89,33 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
         topMenu1 = new vistas.swing.componentes.topMenu();
         jPanel1 = new javax.swing.JPanel();
         panelInputs = new javax.swing.JPanel();
-        textInput1 = new vistas.swing.componentes.textInput();
-        textInput2 = new vistas.swing.componentes.textInput();
-        textInput3 = new vistas.swing.componentes.textInput();
-        textInput4 = new vistas.swing.componentes.textInput();
-        textInput5 = new vistas.swing.componentes.textInput();
+        fundacionInput = new vistas.swing.componentes.textInput();
+        beneficiarioInput = new vistas.swing.componentes.textInput();
+        encargadoInput = new vistas.swing.componentes.textInput();
+        costoInput = new vistas.swing.componentes.textInput();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        rechazarBtn = new javax.swing.JButton();
+        aprobarBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        goBackLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        servicios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelInputs.setLayout(new javax.swing.BoxLayout(panelInputs, javax.swing.BoxLayout.Y_AXIS));
-        panelInputs.add(textInput1);
-        panelInputs.add(textInput2);
-        panelInputs.add(textInput3);
-        panelInputs.add(textInput4);
-        panelInputs.add(textInput5);
+        panelInputs.add(fundacionInput);
+        panelInputs.add(beneficiarioInput);
+        panelInputs.add(encargadoInput);
+        panelInputs.add(costoInput);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(panelInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+            .addComponent(panelInputs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,9 +125,11 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Rechazar");
+        rechazarBtn.setText("Rechazar");
+        rechazarBtn.setName("rechazar"); // NOI18N
 
-        jButton4.setText("Aprobar");
+        aprobarBtn.setText("Aprobar");
+        aprobarBtn.setName("aprobar"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -82,40 +137,70 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(54, 54, 54))
+                .addComponent(rechazarBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(288, Short.MAX_VALUE)
+                    .addComponent(aprobarBtn)
+                    .addGap(77, 77, 77)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(rechazarBtn)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aprobarBtn)
+                    .addContainerGap()))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Solicitud # 1");
 
+        goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
+        goBackLbl.setName("goBack"); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(goBackLbl)
+                .addGap(128, 128, 128)
                 .addComponent(jLabel1)
-                .addGap(110, 110, 110))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(goBackLbl)))
         );
+
+        servicios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Servicio", "Costo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(servicios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,11 +208,13 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,11 +222,13 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
                 .addComponent(topMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -182,18 +271,20 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton aprobarBtn;
+    private vistas.swing.componentes.textInput beneficiarioInput;
+    private vistas.swing.componentes.textInput costoInput;
+    private vistas.swing.componentes.textInput encargadoInput;
+    private vistas.swing.componentes.textInput fundacionInput;
+    private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelInputs;
-    private vistas.swing.componentes.textInput textInput1;
-    private vistas.swing.componentes.textInput textInput2;
-    private vistas.swing.componentes.textInput textInput3;
-    private vistas.swing.componentes.textInput textInput4;
-    private vistas.swing.componentes.textInput textInput5;
+    private javax.swing.JButton rechazarBtn;
+    private javax.swing.JTable servicios;
     private vistas.swing.componentes.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

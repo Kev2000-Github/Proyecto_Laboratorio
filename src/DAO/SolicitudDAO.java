@@ -32,7 +32,7 @@ public class SolicitudDao implements IDao<Solicitud> {
             solicitud.setFundacionId(rs.getString("fundacion_id"));
             solicitud.setBeneficiarioId(rs.getString("beneficiario_id"));
             solicitud.setPrioridad(Constants.prioridadEnum.valueOf(rs.getString("prioridad")));
-            solicitud.setStatus(Constants.estadoEnum.valueOf(rs.getString("tipo")));
+            solicitud.setStatus(Constants.estadoEnum.valueOf(rs.getString("status")));
             return solicitud;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -146,6 +146,32 @@ public class SolicitudDao implements IDao<Solicitud> {
             con.close();
         }
     }
+
+    public List<Solicitud> getAllPending() {
+        try {
+            List<Solicitud> list = new ArrayList<Solicitud>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status"
+                    + " FROM solicitud WHERE status = 'pendiente' AND deleted_at IS NULL";
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs)) {
+                return list;
+            }
+            do {
+                Solicitud solicitud = setEntity(rs);
+                list.add(solicitud);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
 
     @Override
     public void update(Solicitud t) {

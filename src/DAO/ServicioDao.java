@@ -172,4 +172,31 @@ public class ServicioDao implements IDao<Servicio> {
         }
     }
 
+    public List<Servicio> getAllFromSolicitud(String solicitudId) {
+        try {
+            List<Servicio> list = new ArrayList<Servicio>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT s.id, s.nombre, s.tipo, sp.costo_generado AS costo FROM servicio s"
+                    + " JOIN solicitud_presupuesto sp"
+                    + " ON s.id = sp.servicio_id"
+                    + " WHERE sp.solicitud_id = ? AND sp.deleted_at IS NULL AND s.deleted_at IS NULL";
+            String[] params = {solicitudId};
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs)) {
+                return list;
+            }
+            do {
+                Servicio servicio = setEntity(rs);
+                list.add(servicio);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
 }

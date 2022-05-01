@@ -143,4 +143,25 @@ public class FundacionDao implements IDao<Fundacion> {
         }
     }
 
+    public Fundacion getFromEmpleado(String empleadoId) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
+                    + " FROM fundacion f JOIN empleado e ON e.fundacion_id = f.id"
+                    + " WHERE e.id = ? AND f.deleted_at IS NULL AND e.deleted_at IS NULL";
+            String[] params = { empleadoId };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs))
+                return null;
+            Fundacion fundacion = setEntity(rs);
+            return fundacion;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    } 
 }
