@@ -1,29 +1,45 @@
 package modelos;
 
-public class Beneficiario extends Persona {
+public class Beneficiario {
 
-	private String id;
-	
-	public Beneficiario(){}
+    private String id;
+    private String fundacionId;
+    private String cedula;
+    private Persona persona;
+    public String getCedula() {
+        return cedula;
+    }
 
-	public Beneficiario(
-		String nombre, 
-		String apellido, 
-		String cedula, 
-		String direccion, 
-		String telefono,
-		String id)
-	{
-		super(nombre,apellido,cedula,direccion,telefono, id);
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+  
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public String getFundacionId() {
+        return fundacionId;
+    }
+
+    public void setFundacionId(String fundacionId) {
+        this.fundacionId = fundacionId;
+    }
+
+    public Beneficiario() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
-	
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	}
+}

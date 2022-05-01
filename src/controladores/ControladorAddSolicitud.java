@@ -93,7 +93,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         List<Empleado> empleadoList = empleadoDao.getAll();
         for (Empleado emp : empleadoList) {
             modelEmpleado.addElement(
-                    new ComboboxItem(emp.getId(), emp.getCedula() + "-" + emp.getApellido()));
+                    new ComboboxItem(emp.getId(), emp.getPersona().getCedula() + "-" + emp.getPersona().getApellido()));
         }
         window.setModelEmpleado(modelEmpleado);
     }
@@ -105,7 +105,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         for (Beneficiario ben : beneficiariosList) {
             modelBeneficiario.addElement(
                     new ComboboxItem(ben.getId(),
-                            ben.getCedula() + "-" + ben.getApellido()));
+                            ben.getCedula() + "-" + ben.getPersona().getApellido()));
         }
         window.setModelBeneficiario(modelBeneficiario);
 
@@ -120,7 +120,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();
         for (int i = 0; i < window.getServicios().getRowCount(); i++) {
-             Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
+            Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
                 Servicio serv = new Servicio();
                 serv.setId(window.getServicios().getValueAt(i, 1).toString());
@@ -128,7 +128,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
                 serv.setCosto(Float.valueOf(window.getServicios().getValueAt(i, 3).toString()));
                 serviciosArr.add(serv);
             }
-           
+
         }
 
         solicitud.setServicios(serviciosArr);
@@ -139,25 +139,25 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
     public void save() {
         try {
-            if (calcCosto() == 0){
-                 window.mostrarMensaje("Debe seleccionar almenos un servicio");
-            }else{
+            if (calcCosto() == 0) {
+                window.mostrarMensaje("Debe seleccionar almenos un servicio");
+            } else {
                 Solicitud newSolicitud = getSolicitud();
                 String entity = "solicitud";
                 System.out.println("save" + '-' + entity);
-            
+
                 System.out.println(newSolicitud.toString());
                 IDao entityDao = daoFactory.getDao(entity);
                 Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
-            if (existenteSolicitud != null) {
-                window.mostrarMensaje("Ya existe un registro de esta " + entity);
-                return;
+                if (existenteSolicitud != null) {
+                    window.mostrarMensaje("Ya existe un registro de esta " + entity);
+                    return;
+                }
+                entityDao.save(newSolicitud);
+                window.mostrarMensaje("Se agrego el registro con exito ");
+                initCrear();
             }
-            entityDao.save(newSolicitud);
-            window.mostrarMensaje("Se agrego el registro con exito "); 
-            initCrear();
-            }
-         
+
             //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {
             System.out.println("controladores.ControladorAddSolicitud.save()" + e);
@@ -190,19 +190,12 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
         if (source == window.getFundacion()) {
             String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
-            // System.out.println(fundacion_id);
             fillServicios(fundacion_id);
         }
-        //mejorar
-          if (source == window.getCrearSolicitud()) {
-              save();
-          }
-        //  if (source == window.getGestionar_solicitud()) {
-        //      goGestionarSolicitud();
-        //  }
-        //  if (source == window.getCrear_solicitud()) {
-        //      goCrearSolicitud();
-        //  }
+
+        if (source == window.getCrearSolicitud()) {
+            save();
+        }
     }
 
     @Override
@@ -215,9 +208,9 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     @Override
     public void mouseClicked(MouseEvent e) {
         String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JLabel")){
-            JLabel lbl = (JLabel)e.getSource();
-            if(lbl.getName() == "goHome"){
+        if (source.equals("javax.swing.JLabel")) {
+            JLabel lbl = (JLabel) e.getSource();
+            if (lbl.getName() == "goHome") {
                 window.dispose();
                 new ControladorHome(user);
             }

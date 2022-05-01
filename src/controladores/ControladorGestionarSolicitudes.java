@@ -62,7 +62,10 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             EmpleadoDao empleadoDao = new EmpleadoDao();
             Empleado empleado = empleadoDao.get(s.getEmpleadoId());
-            modelSolicitudes.addRow(new Object[]{s.getId(), fundacion.getNombre(), beneficiario.getNombre(), empleado.getNombre()});
+            modelSolicitudes.addRow(new Object[]{s.getId(), 
+                fundacion.getNombre(), 
+                beneficiario.getPersona().getNombre(), 
+                empleado.getPersona().getNombre()});
         }
         window.setModelSolicitudes(modelSolicitudes);
     }

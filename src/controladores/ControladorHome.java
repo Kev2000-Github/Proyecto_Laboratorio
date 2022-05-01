@@ -45,8 +45,7 @@ public class ControladorHome extends ControladorGeneral {
 
         if (source == window.getBack_office()) {
             goBackOffice();
-            new ControladorBeneficiario(user);
-            
+            new ControladorBackOffice(user);
         }
         if (source == window.getGestionar_solicitud()) {
             goGestionarSolicitud();

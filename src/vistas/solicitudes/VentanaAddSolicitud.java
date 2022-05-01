@@ -33,154 +33,153 @@ import java.util.Vector;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Constants;
+
 public class VentanaAddSolicitud extends MetodosGenerales {
-	private JLabel lblTitulo;
-	static JComboBox fundacionElement;
-	static JComboBox empleadoElement;
-	static JComboBox beneficiarioElement;
 
-	static JList itemList;
+    private JLabel lblTitulo;
+    static JComboBox fundacionElement;
+    static JComboBox empleadoElement;
+    static JComboBox beneficiarioElement;
 
-	private JButton goSave;
-	private JButton goBack;
+    static JList itemList;
 
-	public VentanaAddSolicitud(ActionListener accion) {
-		super();
-		initGUI();
-		this.agregarListener(accion);
-	}
+    private JButton goSave;
+    private JButton goBack;
 
-	public Float calcCostoTotal() {
-		return (float) 1000;
-	}
-	public DefaultListModel<Servicio> fillListServicios() {
-		DefaultListModel<Servicio> listModel = new DefaultListModel<Servicio>();
-		;
-		ServicioDao servicioDao = new ServicioDao();
-		List<Servicio> servicioList = servicioDao.getAll();
-		for (Servicio serv : servicioList) {
-			listModel.addElement(new Servicio(serv.getId(), serv.getNombre(), serv.getTipo()));
-		}
-		return listModel;
-	}
+    public VentanaAddSolicitud(ActionListener accion) {
+        super();
+        initGUI();
+        this.agregarListener(accion);
+    }
 
-	private void initGUI() {
-		try {
-		System.out.println("initGui");
-			mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.PAGE_AXIS));
-			{
+    public Float calcCostoTotal() {
+        return (float) 1000;
+    }
 
-				lblTitulo = new JLabel();
-				mainContainer.add(lblTitulo);
+    public DefaultListModel<Servicio> fillListServicios() {
+        DefaultListModel<Servicio> listModel = new DefaultListModel<Servicio>();
+        ;
+        ServicioDao servicioDao = new ServicioDao();
+        List<Servicio> servicioList = servicioDao.getAll();
+        for (Servicio serv : servicioList) {
+            listModel.addElement(new Servicio(serv.getId(), serv.getNombre(), serv.getTipo()));
+        }
+        return listModel;
+    }
 
-				lblTitulo.setText("Crear Solicitud");
-				lblTitulo.setFont(new java.awt.Font("Dialog", 1, 15));
-				lblTitulo.setBorder(new EtchedBorder());
+    private void initGUI() {
+        try {
+            System.out.println("initGui");
+            mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.PAGE_AXIS));
+            {
 
-				Vector modelBeneficiario = new Vector();
-				BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
-				List<Beneficiario> beneficiariosList = beneficiarioDao.getAll();
+                lblTitulo = new JLabel();
+                mainContainer.add(lblTitulo);
 
-				for (Beneficiario ben : beneficiariosList) {
-					// 1 - can call methods of element
-					modelBeneficiario.addElement(
-							new ComboboxItem(ben.getCedula(),
-									ben.getCedula() + "-" + ben.getApellido()));
-					// ...
-				}
-				// create checkbox
-				beneficiarioElement = new JComboBox(modelBeneficiario);
-				beneficiarioElement.setSize(new Dimension(100, 20));
-				mainContainer.add(beneficiarioElement);
+                lblTitulo.setText("Crear Solicitud");
+                lblTitulo.setFont(new java.awt.Font("Dialog", 1, 15));
+                lblTitulo.setBorder(new EtchedBorder());
 
-				// ? Servicios
-				itemList = new JList<Servicio>(fillListServicios());
-				itemList.setVisibleRowCount(20);
-				MouseAdapter mouseListener = new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
+                Vector modelBeneficiario = new Vector();
+                BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+                List<Beneficiario> beneficiariosList = beneficiarioDao.getAll();
 
-						System.out.println("Clicked on " + itemList.getSelectedValuesList());
+                for (Beneficiario ben : beneficiariosList) {
+                    // 1 - can call methods of element
+                    modelBeneficiario.addElement(
+                            new ComboboxItem(ben.getCedula(),
+                                    ben.getCedula() + "-" + ben.getPersona().getApellido()));
+                    // ...
+                }
+                // create checkbox
+                beneficiarioElement = new JComboBox(modelBeneficiario);
+                beneficiarioElement.setSize(new Dimension(100, 20));
+                mainContainer.add(beneficiarioElement);
 
-						// selectedItem = (String) itemList.getSelectedValue();
-						// String id = selectedItem.split(" ")[0];
-						// delete.putClientProperty("itemId", id);
-						// edit.putClientProperty("itemId", id);
-					}
-				};
-				itemList.addMouseListener(mouseListener);
-				mainContainer.add(new JScrollPane(itemList));
+                // ? Servicios
+                itemList = new JList<Servicio>(fillListServicios());
+                itemList.setVisibleRowCount(20);
+                MouseAdapter mouseListener = new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
 
-				Vector modelEmpleado = new Vector();
-				EmpleadoDao empleadoDao = new EmpleadoDao();
-				List<Empleado> empleadoList = empleadoDao.getAll();
+                        System.out.println("Clicked on " + itemList.getSelectedValuesList());
 
-				for (Empleado emp : empleadoList) {
-					modelEmpleado.addElement(
-							new ComboboxItem(emp.getCedula(), emp.getCedula() + "-" + emp.getApellido()));
-					// ...
-				}
-				// create checkbox
-				empleadoElement = new JComboBox(modelEmpleado);
-				empleadoElement.setSize(new Dimension(100, 20));
-				mainContainer.add(empleadoElement);
+                        // selectedItem = (String) itemList.getSelectedValue();
+                        // String id = selectedItem.split(" ")[0];
+                        // delete.putClientProperty("itemId", id);
+                        // edit.putClientProperty("itemId", id);
+                    }
+                };
+                itemList.addMouseListener(mouseListener);
+                mainContainer.add(new JScrollPane(itemList));
 
-				// ?fundacion
-				Vector modelFundacion = new Vector();
-				FundacionDao fundacionDao = new FundacionDao();
-				List<Fundacion> fundacionList = fundacionDao.getAll();
-				for (Fundacion fund : fundacionList) {
+                Vector modelEmpleado = new Vector();
+                EmpleadoDao empleadoDao = new EmpleadoDao();
+                List<Empleado> empleadoList = empleadoDao.getAll();
 
-					modelFundacion.addElement(
-							new ComboboxItem(fund.getId(), fund.getNombre()));
-				}
-				// create checkbox
-				fundacionElement = new JComboBox(modelFundacion);
-				fundacionElement.setSize(new Dimension(100, 20));
-				mainContainer.add(fundacionElement);
+                for (Empleado emp : empleadoList) {
+                    modelEmpleado.addElement(
+                            new ComboboxItem(emp.getCedula(), emp.getCedula() + "-" + emp.getPersona().getNombre()));
+                    // ...
+                }
+                // create checkbox
+                empleadoElement = new JComboBox(modelEmpleado);
+                empleadoElement.setSize(new Dimension(100, 20));
+                mainContainer.add(empleadoElement);
 
-				// ?back
-				goBack = new JButton();
-				mainContainer.add(goBack);
-				goBack.setText("Atras");
-				goBack.setName("go-hom001");
+                // ?fundacion
+                Vector modelFundacion = new Vector();
+                FundacionDao fundacionDao = new FundacionDao();
+                List<Fundacion> fundacionList = fundacionDao.getAll();
+                for (Fundacion fund : fundacionList) {
 
-				goSave = new JButton();
-				goSave.setText("Guardar");
-				goSave.setName("goSolicitud-save");
-				mainContainer.add(goSave);
-			
+                    modelFundacion.addElement(
+                            new ComboboxItem(fund.getId(), fund.getNombre()));
+                }
+                // create checkbox
+                fundacionElement = new JComboBox(modelFundacion);
+                fundacionElement.setSize(new Dimension(100, 20));
+                mainContainer.add(fundacionElement);
 
-			}
+                // ?back
+                goBack = new JButton();
+                mainContainer.add(goBack);
+                goBack.setText("Atras");
+                goBack.setName("go-hom001");
 
-		} catch (Exception e) {
-			// add your error handling code here
-			e.printStackTrace();
-		}
-	}
+                goSave = new JButton();
+                goSave.setText("Guardar");
+                goSave.setName("goSolicitud-save");
+                mainContainer.add(goSave);
 
-	public Solicitud getSolicitud() {
-		Solicitud solicitud = new Solicitud();
-		System.out.println("i: " + ((ArrayList<Servicio>) itemList.getSelectedValuesList()).toString());
-		solicitud.setId(getSaltString());
-                solicitud.setBeneficiarioId(((ComboboxItem) beneficiarioElement.getSelectedItem()).getId());
-            	solicitud.setEmpleadoId(((ComboboxItem) empleadoElement.getSelectedItem()).getId());
-		solicitud.setFundacionId(((ComboboxItem) fundacionElement.getSelectedItem()).getId());
-		solicitud.setServicios((ArrayList<Servicio>) itemList.getSelectedValuesList());
-		solicitud.setPrioridad(Constants.prioridadEnum.alta);
-		solicitud.setStatus(Constants.estadoEnum.pendiente);
-		return solicitud;
-	}
+            }
 
-	
-	
-	public void clear() {
-		// cedulaInput.clear();
-		//
-	}
+        } catch (Exception e) {
+            // add your error handling code here
+            e.printStackTrace();
+        }
+    }
 
-	public void agregarListener(ActionListener accion) {
-		goSave.addActionListener(accion);
-		goBack.addActionListener(accion);
-	}
+    public Solicitud getSolicitud() {
+        Solicitud solicitud = new Solicitud();
+        System.out.println("i: " + ((ArrayList<Servicio>) itemList.getSelectedValuesList()).toString());
+        solicitud.setId(getSaltString());
+        solicitud.setBeneficiarioId(((ComboboxItem) beneficiarioElement.getSelectedItem()).getId());
+        solicitud.setEmpleadoId(((ComboboxItem) empleadoElement.getSelectedItem()).getId());
+        solicitud.setFundacionId(((ComboboxItem) fundacionElement.getSelectedItem()).getId());
+        solicitud.setServicios((ArrayList<Servicio>) itemList.getSelectedValuesList());
+        solicitud.setPrioridad(Constants.prioridadEnum.alta);
+        solicitud.setStatus(Constants.estadoEnum.pendiente);
+        return solicitud;
+    }
+
+    public void clear() {
+        // cedulaInput.clear();
+        //
+    }
+
+    public void agregarListener(ActionListener accion) {
+        goSave.addActionListener(accion);
+        goBack.addActionListener(accion);
+    }
 }
-
