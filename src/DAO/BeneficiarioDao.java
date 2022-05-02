@@ -24,13 +24,12 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             beneficiario.setId(rs.getString("id"));
             beneficiario.setFundacionId(rs.getString("fundacion_id"));
             Persona persona = new Persona();
-            persona.setNombre(rs.getString("nombre"));
-            persona.setCedula(rs.getString("cedula"));
-            persona.setApellido(rs.getString("apellido"));
-            persona.setDireccion(rs.getString("direccion"));
-            persona.setTelefono(rs.getString("telefono"));
-            persona.setCorreo(rs.getString("correo"));
-            beneficiario.setPersona(persona);
+            beneficiario.setNombre(rs.getString("nombre"));
+            beneficiario.setCedula(rs.getString("cedula"));
+            beneficiario.setApellido(rs.getString("apellido"));
+            beneficiario.setDireccion(rs.getString("direccion"));
+            beneficiario.setTelefono(rs.getString("telefono"));
+            beneficiario.setCorreo(rs.getString("correo"));
             return beneficiario;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -102,12 +101,12 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             con.open();
             String sql = "INSERT INTO Persona(cedula, nombre, apellido, direccion, telefono, correo) VALUES(?,?,?,?,?,?)";
             String[] params = {
-                beneficiario.getPersona().getCedula(),
-                beneficiario.getPersona().getNombre(),
-                beneficiario.getPersona().getApellido(),
-                beneficiario.getPersona().getDireccion(),
-                beneficiario.getPersona().getTelefono(),
-                beneficiario.getPersona().getCorreo(),};
+                beneficiario.getCedula(),
+                beneficiario.getNombre(),
+                beneficiario.getApellido(),
+                beneficiario.getDireccion(),
+                beneficiario.getTelefono(),
+                beneficiario.getCorreo(),};
             con.execMutation(sql, params);
             String sqlRel = "INSERT INTO Beneficiario(id,cedula,fundacion_id) VALUES(?,?,?)";
             String[] paramsRel = {
@@ -130,12 +129,12 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
                     + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?"
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
-                beneficiario.getPersona().getNombre(),
-                beneficiario.getPersona().getApellido(),
-                beneficiario.getPersona().getTelefono(),
-                beneficiario.getPersona().getDireccion(),
-                beneficiario.getPersona().getCorreo(),
-                beneficiario.getPersona().getCedula()
+                beneficiario.getNombre(),
+                beneficiario.getApellido(),
+                beneficiario.getTelefono(),
+                beneficiario.getDireccion(),
+                beneficiario.getCorreo(),
+                beneficiario.getCedula()
             };
             con.execMutation(sql, params);
 
@@ -144,7 +143,7 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] paramsFundacion = {
                 beneficiario.getFundacionId(),
-                beneficiario.getPersona().getCedula()
+                beneficiario.getCedula()
             };
             con.execMutation(sqlFundacion, paramsFundacion);
         } catch (Exception e) {

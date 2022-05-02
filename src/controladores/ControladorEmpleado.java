@@ -49,10 +49,10 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
         for (Empleado e : eList) {
             modelEmpleados.addRow(new Object[]{
                 e.getId(),
-                e.getPersona().getNombre(),
-                e.getPersona().getApellido(),
-                e.getPersona().getCedula(),
-                e.getPersona().getCorreo()});
+                e.getNombre(),
+                e.getApellido(),
+                e.getCedula(),
+                e.getCorreo()});
         }
         window.setModeloTabla(modelEmpleados);
     }

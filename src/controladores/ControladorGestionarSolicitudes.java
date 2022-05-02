@@ -65,8 +65,8 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
             modelSolicitudes.addRow(new Object[]{
                 s.getId(), 
                 fundacion.getNombre(), 
-                beneficiario.getPersona().getNombre(), 
-                empleado.getPersona().getNombre(),
+                beneficiario.getNombre() + " " + beneficiario.getApellido(), 
+                empleado.getNombre() + " " + empleado.getApellido(),
                 s.getPrioridad().toString()
             });
         }

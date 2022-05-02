@@ -119,7 +119,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
             window.mostrarMensaje("Existen otras solicitudes con mayor prioridad, procesa esas primero");
             return false;
         }
-        if(partidaRestante < costoTotal){
+        if(fundacion.getPresupuesto() < costoTotal){
             window.mostrarMensaje("No hay suficientes fondos para aprobar esto");
             return false;
         }
@@ -131,6 +131,20 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
         new ControladorGestionarSolicitudes(user);
     }
 
+    private void aprobarSolicitud(){
+        String solicitudId = solicitudInfo.get("solicitudId");
+        solicitudDao.updateStatus(solicitudId, "aprobado");
+        
+        FundacionDao fundacionDao = new FundacionDao();
+        Fundacion fundacion = fundacionDao.getFromSolicitud(solicitudId);
+        float costo = window.getCosto();
+        float updatedPresupuesto = fundacion.getPresupuesto() - costo;
+        fundacion.setPresupuesto(updatedPresupuesto);
+        fundacionDao.update(fundacion);
+        
+        window.mostrarMensaje("La solicitud fue aprobada con exito");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String source = e.getSource().getClass().getName();
@@ -139,9 +153,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
             String name = btn.getName();
             if(name.equals("aprobar")){
                 if(checkConditions()){
-                    String solicitudId = solicitudInfo.get("solicitudId");
-                    solicitudDao.updateStatus(solicitudId, "aprobado");
-                    window.mostrarMensaje("La solicitud fue aprobada con exito");
+                    aprobarSolicitud();
                     goBack();
                 }
             }

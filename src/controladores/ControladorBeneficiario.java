@@ -62,10 +62,10 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
         for (Beneficiario b : bList) {
             modelBeneficiarios.addRow(new Object[]{
                 b.getId(),
-                b.getPersona().getNombre(),
-                b.getPersona().getApellido(),
-                b.getPersona().getCedula(),
-                b.getPersona().getCorreo()});
+                b.getNombre(),
+                b.getApellido(),
+                b.getCedula(),
+                b.getCorreo()});
         }
         window.setModeloTabla(modelBeneficiarios);
     }

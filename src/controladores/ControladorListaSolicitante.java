@@ -61,7 +61,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             modelSolicitantes.addRow(new Object[]{s.getId(), 
                 fundacion.getNombre(), 
-                beneficiario.getPersona().getNombre()});
+                beneficiario.getNombre()});
         }
         window.setModelSolicitantes(modelSolicitantes);
     }

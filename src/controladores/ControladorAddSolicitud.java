@@ -86,14 +86,9 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     }
 
     public void fillEmpleado() {
-        DefaultComboBoxModel<ComboboxItem> modelEmpleado = new DefaultComboBoxModel<ComboboxItem>();
-        EmpleadoDao empleadoDao = new EmpleadoDao();
-        List<Empleado> empleadoList = empleadoDao.getAll();
-        for (Empleado emp : empleadoList) {
-            modelEmpleado.addElement(
-                    new ComboboxItem(emp.getId(), emp.getPersona().getCedula() + "-" + emp.getPersona().getApellido()));
-        }
-        window.setModelEmpleado(modelEmpleado);
+        String nombreCompleto = user.getEmpleado().getNombre() + " " + user.getEmpleado().getApellido();
+        String id = user.getEmpleado().getId();
+        window.setEmpleado(id, nombreCompleto);
     }
 
     public void fillBeneficiario() {
@@ -103,7 +98,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         for (Beneficiario ben : beneficiariosList) {
             modelBeneficiario.addElement(
                     new ComboboxItem(ben.getId(),
-                            ben.getCedula() + "-" + ben.getPersona().getApellido()));
+                            ben.getCedula() + "-" + ben.getApellido()));
         }
         window.setModelBeneficiario(modelBeneficiario);
     }
@@ -122,7 +117,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         Solicitud solicitud = new Solicitud();
         solicitud.setId(window.getSaltString());
         solicitud.setBeneficiarioId(((ComboboxItem) window.getBeneficiario().getSelectedItem()).getId());
-        solicitud.setEmpleadoId(((ComboboxItem) window.getEmpleado().getSelectedItem()).getId());
+        solicitud.setEmpleadoId(window.getEmpleadoId().getText());
         solicitud.setFundacionId(((ComboboxItem) window.getFundacion().getSelectedItem()).getId());
         solicitud.setPrioridad(Constants.prioridadEnum.valueOf(((ComboboxItem) window.getPrioridad().getSelectedItem()).getId()));
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();

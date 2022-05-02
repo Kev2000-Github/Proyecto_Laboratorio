@@ -61,8 +61,6 @@ public class ControladorHome extends ControladorGeneral {
 
     }
     
-    
-
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();

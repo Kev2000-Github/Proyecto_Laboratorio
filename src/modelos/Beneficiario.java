@@ -1,27 +1,9 @@
 package modelos;
 
-public class Beneficiario {
+public class Beneficiario extends Persona{
 
     private String id;
     private String fundacionId;
-    private String cedula;
-    private Persona persona;
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-  
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
 
     public String getFundacionId() {
         return fundacionId;

@@ -81,22 +81,22 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
             if (type == "beneficiario") {
                 BeneficiarioDao benDao = new BeneficiarioDao();
                 Beneficiario model = benDao.get(this.id);
-                fillModel(model.getPersona().getCedula(),
-                        model.getPersona().getNombre(),
-                        model.getPersona().getApellido(),
-                        model.getPersona().getTelefono(),
-                        model.getPersona().getCorreo(),
-                        model.getPersona().getDireccion(),
+                fillModel(model.getCedula(),
+                        model.getNombre(),
+                        model.getApellido(),
+                        model.getTelefono(),
+                        model.getCorreo(),
+                        model.getDireccion(),
                         model.getFundacionId());
             } else {
                 EmpleadoDao empDao = new EmpleadoDao();
                 Empleado model = empDao.get(this.id);
-                fillModel(model.getPersona().getCedula(),
-                        model.getPersona().getNombre(),
-                        model.getPersona().getApellido(),
-                        model.getPersona().getTelefono(),
-                        model.getPersona().getCorreo(),
-                        model.getPersona().getDireccion(),
+                fillModel(model.getCedula(),
+                        model.getNombre(),
+                        model.getApellido(),
+                        model.getTelefono(),
+                        model.getCorreo(),
+                        model.getDireccion(),
                         model.getFundacionId());
             }
 
@@ -141,20 +141,30 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
     }
 
     public Beneficiario getBeneficiario() {
+        Persona persona = getPersona();
         Beneficiario beneficiario = new Beneficiario();
         beneficiario.setId(this.id != null ? this.id : window.getSaltString());
         beneficiario.setCedula(window.getCedula().getText());
         beneficiario.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
-        beneficiario.setPersona(getPersona());
+        beneficiario.setNombre(persona.getNombre());
+        beneficiario.setApellido(persona.getApellido());
+        beneficiario.setCorreo(persona.getCorreo());
+        beneficiario.setDireccion(persona.getDireccion());
+        beneficiario.setTelefono(persona.getTelefono());
         return beneficiario;
     }
 
     public Empleado getEmpleado() {
+        Persona persona = getPersona();
         Empleado empleado = new Empleado();
         empleado.setId(this.id != null ? this.id : window.getSaltString());
         empleado.setCedula(window.getCedula().getText());
         empleado.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
-        empleado.setPersona(getPersona());
+        empleado.setNombre(persona.getNombre());
+        empleado.setApellido(persona.getApellido());
+        empleado.setCorreo(persona.getCorreo());
+        empleado.setDireccion(persona.getDireccion());
+        empleado.setTelefono(persona.getTelefono());
         return empleado;
     }
 

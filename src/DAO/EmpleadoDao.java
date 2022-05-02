@@ -24,14 +24,12 @@ public class EmpleadoDao implements IDao<Empleado> {
             empleado.setCedula(rs.getString("cedula"));
             empleado.setId(rs.getString("id"));
             empleado.setFundacionId(rs.getString("fundacion_id"));
-            Persona persona = new Persona();
-            persona.setNombre(rs.getString("nombre"));
-            persona.setCedula(rs.getString("cedula"));
-            persona.setApellido(rs.getString("apellido"));
-            persona.setDireccion(rs.getString("direccion"));
-            persona.setTelefono(rs.getString("telefono"));
-            persona.setCorreo(rs.getString("correo"));
-            empleado.setPersona(persona);
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setCedula(rs.getString("cedula"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setDireccion(rs.getString("direccion"));
+            empleado.setTelefono(rs.getString("telefono"));
+            empleado.setCorreo(rs.getString("correo"));
             return empleado;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -102,12 +100,12 @@ public class EmpleadoDao implements IDao<Empleado> {
             con.open();
             String sql = "INSERT INTO persona(cedula, nombre, apellido, direccion, telefono, correo) VALUES(?,?,?,?,?,?)";
             String[] params = {
-                empleado.getPersona().getCedula(),
-                empleado.getPersona().getNombre(),
-                empleado.getPersona().getApellido(),
-                empleado.getPersona().getDireccion(),
-                empleado.getPersona().getTelefono(),
-                empleado.getPersona().getCorreo(),};
+                empleado.getCedula(),
+                empleado.getNombre(),
+                empleado.getApellido(),
+                empleado.getDireccion(),
+                empleado.getTelefono(),
+                empleado.getCorreo(),};
             con.execMutation(sql, params);
             String sqlRel = "INSERT INTO empleado(id,cedula,fundacion_id) VALUES(?,?,?)";
             String[] paramsRel = {
@@ -130,12 +128,12 @@ public class EmpleadoDao implements IDao<Empleado> {
                     + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?"
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] params = {
-                empleado.getPersona().getNombre(),
-                empleado.getPersona().getApellido(),
-                empleado.getPersona().getTelefono(),
-                empleado.getPersona().getDireccion(),
-                empleado.getPersona().getCorreo(),
-                empleado.getPersona().getCedula()
+                empleado.getNombre(),
+                empleado.getApellido(),
+                empleado.getTelefono(),
+                empleado.getDireccion(),
+                empleado.getCorreo(),
+                empleado.getCedula()
             };
             con.execMutation(sql, params);
 
@@ -144,7 +142,7 @@ public class EmpleadoDao implements IDao<Empleado> {
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] paramsFundacion = {
                 empleado.getFundacionId(),
-                empleado.getPersona().getCedula()
+                empleado.getCedula()
             };
             con.execMutation(sqlFundacion, paramsFundacion);
         } catch (Exception e) {
