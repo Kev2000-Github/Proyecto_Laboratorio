@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vistas.swing.componentes;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 
 /**
  *
@@ -15,6 +18,10 @@ public class textInputSearch extends javax.swing.JPanel {
      */
     public textInputSearch() {
         initComponents();
+    }
+
+    public void agregarListener(ActionListener accion){
+        buscarBtn.addActionListener(accion);
     }
 
     public void setTextLabel(String text){
@@ -33,8 +40,13 @@ public class textInputSearch extends javax.swing.JPanel {
         return inputLbl.getText();
     }
 
+    public JButton getSourceButton(){
+        return buscarBtn;
+    }
+
     public void setEnabled(boolean state){
         inputField.setEnabled(state);
+        buscarBtn.setEnabled(state);
     }
 
     /**

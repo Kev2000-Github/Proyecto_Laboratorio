@@ -88,7 +88,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
                 window.dispose();
-                new ControladorPersona(user, "empleado", idString);
+                new ControladorUpdatePersona(user, "empleado", idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -98,7 +98,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
         }
         if (source == window.getCrear()) {
             window.dispose();
-            new ControladorPersona(user, "empleado", null);
+            new ControladorAddPersona(user, "empleado", null);
         }
 
     }

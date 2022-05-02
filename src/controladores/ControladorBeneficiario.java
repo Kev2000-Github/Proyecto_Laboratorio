@@ -101,17 +101,14 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
                 window.dispose();
-                new ControladorPersona(user, "beneficiario", idString);
+                new ControladorUpdatePersona(user, "beneficiario", idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
-
-            //  window.dispose();
-            //  new ControladorPersona(user, "beneficiario", null);
         }
         if (source == window.getCrear()) {
             window.dispose();
-            new ControladorPersona(user, "beneficiario", null);
+            new ControladorAddPersona(user, "beneficiario", null);
         }
 
     }

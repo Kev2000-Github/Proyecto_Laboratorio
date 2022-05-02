@@ -11,6 +11,8 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
 import vistas.swing.componentes.textInput;
 import vistas.swing.componentes.textInputSearch;
 
@@ -18,24 +20,22 @@ import vistas.swing.componentes.textInputSearch;
  *
  * @author ASRock
  */
-public class VentanaGuardarPersona extends MetodosGenerales {
+public class VentanaEditarPersona extends MetodosGenerales {
 
     /**
      * Creates new form VentanaDetallesSolicitud
      */
-    public VentanaGuardarPersona(String title, ActionListener accion, MouseListener ml) {
+    public VentanaEditarPersona(String title, ActionListener accion, MouseListener ml) {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, title);
         this.agregarMouseListener(ml);
         this.agregarListener(accion);
-        cedula.setTextLabel("Cedula:");
         nombre.setTextLabel("Nombre:");
         apellido.setTextLabel("Apellido:");
         telefono.setTextLabel("Telefono:");
         correo.setTextLabel("Correo:");
         direccion.setTextLabel("Direccion:");
         //topMenu1.setMenuFunctions(this, "");
-        setEnabled(false);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -50,11 +50,11 @@ public class VentanaGuardarPersona extends MetodosGenerales {
         this.nombre = nombre;
     }
 
-    public textInputSearch getCedula() {
+    public JLabel getCedula() {
         return cedula;
     }
 
-    public void setCedula(textInputSearch cedula) {
+    public void setCedula(JLabel cedula) {
         this.cedula = cedula;
     }
 
@@ -101,7 +101,6 @@ public class VentanaGuardarPersona extends MetodosGenerales {
     
     private void agregarListener(ActionListener accion) {
         save.addActionListener(accion);
-        cedula.agregarListener(accion);
     }
     
 
@@ -146,12 +145,13 @@ public class VentanaGuardarPersona extends MetodosGenerales {
         telefono = new vistas.swing.componentes.textInput();
         correo = new vistas.swing.componentes.textInput();
         direccion = new vistas.swing.componentes.textInput();
-        cedula = new vistas.swing.componentes.textInputSearch();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         goBackLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        cedulaLbl = new javax.swing.JLabel();
+        cedula = new javax.swing.JLabel();
         save = new javax.swing.JButton();
         fundaciones = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -172,16 +172,13 @@ public class VentanaGuardarPersona extends MetodosGenerales {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(panelInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(0, 0, 0)
                 .addComponent(panelInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 10, Short.MAX_VALUE))
         );
@@ -214,15 +211,28 @@ public class VentanaGuardarPersona extends MetodosGenerales {
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setText("Persona");
 
+        cedulaLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cedulaLbl.setText("Cedula");
+
+        cedula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cedula.setText("xx.xxx.xxx");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(goBackLbl)
-                .addGap(108, 108, 108)
-                .addComponent(jLabel1)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(goBackLbl)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(cedulaLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cedula)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -232,7 +242,11 @@ public class VentanaGuardarPersona extends MetodosGenerales {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(goBackLbl))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cedulaLbl)
+                    .addComponent(cedula))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         save.setText("Guardar");
@@ -314,14 +328,18 @@ public class VentanaGuardarPersona extends MetodosGenerales {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaGuardarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEditarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaGuardarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEditarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaGuardarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEditarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaGuardarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEditarPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -337,7 +355,8 @@ public class VentanaGuardarPersona extends MetodosGenerales {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.textInput apellido;
-    private vistas.swing.componentes.textInputSearch cedula;
+    private javax.swing.JLabel cedula;
+    private javax.swing.JLabel cedulaLbl;
     private vistas.swing.componentes.textInput correo;
     private vistas.swing.componentes.textInput direccion;
     private javax.swing.JComboBox fundaciones;
