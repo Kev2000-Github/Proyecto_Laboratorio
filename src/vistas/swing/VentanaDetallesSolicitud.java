@@ -27,9 +27,9 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
         this.agregarActionListener(accion);
         this.agregarMouseListener(ml);
         fundacionInput.setTextLabel("Fundacion:");
-        beneficiarioInput.setTextField("Beneficiario:");
-        encargadoInput.setTextField("Empleado:");
-        costoInput.setTextField("costo:");
+        beneficiarioInput.setTextLabel("Beneficiario:");
+        encargadoInput.setTextLabel("Empleado:");
+        costoInput.setTextLabel("costo:");
     }
 
     private void agregarActionListener(ActionListener accion) {
