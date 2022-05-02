@@ -29,6 +29,7 @@ public class VentanaHome extends MetodosGenerales {
         crear_solicitud.addActionListener(accion);
         gestionar_solicitud.addActionListener(accion);
         updateFondos.addActionListener(accion);
+        back_office1.addActionListener(accion);
     }
 
     /**
