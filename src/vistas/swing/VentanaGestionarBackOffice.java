@@ -25,12 +25,17 @@ public class VentanaGestionarBackOffice extends MetodosGenerales {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, title);
         this.agregarListener(accion);
+        this.agregarMouseListener(ml);
     }
 
     private void agregarListener(ActionListener accion) {
         crear.addActionListener(accion);
         eliminar.addActionListener(accion);
         editar.addActionListener(accion);
+    }
+
+    private void agregarMouseListener(MouseListener ml) {
+        goBackLbl.addMouseListener(ml);
     }
 
     /**
@@ -116,10 +121,11 @@ public class VentanaGestionarBackOffice extends MetodosGenerales {
         Jpanel23Layout.setVerticalGroup(
             Jpanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Jpanel23Layout.createSequentialGroup()
-                .addGroup(Jpanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editar)
-                    .addComponent(eliminar)
-                    .addComponent(goBackLbl))
+                .addGroup(Jpanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(goBackLbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Jpanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editar)
+                        .addComponent(eliminar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)

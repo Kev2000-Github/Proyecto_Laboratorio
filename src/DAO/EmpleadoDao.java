@@ -143,7 +143,9 @@ public class EmpleadoDao implements IDao<Empleado> {
                     + " fundacion_id=?"
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] paramsFundacion = {
-                empleado.getFundacionId()};
+                empleado.getFundacionId(),
+                empleado.getPersona().getCedula()
+            };
             con.execMutation(sqlFundacion, paramsFundacion);
         } catch (Exception e) {
             // e.printStackTrace();

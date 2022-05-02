@@ -3,36 +3,23 @@ package controladores;
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
-import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
-import modelos.Servicio;
-import modelos.Solicitud;
 import modelos.Usuario;
-import utils.Constants;
 import vistas.general.ComboboxItem;
-import vistas.swing.VentanaCrearSolicitud;
 import javax.swing.JLabel;
-import controladores.ControladorHome;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Persona;
 import vistas.swing.VentanaGuardarPersona;
-import vistas.swing.VentanaGestionarBackOffice;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -110,7 +97,7 @@ public class ControladorPersona extends ControladorGeneral implements ListSelect
     }
 
     public void fillFundacion() {
-        DefaultComboBoxModel modelFundacion = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
         FundacionDao fundacionDao = new FundacionDao();
         List<Fundacion> fundacionList = fundacionDao.getAll();
         for (Fundacion fund : fundacionList) {
@@ -285,7 +272,7 @@ public class ControladorPersona extends ControladorGeneral implements ListSelect
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
                 window.dispose();
-                //    new ControladorHome(user);
+                new ControladorHome(user);
             }
             if (lbl.getName() == "goBack") {
                 if (this.type == "beneficiario") {

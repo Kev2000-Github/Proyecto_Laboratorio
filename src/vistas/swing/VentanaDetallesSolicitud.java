@@ -8,6 +8,7 @@ import vistas.general.MetodosGenerales;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import modelos.Solicitud;
 
@@ -26,9 +27,9 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
         this.agregarActionListener(accion);
         this.agregarMouseListener(ml);
         fundacionInput.setTextLabel("Fundacion:");
-        beneficiarioInput.setTextField("Beneficiario:");
-        encargadoInput.setTextField("Empleado:");
-        costoInput.setTextField("costo:");
+        beneficiarioInput.setTextLabel("Beneficiario:");
+        encargadoInput.setTextLabel("Empleado:");
+        costoInput.setTextLabel("costo:");
     }
 
     private void agregarActionListener(ActionListener accion) {
@@ -56,7 +57,7 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
         beneficiarioInput.setTextField(beneficiarioName);
         encargadoInput.setTextField(encargadoName);
         setModelSolicitudes(model);
-        float costo = getCosto(model);
+        float costo = getCosto();
         costoInput.setTextField(Float.toString(costo));
         fundacionInput.setEnabled(false);
         beneficiarioInput.setEnabled(false);
@@ -64,7 +65,8 @@ public class VentanaDetallesSolicitud extends MetodosGenerales {
         costoInput.setEnabled(false);
     }
 
-    private float getCosto(DefaultTableModel model){
+    public float getCosto(){
+        TableModel model = this.servicios.getModel();
         int rows = model.getRowCount();
         float costo = 0;
         for(int i = 0; i < rows; i++){

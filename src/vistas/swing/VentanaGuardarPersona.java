@@ -39,7 +39,6 @@ public class VentanaGuardarPersona extends MetodosGenerales {
 
     private void agregarMouseListener(MouseListener ml) {
         goBackLbl.addMouseListener(ml);
-
     }
 
     public textInput getNombre() {

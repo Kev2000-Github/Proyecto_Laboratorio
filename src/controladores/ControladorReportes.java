@@ -1,45 +1,44 @@
-package controladores;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import javax.swing.JLabel;
-import modelos.Usuario;
-import vistas.swing.VentanaRegistros;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package controladores;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import modelos.Usuario;
+import vistas.swing.VentanaBackOffice;
+import vistas.swing.VentanaHome;
+import vistas.swing.VentanaReportes;
+
 /**
  *
- * @author juanperez
+ * @author prometheus
  */
-public class ControladorRegistros extends ControladorGeneral {
+public class ControladorReportes extends ControladorGeneral {
 
-    VentanaRegistros window;
+    VentanaReportes window;
 
-    public ControladorRegistros(Usuario user) {
+    public ControladorReportes(Usuario user) {
         super(user);
-        window = new VentanaRegistros(this, this);
+        window = new VentanaReportes(this,this);
         window.setVisible(true);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
-        if (source == window.getBeneficiarios()) {
+        if (source == window.getSolicitantes_list()) {
             window.dispose();
-            new ControladorBeneficiario(user);
+            new ControladorListaSolicitante(user);
         }
-
-        if (source == window.getEmpleados()) {
-            window.dispose();
-            new ControladorEmpleado(user);
-        }
-
+    
     }
-
+    
+   
     @Override
     public void mouseClicked(MouseEvent e) {
         String source = e.getSource().getClass().getName();
@@ -55,5 +54,4 @@ public class ControladorRegistros extends ControladorGeneral {
             }
         }
     }
-
 }

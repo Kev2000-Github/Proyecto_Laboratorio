@@ -115,7 +115,11 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
                 window.setVisible(false);
-                //   new ControladorHome(user);
+                new ControladorHome(user);
+            }
+            if(lbl.getName() == "goBack"){
+                window.dispose();
+                new ControladorRegistros(user);
             }
         }
     }

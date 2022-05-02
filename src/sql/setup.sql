@@ -249,13 +249,26 @@ INSERT INTO servicio(id, nombre, tipo)
 	VALUES('1', 'examen', 'medico'),
 		  ('2', 'consula medica general', 'medico'),
 		  ('3', 'consulta psicologica', 'medico'),
-		  ('4', 'consulta odontologica', 'medico');
+		  ('4', 'consulta odontologica', 'medico'),
+		  ('5', 'examen Rx', 'medico'),
+		  ('6', 'donaciones para discapacitados', 'otros'),
+		  ('7', 'cesta de comida', 'otros'),
+		  ('8', 'tanques de agua', 'otros');
 
 INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a', '1', 10),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '2', 20),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
-		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40);
+		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '1', 30),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '5', 50),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '6', 10),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '7', 20),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '8', 20),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '8', 50),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '5', 65),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '3', 30),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '7', 20);
 		  
 INSERT INTO charla(id, tema, lugar, organismo, fecha)
 	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
