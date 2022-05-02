@@ -153,6 +153,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
                     window.mostrarMensaje("Ya existe un registro de esta " + entity);
                     return;
                 }
+                //!validacion costo
                 entityDao.save(newSolicitud);
                 window.mostrarMensaje("Se agrego el registro con exito ");
                 initCrear();
@@ -179,9 +180,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
     @Override
     public void valueChanged(ListSelectionEvent l) {
-        //action
-        // System.out.println("t" + String.valueOf(calcCosto()));
-        //  window.setTextPrecio(String.valueOf(calcCosto()));
+        
     }
 
     @Override

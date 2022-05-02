@@ -248,7 +248,7 @@ public class ControladorPersona extends ControladorGeneral implements ListSelect
                     System.out.println("save" + '-' + entity);
                     System.out.println(newEmpleado.toString());
                     IDao entityDao = daoFactory.getDao(entity);
-                    Beneficiario existenteSolicitud = (Beneficiario) entityDao.get(newEmpleado.getId());
+                    Empleado existenteSolicitud = (Empleado) entityDao.get(newEmpleado.getId());
                     if (existenteSolicitud == null) {
                         window.mostrarMensaje("No existe este " + entity);
                         return;

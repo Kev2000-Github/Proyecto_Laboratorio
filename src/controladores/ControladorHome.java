@@ -32,10 +32,7 @@ public class ControladorHome extends ControladorGeneral {
         window.setVisible(true);
     }
 
-    private void goBackOffice() {
-        window.dispose();
 
-    }
 
     private void goGestionarSolicitud() {
            window.dispose();
@@ -69,7 +66,7 @@ public class ControladorHome extends ControladorGeneral {
         var source = arg0.getSource();
 
         if (source == window.getBack_office()) {
-            goBackOffice();
+            window.dispose();
             new ControladorBackOffice(user);
         }
         if (source == window.getGestionar_solicitud()) {
