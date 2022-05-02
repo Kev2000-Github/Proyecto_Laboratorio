@@ -51,11 +51,13 @@ public class VentanaHome extends MetodosGenerales {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+
         updateFondos.setText("asignar partida");
         updateFondos.setName("asignarPartida"); // NOI18N
         updateFondos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateFondosActionPerformed(evt);
+
             }
         });
 
@@ -90,6 +92,7 @@ public class VentanaHome extends MetodosGenerales {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
+
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(back_office1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                             .addComponent(crear_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -98,6 +101,7 @@ public class VentanaHome extends MetodosGenerales {
                             .addComponent(updateFondos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(gestionar_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
                 .addContainerGap(18, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +113,13 @@ public class VentanaHome extends MetodosGenerales {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gestionar_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateFondos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(back_office1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -128,9 +134,11 @@ public class VentanaHome extends MetodosGenerales {
         // TODO add your handling code here:
     }//GEN-LAST:event_gestionar_solicitudActionPerformed
 
+
     private void updateFondosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFondosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateFondosActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -182,6 +190,7 @@ public class VentanaHome extends MetodosGenerales {
     public JButton getAsignar_fondos() {
         return updateFondos;
     }
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

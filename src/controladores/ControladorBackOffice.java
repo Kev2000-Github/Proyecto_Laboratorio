@@ -40,6 +40,7 @@ public class ControladorBackOffice extends ControladorGeneral {
         
         if (source == window.getReportes()) {
          window.dispose();
+            new ControladorReportes(user);
 
         }
     }
