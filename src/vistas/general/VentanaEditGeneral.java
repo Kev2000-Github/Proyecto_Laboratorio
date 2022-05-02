@@ -5,15 +5,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
-import utils.Utils;
-
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VentanaEditGeneral<T> extends VentanaGeneral{
+public class VentanaEditGeneral<T> extends MetodosGenerales{
     private JLabel lblTitulo;
     protected Map<String, InputField> inputs;
     protected Map<String, InputField> inmutableInputs;

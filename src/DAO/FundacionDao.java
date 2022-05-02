@@ -3,6 +3,7 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
 import modelos.Fundacion;
+import utils.Utils;
 
 public class FundacionDao implements IDao<Fundacion> {
     private Conne con;
@@ -47,6 +49,7 @@ public class FundacionDao implements IDao<Fundacion> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -72,6 +75,7 @@ public class FundacionDao implements IDao<Fundacion> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -88,8 +92,7 @@ public class FundacionDao implements IDao<Fundacion> {
                     fundacion.getId(),
                     fundacion.getNombre(),
                     String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
-                    String.valueOf(fundacion.getGobernacionId())
+                    String.valueOf(fundacion.getPorcentajePartidoAnual())
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -144,4 +147,146 @@ public class FundacionDao implements IDao<Fundacion> {
         }
     }
 
+    public Fundacion getFromEmpleado(String empleadoId) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, presupuesto, porcentaje_partido_anual"
+                    + " FROM fundacion f JOIN empleado e ON e.fundacion_id = f.id"
+                    + " WHERE e.id = ? AND f.deleted_at IS NULL AND e.deleted_at IS NULL";
+            String[] params = { empleadoId };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs))
+                return null;
+            Fundacion fundacion = setEntity(rs);
+            return fundacion;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    } 
+
+    public void updateFondos(Fundacion fundacion, float partidaAsignada) {
+        try {
+            con = new Conne();
+            con.open();
+            String currentYear = Integer.toString(Year.now().getValue());
+            String sql = "UPDATE fundacion SET"
+                    + " presupuesto=" + Float.toString(fundacion.getPresupuesto())
+                    + " WHERE id = ? AND deleted_at IS NULL";
+            String[] params = { fundacion.getId() };
+            con.execMutation(sql, params);
+
+            String sql2 = "INSERT INTO log_partidas_asignadas(id, fundacion_id, partida_asignada, annio)"
+                        + " VALUES(?,?," + Float.toString(partidaAsignada) + ", " + currentYear + " )";
+            String[] params2 = {
+                Utils.genRandomSalt(),
+                fundacion.getId()
+            };
+            con.execMutation(sql2, params2);
+        } catch (Exception e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            con.close();
+        }
+    } 
+
+    public float getPartidaAsignada(String fundacionId, int annio) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT partida_asignada"
+                    + " FROM log_partidas_asignadas"
+                    + " WHERE fundacion_id = ? AND annio = " + Integer.toString(annio) + " AND deleted_at IS NULL";
+            String[] params = { fundacionId };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs))
+                return 0;
+            float partida = rs.getFloat("partida_asignada");
+            return partida;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
+        } finally {
+            con.close();
+        }
+    }
+
+    public float getPartidaAnnio(int annio) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT partida_asignada"
+                    + " FROM log_partidas_asignadas"
+                    + " WHERE annio = " + Integer.toString(annio) + " AND deleted_at IS NULL";
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs))
+                return 0;
+            float partida = 0;
+            do {
+                float partidaFundacion = rs.getFloat("partida_asignada");
+                partida += partidaFundacion;
+            } while (rs.next());
+            return partida;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
+        } finally {
+            con.close();
+        }
+    }
+
+    public Fundacion getFromSolicitud(String solicitudId) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT s.id, nombre, presupuesto, porcentaje_partido_anual"
+                    + " FROM fundacion f JOIN solicitud s ON s.fundacion_id = f.id"
+                    + " WHERE s.id = ? AND f.deleted_at IS NULL AND s.deleted_at IS NULL";
+            String[] params = { solicitudId };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs))
+                return null;
+            Fundacion fundacion = setEntity(rs);
+            return fundacion;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public float getTotalGastado(String fundacionId, int annio) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT total_gastado FROM view_total_gastado_anual"
+                    + " WHERE fundacion_id = ? AND annio = " + Integer.toString(annio);
+            String[] params = { fundacionId };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs))
+                return 0;
+            float gasto = rs.getFloat("total_gastado");
+            return gasto;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
+        } finally {
+            con.close();
+        }
+    }
 }

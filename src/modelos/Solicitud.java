@@ -2,31 +2,36 @@ package modelos;
 
 import java.util.ArrayList;
 
-public class Solicitud {
+import utils.Constants.*;
 
- 
+public class Solicitud {
     private String id;
 
-   
     private String empleadoId;
     private String fundacionId;
     private prioridadEnum prioridad;
     private estadoEnum status;
-    private Float costoTotal;
-
+    private ArrayList<Servicio> servicios;
     private String beneficiarioId;
 
-    private ArrayList<Servicio> servicios;
-    
-    public enum prioridadEnum {
-        alta, media, baja
-    };
+    public Solicitud(){}
 
-    public enum estadoEnum {
-        aprobado, negado, pendiente
+    public Solicitud(
+            String fundaciondestino, 
+            String id, 
+            float costoTotal,
+            ArrayList<Servicio> servicios,
+            String beneficiarioId,
+            String empleadoId
+            ){
+        this.fundacionId = fundaciondestino;
+        this.id = id;
+        this.servicios = servicios;
+        this.beneficiarioId = beneficiarioId;
+        this.empleadoId = empleadoId;
     }
 
-
+    //Metodos sets y gets
     public String getId() {
         return this.id;
     }
@@ -84,21 +89,11 @@ public class Solicitud {
         this.status = status;
     }
 
-    public Float getCostoTotal() {
-        return this.costoTotal;
-    }
-
-    public void setCostoTotal(Float costoTotal) {
-        this.costoTotal = costoTotal;
-    }
-  
-
-    public void setCedula(Object selectedItem) {
-    }
- 
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return this.id + " - " + this.empleadoId + " - " + this.prioridad + " - " + this.status + " - " + this.costoTotal + " - " + this.beneficiarioId + " - " + this.servicios;
+    public float calcularCosto(){
+        float costo = 0;
+        for(Servicio servicio : servicios){
+            costo += servicio.getCosto();
+        }
+        return costo;
     }
 }
