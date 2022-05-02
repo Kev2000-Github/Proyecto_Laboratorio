@@ -132,7 +132,7 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
             }
             if(lbl.getName() == "goBack"){
                 window.dispose();
-                //new ControladorGestionarSolicitudes(user);
+                new ControladorRegistros(user);
             }
         }
     }

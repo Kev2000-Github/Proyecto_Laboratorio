@@ -62,6 +62,7 @@ public class EmpleadoDao implements IDao<Empleado> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -88,6 +89,7 @@ public class EmpleadoDao implements IDao<Empleado> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -141,7 +143,9 @@ public class EmpleadoDao implements IDao<Empleado> {
                     + " fundacion_id=?"
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] paramsFundacion = {
-                empleado.getFundacionId()};
+                empleado.getFundacionId(),
+                empleado.getPersona().getCedula()
+            };
             con.execMutation(sqlFundacion, paramsFundacion);
         } catch (Exception e) {
             // e.printStackTrace();
@@ -191,6 +195,7 @@ public class EmpleadoDao implements IDao<Empleado> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();

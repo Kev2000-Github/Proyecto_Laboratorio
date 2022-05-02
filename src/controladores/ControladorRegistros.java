@@ -1,13 +1,9 @@
 package controladores;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import modelos.Usuario;
-import vistas.swing.VentanaBackOffice;
-import vistas.swing.VentanaHome;
 import vistas.swing.VentanaRegistros;
 
 /*
@@ -24,7 +20,7 @@ public class ControladorRegistros extends ControladorGeneral {
 
     public ControladorRegistros(Usuario user) {
         super(user);
-        window = new VentanaRegistros(this);
+        window = new VentanaRegistros(this, this);
         window.setVisible(true);
     }
 
@@ -44,6 +40,20 @@ public class ControladorRegistros extends ControladorGeneral {
 
     }
 
-
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                window.dispose();
+                new ControladorHome(user);
+            }
+            if(lbl.getName() == "goBack"){
+                window.dispose();
+                new ControladorBackOffice(user);
+            }
+        }
+    }
 
 }

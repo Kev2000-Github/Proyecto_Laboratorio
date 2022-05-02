@@ -25,12 +25,17 @@ public class VentanaGestionarBackOffice extends MetodosGenerales {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, title);
         this.agregarListener(accion);
+        this.agregarMouseListener(ml);
     }
 
     private void agregarListener(ActionListener accion) {
         crear.addActionListener(accion);
         eliminar.addActionListener(accion);
         editar.addActionListener(accion);
+    }
+
+    private void agregarMouseListener(MouseListener ml) {
+        goBackLbl.addMouseListener(ml);
     }
 
     /**

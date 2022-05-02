@@ -23,7 +23,7 @@ public class ControladorBackOffice extends ControladorGeneral {
 
     public ControladorBackOffice(Usuario user) {
         super(user);
-        window = new VentanaBackOffice(this);
+        window = new VentanaBackOffice(this, this);
         window.setVisible(true);
     }
 
@@ -43,8 +43,22 @@ public class ControladorBackOffice extends ControladorGeneral {
             new ControladorReportes(user);
 
         }
-  
+    }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                window.dispose();
+                new ControladorHome(user);
+            }
+            if(lbl.getName() == "goBack"){
+                window.dispose();
+                new ControladorHome(user);
+            }
+        }
     }
 
 }

@@ -28,7 +28,8 @@ public class VentanaHome extends MetodosGenerales {
     private void agregarListener(ActionListener accion){
         crear_solicitud.addActionListener(accion);
         gestionar_solicitud.addActionListener(accion);
-        back_office.addActionListener(accion);
+        updateFondos.addActionListener(accion);
+        back_office1.addActionListener(accion);
     }
 
     /**
@@ -40,19 +41,23 @@ public class VentanaHome extends MetodosGenerales {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        back_office = new javax.swing.JButton();
+        updateFondos = new javax.swing.JButton();
         crear_solicitud = new javax.swing.JButton();
         gestionar_solicitud = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         topMenuLogin = new vistas.swing.componentes.topMenuLogin();
+        back_office1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        back_office.setText("BackOffice");
-        back_office.addActionListener(new java.awt.event.ActionListener() {
+
+        updateFondos.setText("asignar partida");
+        updateFondos.setName("asignarPartida"); // NOI18N
+        updateFondos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                back_officeActionPerformed(evt);
+                updateFondosActionPerformed(evt);
+
             }
         });
 
@@ -73,6 +78,8 @@ public class VentanaHome extends MetodosGenerales {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Inicio");
 
+        back_office1.setText("BackOffice");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,13 +92,16 @@ public class VentanaHome extends MetodosGenerales {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(gestionar_solicitud))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(back_office1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(crear_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(updateFondos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gestionar_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
+                .addContainerGap(18, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,9 +113,13 @@ public class VentanaHome extends MetodosGenerales {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gestionar_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateFondos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back_office1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -120,9 +134,11 @@ public class VentanaHome extends MetodosGenerales {
         // TODO add your handling code here:
     }//GEN-LAST:event_gestionar_solicitudActionPerformed
 
-    private void back_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_officeActionPerformed
+
+    private void updateFondosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFondosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_back_officeActionPerformed
+    }//GEN-LAST:event_updateFondosActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -160,7 +176,7 @@ public class VentanaHome extends MetodosGenerales {
     }
 
     public JButton getBack_office() {
-        return back_office;
+        return back_office1;
     }
 
     public JButton getCrear_solicitud() {
@@ -171,16 +187,18 @@ public class VentanaHome extends MetodosGenerales {
         return gestionar_solicitud;
     }
     
-    
-    
+    public JButton getAsignar_fondos() {
+        return updateFondos;
+    }
 
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back_office;
+    private javax.swing.JButton back_office1;
     private javax.swing.JButton crear_solicitud;
     private javax.swing.JButton gestionar_solicitud;
     private javax.swing.JLabel jLabel1;
     private vistas.swing.componentes.topMenuLogin topMenuLogin;
+    private javax.swing.JButton updateFondos;
     // End of variables declaration//GEN-END:variables
 }

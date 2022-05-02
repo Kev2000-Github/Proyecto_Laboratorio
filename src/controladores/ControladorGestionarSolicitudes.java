@@ -52,8 +52,8 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
     public void fillSolicitudes() {
         DefaultTableModel modelSolicitudes = new DefaultTableModel();
         List<Solicitud> solicitudes = solicitudDao.getAllPending();  
-        modelSolicitudes.setColumnCount(4);
-        modelSolicitudes.setColumnIdentifiers(new String[]{"Solicitud", "Fundacion", "Beneficiario", "Encargado"});
+        modelSolicitudes.setColumnCount(5);
+        modelSolicitudes.setColumnIdentifiers(new String[]{"Solicitud", "Fundacion", "Beneficiario", "Encargado", "Prioridad"});
 
         for (Solicitud s : solicitudes) {
             FundacionDao fundacionDao = new FundacionDao();
@@ -62,10 +62,13 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             EmpleadoDao empleadoDao = new EmpleadoDao();
             Empleado empleado = empleadoDao.get(s.getEmpleadoId());
-            modelSolicitudes.addRow(new Object[]{s.getId(), 
+            modelSolicitudes.addRow(new Object[]{
+                s.getId(), 
                 fundacion.getNombre(), 
                 beneficiario.getPersona().getNombre(), 
-                empleado.getPersona().getNombre()});
+                empleado.getPersona().getNombre(),
+                s.getPrioridad().toString()
+            });
         }
         window.setModelSolicitudes(modelSolicitudes);
     }
@@ -77,10 +80,12 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
         String fundacionName = window.getSolicitudes().getValueAt(row, 1).toString();
         String beneficiarioName = window.getSolicitudes().getValueAt(row, 2).toString();
         String encargadoName = window.getSolicitudes().getValueAt(row, 3).toString();
+        String prioridad = window.getSolicitudes().getValueAt(row, 4).toString();
         rowInfo.put("solicitudId",solicitudId);
         rowInfo.put("fundacion",fundacionName);
         rowInfo.put("beneficiario",beneficiarioName);
         rowInfo.put("encargado",encargadoName);
+        rowInfo.put("prioridad", prioridad);
         return rowInfo;
     }
 

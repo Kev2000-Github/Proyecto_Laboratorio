@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
+import javax.swing.table.DefaultTableModel;
 import modelos.Charla;
 
 public class CharlaDao implements IDao<Charla> {
@@ -33,7 +34,7 @@ public class CharlaDao implements IDao<Charla> {
 
     public CharlaDao() {
     }
-
+    
     @Override
     public Charla get(String id) {
         try {
@@ -51,12 +52,38 @@ public class CharlaDao implements IDao<Charla> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
         }
     }
 
+    public List<Charla> getCharlasByType() {
+        try {
+            List<Charla> list = new ArrayList<Charla>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, tema, direccion,organismo,fecha"
+                    + " FROM charla c WHERE c.deleted_at IS NULL";
+            //SETEO TYPE : String[] params = {id};
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs))
+                return list;
+            do {
+                Charla charla = setEntity(rs);
+                list.add(charla);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error #7105 obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+    
     @Override
     public List<Charla> getAll() {
         try {
@@ -76,6 +103,7 @@ public class CharlaDao implements IDao<Charla> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -156,7 +184,7 @@ public class CharlaDao implements IDao<Charla> {
             con.open();
             List<Charla> list = new ArrayList<Charla>();
             String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
-                    + " FROM charla c JOIN asistenciaCharla ac ON c.id = ac.charlaId"
+                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
                     + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
             String[] params = { cedula };
             ResultSet rs = con.execQuery(sql, params);
@@ -171,7 +199,32 @@ public class CharlaDao implements IDao<Charla> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public int countCharlasAsistidas(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT COUNT(ac.cedula) as count"
+                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                    + " WHERE ac.cedula = ? AND c.deleted_at IS NULL AND ac.deleted_at IS NULL";
+            String[] params = { cedula };
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs))
+                return 0;
+            int count = rs.getInt("count");         
+            return count;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
         } finally {
             con.close();
         }

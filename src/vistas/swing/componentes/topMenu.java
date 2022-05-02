@@ -107,7 +107,7 @@ public class topMenu extends javax.swing.JPanel {
 
         title.setOpaque(false);
 
-        goHomeLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/icons8_minus_18px_1.png"))); // NOI18N
+        goHomeLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/home-button.png"))); // NOI18N
         goHomeLbl.setAlignmentX(0.5F);
         goHomeLbl.setName("goHome"); // NOI18N
 
@@ -121,7 +121,7 @@ public class topMenu extends javax.swing.JPanel {
             titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(goHomeLbl)
+                .addComponent(goHomeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleLbl)
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -130,9 +130,9 @@ public class topMenu extends javax.swing.JPanel {
             titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLbl)
-                    .addComponent(goHomeLbl))
+                .addGroup(titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(goHomeLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
