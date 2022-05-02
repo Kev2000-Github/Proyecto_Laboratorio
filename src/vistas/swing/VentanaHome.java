@@ -50,6 +50,11 @@ public class VentanaHome extends MetodosGenerales {
         setUndecorated(true);
 
         back_office.setText("BackOffice");
+        back_office.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_officeActionPerformed(evt);
+            }
+        });
 
         crear_solicitud.setText("Crear Solicitud");
         crear_solicitud.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +77,7 @@ public class VentanaHome extends MetodosGenerales {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -79,16 +85,13 @@ public class VentanaHome extends MetodosGenerales {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(gestionar_solicitud))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(gestionar_solicitud))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
-            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,9 +103,9 @@ public class VentanaHome extends MetodosGenerales {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gestionar_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(back_office, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,6 +119,10 @@ public class VentanaHome extends MetodosGenerales {
     private void gestionar_solicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionar_solicitudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gestionar_solicitudActionPerformed
+
+    private void back_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_officeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_back_officeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +172,8 @@ public class VentanaHome extends MetodosGenerales {
     }
     
     
+    
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

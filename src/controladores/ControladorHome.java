@@ -38,6 +38,8 @@ public class ControladorHome extends ControladorGeneral {
            window.dispose();
            
     }
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -51,6 +53,7 @@ public class ControladorHome extends ControladorGeneral {
             goGestionarSolicitud();
             new ControladorGestionarSolicitudes(user);
         }
+        
         if (source == window.getCrear_solicitud()) {
             goCrearSolicitud();
             new ControladorAddSolicitud(user);
