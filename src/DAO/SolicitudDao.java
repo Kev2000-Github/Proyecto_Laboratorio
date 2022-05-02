@@ -59,6 +59,7 @@ public class SolicitudDao implements IDao<Solicitud> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -85,6 +86,7 @@ public class SolicitudDao implements IDao<Solicitud> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -166,12 +168,86 @@ public class SolicitudDao implements IDao<Solicitud> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
         }
     }
 
+    public int countNumberSolicitudes(String beneficiarioId, String status, Date from, Date to) {
+        try {
+            con = new Conne();
+            con.open();
+            String fromFormatted = new Timestamp(from.getTime()).toString();
+            String toFormatted = new Timestamp(to.getTime()).toString();
+            String statusFormatted = Constants.estadoEnum.valueOf(status).toString();
+            String sql = "SELECT COUNT(*) AS count FROM solicitud s"
+                    + " JOIN beneficiario b"
+                    + " ON s.beneficiario_id = b.id"
+                    + " WHERE status = '" + statusFormatted + "' and created_at between '" + fromFormatted + "' and '"+ toFormatted +"'"
+                    + " AND b.id = ?"
+                    + " AND s.deleted_at IS NULL AND b.deleted_at IS NULL";
+            String[] params = {
+                beneficiarioId
+            };
+            ResultSet rs = con.execQuery(sql, params);
+            if (con.isResultSetEmpty(rs)) {
+                return 0;
+            }
+            int count = rs.getInt("count");
+            return count;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
+        } finally {
+            con.close();
+        }
+    }
+
+    public Solicitud getHighestPriority(String id) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, empleado_id, fundacion_id, beneficiario_id, prioridad, status"
+                    + " FROM solicitud f WHERE id = ? AND f.deleted_at IS NULL ORDER BY prioridad DESC LIMIT 1";
+            String[] params = {id};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Solicitud solicitud = setEntity(rs);
+            return solicitud;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public void updateStatus(String solicitudId, String newStatus) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "UPDATE solicitud SET"
+                    + " status='" + newStatus + "'"
+                    + " WHERE id = ? AND deleted_at IS NULL";
+            String[] params = { solicitudId };
+            con.execMutation(sql, params);
+            System.out.println("updateStatus-solicitud");
+        } catch (Exception e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            con.close();
+        }
+    }
 
     @Override
     public void update(Solicitud t) {

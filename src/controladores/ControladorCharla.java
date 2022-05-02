@@ -12,7 +12,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelos.Charla;
-import modelos.FundacionServicio;
 import modelos.Usuario;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCharlas;
