@@ -7,9 +7,7 @@ import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -26,7 +24,6 @@ import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
 import javax.swing.JLabel;
-import controladores.ControladorHome;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -53,13 +50,14 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         fillFundacion();
         fillEmpleado();
         fillBeneficiario();
+        fillPrioridad();
         String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
         fillServicios(fundacion_id);
 
     }
 
     public void fillFundacion() {
-        DefaultComboBoxModel modelFundacion = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
         FundacionDao fundacionDao = new FundacionDao();
         List<Fundacion> fundacionList = fundacionDao.getAll();
         for (Fundacion fund : fundacionList) {
@@ -78,17 +76,17 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         };
         ServicioDao servicioDao = new ServicioDao();
         List<Servicio> fsList = servicioDao.getAllFromFundacion(fundacionId);
-        modelServicios.setColumnCount(4);
-        modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo"});
+        modelServicios.setColumnCount(5);
+        modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo", "Tipo"});
 
         for (Servicio s : fsList) {
-            modelServicios.addRow(new Object[]{Boolean.FALSE, s.getId(), s.getNombre(), s.getCosto()});
+            modelServicios.addRow(new Object[]{Boolean.FALSE, s.getId(), s.getNombre(), s.getCosto(), s.getTipo().toString()});
         }
         window.setModelServicio(modelServicios);
     }
 
     public void fillEmpleado() {
-        DefaultComboBoxModel modelEmpleado = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelEmpleado = new DefaultComboBoxModel<ComboboxItem>();
         EmpleadoDao empleadoDao = new EmpleadoDao();
         List<Empleado> empleadoList = empleadoDao.getAll();
         for (Empleado emp : empleadoList) {
@@ -99,7 +97,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     }
 
     public void fillBeneficiario() {
-        DefaultComboBoxModel modelBeneficiario = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelBeneficiario = new DefaultComboBoxModel<ComboboxItem>();
         BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
         List<Beneficiario> beneficiariosList = beneficiarioDao.getAll();
         for (Beneficiario ben : beneficiariosList) {
@@ -108,7 +106,16 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
                             ben.getCedula() + "-" + ben.getPersona().getApellido()));
         }
         window.setModelBeneficiario(modelBeneficiario);
+    }
 
+    public void fillPrioridad() {
+        DefaultComboBoxModel<ComboboxItem> modelPrioridad = new DefaultComboBoxModel<ComboboxItem>();
+        String[] prioridades = new String[]{ Constants.prioridadEnum.alta.toString(), Constants.prioridadEnum.media.toString(), Constants.prioridadEnum.baja.toString() };
+        for (String prioridad : prioridades) {
+            modelPrioridad.addElement(
+                    new ComboboxItem(prioridad, prioridad));
+        }
+        window.setModelPrioridad(modelPrioridad);
     }
 
     public Solicitud getSolicitud() {
@@ -117,7 +124,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         solicitud.setBeneficiarioId(((ComboboxItem) window.getBeneficiario().getSelectedItem()).getId());
         solicitud.setEmpleadoId(((ComboboxItem) window.getEmpleado().getSelectedItem()).getId());
         solicitud.setFundacionId(((ComboboxItem) window.getFundacion().getSelectedItem()).getId());
-
+        solicitud.setPrioridad(Constants.prioridadEnum.valueOf(((ComboboxItem) window.getPrioridad().getSelectedItem()).getId()));
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();
         for (int i = 0; i < window.getServicios().getRowCount(); i++) {
             Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
@@ -128,7 +135,6 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
                 serv.setCosto(Float.valueOf(window.getServicios().getValueAt(i, 3).toString()));
                 serviciosArr.add(serv);
             }
-
         }
 
         solicitud.setServicios(serviciosArr);
@@ -141,23 +147,22 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         try {
             if (calcCosto() == 0) {
                 window.mostrarMensaje("Debe seleccionar almenos un servicio");
-            } else {
-                Solicitud newSolicitud = getSolicitud();
-                String entity = "solicitud";
-                System.out.println("save" + '-' + entity);
-
-                System.out.println(newSolicitud.toString());
-                IDao entityDao = daoFactory.getDao(entity);
-                Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
-                if (existenteSolicitud != null) {
-                    window.mostrarMensaje("Ya existe un registro de esta " + entity);
-                    return;
-                }
-                //!validacion costo
-                entityDao.save(newSolicitud);
-                window.mostrarMensaje("Se agrego el registro con exito ");
-                initCrear();
+                return;
             }
+            Solicitud newSolicitud = getSolicitud();
+            String entity = "solicitud";
+            System.out.println("save" + '-' + entity);
+
+            System.out.println(newSolicitud.toString());
+            IDao<Solicitud> entityDao = daoFactory.getDao(entity);
+            Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
+            if (existenteSolicitud != null) {
+                window.mostrarMensaje("Ya existe un registro de esta " + entity);
+                return;
+            }
+            entityDao.save(newSolicitud);
+            window.mostrarMensaje("Se agrego el registro con exito ");
+            initCrear();
 
             //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {

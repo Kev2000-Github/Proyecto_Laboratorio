@@ -109,14 +109,18 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
         float totalGastado = fundacionDao.getTotalGastado(fundacion.getId(), currentYear);
         float partidaRestante = partidaAsignada - totalGastado;
         float partidaRestantePorcentual = partidaRestante*100/partidaAsignada;
-
+        float costoTotal = window.getCosto();
         int currentMonth = now.getMonth().getValue();
-        String prioridad = solicitud.getPrioridad().toString();
+        String prioridad = solicitudInfo.get("prioridad");
         Solicitud highestSolicitud = solicitudDao.getHighestPriority(solicitudId);
         String highestPriority = highestSolicitud.getPrioridad().toString();
 
         if(partidaRestantePorcentual < 25 && currentMonth < 10 && !prioridad.equals(highestPriority)){
             window.mostrarMensaje("Existen otras solicitudes con mayor prioridad, procesa esas primero");
+            return false;
+        }
+        if(partidaRestante < costoTotal){
+            window.mostrarMensaje("No hay suficientes fondos para aprobar esto");
             return false;
         }
         return true;

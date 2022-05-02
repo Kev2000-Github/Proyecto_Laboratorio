@@ -143,7 +143,9 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
                     + " fundacion_id=?"
                     + " WHERE cedula = ? AND deleted_at IS NULL";
             String[] paramsFundacion = {
-                beneficiario.getFundacionId(),};
+                beneficiario.getFundacionId(),
+                beneficiario.getPersona().getCedula()
+            };
             con.execMutation(sqlFundacion, paramsFundacion);
         } catch (Exception e) {
             // e.printStackTrace();

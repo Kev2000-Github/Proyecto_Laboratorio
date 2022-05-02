@@ -7,6 +7,7 @@ package vistas.swing;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import vistas.general.MetodosGenerales;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -18,16 +19,21 @@ public class VentanaBackOffice extends MetodosGenerales {
      * Creates new form VentanaHome
      * @param accion
      */
-    public VentanaBackOffice(ActionListener accion) {
+    public VentanaBackOffice(ActionListener accion, MouseListener ml) {
         initComponents();
         setLocationRelativeTo(null);
         this.agregarListener(accion);
-        topMenuLogin.setMenuFunctions(this, "Backoffice");
+        this.agregarMouseListener(ml);
+        topMenu.setMenuFunctions(this, ml, "Backoffice");
     }
     
     private void agregarListener(ActionListener accion){
         registros.addActionListener(accion);
         reportes.addActionListener(accion);
+    }
+
+    private void agregarMouseListener(MouseListener ml) {
+        goBackLbl.addMouseListener(ml);
     }
 
     /**
@@ -39,11 +45,11 @@ public class VentanaBackOffice extends MetodosGenerales {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topMenuLogin = new vistas.swing.componentes.topMenuLogin();
         registros = new javax.swing.JButton();
         reportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
+        topMenu = new vistas.swing.componentes.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -63,7 +69,6 @@ public class VentanaBackOffice extends MetodosGenerales {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -75,12 +80,13 @@ public class VentanaBackOffice extends MetodosGenerales {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(goBackLbl)
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
+            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(topMenuLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(topMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goBackLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
@@ -148,6 +154,6 @@ public class VentanaBackOffice extends MetodosGenerales {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton registros;
     private javax.swing.JButton reportes;
-    private vistas.swing.componentes.topMenuLogin topMenuLogin;
+    private vistas.swing.componentes.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }
