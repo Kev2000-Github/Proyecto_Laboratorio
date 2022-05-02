@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS beneficiario(
 
 CREATE TABLE IF NOT EXISTS solicitud(
 	id VARCHAR(40) PRIMARY KEY,
-	beneficiario_id VARCHAR(10) NOT NULL,
+	beneficiario_id VARCHAR(40) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
 	prioridad solicitud_prioridad NULL,
