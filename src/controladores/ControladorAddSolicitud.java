@@ -138,7 +138,6 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         }
 
         solicitud.setServicios(serviciosArr);
-        solicitud.setPrioridad(Constants.prioridadEnum.alta);
         solicitud.setStatus(Constants.estadoEnum.pendiente);
         return solicitud;
     }
