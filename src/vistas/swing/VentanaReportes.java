@@ -4,6 +4,7 @@
  */
 package vistas.swing;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import vistas.general.MetodosGenerales;
 /**
@@ -15,15 +16,20 @@ public class VentanaReportes extends MetodosGenerales {
     /**
      * Creates new form VentanaReportes
      */
-    public VentanaReportes(ActionListener accion) {
-           initComponents();
-           setLocationRelativeTo(null);
-           this.agregarListener(accion);
-           topMenuLogin.setMenuFunctions(this, "Reportes");
-       }
+    public VentanaReportes(ActionListener accion, MouseListener ml) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.agregarListener(accion);
+        this.agregarMouseListener(ml);
+        topMenu.setMenuFunctions(this, ml, "Reportes");
+    }
 
     private void agregarListener(ActionListener accion){
         listadoSolibtn.addActionListener(accion);
+        
+    }
+    
+    private void agregarMouseListener(MouseListener ml) {
         
     }
     /**
@@ -38,9 +44,11 @@ public class VentanaReportes extends MetodosGenerales {
         jPanel1 = new javax.swing.JPanel();
         listadoSolibtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        topMenuLogin = new vistas.swing.componentes.topMenuLogin();
+        topMenu = new vistas.swing.componentes.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(233, 233, 233));
 
@@ -80,16 +88,16 @@ public class VentanaReportes extends MetodosGenerales {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(topMenuLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(topMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -147,6 +155,6 @@ public class VentanaReportes extends MetodosGenerales {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton listadoSolibtn;
-    private vistas.swing.componentes.topMenuLogin topMenuLogin;
+    private vistas.swing.componentes.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

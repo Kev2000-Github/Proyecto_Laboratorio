@@ -21,8 +21,10 @@ import java.util.Map;
 import javax.swing.JLabel;
 import DAO.BeneficiarioDao;
 import DAO.FundacionDao;
+import DAO.ServicioDao;
 import DAO.SolicitudDao;
 import javax.swing.DefaultComboBoxModel;
+import modelos.Servicio;
 import vistas.general.ComboboxItem;
 
 
@@ -43,8 +45,6 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         fillSolicitantes();
         fillFundacion();
         
-
-    
     }
 
 
@@ -76,7 +76,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         }
         window.setModelFundacioncb(modelFundacion);
     }
- 
+    
     
     
     @Override
