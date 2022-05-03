@@ -54,6 +54,7 @@ public class UsuarioDao implements IDao<Usuario> {
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		} 
         finally {
@@ -75,6 +76,7 @@ public class UsuarioDao implements IDao<Usuario> {
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		} 
         finally {
@@ -100,6 +102,7 @@ public class UsuarioDao implements IDao<Usuario> {
         catch (SQLException e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		}
         finally {

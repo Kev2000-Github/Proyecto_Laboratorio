@@ -5,6 +5,7 @@ public class Servicio {
 	private String id;
 	private String nombre;
 	private String tipo;
+	private float costo;
 
 	public Servicio() {
 	};
@@ -45,9 +46,11 @@ public class Servicio {
 		this.tipo = tipo;
 	}
 
-	@Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return nombre;
+	public Float getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Float costo) {
+        this.costo = costo;
     }
 }

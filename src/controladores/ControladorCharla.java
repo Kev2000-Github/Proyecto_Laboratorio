@@ -5,7 +5,6 @@
 package controladores;
 
 import DAO.CharlaDao;
-import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 
@@ -26,8 +25,6 @@ import javax.swing.JLabel;
 
 import modelos.Charla;
 import modelos.Usuario;
-
-import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCharlas;
 
 

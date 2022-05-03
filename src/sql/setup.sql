@@ -18,13 +18,20 @@ DROP TABLE IF EXISTS detalle_solicitud_servicio CASCADE;
 DROP TABLE IF EXISTS presupuesto;
 DROP TABLE IF EXISTS charla CASCADE;
 DROP TABLE IF EXISTS asistenciaCharla CASCADE;
+DROP TABLE IF EXISTS solicitud_presupuesto CASCADE;
+DROP TABLE IF EXISTS log_partidas_asignadas CASCADE;
+DROP TABLE IF EXISTS asistencia_charla CASCADE;
+--VIEW
+DROP VIEW IF EXISTS partida_total_actual;
+DROP VIEW IF EXISTS view_presupuestos_totales_solicitud;
+DROP VIEW IF EXISTS view_total_gastado_anual;
 --ENUM
 DROP TYPE IF EXISTS tipo_servicio;
---DROP TYPE IF EXISTS solicitud_prioridad;
---DROP TYPE IF EXISTS solicitud_status;
+DROP TYPE IF EXISTS solicitud_prioridad;
+DROP TYPE IF EXISTS solicitud_status;
 CREATE TYPE tipo_servicio AS ENUM ('medico','otros');
---CREATE TYPE solicitud_prioridad AS ENUM ('alta', 'media', 'baja');
---CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
+CREATE TYPE solicitud_prioridad AS ENUM ('baja', 'media', 'alta');
+CREATE TYPE solicitud_status AS ENUM ('aprobado','rechazado','pendiente');
 
 
 --BUSINESS LOGIC TABLES
@@ -41,8 +48,17 @@ CREATE TABLE IF NOT EXISTS fundacion(
 	presupuesto FLOAT NOT NULL DEFAULT 0,
 	porcentaje_partido_anual FLOAT NOT NULL DEFAULT 0,
 	gobernacion_id VARCHAR(40) NOT NULL, --FOREIGN KEY
-	CONSTRAINT fk_gobernacion FOREIGN KEY(gobernacion_id) REFERENCES gobernacion(id), --FOREIGN KEY
-	deleted_at DATE DEFAULT NULL
+	deleted_at DATE DEFAULT NULL,
+	CONSTRAINT fk_gobernacion FOREIGN KEY(gobernacion_id) REFERENCES gobernacion(id) --FOREIGN KEY
+);
+
+CREATE TABLE IF NOT EXISTS log_partidas_asignadas(
+	id VARCHAR(40) PRIMARY KEY,
+	fundacion_id VARCHAR(40) NOT NULL,
+	partida_asignada FLOAT NOT NULL,
+	annio INT NOT NULL,
+	deleted_at DATE DEFAULT NULL,
+	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id)
 );
 
 
@@ -95,12 +111,11 @@ CREATE TABLE IF NOT EXISTS beneficiario(
 
 CREATE TABLE IF NOT EXISTS solicitud(
 	id VARCHAR(40) PRIMARY KEY,
-	beneficiario_id VARCHAR(10) NOT NULL,
+	beneficiario_id VARCHAR(40) NOT NULL,
 	empleado_id VARCHAR(40) NOT NULL,
 	fundacion_id VARCHAR(40) NOT NULL,
-	prioridad VARCHAR(40) NULL,
-	status VARCHAR(40) NOT NULL,
-	costo_total FLOAT NOT NULL,
+	prioridad solicitud_prioridad NULL,
+	status solicitud_status NOT NULL,
 	created_at DATE NOT NULL,
 	updated_at DATE NOT NULL,
 	deleted_at DATE DEFAULT NULL,
@@ -109,10 +124,11 @@ CREATE TABLE IF NOT EXISTS solicitud(
 	CONSTRAINT fk_fundacion FOREIGN KEY(fundacion_id) REFERENCES fundacion(id)
 );
 
-CREATE TABLE IF NOT EXISTS presupuesto(
+CREATE TABLE IF NOT EXISTS solicitud_presupuesto(
 	solicitud_id VARCHAR(40) NOT NULL,
 	servicio_id VARCHAR(40) NOT NULL,
 	costo_generado FLOAT NOT NULL,
+	deleted_at DATE DEFAULT NULL,
 	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
 	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
 );
@@ -159,17 +175,28 @@ CREATE TABLE IF NOT EXISTS charla(
 	deleted_at DATE DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS asistenciaCharla(
+CREATE TABLE IF NOT EXISTS asistencia_charla(
 	cedula VARCHAR(40) NOT NULL,
-	charla_id VARCHAR(80) NOT NULL
+	charla_id VARCHAR(80) NOT NULL,
+	deleted_at DATE DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS detalle_solicitud_servicio(
-	solicitud_id VARCHAR(40) NOT NULL,
-	servicio_id VARCHAR(40) NOT NULL,
-	CONSTRAINT fk_solicitud FOREIGN KEY(solicitud_id) REFERENCES solicitud(id),
-	CONSTRAINT fk_servicio FOREIGN KEY(servicio_id) REFERENCES servicio(id)
-);
+--VIEWS
+CREATE VIEW partida_total_actual AS
+select sum(partida_asignada) from log_partidas_asignadas
+where annio in (select max(annio) as currentYear from log_partidas_asignadas);
+
+CREATE VIEW view_presupuestos_totales_solicitud AS
+SELECT fundacion_id, solicitud_id, sum(costo_generado) as costo_total, s.status, s.updated_at as fecha FROM solicitud s
+join solicitud_presupuesto sp
+on sp.solicitud_id = s.id
+group by fundacion_id, solicitud_id, s.status, fecha;
+
+CREATE VIEW view_total_gastado_anual AS
+select fundacion_id, sum(costo_total) total_gastado, EXTRACT(YEAR FROM fecha) annio from view_presupuestos_totales_solicitud
+where status = 'aprobado'
+group by fundacion_id, fecha;
+--INSERT DEFAULT VALUES
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
 	VALUES('27317962','kevin','cheng','584126796098','chengkev2000@gmail.com','direccion'),
@@ -222,13 +249,26 @@ INSERT INTO servicio(id, nombre, tipo)
 	VALUES('1', 'examen', 'medico'),
 		  ('2', 'consula medica general', 'medico'),
 		  ('3', 'consulta psicologica', 'medico'),
-		  ('4', 'consulta odontologica', 'medico');
+		  ('4', 'consulta odontologica', 'medico'),
+		  ('5', 'examen Rx', 'medico'),
+		  ('6', 'donaciones para discapacitados', 'otros'),
+		  ('7', 'cesta de comida', 'otros'),
+		  ('8', 'tanques de agua', 'otros');
 
 INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a', '1', 10),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '2', 20),
 		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
-		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40);
+		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '1', 30),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '5', 50),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '6', 10),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '7', 20),
+		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '8', 20),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '8', 50),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '5', 65),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '3', 30),
+		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '7', 20);
 		  
 INSERT INTO charla(id, tema, lugar, organismo, fecha)
 	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
@@ -236,14 +276,14 @@ INSERT INTO charla(id, tema, lugar, organismo, fecha)
 		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
 		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01');
 
-INSERT INTO asistenciaCharla(cedula, charla_id)
+INSERT INTO asistencia_charla(cedula, charla_id)
 	VALUES('27317962','1'),
 		  ('27317962','2'),
 		  ('27317962','3'),
 		  ('27317962','4'),
 		  ('27317963','4'),
 		  ('27317963','3'),
-		  ('27317963','2'),
+		  ('27317963','2'), 
 		  ('27317963','1'),
 		  ('27317964','3'),
 		  ('27317964','1'),

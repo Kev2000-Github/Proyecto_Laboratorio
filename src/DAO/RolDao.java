@@ -49,6 +49,7 @@ public class RolDao implements IDao<Rol> {
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		} 
         finally {
@@ -74,6 +75,7 @@ public class RolDao implements IDao<Rol> {
         catch (SQLException e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		}
         finally {

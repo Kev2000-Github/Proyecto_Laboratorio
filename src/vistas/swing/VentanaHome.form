@@ -7,7 +7,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -24,7 +24,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Component id="topMenuLogin" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
@@ -32,22 +34,20 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="crear_solicitud" min="-2" pref="162" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="gestionar_solicitud" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                              <Component id="back_office" min="-2" pref="155" max="-2" attributes="0"/>
-                          </Group>
+
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="back_office1" pref="155" max="32767" attributes="0"/>
+                          <Component id="crear_solicitud" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="updateFondos" max="32767" attributes="0"/>
+                          <Component id="gestionar_solicitud" pref="144" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
-          <Component id="topMenuLogin" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,18 +61,27 @@
                   <Component id="crear_solicitud" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="gestionar_solicitud" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
+
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="back_office" min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="updateFondos" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="back_office1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="back_office">
+    <Component class="javax.swing.JButton" name="updateFondos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="BackOffice"/>
+        <Property name="text" type="java.lang.String" value="asignar partida"/>
+        <Property name="name" type="java.lang.String" value="asignarPartida" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateFondosActionPerformed"/>
+
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="crear_solicitud">
       <Properties>
@@ -99,6 +108,11 @@
       </Properties>
     </Component>
     <Component class="vistas.swing.componentes.topMenuLogin" name="topMenuLogin">
+    </Component>
+    <Component class="javax.swing.JButton" name="back_office1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="BackOffice"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

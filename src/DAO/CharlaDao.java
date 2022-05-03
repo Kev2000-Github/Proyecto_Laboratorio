@@ -52,6 +52,7 @@ public class CharlaDao implements IDao<Charla> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -128,6 +129,7 @@ public class CharlaDao implements IDao<Charla> {
         } catch (SQLException e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -207,7 +209,7 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             List<Charla> list = new ArrayList<Charla>();
-            String sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
+            String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
                     + " FROM charla c JOIN asistenciacharla ac ON c.id = ac.charlaId"
                     + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
             String[] params = { cedula };
@@ -223,7 +225,32 @@ public class CharlaDao implements IDao<Charla> {
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public int countCharlasAsistidas(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT COUNT(ac.cedula) as count"
+                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                    + " WHERE ac.cedula = ? AND c.deleted_at IS NULL AND ac.deleted_at IS NULL";
+            String[] params = { cedula };
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs))
+                return 0;
+            int count = rs.getInt("count");         
+            return count;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return 0;
         } finally {
             con.close();
         }

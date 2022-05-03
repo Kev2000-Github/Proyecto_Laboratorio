@@ -90,7 +90,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="goHomeLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="goHomeLbl" min="-2" pref="16" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="titleLbl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -101,9 +101,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="titleLbl" min="-2" max="-2" attributes="0"/>
-                      <Component id="goHomeLbl" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="goHomeLbl" max="32767" attributes="0"/>
+                      <Component id="titleLbl" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -114,7 +114,7 @@
         <Component class="javax.swing.JLabel" name="goHomeLbl">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/vistas/swing/componentes/images/icons8_minus_18px_1.png"/>
+              <Image iconType="3" name="/vistas/swing/componentes/images/home-button.png"/>
             </Property>
             <Property name="alignmentX" type="float" value="0.5"/>
             <Property name="name" type="java.lang.String" value="goHome" noResource="true"/>

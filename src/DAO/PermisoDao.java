@@ -45,6 +45,7 @@ public class PermisoDao implements IDao<Permiso> {
         catch (Exception e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		} 
         finally {
@@ -70,6 +71,7 @@ public class PermisoDao implements IDao<Permiso> {
         catch (SQLException e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		}
         finally {
@@ -99,6 +101,7 @@ public class PermisoDao implements IDao<Permiso> {
         catch (SQLException e) {
 			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
 		}
         finally {

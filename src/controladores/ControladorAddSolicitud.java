@@ -7,9 +7,7 @@ import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -19,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.FundacionServicio;
 import modelos.Servicio;
 import modelos.Solicitud;
 import modelos.Usuario;
@@ -27,7 +24,6 @@ import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
 import javax.swing.JLabel;
-import controladores.ControladorHome;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,14 +35,14 @@ import controladores.ControladorHome;
  */
 public class ControladorAddSolicitud extends ControladorGeneral implements ListSelectionListener {
 
-    VentanaCrearSolicitud windowCrear;
+    VentanaCrearSolicitud window;
     DaoFactory daoFactory;
 
     public ControladorAddSolicitud(Usuario user) {
         super(user);
         daoFactory = new DaoFactory();
-        windowCrear = new VentanaCrearSolicitud(this, this, this);
-        windowCrear.setVisible(true);
+        window = new VentanaCrearSolicitud(this, this, this);
+        window.setVisible(true);
         initCrear();
     }
 
@@ -54,23 +50,24 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         fillFundacion();
         fillEmpleado();
         fillBeneficiario();
-        String fundacion_id = ((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId();
+        fillPrioridad();
+        String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
         fillServicios(fundacion_id);
 
     }
 
     public void fillFundacion() {
-        DefaultComboBoxModel modelFundacion = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
         FundacionDao fundacionDao = new FundacionDao();
         List<Fundacion> fundacionList = fundacionDao.getAll();
         for (Fundacion fund : fundacionList) {
             modelFundacion.addElement(
                     new ComboboxItem(fund.getId(), fund.getNombre()));
         }
-        windowCrear.setModelFundacion(modelFundacion);
+        window.setModelFundacion(modelFundacion);
     }
 
-    public void fillServicios(String id) {
+    public void fillServicios(String fundacionId) {
         DefaultTableModel modelServicios = new DefaultTableModel() {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -78,89 +75,90 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
             }
         };
         ServicioDao servicioDao = new ServicioDao();
-        List<FundacionServicio> fsList = servicioDao.getFundacionServiciosById(id);
-        modelServicios.setColumnCount(4);
-        modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo"});
+        List<Servicio> fsList = servicioDao.getAllFromFundacion(fundacionId);
+        modelServicios.setColumnCount(5);
+        modelServicios.setColumnIdentifiers(new Object[]{"Seleccionar", "ID", "Nombre", "Costo", "Tipo"});
 
-        for (FundacionServicio fs : fsList) {
-            modelServicios.addRow(new Object[]{Boolean.FALSE, fs.getServicio_id(), fs.getNombre(), fs.getCosto()});
+        for (Servicio s : fsList) {
+            modelServicios.addRow(new Object[]{Boolean.FALSE, s.getId(), s.getNombre(), s.getCosto(), s.getTipo().toString()});
         }
-        windowCrear.setModelServicio(modelServicios);
+        window.setModelServicio(modelServicios);
     }
 
     public void fillEmpleado() {
-        DefaultComboBoxModel modelEmpleado = new DefaultComboBoxModel();
-        EmpleadoDao empleadoDao = new EmpleadoDao();
-        List<Empleado> empleadoList = empleadoDao.getAll();
-        for (Empleado emp : empleadoList) {
-            modelEmpleado.addElement(
-                    new ComboboxItem(emp.getId(), emp.getCedula() + "-" + emp.getApellido()));
-        }
-        windowCrear.setModelEmpleado(modelEmpleado);
+        String nombreCompleto = user.getEmpleado().getNombre() + " " + user.getEmpleado().getApellido();
+        String id = user.getEmpleado().getId();
+        window.setEmpleado(id, nombreCompleto);
     }
 
     public void fillBeneficiario() {
-        DefaultComboBoxModel modelBeneficiario = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ComboboxItem> modelBeneficiario = new DefaultComboBoxModel<ComboboxItem>();
         BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
         List<Beneficiario> beneficiariosList = beneficiarioDao.getAll();
         for (Beneficiario ben : beneficiariosList) {
-            // 1 - can call methods of element
             modelBeneficiario.addElement(
                     new ComboboxItem(ben.getId(),
                             ben.getCedula() + "-" + ben.getApellido()));
         }
-        windowCrear.setModelBeneficiario(modelBeneficiario);
+        window.setModelBeneficiario(modelBeneficiario);
+    }
 
+    public void fillPrioridad() {
+        DefaultComboBoxModel<ComboboxItem> modelPrioridad = new DefaultComboBoxModel<ComboboxItem>();
+        String[] prioridades = new String[]{ Constants.prioridadEnum.alta.toString(), Constants.prioridadEnum.media.toString(), Constants.prioridadEnum.baja.toString() };
+        for (String prioridad : prioridades) {
+            modelPrioridad.addElement(
+                    new ComboboxItem(prioridad, prioridad));
+        }
+        window.setModelPrioridad(modelPrioridad);
     }
 
     public Solicitud getSolicitud() {
         Solicitud solicitud = new Solicitud();
-        //System.out.println("i: " + ((ArrayList<Servicio>) itemList.getSelectedValuesList()).toString());
-        solicitud.setId(windowCrear.getSaltString());
-        solicitud.setBeneficiarioId(((ComboboxItem) windowCrear.getBeneficiario().getSelectedItem()).getId());
-        solicitud.setEmpleadoId(((ComboboxItem) windowCrear.getEmpleado().getSelectedItem()).getId());
-        solicitud.setFundacionId(((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId());
-
+        solicitud.setId(window.getSaltString());
+        solicitud.setBeneficiarioId(((ComboboxItem) window.getBeneficiario().getSelectedItem()).getId());
+        solicitud.setEmpleadoId(window.getEmpleadoId().getText());
+        solicitud.setFundacionId(((ComboboxItem) window.getFundacion().getSelectedItem()).getId());
+        solicitud.setPrioridad(Constants.prioridadEnum.valueOf(((ComboboxItem) window.getPrioridad().getSelectedItem()).getId()));
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();
-        for (int i = 0; i < windowCrear.getServicios().getRowCount(); i++) {
-             Boolean isChecked = Boolean.valueOf(windowCrear.getServicios().getValueAt(i, 0).toString());
+        for (int i = 0; i < window.getServicios().getRowCount(); i++) {
+            Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
-                 serviciosArr.add(
-                    new Servicio(String.valueOf(windowCrear.getServicios().getValueAt(i, 1).toString()),
-                    String.valueOf(windowCrear.getServicios().getValueAt(i, 2).toString())));
+                Servicio serv = new Servicio();
+                serv.setId(window.getServicios().getValueAt(i, 1).toString());
+                serv.setNombre(window.getServicios().getValueAt(i, 2).toString());
+                serv.setCosto(Float.valueOf(window.getServicios().getValueAt(i, 3).toString()));
+                serviciosArr.add(serv);
             }
-           
         }
 
         solicitud.setServicios(serviciosArr);
-        solicitud.setPrioridad(Constants.prioridadEnum.alta);
         solicitud.setStatus(Constants.estadoEnum.pendiente);
-        solicitud.setCostoTotal(calcCosto());
         return solicitud;
     }
 
     public void save() {
         try {
-            if (calcCosto() == 0){
-                 windowCrear.mostrarMensaje("Debe seleccionar almenos un servicio");
-            }else{
-               Solicitud newSolicitud = getSolicitud();
+            if (calcCosto() == 0) {
+                window.mostrarMensaje("Debe seleccionar almenos un servicio");
+                return;
+            }
+            Solicitud newSolicitud = getSolicitud();
             String entity = "solicitud";
             System.out.println("save" + '-' + entity);
-          
+
             System.out.println(newSolicitud.toString());
-            IDao entityDao = daoFactory.getDao(entity);
+            IDao<Solicitud> entityDao = daoFactory.getDao(entity);
             Solicitud existenteSolicitud = (Solicitud) entityDao.get(newSolicitud.getId());
             if (existenteSolicitud != null) {
-                windowCrear.mostrarMensaje("Ya existe un registro de esta " + entity);
+                window.mostrarMensaje("Ya existe un registro de esta " + entity);
                 return;
             }
             entityDao.save(newSolicitud);
-            windowCrear.mostrarMensaje("Se agrego el registro con exito "); 
+            window.mostrarMensaje("Se agrego el registro con exito ");
             initCrear();
-            }
-         
-            //((VentanaCrearSolicitud) windowCrear).clear();
+
+            //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {
             System.out.println("controladores.ControladorAddSolicitud.save()" + e);
         }
@@ -169,10 +167,10 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
     public float calcCosto() {
         float cost = 0;
-        for (int i = 0; i < windowCrear.getServicios().getRowCount(); i++) {
-            Boolean isChecked = Boolean.valueOf(windowCrear.getServicios().getValueAt(i, 0).toString());
+        for (int i = 0; i < window.getServicios().getRowCount(); i++) {
+            Boolean isChecked = Boolean.valueOf(window.getServicios().getValueAt(i, 0).toString());
             if (isChecked) {
-                cost += Float.valueOf(windowCrear.getServicios().getValueAt(i, 3).toString());
+                cost += Float.valueOf(window.getServicios().getValueAt(i, 3).toString());
                 //get the values of the columns you need.
             }
         }
@@ -181,65 +179,40 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
 
     @Override
     public void valueChanged(ListSelectionEvent l) {
-        //action
-        // System.out.println("t" + String.valueOf(calcCosto()));
-        //  windowCrear.setTextPrecio(String.valueOf(calcCosto()));
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
-        if (source == windowCrear.getFundacion()) {
-            String fundacion_id = ((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId();
-            // System.out.println(fundacion_id);
+        if (source == window.getFundacion()) {
+            String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
             fillServicios(fundacion_id);
         }
-        //mejorar
-          if (source == windowCrear.getCrearSolicitud()) {
-              save();
-          }
-        //  if (source == window.getGestionar_solicitud()) {
-        //      goGestionarSolicitud();
-        //  }
-        //  if (source == window.getCrear_solicitud()) {
-        //      goCrearSolicitud();
-        //  }
-    }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JLabel")){
-            JLabel lbl = (JLabel)e.getSource();
-            if(lbl.getName() == "goHome"){
-                windowCrear.dispose();
-                new ControladorHome(user);
-            }
+        if (source == window.getCrearSolicitud()) {
+            save();
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         //  System.out.println("t" + String.valueOf(calcCosto()));
-        windowCrear.setTextPrecio(String.valueOf(calcCosto()));
+        window.setTextPrecio(String.valueOf(calcCosto()));
         //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
-        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void mouseClicked(MouseEvent e) {
+        String source = e.getSource().getClass().getName();
+        if (source.equals("javax.swing.JLabel")) {
+            JLabel lbl = (JLabel) e.getSource();
+            if (lbl.getName() == "goHome") {
+                window.dispose();
+                new ControladorHome(user);
+            }
+        }
     }
 
 }
