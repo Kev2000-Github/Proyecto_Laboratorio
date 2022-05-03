@@ -26,8 +26,9 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
      */
     public VentanaDetalleSolicitante(ActionListener accion, MouseListener ml) {
         initComponents();
-        topMenu1.setMenuFunctions(this, ml,"");
-        this.agregarActionListener(accion);
+        setLocationRelativeTo(null);
+        this.agregarMouseListener(ml);
+        topMenu1.setMenuFunctions(this, ml, "Listado Solicitantes por Fundacion");
     }
     
     public void setModelSolicitantes(DefaultTableModel model){
@@ -35,14 +36,14 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
     }
     
     private void agregarMouseListener(MouseListener ml) {
-        fundacioncb.addMouseListener(ml);
+        //fundacioncb.addMouseListener(ml);
+        goBackLbl.addMouseListener(ml);
     }
     
     
 
     private void agregarActionListener(ActionListener accion) {
-
-        fundacioncb.addActionListener(accion);
+        //fundacioncb.addActionListener(accion);
         
     }
     
@@ -51,11 +52,7 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
     }
      
     
-    
-    
-    
-    
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,8 +67,7 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSolicitantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        fundacioncb = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        goBackLbl = new javax.swing.JLabel();
         topMenu1 = new vistas.swing.componentes.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,27 +93,21 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
         jLabel1.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         jLabel1.setText("Lista de Solicitantes por fundacion");
 
-        jLabel2.setText("Fundaciones");
+        goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
+        goBackLbl.setName("goBack"); // NOI18N
+        goBackLbl.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(fundacioncb, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 395, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(goBackLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(166, 166, 166))
         );
@@ -125,24 +115,20 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fundacioncb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(goBackLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(topMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,20 +180,19 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
         });
     }
    
-    public JComboBox<ComboboxItem> getFundacion() {
+    /*  public JComboBox<ComboboxItem> getFundacion() {
         return fundacioncb;
-    }
+    }*/
     
-        public void setModelFundacioncb(DefaultComboBoxModel model) {
+    /*    public void setModelFundacioncb(DefaultComboBoxModel model) {
         this.fundacioncb.setModel(model);
-    }
+    } */
 
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<ComboboxItem> fundacioncb;
+    private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -148,6 +148,7 @@ public class VentanaRegistros extends MetodosGenerales {
     public JButton getEmpleados() {
         return empleados;
     }
+    
 
  
 

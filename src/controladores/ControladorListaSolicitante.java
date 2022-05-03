@@ -43,7 +43,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         window.setVisible(true);
         solicitudDao = new SolicitudDao();
         fillSolicitantes();
-        fillFundacion();
+        //fillFundacion();
         
     }
 
@@ -61,11 +61,12 @@ public class ControladorListaSolicitante extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             modelSolicitantes.addRow(new Object[]{s.getId(), 
                 fundacion.getNombre(), 
-                beneficiario.getNombre()});
+                beneficiario.getNombre() +" "+ beneficiario.getApellido()});
         }
         window.setModelSolicitantes(modelSolicitantes);
     }
 
+    /*
     public void fillFundacion() {
         DefaultComboBoxModel modelFundacion = new DefaultComboBoxModel();
         FundacionDao fundacionDao = new FundacionDao();
@@ -75,7 +76,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
                     new ComboboxItem(fund.getId(), fund.getNombre()));
         }
         window.setModelFundacioncb(modelFundacion);
-    }
+    } */
     
     
     
@@ -87,6 +88,10 @@ public class ControladorListaSolicitante extends ControladorGeneral {
             if(lbl.getName() == "goHome"){
                 window.dispose();
                 new ControladorHome(user);
+            }
+            if(lbl.getName() == "goBack"){
+                window.dispose();
+                new ControladorBackOffice(user);
             }
         }
     }
