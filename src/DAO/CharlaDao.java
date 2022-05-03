@@ -20,7 +20,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             Charla charla = new Charla();
             charla.setTema(rs.getString("tema"));
-            charla.setDireccion(rs.getString("direccion"));
+            charla.setDireccion(rs.getString("lugar"));
             charla.setOrganismo(rs.getString("organismo"));
             charla.setFecha(rs.getDate("fecha"));
             charla.setId(rs.getString("id"));
@@ -40,7 +40,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
+            String sql = "SELECT id, tema, lugar,organismo,fecha"
                     + " FROM charla c WHERE id = ? AND c.deleted_at IS NULL";
             String[] params = { id };
             ResultSet rs = con.execQuery(sql, params);
@@ -58,22 +58,48 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
 
-    public List<Charla> getCharlasByType() {
+    public List<Charla> getCharlasByType(String selection) {
         try {
+           
             List<Charla> list = new ArrayList<Charla>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
-                    + " FROM charla c WHERE c.deleted_at IS NULL";
-            //SETEO TYPE : String[] params = {id};
+            
+            //Inicializando Consulta
+            String sql = "";
+            
+            //Condicion para Seleccionar el tipo de Consulta a realizar
+            if(selection=="Por empezar, sin Registrar"){
+                
+            sql = "SELECT id, tema, lugar, organismo, fecha"
+                    + " FROM charla c WHERE status = pend c.deleted_at IS NULL";
+            }
+            else if (selection =="Finalizadas, Registradas"){
+                
+            sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
+                  + " FROM charla c JOIN asistenciacharla ac ON c.id = ac.charla_id"
+                  + " WHERE c.status = fin AND c.deleted_at IS NULL";
+
+            }
+            else {//caso Finalizadas sin Registrar
+            
+                sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
+                      + "FROM  charla c LEFT JOIN asistenciacharla ac ON c.id = ac.charla_id"
+                      + "WHERE c.status = 'fin' AND ac.charla_id IS NULL" ;         
+            }
+            
             ResultSet rs = con.execQuery(sql);
+            
             if (con.isResultSetEmpty(rs))
                 return list;
-            do {
+            
+            do {                
                 Charla charla = setEntity(rs);
-                list.add(charla);
+                list.add(charla);               
             } while (rs.next());
+            
             return list;
+            
         } catch (SQLException e) {
             String msg = "Error #7105 obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
@@ -89,7 +115,7 @@ public class CharlaDao implements IDao<Charla> {
             List<Charla> list = new ArrayList<Charla>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
+            String sql = "SELECT id, tema, lugar,organismo,fecha"
                     + " FROM charla c WHERE c.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
@@ -113,7 +139,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, tema, direccion,organismo,fecha) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO fundacion(id, tema, lugar,organismo,fecha) VALUES(?,?,?,?,?)";
             String[] params = {
                     charla.getId(),
                     charla.getTema(),
@@ -137,7 +163,7 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             String sql = "UPDATE charla SET"
-                    + " tema=?, direccion=?, organismo=?, fecha=?"
+                    + " tema=?, lugar=?, organismo=?, fecha=?"
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
                     charla.getTema(),
@@ -181,8 +207,8 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             List<Charla> list = new ArrayList<Charla>();
-            String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
-                    + " FROM charla c JOIN asistenciaCharla ac ON c.id = ac.charlaId"
+            String sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
+                    + " FROM charla c JOIN asistenciacharla ac ON c.id = ac.charlaId"
                     + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
             String[] params = { cedula };
             ResultSet rs = con.execQuery(sql, params);
