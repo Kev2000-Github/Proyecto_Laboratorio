@@ -19,26 +19,28 @@ import vistas.general.MyTableModel;
 
 public class VentanaCharlas extends MetodosGenerales {
 
-    //VER TIPOS Y FUNCION DE ACCION LISTENERS
-
     /**
      @param accion
      * @param listSelection
      * @param ml
      */
+    //=*
     public VentanaCharlas(ActionListener accion, ListSelectionListener listSelection, MouseListener ml) {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.agregarActionListener(accion);
         this.agregarSelectionListener(listSelection);
         this.agregarMouseListener(ml);
         topMenu.setMenuFunctions(this, "");
 
+        
+
+
 
     }
-
+//=*
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
@@ -55,6 +57,7 @@ public class VentanaCharlas extends MetodosGenerales {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         Background.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,6 +66,11 @@ public class VentanaCharlas extends MetodosGenerales {
 
         lblTipodeCharla.setText("Tipo de Charla");
 
+        CmBoxTipodeCharla.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmBoxTipodeCharlaItemStateChanged(evt);
+            }
+        });
         CmBoxTipodeCharla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CmBoxTipodeCharlaActionPerformed(evt);
@@ -101,6 +109,7 @@ public class VentanaCharlas extends MetodosGenerales {
         jScrollPane2.setViewportView(charlas);
 
         BtnRegistrarAsistentes.setText("Registrar Asistentes");
+        BtnRegistrarAsistentes.setEnabled(false);
 
         topMenu.setToolTipText("");
 
@@ -147,37 +156,45 @@ public class VentanaCharlas extends MetodosGenerales {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnRegistrarAsistentes)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 375, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void CmBoxTipodeCharlaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmBoxTipodeCharlaActionPerformed
+    //=* Tiene uno, pero no lo usa, al igual que este
+    private void CmBoxTipodeCharlaActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
-        //getting selected value:
+    }                                                 
+    //Activa boton RegistrarAsistentes segun el itemComboBox seleccionado
+    private void CmBoxTipodeCharlaItemStateChanged(java.awt.event.ItemEvent evt) {                                                   
+        // TODO add your handling code here:
+        
         String seleccion = CmBoxTipodeCharla.getSelectedItem().toString();
         
-        //TODO Hacer logica de actualizar tabla segun seleccion
-        //caso 1: Charlas en status finished, sin participantes
-        //caso 2: Charlas en status pending, sin participantes
-        //caso 3: Charlas en status finished, con participantes
-    }//GEN-LAST:event_CmBoxTipodeCharlaActionPerformed
+        if(seleccion=="Finalizadas, sin Registrar"){
+        BtnRegistrarAsistentes.setEnabled(true);
+        }
+        /*else {
+        BtnRegistrarAsistentes.setEnabled(false);
+        }*/
+    }                                                  
 
     /**
      * @param args the command line arguments
      */
+    //=*
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -209,47 +226,56 @@ public class VentanaCharlas extends MetodosGenerales {
             }
         });
     }
-
-    private void agregarActionListener(ActionListener accion){
-        BtnMostrar.addActionListener(accion);
-        BtnRegistrarAsistentes.addActionListener(accion);
-        CmBoxTipodeCharla.addActionListener(accion); 
-    }
     
+    //=*
     private void agregarMouseListener(MouseListener ml) {
-        charlas.addMouseListener(ml);
+        charlas.addMouseListener(ml);    
     }
     
+    //=*
     private void agregarSelectionListener(ListSelectionListener lsl) {
         charlas.getSelectionModel().addListSelectionListener(lsl);
     }
     
+    //=*
+    private void agregarActionListener(ActionListener accion){
+        CmBoxTipodeCharla.addActionListener(accion); 
+        BtnMostrar.addActionListener(accion);
+        BtnRegistrarAsistentes.addActionListener(accion);
+
+    }
+    //GETTERS--------------------------
+    //=*
     public JTable getCharlas() {
             return charlas;
         }
+    //=*
     public JButton getBtnMostrar(){
             return BtnMostrar;
     }
+    //=*
     public JButton getBtnRegistrarAsistentes(){
             return BtnRegistrarAsistentes;
     }
+    //=*
     public JComboBox<ComboboxItem> getCmBoxTipodeCharla(){
             return CmBoxTipodeCharla;
     }
-
+    //SETTERS--------------------------------------
+    //=*
     public void setCmBoxTipodeCharla(JComboBox<ComboboxItem> tipocharla) {
             this.CmBoxTipodeCharla = tipocharla;
         }
-
+    //=*
     public void setModelTipoCharla(DefaultComboBoxModel model) {
         this.CmBoxTipodeCharla.setModel(model);
     }
-    
+    //=*
     public void setModelTablaCharla(DefaultTableModel model) {
     this.charlas.setModel(model);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JPanel Background;
     private javax.swing.JButton BtnMostrar;
     private javax.swing.JButton BtnRegistrarAsistentes;
@@ -260,5 +286,5 @@ public class VentanaCharlas extends MetodosGenerales {
     private javax.swing.JLabel lblTipodeCharla;
     private javax.swing.JLabel lblTitle;
     private vistas.swing.componentes.topMenuLogin topMenu;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
