@@ -3,29 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controladores;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
-
 import modelos.Beneficiario;
 import modelos.Fundacion;
 import modelos.Solicitud;
 import modelos.Usuario;
 import vistas.swing.VentanaDetalleSolicitante;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JLabel;
 import DAO.BeneficiarioDao;
 import DAO.FundacionDao;
-import DAO.ServicioDao;
 import DAO.SolicitudDao;
-import javax.swing.DefaultComboBoxModel;
-import modelos.Servicio;
-import vistas.general.ComboboxItem;
 
 
 

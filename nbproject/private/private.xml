@@ -4,12 +4,25 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorGestionarSolicitudes.java</file>
-            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorDetalleSolicitud.java</file>
             <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorAddPersona.java</file>
-            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaDetallesSolicitud.java</file>
-            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/sql/setup.sql</file>
-            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorListaSolicitante.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/config/.gitignore</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorRegistros.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorCharla.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaDetalleSolicitante.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorBeneficiario.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaRegistros.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaReportes.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorDetalleSolicitud.java</file>
             <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaCrearSolicitud.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaGuardarPersona.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorListaSolicitante.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorReportes.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/sql/setup.sql</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorBackOffice.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/controladores/ControladorUpdatePersona.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaLogin.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/vistas/swing/VentanaDetallesSolicitud.java</file>
+            <file>file:/home/prometheus/Documentos/UCLA/2021-2/Lab%20I/Workspace/Current/Proyecto_Laboratorio/src/config/.env</file>
         </group>
     </open-files>
 </project-private>
