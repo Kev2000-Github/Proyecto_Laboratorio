@@ -88,6 +88,8 @@ public class VentanaListaPresupuestos extends MetodosGenerales {
                 "Solicitud", "Fundacion", "Encargado", "Beneficiario", "Presupuesto"
             }
         ));
+        tablaPresupuestos.setToolTipText("");
+        tablaPresupuestos.setInheritsPopupMenu(true);
         jScrollPane1.setViewportView(tablaPresupuestos);
 
         jScrollPane2.setViewportView(jScrollPane1);

@@ -39,6 +39,11 @@ public class ControladorReportes extends ControladorGeneral {
             window.dispose();
             new ControladorListaPresupuesto(user);
         }
+        if (source == window.getResponsableList()) {
+            window.dispose();
+            new ControladorListaResponsable(user);
+        }
+        
     }
     
    

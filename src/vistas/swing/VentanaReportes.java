@@ -32,6 +32,7 @@ public class VentanaReportes extends MetodosGenerales {
     private void agregarListener(ActionListener accion){
         listadoSolibtn.addActionListener(accion);
         listadoPrepBtn.addActionListener(accion);
+        listadoRespBtn.addActionListener(accion);
     }
     
     
@@ -49,6 +50,7 @@ public class VentanaReportes extends MetodosGenerales {
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
         listadoPrepBtn = new javax.swing.JButton();
+        listadoRespBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -69,17 +71,21 @@ public class VentanaReportes extends MetodosGenerales {
         goBackLbl.setName("goBack"); // NOI18N
 
         listadoPrepBtn.setText("Listado Presupuestos");
+        listadoPrepBtn.setToolTipText("");
+        listadoPrepBtn.setInheritsPopupMenu(true);
         listadoPrepBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listadoPrepBtnActionPerformed(evt);
             }
         });
 
+        listadoRespBtn.setLabel("Listado Responsable");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,11 +94,13 @@ public class VentanaReportes extends MetodosGenerales {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(listadoPrepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(listadoSolibtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 46, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(listadoSolibtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +114,9 @@ public class VentanaReportes extends MetodosGenerales {
                     .addComponent(listadoSolibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(listadoPrepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,12 +171,18 @@ public class VentanaReportes extends MetodosGenerales {
     public JButton getPresupuestosList() {
         return listadoPrepBtn;
     }
+    
+    public JButton getResponsableList() {
+        return listadoRespBtn;
+    }
+    
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton listadoPrepBtn;
+    private javax.swing.JButton listadoRespBtn;
     private javax.swing.JButton listadoSolibtn;
     private vistas.swing.componentes.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
