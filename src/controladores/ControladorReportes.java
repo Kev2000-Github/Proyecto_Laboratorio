@@ -31,11 +31,19 @@ public class ControladorReportes extends ControladorGeneral {
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
-        if (source == window.getSolicitantes_list()) {
+        if (source == window.getSolicitantesList()) {
             window.dispose();
             new ControladorListaSolicitante(user);
         }
-    
+        if (source == window.getPresupuestosList()) {
+            window.dispose();
+            new ControladorListaPresupuesto(user);
+        }
+        if (source == window.getResponsableList()) {
+            window.dispose();
+            new ControladorListaResponsable(user);
+        }
+        
     }
     
    

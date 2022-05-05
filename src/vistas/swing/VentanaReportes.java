@@ -31,7 +31,8 @@ public class VentanaReportes extends MetodosGenerales {
 
     private void agregarListener(ActionListener accion){
         listadoSolibtn.addActionListener(accion);
-        
+        listadoPrepBtn.addActionListener(accion);
+        listadoRespBtn.addActionListener(accion);
     }
     
     
@@ -48,6 +49,8 @@ public class VentanaReportes extends MetodosGenerales {
         listadoSolibtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
+        listadoPrepBtn = new javax.swing.JButton();
+        listadoRespBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -67,22 +70,37 @@ public class VentanaReportes extends MetodosGenerales {
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
 
+        listadoPrepBtn.setText("Listado Presupuestos");
+        listadoPrepBtn.setToolTipText("");
+        listadoPrepBtn.setInheritsPopupMenu(true);
+        listadoPrepBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listadoPrepBtnActionPerformed(evt);
+            }
+        });
+
+        listadoRespBtn.setLabel("Listado Responsable");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(goBackLbl)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listadoSolibtn)
-                        .addGap(28, 28, 28))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 46, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(listadoSolibtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +112,11 @@ public class VentanaReportes extends MetodosGenerales {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listadoSolibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -103,6 +125,10 @@ public class VentanaReportes extends MetodosGenerales {
     private void listadoSolibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoSolibtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listadoSolibtnActionPerformed
+
+    private void listadoPrepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoPrepBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listadoPrepBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,14 +164,25 @@ public class VentanaReportes extends MetodosGenerales {
             }
         });
     }
-     public JButton getSolicitantes_list() {
+     public JButton getSolicitantesList() {
         return listadoSolibtn;
     }
+
+    public JButton getPresupuestosList() {
+        return listadoPrepBtn;
+    }
+    
+    public JButton getResponsableList() {
+        return listadoRespBtn;
+    }
+    
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton listadoPrepBtn;
+    private javax.swing.JButton listadoRespBtn;
     private javax.swing.JButton listadoSolibtn;
     private vistas.swing.componentes.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
