@@ -32,11 +32,13 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     //Crear Variable Ventana y DaoFactory
     VentanaCharlas ventana;
     DaoFactory daoFactory;
+    CharlaDao charlaDao;
     
 
         public ControladorCharla(Usuario user) {
         super(user);
         daoFactory = new DaoFactory();
+        charlaDao = new CharlaDao();
         ventana = new VentanaCharlas(this, this, this);
 
         ventana.setVisible(true);
@@ -55,20 +57,23 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     }     
    //=*
     public void fillCharlas(String selection) {
+
         DefaultTableModel modelCharlas = new DefaultTableModel() {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
             }
         };
-        
-        CharlaDao charlaDao = new CharlaDao();
         List<Charla> ch_list = charlaDao.getCharlasByType(selection);
         modelCharlas.setColumnCount(5);
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
         for (Charla c : ch_list) {
-            modelCharlas.addRow(new Object[]{Boolean.FALSE, c.getId(), c.getTema(), c.getDireccion(), c.getOrganismo(), (c.getFecha()).toString()});
+            
+            CharlaDao charlaDao = new CharlaDao();
+            Charla charla = charlaDao.get(c.getId());
+            modelCharlas.addRow(new Object[]{Boolean.FALSE, c.getId(), 
+                c.getTema(), c.getDireccion(), c.getOrganismo(), c.getTema()});
         }
         ventana.setModelTablaCharla(modelCharlas);
     }
