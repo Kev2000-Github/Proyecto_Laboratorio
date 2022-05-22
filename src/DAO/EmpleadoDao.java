@@ -9,9 +9,7 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Beneficiario;
 import modelos.Empleado;
-import modelos.Persona;
 
 public class EmpleadoDao implements IDao<Empleado> {
 

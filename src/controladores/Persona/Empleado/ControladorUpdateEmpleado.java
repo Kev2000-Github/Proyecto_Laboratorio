@@ -1,12 +1,10 @@
 package controladores.Persona.Empleado;
-//TODO: IMPORTANT refactor hard here
-import DAO.BeneficiarioDao;
+
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
-import controladores.ControladorComponente.ControladorGeneral;
 import controladores.ControladorComponente.ControladorUpdateGeneral;
 import controladores.Mediator.Router;
 
@@ -17,7 +15,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import modelos.Usuario;
 import utils.Utils;
 import vistas.general.ComboboxItem;
 import javax.swing.JLabel;
@@ -26,7 +23,6 @@ import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Persona;
 import vistas.swing.VentanaEditarPersona;
-import vistas.swing.VentanaGuardarPersona;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

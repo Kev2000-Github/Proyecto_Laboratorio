@@ -1,23 +1,18 @@
 package controladores.Solicitud;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.Year;
 
 import modelos.Beneficiario;
-import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import utils.Utils;
 import vistas.swing.VentanaDetallesSolicitud;
-import vistas.swing.VentanaGestionarSolicitud;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +21,10 @@ import javax.swing.JLabel;
 
 import DAO.BeneficiarioDao;
 import DAO.CharlaDao;
-import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorDetailsGeneral;
-import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.Router;
 
 /*

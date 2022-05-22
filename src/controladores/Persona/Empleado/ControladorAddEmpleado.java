@@ -1,6 +1,5 @@
 package controladores.Persona.Empleado;
 
-import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.PersonaDao;
@@ -16,7 +15,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import modelos.Usuario;
 import utils.Utils;
 import vistas.general.ComboboxItem;
 import javax.swing.JLabel;

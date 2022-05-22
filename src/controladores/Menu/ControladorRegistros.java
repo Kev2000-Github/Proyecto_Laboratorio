@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.Router;
-import modelos.Usuario;
 import vistas.swing.VentanaRegistros;
 
 /*

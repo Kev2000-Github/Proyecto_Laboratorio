@@ -1,7 +1,6 @@
 package controladores.Solicitud;
 
 import DAO.BeneficiarioDao;
-import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.general.DaoFactory;
@@ -18,11 +17,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
-import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
@@ -61,9 +58,8 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         fillEmpleado();
         fillBeneficiario();
         fillPrioridad();
-        String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
-        fillServicios(fundacion_id);
-
+        String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
+        fillServicios(fundacionId);
     }
 
     public void fillFundacion() {

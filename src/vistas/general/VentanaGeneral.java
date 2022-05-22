@@ -1,8 +1,6 @@
 package vistas.general;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

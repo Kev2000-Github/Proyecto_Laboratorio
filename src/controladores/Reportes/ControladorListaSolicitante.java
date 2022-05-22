@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
 import modelos.Fundacion;
 import modelos.Solicitud;
-import modelos.Usuario;
 import vistas.swing.VentanaDetalleSolicitante;
 import java.awt.event.MouseEvent;
 import java.util.List;

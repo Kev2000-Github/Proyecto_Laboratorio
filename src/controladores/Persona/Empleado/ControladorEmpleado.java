@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import modelos.Usuario;
 import javax.swing.JLabel;
 import modelos.Empleado;
 import vistas.swing.VentanaGestionarBackOffice;

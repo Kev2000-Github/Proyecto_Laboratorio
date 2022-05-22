@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Empleado;
 import modelos.Solicitud;
-import modelos.Usuario;
 import vistas.swing.VentanaListaResponsable;
 import java.awt.event.MouseEvent;
 import java.util.List;

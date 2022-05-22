@@ -1,19 +1,15 @@
 package controladores.Solicitud;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import vistas.swing.VentanaGestionarSolicitud;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

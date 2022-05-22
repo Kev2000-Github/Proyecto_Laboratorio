@@ -5,7 +5,6 @@
 package controladores.Reportes;
 import javax.swing.table.DefaultTableModel;
 
-import modelos.Usuario;
 import utils.Constants;
 import vistas.swing.VentanaListaPresupuestos;
 
