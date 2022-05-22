@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
+package controladores.Reportes;
 import javax.swing.table.DefaultTableModel;
 
 import modelos.Empleado;
@@ -14,6 +14,8 @@ import java.util.List;
 import javax.swing.JLabel;
 import DAO.EmpleadoDao;
 import DAO.SolicitudDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 /**
  *
  * @author prometheus
@@ -22,15 +24,23 @@ public class ControladorListaResponsable extends ControladorGeneral {
     VentanaListaResponsable window;
     SolicitudDao solicitudDao;
     
-      public ControladorListaResponsable(Usuario user) {
-        super(user);
+      public ControladorListaResponsable(Router router) {
+        super("listaresponsable", router);
+        solicitudDao = new SolicitudDao();
+      }
+
+        
+    public void initGUI(){
         window = new VentanaListaResponsable(this, this);
         window.setVisible(true);
-        solicitudDao = new SolicitudDao();
         fillResponsables();
-        }
+    }
+
+    public void closeGUI(){
+        window.dispose();
+    }
         
-      public void fillResponsables() {
+    public void fillResponsables() {
         DefaultTableModel modelResponsables = new DefaultTableModel();
         List<Solicitud> solicitudes = solicitudDao.getAllPending();  
         modelResponsables.setColumnCount(2);
@@ -53,12 +63,10 @@ public class ControladorListaResponsable extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorBackOffice(user);
+                router.notify(this, "go-reportes");
             }
         }
     }

@@ -5,7 +5,7 @@
 package vistas.swing;
 
 import vistas.general.ComboboxItem;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
@@ -18,7 +18,7 @@ import vistas.swing.componentes.textInputSearch;
  *
  * @author ASRock
  */
-public class VentanaGuardarPersona extends MetodosGenerales {
+public class VentanaGuardarPersona extends VentanaGeneral {
 
     /**
      * Creates new form VentanaDetallesSolicitud

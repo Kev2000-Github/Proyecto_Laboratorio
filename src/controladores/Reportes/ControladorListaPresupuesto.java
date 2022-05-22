@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
+package controladores.Reportes;
 import javax.swing.table.DefaultTableModel;
 
 import modelos.Usuario;
@@ -15,6 +15,9 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 import DAO.SolicitudDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import javax.swing.DefaultComboBoxModel;
 import vistas.general.ComboboxItem;
 import java.awt.event.ActionEvent;
@@ -28,13 +31,20 @@ public class ControladorListaPresupuesto extends ControladorGeneral {
     VentanaListaPresupuestos window;
     SolicitudDao solicitudDao;
     
-    public ControladorListaPresupuesto(Usuario user) {
-        super(user);
+    public ControladorListaPresupuesto(Router router) {
+        super("listapresupuesto", router);
+        solicitudDao = new SolicitudDao();        
+    }
+
+    public void initGUI(){
         window = new VentanaListaPresupuestos(this, this);
         window.setVisible(true);
-        solicitudDao = new SolicitudDao();
         fillPresupuestos("aprobado");
         fillStatuses();
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillPresupuestos(String status) {
@@ -88,12 +98,10 @@ public class ControladorListaPresupuesto extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorReportes(user);
+                router.notify(this, "go-reportes");
             }
         }
     }

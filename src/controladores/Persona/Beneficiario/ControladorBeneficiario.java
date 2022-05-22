@@ -1,4 +1,4 @@
-package controladores;
+package controladores.Persona.Beneficiario;
 
 import DAO.BeneficiarioDao;
 import DAO.ServicioDao;
@@ -22,7 +22,11 @@ import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
 import javax.swing.JLabel;
-import controladores.ControladorHome;
+
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+import controladores.Menu.ControladorHome;
+
 import javax.swing.JButton;
 import modelos.Beneficiario;
 import vistas.swing.VentanaGestionarBackOffice;
@@ -40,17 +44,19 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
 
-    public ControladorBeneficiario(Usuario user) {
-        super(user);
+    public ControladorBeneficiario(Router router) {
+        super("beneficiario", router);
         daoFactory = new DaoFactory();
-        window = new VentanaGestionarBackOffice("Gestionar Beneficiarios", this, this);
-        window.setVisible(true);
-        init();
     }
 
-    public void init() {
+    public void initGUI(){
+        window = new VentanaGestionarBackOffice("Gestionar Beneficiarios", this, this);
+        window.setVisible(true);
         fillBeneficiarios();
+    }
 
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillBeneficiarios() {
@@ -88,7 +94,7 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
                 Beneficiario ben = new Beneficiario();
                 ben.setId(idString);
                 benDao.delete(ben);
-                init();
+                fillBeneficiarios();
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -100,15 +106,13 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
-                window.dispose();
-                new ControladorUpdatePersona(user, "beneficiario", idString);
+                router.notify(this, "update-updatebeneficiario-" + idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
         }
         if (source == window.getCrear()) {
-            window.dispose();
-            new ControladorAddPersona(user, "beneficiario", null);
+            router.notify(this, "go-addbeneficiario");
         }
 
     }
@@ -124,12 +128,10 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorRegistros(user);
+                router.notify(this, "go-registros");
             }
         }
     }

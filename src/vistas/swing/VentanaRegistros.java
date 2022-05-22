@@ -6,7 +6,7 @@ package vistas.swing;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.MouseListener;
 
 
@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
  *
  * @author juanperez
  */
-public class VentanaRegistros extends MetodosGenerales {
+public class VentanaRegistros extends VentanaGeneral {
 
     /**
      * Creates new form VentanaHome

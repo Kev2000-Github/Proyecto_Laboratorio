@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistas.swing;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
@@ -17,7 +17,7 @@ import vistas.general.ComboboxItem;
  *
  * @author prometheus
  */
-public class VentanaListaPresupuestos extends MetodosGenerales {
+public class VentanaListaPresupuestos extends VentanaGeneral {
     String selectedRow;
     /**
      * Creates new form VentanaDetalleSolicitante

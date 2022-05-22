@@ -1,11 +1,14 @@
-package controladores;
-
+package controladores.Persona;
+//TODO: IMPORTANT refactor hard here
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -14,12 +17,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import modelos.Usuario;
+import utils.Utils;
 import vistas.general.ComboboxItem;
 import javax.swing.JLabel;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Persona;
+import vistas.swing.VentanaEditarPersona;
 import vistas.swing.VentanaGuardarPersona;
 
 /*
@@ -30,21 +35,26 @@ import vistas.swing.VentanaGuardarPersona;
  *
  * @author juanperez
  */
-public class ControladorAddPersona extends ControladorGeneral implements ListSelectionListener {
+public class ControladorUpdatePersona extends ControladorGeneral implements ListSelectionListener {
 
-    VentanaGuardarPersona window;
+    VentanaEditarPersona window;
     DaoFactory daoFactory;
     private String type;
-    private String id;
 
-    public ControladorAddPersona(Usuario user, String type, String id) {
-        super(user);
+    public ControladorUpdatePersona(Router router, String type, String id) {
+        super(id, router);
         daoFactory = new DaoFactory();
         this.type = type;
-        this.id = id;
-        window = new VentanaGuardarPersona("Crear " + type, this, this);
+    }
+
+    public void initGUI(){
+        window = new VentanaEditarPersona("Editar " + type, this, this);
         window.setVisible(true);
         init();
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillModel(String cedula,
@@ -53,43 +63,15 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
             String correo,
             String direccion,
             String fundacion_id) {
-        window.getCedula().setTextField(cedula);
+        window.getCedula().setText(cedula);
         window.getNombre().setTextField(nombre);
         window.getApellido().setTextField(apellido);
         window.getTelefono().setTextField(telefono);
         window.getCorreo().setTextField(correo);
         window.getDireccion().setTextField(direccion);
 
-        int selectedItem = findCombobox(window.getFundaciones(), fundacion_id);
+        int selectedItem = Utils.findCombobox(window.getFundaciones(), fundacion_id);
         window.setSelectedFundacion(selectedItem != -1 ? selectedItem : 0);
-    }
-
-    public void init() {
-        fillFundacion();
-        if (this.id != null) {
-            if (type == "beneficiario") {
-                BeneficiarioDao benDao = new BeneficiarioDao();
-                Beneficiario model = benDao.get(this.id);
-                fillModel(model.getCedula(),
-                        model.getNombre(),
-                        model.getApellido(),
-                        model.getTelefono(),
-                        model.getCorreo(),
-                        model.getDireccion(),
-                        model.getFundacionId());
-            } else {
-                EmpleadoDao empDao = new EmpleadoDao();
-                Empleado model = empDao.get(this.id);
-                fillModel(model.getCedula(),
-                        model.getNombre(),
-                        model.getApellido(),
-                        model.getTelefono(),
-                        model.getCorreo(),
-                        model.getDireccion(),
-                        model.getFundacionId());
-            }
-
-        }
     }
 
     public void fillFundacion() {
@@ -108,19 +90,9 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
 
     }
 
-    public void goBack() {
-        if (this.type == "beneficiario") {
-            window.dispose();
-            new ControladorBeneficiario(user);
-        } else {
-            window.dispose();
-            new ControladorEmpleado(user);
-        }
-    }
-
     public void clear() {
         fillFundacion();
-        window.getCedula().setTextField("");
+        window.getCedula().setText("");
         window.getNombre().setTextField("");
         window.getApellido().setTextField("");
         window.getTelefono().setTextField("");
@@ -130,7 +102,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
 
     public Persona getPersona() {
         Persona persona = new Persona();
-        persona.setCedula(window.getCedula().getTextField());
+        persona.setCedula(window.getCedula().getText());
         persona.setNombre(window.getNombre().getTextField());
         persona.setApellido(window.getApellido().getTextField());
         persona.setTelefono(window.getTelefono().getTextField());
@@ -143,7 +115,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
         Persona persona = getPersona();
         Beneficiario beneficiario = new Beneficiario();
         beneficiario.setId(this.id != null ? this.id : window.getSaltString());
-        beneficiario.setCedula(window.getCedula().getTextField());
+        beneficiario.setCedula(window.getCedula().getText());
         beneficiario.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
         beneficiario.setNombre(persona.getNombre());
         beneficiario.setApellido(persona.getApellido());
@@ -157,7 +129,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
         Persona persona = getPersona();
         Empleado empleado = new Empleado();
         empleado.setId(this.id != null ? this.id : window.getSaltString());
-        empleado.setCedula(window.getCedula().getTextField());
+        empleado.setCedula(window.getCedula().getText());
         empleado.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
         empleado.setNombre(persona.getNombre());
         empleado.setApellido(persona.getApellido());
@@ -176,7 +148,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
     }
 
     public Boolean validateForm() {
-        return window.getCedula().getTextField().isEmpty()
+        return window.getCedula().getText().isEmpty()
                 || window.getNombre().getTextField().isEmpty()
                 || window.getApellido().getTextField().isEmpty()
                 || window.getTelefono().getTextField().isEmpty()
@@ -224,6 +196,42 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
             //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {
             System.out.println("controladores.ControladorPersona.save()" + e);
+        }
+    }
+
+    public void goBack() {
+        if (this.type == "beneficiario") {
+            router.notify(this, "go-beneficiario");
+        } else {
+            router.notify(this, "go-empleado");
+        }
+    }
+
+    public void init() {
+        fillFundacion();
+        if (this.id != null) {
+            if (type == "beneficiario") {
+                BeneficiarioDao benDao = new BeneficiarioDao();
+                Beneficiario model = benDao.get(this.id);
+                fillModel(model.getCedula(),
+                        model.getNombre(),
+                        model.getApellido(),
+                        model.getTelefono(),
+                        model.getCorreo(),
+                        model.getDireccion(),
+                        model.getFundacionId());
+            } else {
+                EmpleadoDao empDao = new EmpleadoDao();
+                Empleado model = empDao.get(this.id);
+                fillModel(model.getCedula(),
+                        model.getNombre(),
+                        model.getApellido(),
+                        model.getTelefono(),
+                        model.getCorreo(),
+                        model.getDireccion(),
+                        model.getFundacionId());
+            }
+
         }
     }
 
@@ -285,10 +293,6 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
             save();
             goBack();
         }
-        if (source == window.getCedula().getSourceButton()) {
-            String cedula = window.getCedula().getTextField();
-            searchPersona(cedula);
-        }
     }
 
     @Override
@@ -302,8 +306,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
         if (source.equals("javax.swing.JLabel")) {
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if (lbl.getName() == "goBack") {
                 goBack();

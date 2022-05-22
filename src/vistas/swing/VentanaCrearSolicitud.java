@@ -20,14 +20,14 @@ import modelos.Servicio;
 import modelos.Solicitud;
 import utils.Constants;
 import vistas.general.ComboboxItem;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import vistas.general.MyTableModel;
 
 /**
  *
  * @author juanperez
  */
-public class VentanaCrearSolicitud extends MetodosGenerales {
+public class VentanaCrearSolicitud extends VentanaGeneral {
 
     /**
      * Creates new form VentanaHome

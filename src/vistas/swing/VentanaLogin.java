@@ -5,14 +5,14 @@
 package vistas.swing;
 
 import java.awt.event.ActionListener;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.MouseListener;
 
 /**
  *
  * @author juanperez
  */
-public class VentanaLogin extends MetodosGenerales {
+public class VentanaLogin extends VentanaGeneral {
 
     /**
      * Creates new form VentanaLogin

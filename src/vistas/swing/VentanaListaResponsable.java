@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistas.swing;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +13,7 @@ import javax.swing.JTable;
  *
  * @author prometheus
  */
-public class VentanaListaResponsable extends MetodosGenerales {
+public class VentanaListaResponsable extends VentanaGeneral {
 
     /**
      * Creates new form VentanaListaResponsable

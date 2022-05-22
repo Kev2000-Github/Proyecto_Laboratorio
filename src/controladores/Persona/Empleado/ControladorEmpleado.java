@@ -1,8 +1,11 @@
-package controladores;
+package controladores.Persona.Empleado;
 
 import DAO.EmpleadoDao;
 
 import DAO.general.DaoFactory;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -27,17 +30,19 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
 
-    public ControladorEmpleado(Usuario user) {
-        super(user);
+    public ControladorEmpleado(Router router) {
+        super("empleado", router);
         daoFactory = new DaoFactory();
-        window = new VentanaGestionarBackOffice("Gestionar Empleados", this, this);
-        window.setVisible(true);
-        init();
     }
 
-    public void init() {
+    public void initGUI(){
+        window = new VentanaGestionarBackOffice("Gestionar Empleados", this, this);
+        window.setVisible(true);
         fillEmpleados();
+    }
 
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillEmpleados() {
@@ -75,7 +80,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
                 Empleado emp = new Empleado();
                 emp.setId(idString);
                 empDao.delete(emp);
-                init();
+                fillEmpleados();
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -87,25 +92,19 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
-                window.dispose();
-                new ControladorUpdatePersona(user, "empleado", idString);
+                router.notify(this, "update-updateempleado-" + idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
-
-            //  window.dispose();
-            //  new ControladorPersona(user, "beneficiario", null);
         }
         if (source == window.getCrear()) {
-            window.dispose();
-            new ControladorAddPersona(user, "empleado", null);
+            router.notify(this, "go-addempleado");
         }
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //  System.out.println("t" + String.valueOf(calcCosto()));
     }
 
     @Override
@@ -114,12 +113,10 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
         if (source.equals("javax.swing.JLabel")) {
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
-                window.setVisible(false);
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorRegistros(user);
+                router.notify(this, "go-registros");
             }
         }
     }

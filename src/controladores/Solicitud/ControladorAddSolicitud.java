@@ -1,4 +1,4 @@
-package controladores;
+package controladores.Solicitud;
 
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
@@ -6,6 +6,9 @@ import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -38,12 +41,19 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     VentanaCrearSolicitud window;
     DaoFactory daoFactory;
 
-    public ControladorAddSolicitud(Usuario user) {
-        super(user);
+    public ControladorAddSolicitud(Router router) {
+        super("addsolicitud", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void initGUI(){
         window = new VentanaCrearSolicitud(this, this, this);
         window.setVisible(true);
         initCrear();
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void initCrear() {
@@ -209,8 +219,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         if (source.equals("javax.swing.JLabel")) {
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
         }
     }

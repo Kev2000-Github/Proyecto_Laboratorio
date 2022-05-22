@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
+package controladores.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 import modelos.Usuario;
 import vistas.swing.VentanaReportes;
 
@@ -14,17 +17,21 @@ import vistas.swing.VentanaReportes;
  * @author prometheus
  */
 public class ControladorReportes extends ControladorGeneral {
-
     VentanaReportes window;
 
-    public ControladorReportes(Usuario user) {
-        super(user);
-        window = new VentanaReportes(this,this);
-        window.setVisible(true);
-        
+    public ControladorReportes(Router router) {
+        super("reportes", router);
+        this.router = router;
     }
     
-    
+    public void initGUI(){
+        window = new VentanaReportes(this, this);
+        window.setVisible(true);
+    }
+
+    public void closeGUI(){
+        window.dispose();
+    }
     
     
     @Override
@@ -32,16 +39,13 @@ public class ControladorReportes extends ControladorGeneral {
         var source = arg0.getSource();
 
         if (source == window.getSolicitantesList()) {
-            window.dispose();
-            new ControladorListaSolicitante(user);
+            router.notify(this, "go-listasolicitante");
         }
         if (source == window.getPresupuestosList()) {
-            window.dispose();
-            new ControladorListaPresupuesto(user);
+            router.notify(this, "go-listapresupuesto");
         }
         if (source == window.getResponsableList()) {
-            window.dispose();
-            new ControladorListaResponsable(user);
+            router.notify(this, "go-listaresponsable");
         }
         
     }
@@ -53,12 +57,10 @@ public class ControladorReportes extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorBackOffice(user);
+                router.notify(this, "go-backoffice");
             }
         }
     }

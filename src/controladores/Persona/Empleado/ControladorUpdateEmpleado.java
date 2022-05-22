@@ -1,11 +1,15 @@
-package controladores;
-
+package controladores.Persona.Empleado;
+//TODO: IMPORTANT refactor hard here
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.ControladorComponente.ControladorUpdateGeneral;
+import controladores.Mediator.Router;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -14,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import modelos.Usuario;
+import utils.Utils;
 import vistas.general.ComboboxItem;
 import javax.swing.JLabel;
 import modelos.Beneficiario;
@@ -31,31 +36,29 @@ import vistas.swing.VentanaGuardarPersona;
  *
  * @author juanperez
  */
-public class ControladorUpdatePersona extends ControladorGeneral implements ListSelectionListener {
+public class ControladorUpdateEmpleado extends ControladorUpdateGeneral implements ListSelectionListener {
 
     VentanaEditarPersona window;
     DaoFactory daoFactory;
-    private String type;
-    private String id;
+    String empleadoId;
 
-    public ControladorUpdatePersona(Usuario user, String type, String id) {
-        super(user);
+    public ControladorUpdateEmpleado(Router router) {
+        super("updateempleado", router);
         daoFactory = new DaoFactory();
-        this.type = type;
-        this.id = id;
-        window = new VentanaEditarPersona("Editar " + type, this, this);
+    }
+
+    public void updateId(String id){
+        empleadoId = id;
+    }
+
+    public void initGUI(){
+        window = new VentanaEditarPersona("Editar Empleado", this, this);
         window.setVisible(true);
         init();
     }
 
-    public void goBack() {
-        if (this.type == "beneficiario") {
-            window.dispose();
-            new ControladorBeneficiario(user);
-        } else {
-             window.dispose();
-            new ControladorEmpleado(user);
-        }
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillModel(String cedula,
@@ -71,36 +74,8 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
         window.getCorreo().setTextField(correo);
         window.getDireccion().setTextField(direccion);
 
-        int selectedItem = findCombobox(window.getFundaciones(), fundacion_id);
+        int selectedItem = Utils.findCombobox(window.getFundaciones(), fundacion_id);
         window.setSelectedFundacion(selectedItem != -1 ? selectedItem : 0);
-    }
-
-    public void init() {
-        fillFundacion();
-        if (this.id != null) {
-            if (type == "beneficiario") {
-                BeneficiarioDao benDao = new BeneficiarioDao();
-                Beneficiario model = benDao.get(this.id);
-                fillModel(model.getCedula(),
-                        model.getNombre(),
-                        model.getApellido(),
-                        model.getTelefono(),
-                        model.getCorreo(),
-                        model.getDireccion(),
-                        model.getFundacionId());
-            } else {
-                EmpleadoDao empDao = new EmpleadoDao();
-                Empleado model = empDao.get(this.id);
-                fillModel(model.getCedula(),
-                        model.getNombre(),
-                        model.getApellido(),
-                        model.getTelefono(),
-                        model.getCorreo(),
-                        model.getDireccion(),
-                        model.getFundacionId());
-            }
-
-        }
     }
 
     public void fillFundacion() {
@@ -143,7 +118,7 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
     public Beneficiario getBeneficiario() {
         Persona persona = getPersona();
         Beneficiario beneficiario = new Beneficiario();
-        beneficiario.setId(this.id != null ? this.id : window.getSaltString());
+        beneficiario.setId(this.empleadoId != null ? this.empleadoId : window.getSaltString());
         beneficiario.setCedula(window.getCedula().getText());
         beneficiario.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
         beneficiario.setNombre(persona.getNombre());
@@ -157,7 +132,7 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
     public Empleado getEmpleado() {
         Persona persona = getPersona();
         Empleado empleado = new Empleado();
-        empleado.setId(this.id != null ? this.id : window.getSaltString());
+        empleado.setId(this.empleadoId != null ? this.empleadoId : window.getSaltString());
         empleado.setCedula(window.getCedula().getText());
         empleado.setFundacionId(((ComboboxItem) window.getFundaciones().getSelectedItem()).getId());
         empleado.setNombre(persona.getNombre());
@@ -169,7 +144,7 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
     }
 
     public void save() {
-        if (this.id != null) {
+        if (this.empleadoId != null) {
             update(id);
         } else {
             create();
@@ -190,23 +165,8 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
             if (validateForm()) {
                 window.mostrarMensaje("Faltan campos por llenar");
             } else {
-                if (this.type == "beneficiario") {
-                    Beneficiario newBeneficiario = getBeneficiario();
-                    String entity = this.type;
-                    System.out.println("save" + '-' + entity);
-                    System.out.println(newBeneficiario.toString());
-                    IDao entityDao = daoFactory.getDao(entity);
-                    Beneficiario existenteSolicitud = (Beneficiario) entityDao.get(newBeneficiario.getId());
-                    if (existenteSolicitud != null) {
-                        window.mostrarMensaje("Ya existe un registro de este " + entity);
-                        return;
-                    }
-                    entityDao.save(newBeneficiario);
-                    window.mostrarMensaje("Se agrego el registro con exito ");
-                    clear();
-                } else {
-                    Empleado newEmpleado = getEmpleado();
-                    String entity = this.type;
+                Empleado newEmpleado = getEmpleado();
+                    String entity = "empleado";
                     System.out.println("save" + '-' + entity);
                     System.out.println(newEmpleado.toString());
                     IDao entityDao = daoFactory.getDao(entity);
@@ -218,8 +178,6 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
                     entityDao.save(newEmpleado);
                     window.mostrarMensaje("Se actualizo el registro con exito ");
                     clear();
-                }
-
             }
 
             //((VentanaCrearSolicitud) window).clear();
@@ -228,27 +186,32 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
         }
     }
 
+    public void goBack() {
+        router.notify(this, "go-empleado");
+    }
+
+    public void init() {
+        fillFundacion();
+        if (this.empleadoId != null) {
+            EmpleadoDao empDao = new EmpleadoDao();
+                Empleado model = empDao.get(this.empleadoId);
+                fillModel(model.getCedula(),
+                        model.getNombre(),
+                        model.getApellido(),
+                        model.getTelefono(),
+                        model.getCorreo(),
+                        model.getDireccion(),
+                        model.getFundacionId());
+        }
+    }
+
     public void update(String cedula) {
         try {
             if (validateForm()) {
                 window.mostrarMensaje("Faltan campos por llenar");
             } else {
-                if (this.type == "beneficiario") {
-                    Beneficiario newBeneficiario = getBeneficiario();
-                    String entity = this.type;
-                    System.out.println("save" + '-' + entity);
-                    System.out.println(newBeneficiario.toString());
-                    IDao entityDao = daoFactory.getDao(entity);
-                    Beneficiario existenteSolicitud = (Beneficiario) entityDao.get(newBeneficiario.getId());
-                    if (existenteSolicitud == null) {
-                        window.mostrarMensaje("No existe este " + entity);
-                        return;
-                    }
-                    entityDao.update(newBeneficiario);
-                    window.mostrarMensaje("Se actualizo el registro con exito ");
-                } else {
-                    Empleado newEmpleado = getEmpleado();
-                    String entity = this.type;
+                Empleado newEmpleado = getEmpleado();
+                    String entity = "empleado";
                     System.out.println("save" + '-' + entity);
                     System.out.println(newEmpleado.toString());
                     IDao entityDao = daoFactory.getDao(entity);
@@ -259,8 +222,6 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
                     }
                     entityDao.update(newEmpleado);
                     window.mostrarMensaje("Se actualizo el registro con exito ");
-                    //empleado
-                }
 
             }
         } catch (Exception e) {
@@ -299,8 +260,7 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
         if (source.equals("javax.swing.JLabel")) {
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if (lbl.getName() == "goBack") {
                 goBack();

@@ -1,4 +1,4 @@
-package controladores;
+package controladores.Solicitud;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +30,9 @@ import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
+import controladores.ControladorComponente.ControladorDetailsGeneral;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,21 +42,31 @@ import DAO.SolicitudDao;
  *
  * @author juanperez
  */
-public class ControladorDetalleSolicitud extends ControladorGeneral {
+public class ControladorDetalleSolicitud extends ControladorDetailsGeneral {
 
     private VentanaDetallesSolicitud window;
     private ServicioDao servicioDao;
     private Map<String,String> solicitudInfo;
     private SolicitudDao solicitudDao;
 
-    public ControladorDetalleSolicitud(Usuario user, Map<String,String> solicitudInfo) {
-        super(user);
+    public ControladorDetalleSolicitud(Router route) {
+        super("detallesolicitud", route);
+        this.servicioDao = new ServicioDao();
+    }
+
+    public void updateMap(Map<String,String> map){
+        this.solicitudInfo = map;
+        this.solicitudDao = new SolicitudDao();
+        fillSolicitud(this.solicitudInfo);
+    }
+
+    public void initGUI(){
         window = new VentanaDetallesSolicitud(this, this);
         window.setVisible(true);
-        this.servicioDao = new ServicioDao();
-        this.solicitudInfo = solicitudInfo;
-        this.solicitudDao = new SolicitudDao();
-        fillSolicitud(solicitudInfo);
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillSolicitud(Map<String,String> solicitudInfo) {
@@ -127,8 +140,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
     }
 
     private void goBack(){
-        window.dispose();
-        new ControladorGestionarSolicitudes(user);
+        router.notify(this, "go-solicitudes");
     }
 
     private void aprobarSolicitud(){
@@ -172,8 +184,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
                 goBack();

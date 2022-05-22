@@ -1,26 +1,29 @@
 package controladores;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import DAO.EmpleadoDao;
 import DAO.UsuarioDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 import modelos.Empleado;
 import modelos.Usuario;
 import vistas.swing.VentanaLogin;
 
-public class ControladorLogin implements ActionListener {
-
+public class ControladorLogin extends ControladorGeneral {
     VentanaLogin window;
 
-    public ControladorLogin() {
-        super();
+    public ControladorLogin(Router router) {
+        super("login", router);
     }
 
-    public void init(){
+    public void initGUI(){
         window = new VentanaLogin(this);
         window.setVisible(true);
-        System.out.println("pase por aqui");
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     private Usuario autenticar(String username, String password) {
@@ -44,8 +47,8 @@ public class ControladorLogin implements ActionListener {
         } else {
             Empleado userEmpleado = getUserInfo(user);
             user.setEmpleado(userEmpleado);
-            window.dispose();
-            new ControladorHome(user);
+            this.user = user;
+            router.notify(this, "go-home");
         }
     }
 }

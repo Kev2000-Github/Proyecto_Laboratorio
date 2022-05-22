@@ -8,6 +8,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JComboBox;
+
+import vistas.general.ComboboxItem;
+
 public class Utils {
     public static ArrayList<String> getFieldsName(Object o) throws IllegalArgumentException, IllegalAccessException {
         ArrayList<String> result = new ArrayList<String>();
@@ -62,5 +66,18 @@ public class Utils {
         }
         String saltStr = salt.toString();
         return saltStr;
+    }
+
+    public static int findCombobox(JComboBox<ComboboxItem> c, String s) {
+       int size = c.getItemCount();
+       int itemFind = -1;
+       for (int i = 0; i < size; i++) {
+           ComboboxItem item = c.getItemAt(i);
+           if (s.equals(item.getId())){
+               itemFind = i;
+           }
+           System.out.println("Item at " + item.getId());
+       }
+       return itemFind;
     }
 }

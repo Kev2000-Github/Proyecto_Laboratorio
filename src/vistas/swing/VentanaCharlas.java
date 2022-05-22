@@ -13,11 +13,11 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import vistas.general.ComboboxItem;
 import vistas.general.MyTableModel;
 
-public class VentanaCharlas extends MetodosGenerales {
+public class VentanaCharlas extends VentanaGeneral {
 
     //VER TIPOS Y FUNCION DE ACCION LISTENERS
 

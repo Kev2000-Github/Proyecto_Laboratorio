@@ -1,8 +1,11 @@
-package controladores;
+package controladores.Menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 import modelos.Usuario;
 import vistas.swing.VentanaRegistros;
 
@@ -18,10 +21,17 @@ public class ControladorRegistros extends ControladorGeneral {
 
     VentanaRegistros window;
 
-    public ControladorRegistros(Usuario user) {
-        super(user);
+    public ControladorRegistros(Router router) {
+        super("registros", router);
+    }
+
+    public void initGUI(){
         window = new VentanaRegistros(this, this);
         window.setVisible(true);
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     @Override
@@ -29,13 +39,11 @@ public class ControladorRegistros extends ControladorGeneral {
         var source = arg0.getSource();
 
         if (source == window.getBeneficiarios()) {
-            window.dispose();
-            new ControladorBeneficiario(user);
+            router.notify(this, "go-beneficiario");
         }
 
         if (source == window.getEmpleados()) {
-            window.dispose();
-            new ControladorEmpleado(user);
+            router.notify(this, "go-empleado");
         }
 
     }
@@ -46,12 +54,10 @@ public class ControladorRegistros extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorBackOffice(user);
+                router.notify(this, "go-backoffice");
             }
         }
     }

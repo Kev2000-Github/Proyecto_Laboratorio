@@ -6,12 +6,12 @@ package vistas.swing;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 /**
  *
  * @author prometheus
  */
-public class VentanaReportes extends MetodosGenerales {
+public class VentanaReportes extends VentanaGeneral {
 
     /**
      * Creates new form
