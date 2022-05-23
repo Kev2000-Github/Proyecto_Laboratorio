@@ -45,6 +45,10 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
         servicioDao = new ServicioDao();
     }
 
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
     public void initGUI(){
         window = new VentanaGestionarSolicitud(this, this);
         window.setVisible(true);
@@ -105,7 +109,7 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
                 if(window.getSolicitudes().getSelectedRow() != -1){
                     window.dispose();
                     this.solicitudInfo = getSelectedSolicitud();
-                    router.notify(this, "go-detallesolicitud");
+                    router.notify(this, "go-detalleSolicitud");
                 }
                 else{
                     window.mostrarMensaje("No se ha seleccionado ninguna solicitud");

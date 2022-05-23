@@ -39,8 +39,12 @@ public class ControladorAddBeneficiario extends ControladorGeneral implements Li
     private String beneficiarioId;
 
     public ControladorAddBeneficiario(Router router) {
-        super("addbeneficiario", router);
+        super("addBeneficiario", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){

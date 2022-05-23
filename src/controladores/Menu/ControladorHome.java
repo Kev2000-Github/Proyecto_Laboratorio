@@ -53,19 +53,23 @@ public class ControladorHome extends ControladorGeneral {
 
     }
     
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
         if (source == window.getBack_office()) {
-            router.notify(this, "go-backoffice");
+            router.notify(this, "go-backOffice");
         }
         if (source == window.getGestionar_solicitud()) {
             router.notify(this, "go-solicitudes");
         }
         
         if (source == window.getCrear_solicitud()) {
-            router.notify(this, "go-addsolicitud");
+            router.notify(this, "go-addSolicitud");
         }
         if(source == window.getAsignar_fondos()) {
             int currentYear = Year.now().getValue();

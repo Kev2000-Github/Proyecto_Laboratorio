@@ -28,8 +28,12 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     SolicitudDao solicitudDao;
     
     public ControladorListaSolicitante(Router router) {
-        super("listasolicitante", router);
+        super("listaSolicitante", router);
         solicitudDao = new SolicitudDao();     
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){

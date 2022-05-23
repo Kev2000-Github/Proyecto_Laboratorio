@@ -30,6 +30,10 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         super("charla", router);
         daoFactory = new DaoFactory();
     }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
     
     public void initGUI(){
         window = new VentanaCharlas(this, this, this);

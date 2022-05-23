@@ -23,6 +23,8 @@ public abstract class ControladorGeneral implements ActionListener, MouseListene
 
     public abstract void closeGUI();
 
+    public abstract void mostrarMensaje(String mensaje);
+
     public String getId() {
         return id;
     }

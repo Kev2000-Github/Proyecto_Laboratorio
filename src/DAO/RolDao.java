@@ -21,9 +21,6 @@ public class RolDao implements IDao<Rol> {
             Rol rol = new Rol();
             rol.setId(rs.getString("id"));
             rol.setNombre(rs.getString("nombre"));	
-            PermisoDao permisoDao = new PermisoDao();
-            List<Permiso> permisos = permisoDao.getPermisoDeRol(rol.getId());
-            rol.setPermisos(permisos);
             return rol;
         }
         catch(SQLException e){
@@ -138,4 +135,29 @@ public class RolDao implements IDao<Rol> {
 		}    
     }
 
+
+    public Rol getByUser(String userId) {
+		try {
+			con = new Conne();
+            con.open();
+            String sql = "SELECT r.id, r.nombre FROM usuario u JOIN rol r"
+                        + " on u.rol_id = r.id WHERE u.id = ?"
+                        + " AND u.deleted_at is NULL AND r.deleted_at is NULL";
+            String[] params = {userId};
+            ResultSet rs = con.execQuery(sql, params);
+            
+            if(con.isResultSetEmpty(rs)) return null;
+            Rol rol = setEntity(rs);
+            return rol;	
+		} 
+        catch (Exception e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+		} 
+        finally {
+            con.close();
+        }		
+    }
 }

@@ -1,12 +1,17 @@
 package controladores;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import DAO.EmpleadoDao;
+import DAO.PermisoDao;
+import DAO.RolDao;
 import DAO.UsuarioDao;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.Router;
 import modelos.Empleado;
+import modelos.Permiso;
+import modelos.Rol;
 import modelos.Usuario;
 import vistas.swing.VentanaLogin;
 
@@ -31,10 +36,24 @@ public class ControladorLogin extends ControladorGeneral {
         return userDao.login(username, password);
     }
 
-    private Empleado getUserInfo(Usuario user) {
+    private Usuario getUserInfo(Usuario user) {
+        Usuario newUser = user;
         EmpleadoDao empleadoDao = new EmpleadoDao();
+        RolDao rolDao = new RolDao();
+        PermisoDao permisoDao = new PermisoDao();
+
         Empleado empleado = empleadoDao.get(user.getEmpleado().getId());
-        return empleado;
+        Rol rol =  rolDao.getByUser(user.getId());
+        List<Permiso> permisos = permisoDao.getAllByRole(rol.getId());
+        rol.setPermisos(permisos);
+
+        newUser.setEmpleado(empleado);
+        newUser.setRol(rol);
+        return newUser;
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     @Override
@@ -45,9 +64,8 @@ public class ControladorLogin extends ControladorGeneral {
         if (user == null) {
             window.mostrarMensaje("Credenciales incorrectas");
         } else {
-            Empleado userEmpleado = getUserInfo(user);
-            user.setEmpleado(userEmpleado);
-            this.user = user;
+            Usuario completeUser = getUserInfo(user);
+            setUser(completeUser);
             router.notify(this, "go-home");
         }
     }

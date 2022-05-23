@@ -39,8 +39,12 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
     private String empleadoId;
 
     public ControladorAddEmpleado(Router router) {
-        super("addempleado", router);
+        super("addEmpleado", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){

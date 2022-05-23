@@ -39,8 +39,12 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     DaoFactory daoFactory;
 
     public ControladorAddSolicitud(Router router) {
-        super("addsolicitud", router);
+        super("addSolicitud", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){

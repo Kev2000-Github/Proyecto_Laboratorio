@@ -21,7 +21,11 @@ public class ControladorBackOffice extends ControladorGeneral {
     VentanaBackOffice window;
 
     public ControladorBackOffice(Router router) {
-        super("backoffice", router);
+        super("backOffice", router);
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){

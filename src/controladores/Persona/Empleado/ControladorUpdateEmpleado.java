@@ -39,8 +39,12 @@ public class ControladorUpdateEmpleado extends ControladorUpdateGeneral implemen
     String empleadoId;
 
     public ControladorUpdateEmpleado(Router router) {
-        super("updateempleado", router);
+        super("updateEmpleado", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void updateId(String id){

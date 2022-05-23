@@ -97,9 +97,13 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
             }
         }
         if (source == window.getCrear()) {
-            router.notify(this, "go-addbeneficiario");
+            router.notify(this, "go-addBeneficiario");
         }
 
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     @Override

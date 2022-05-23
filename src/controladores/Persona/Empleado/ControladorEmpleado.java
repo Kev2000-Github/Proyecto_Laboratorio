@@ -97,9 +97,13 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             }
         }
         if (source == window.getCrear()) {
-            router.notify(this, "go-addempleado");
+            router.notify(this, "go-addEmpleado");
         }
 
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     @Override

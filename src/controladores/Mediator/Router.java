@@ -6,22 +6,15 @@ import controladores.ControladorComponente.ControladorDetailsGeneral;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.ControladorComponente.ControladorUpdateGeneral;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
+import modelos.Permiso;
+import modelos.Rol;
+import modelos.Usuario;
 
-public class Router {
+public class Router implements IRouterMediator<ControladorGeneral> {
     private List<ControladorGeneral> controladores;
 
     public Router(){
         controladores = new ArrayList<ControladorGeneral>();
-    }
-
-    private ControladorGeneral getControlador(String id){
-        for(ControladorGeneral controlador : controladores){
-            String contId = controlador.getId();
-            if(id.equals(contId)){
-                return controlador;
-            }
-        }
-        return null;
     }
 
     private void changeLocation(ControladorGeneral prevLocation, ControladorGeneral newLocation){
@@ -44,6 +37,17 @@ public class Router {
         newLocation.initGUI();
     }
 
+    private boolean hasPermissions(Usuario user, String locationId){
+        Rol userRole = user.getRol();
+        List<Permiso> rolePermissions = userRole.getPermisos();
+        for(Permiso permission : rolePermissions){
+            if(locationId.equals(permission.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addControlador(ControladorGeneral controller){
         controladores.add(controller);
     }
@@ -64,12 +68,30 @@ public class Router {
         return controladores.remove(controller);
     }
 
+    public ControladorGeneral getControlador(String id){
+        for(ControladorGeneral controlador : controladores){
+            String contId = controlador.getId();
+            if(id.equals(contId)){
+                return controlador;
+            }
+        }
+        return null;
+    }
+
     public void notify(ControladorGeneral component, String event){
         String[] eventContent = event.split("-");
         String action = eventContent[0];
         String to = eventContent[1];
         ControladorGeneral newControlador = getControlador(to);
         if(newControlador == null){
+            System.out.println("Controller doesn't exist");
+            return;
+        }
+        Usuario user = component.getUser();
+        boolean isPermitted = hasPermissions(user, to);
+        if(!isPermitted){
+            System.out.println("User does not have required permissions");
+            component.mostrarMensaje("El usuario no tiene los permisos requeridos");
             return;
         }
         switch(action){
@@ -89,6 +111,5 @@ public class Router {
                 toUpdate(component, (ControladorUpdateGeneral)newControlador, id);
         }
     }
-
 
 }

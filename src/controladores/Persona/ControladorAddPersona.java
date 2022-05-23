@@ -275,6 +275,10 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
         }
     }
 
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
     public void searchPersona(String cedula) {
         PersonaDao personaDao = new PersonaDao();
         Persona persona = personaDao.get(cedula);

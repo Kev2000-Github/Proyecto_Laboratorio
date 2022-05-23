@@ -24,9 +24,13 @@ public class ControladorListaResponsable extends ControladorGeneral {
     SolicitudDao solicitudDao;
     
       public ControladorListaResponsable(Router router) {
-        super("listaresponsable", router);
+        super("listaResponsable", router);
         solicitudDao = new SolicitudDao();
       }
+
+      public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
 
         
     public void initGUI(){

@@ -39,8 +39,12 @@ public class ControladorUpdateBeneficiario extends ControladorUpdateGeneral impl
     String beneficiarioId;
 
     public ControladorUpdateBeneficiario(Router router) {
-        super("updatebeneficiario", router);
+        super("updateBeneficiario", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void updateId(String id){

@@ -43,8 +43,12 @@ public class ControladorDetalleSolicitud extends ControladorDetailsGeneral {
     private SolicitudDao solicitudDao;
 
     public ControladorDetalleSolicitud(Router route) {
-        super("detallesolicitud", route);
+        super("detalleSolicitud", route);
         this.servicioDao = new ServicioDao();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void updateMap(Map<String,String> map){

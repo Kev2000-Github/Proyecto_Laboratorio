@@ -47,6 +47,10 @@ public class ControladorRegistros extends ControladorGeneral {
 
     }
 
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         String source = e.getSource().getClass().getName();
@@ -56,7 +60,7 @@ public class ControladorRegistros extends ControladorGeneral {
                 router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                router.notify(this, "go-backoffice");
+                router.notify(this, "go-backOffice");
             }
         }
     }

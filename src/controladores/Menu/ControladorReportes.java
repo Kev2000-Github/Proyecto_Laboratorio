@@ -38,17 +38,20 @@ public class ControladorReportes extends ControladorGeneral {
         var source = arg0.getSource();
 
         if (source == window.getSolicitantesList()) {
-            router.notify(this, "go-listasolicitante");
+            router.notify(this, "go-listaSolicitante");
         }
         if (source == window.getPresupuestosList()) {
-            router.notify(this, "go-listapresupuesto");
+            router.notify(this, "go-listaPresupuesto");
         }
         if (source == window.getResponsableList()) {
-            router.notify(this, "go-listaresponsable");
+            router.notify(this, "go-listaResponsable");
         }
         
     }
-    
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
    
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -59,7 +62,7 @@ public class ControladorReportes extends ControladorGeneral {
                 router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                router.notify(this, "go-backoffice");
+                router.notify(this, "go-backOffice");
             }
         }
     }

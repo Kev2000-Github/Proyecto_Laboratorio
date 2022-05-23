@@ -273,6 +273,10 @@ public class ControladorUpdatePersona extends ControladorGeneral implements List
         }
     }
 
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
     public void searchPersona(String cedula) {
         PersonaDao personaDao = new PersonaDao();
         Persona persona = personaDao.get(cedula);

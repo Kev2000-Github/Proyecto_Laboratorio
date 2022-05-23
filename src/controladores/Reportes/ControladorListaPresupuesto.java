@@ -31,8 +31,12 @@ public class ControladorListaPresupuesto extends ControladorGeneral {
     SolicitudDao solicitudDao;
     
     public ControladorListaPresupuesto(Router router) {
-        super("listapresupuesto", router);
+        super("listaPresupuesto", router);
         solicitudDao = new SolicitudDao();        
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     public void initGUI(){
