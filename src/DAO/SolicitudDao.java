@@ -3,21 +3,17 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Beneficiario;
-import modelos.Empleado;
-import modelos.Servicio;//?
+
 import modelos.Solicitud;
-import java.util.Date;
 import utils.Constants;
-import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SolicitudDao implements IDao<Solicitud> {
 
@@ -244,6 +240,37 @@ public class SolicitudDao implements IDao<Solicitud> {
         } catch (Exception e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
+        } finally {
+            con.close();
+        }
+    }
+
+    public List<Map<String, String>> getListaPresupuestos(String status) {
+        try {
+            List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM view_lista_presupuestos WHERE status = '" + status +"'";
+            ResultSet rs = con.execQuery(sql);
+            if (con.isResultSetEmpty(rs)) {
+                return result;
+            }
+            do{
+                Map<String, String> map = new HashMap<>();
+                map.put("solicitud_id",rs.getString("id"));
+                map.put("fundacion",rs.getString("fundacion"));
+                map.put("empleado",rs.getString("empleado"));
+                map.put("beneficiario",rs.getString("beneficiario"));
+                map.put("presupuesto_total",rs.getString("presupuesto_total"));
+                map.put("status",rs.getString("status"));
+                result.add(map);
+            }while(rs.next());
+            return result;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
         } finally {
             con.close();
         }

@@ -1,11 +1,13 @@
-package controladores;
+package controladores.Solicitud;
 
 import DAO.BeneficiarioDao;
-import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -15,11 +17,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelos.Beneficiario;
-import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
@@ -38,12 +38,23 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     VentanaCrearSolicitud window;
     DaoFactory daoFactory;
 
-    public ControladorAddSolicitud(Usuario user) {
-        super(user);
+    public ControladorAddSolicitud(Router router) {
+        super("addSolicitud", router);
         daoFactory = new DaoFactory();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
+    public void initGUI(){
         window = new VentanaCrearSolicitud(this, this, this);
         window.setVisible(true);
         initCrear();
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void initCrear() {
@@ -51,9 +62,8 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         fillEmpleado();
         fillBeneficiario();
         fillPrioridad();
-        String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
-        fillServicios(fundacion_id);
-
+        String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
+        fillServicios(fundacionId);
     }
 
     public void fillFundacion() {
@@ -86,14 +96,9 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     }
 
     public void fillEmpleado() {
-        DefaultComboBoxModel<ComboboxItem> modelEmpleado = new DefaultComboBoxModel<ComboboxItem>();
-        EmpleadoDao empleadoDao = new EmpleadoDao();
-        List<Empleado> empleadoList = empleadoDao.getAll();
-        for (Empleado emp : empleadoList) {
-            modelEmpleado.addElement(
-                    new ComboboxItem(emp.getId(), emp.getPersona().getCedula() + "-" + emp.getPersona().getApellido()));
-        }
-        window.setModelEmpleado(modelEmpleado);
+        String nombreCompleto = user.getEmpleado().getNombre() + " " + user.getEmpleado().getApellido();
+        String id = user.getEmpleado().getId();
+        window.setEmpleado(id, nombreCompleto);
     }
 
     public void fillBeneficiario() {
@@ -103,7 +108,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         for (Beneficiario ben : beneficiariosList) {
             modelBeneficiario.addElement(
                     new ComboboxItem(ben.getId(),
-                            ben.getCedula() + "-" + ben.getPersona().getApellido()));
+                            ben.getCedula() + "-" + ben.getApellido()));
         }
         window.setModelBeneficiario(modelBeneficiario);
     }
@@ -122,7 +127,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         Solicitud solicitud = new Solicitud();
         solicitud.setId(window.getSaltString());
         solicitud.setBeneficiarioId(((ComboboxItem) window.getBeneficiario().getSelectedItem()).getId());
-        solicitud.setEmpleadoId(((ComboboxItem) window.getEmpleado().getSelectedItem()).getId());
+        solicitud.setEmpleadoId(window.getEmpleadoId().getText());
         solicitud.setFundacionId(((ComboboxItem) window.getFundacion().getSelectedItem()).getId());
         solicitud.setPrioridad(Constants.prioridadEnum.valueOf(((ComboboxItem) window.getPrioridad().getSelectedItem()).getId()));
         ArrayList<Servicio> serviciosArr = new ArrayList<Servicio>();
@@ -214,8 +219,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         if (source.equals("javax.swing.JLabel")) {
             JLabel lbl = (JLabel) e.getSource();
             if (lbl.getName() == "goHome") {
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
         }
     }

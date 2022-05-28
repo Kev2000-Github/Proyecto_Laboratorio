@@ -2,30 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+package controladores.Reportes;
 import javax.swing.table.DefaultTableModel;
-
 import modelos.Beneficiario;
 import modelos.Fundacion;
 import modelos.Solicitud;
-import modelos.Usuario;
 import vistas.swing.VentanaDetalleSolicitante;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JLabel;
 import DAO.BeneficiarioDao;
 import DAO.FundacionDao;
-import DAO.ServicioDao;
 import DAO.SolicitudDao;
-import javax.swing.DefaultComboBoxModel;
-import modelos.Servicio;
-import vistas.general.ComboboxItem;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 
 
 
@@ -37,16 +27,24 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     VentanaDetalleSolicitante window;
     SolicitudDao solicitudDao;
     
-    public ControladorListaSolicitante(Usuario user) {
-        super(user);
-        window = new VentanaDetalleSolicitante(this, this);
-        window.setVisible(true);
-        solicitudDao = new SolicitudDao();
-        fillSolicitantes();
-        fillFundacion();
-        
+    public ControladorListaSolicitante(Router router) {
+        super("listaSolicitante", router);
+        solicitudDao = new SolicitudDao();     
     }
 
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
+    public void initGUI(){
+        window = new VentanaDetalleSolicitante(this, this);
+        window.setVisible(true);
+        fillSolicitantes();
+    }
+
+    public void closeGUI(){
+        window.dispose();
+    }
 
     public void fillSolicitantes() {
         DefaultTableModel modelSolicitantes = new DefaultTableModel();
@@ -61,11 +59,12 @@ public class ControladorListaSolicitante extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             modelSolicitantes.addRow(new Object[]{s.getId(), 
                 fundacion.getNombre(), 
-                beneficiario.getPersona().getNombre()});
+                beneficiario.getNombre() +" "+ beneficiario.getApellido()});
         }
         window.setModelSolicitantes(modelSolicitantes);
     }
 
+    /*
     public void fillFundacion() {
         DefaultComboBoxModel modelFundacion = new DefaultComboBoxModel();
         FundacionDao fundacionDao = new FundacionDao();
@@ -75,7 +74,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
                     new ComboboxItem(fund.getId(), fund.getNombre()));
         }
         window.setModelFundacioncb(modelFundacion);
-    }
+    } */
     
     
     
@@ -85,8 +84,10 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
+            }
+            if(lbl.getName() == "goBack"){
+                router.notify(this, "go-reportes");
             }
         }
     }

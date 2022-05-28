@@ -1,16 +1,13 @@
-package controladores;
+package controladores.Menu;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Year;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import DAO.FundacionDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 import modelos.Fundacion;
-import modelos.Usuario;
 import utils.Utils;
 import vistas.swing.VentanaHome;
 
@@ -23,24 +20,19 @@ import vistas.swing.VentanaHome;
  * @author juanperez
  */
 public class ControladorHome extends ControladorGeneral {
-
     VentanaHome window;
 
-    public ControladorHome(Usuario user) {
-        super(user);
+    public ControladorHome(Router router) {
+        super("home", router);
+    }
+
+    public void initGUI(){
         window = new VentanaHome(this);
         window.setVisible(true);
     }
 
-
-
-    private void goGestionarSolicitud() {
-           window.dispose();
-
-    }
-
-    private void goCrearSolicitud() {
-           window.dispose();
+    public void closeGUI(){
+        window.dispose();
     }
 
     private void asignarPartidaAnual(float partidaTotal){
@@ -61,24 +53,23 @@ public class ControladorHome extends ControladorGeneral {
 
     }
     
-    
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
         if (source == window.getBack_office()) {
-            window.dispose();
-            new ControladorBackOffice(user);
+            router.notify(this, "go-backOffice");
         }
         if (source == window.getGestionar_solicitud()) {
-            goGestionarSolicitud();
-            new ControladorGestionarSolicitudes(user);
+            router.notify(this, "go-solicitudes");
         }
         
         if (source == window.getCrear_solicitud()) {
-            goCrearSolicitud();
-            new ControladorAddSolicitud(user);
+            router.notify(this, "go-addSolicitud");
         }
         if(source == window.getAsignar_fondos()) {
             int currentYear = Year.now().getValue();
@@ -100,7 +91,6 @@ public class ControladorHome extends ControladorGeneral {
             asignarPartidaAnual(Float.parseFloat(fondos));
             window.mostrarMensaje("Los fondos fueron asignados con exito");
         }
-
     }
 
 }

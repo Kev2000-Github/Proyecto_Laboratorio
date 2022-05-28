@@ -79,14 +79,14 @@ public class PermisoDao implements IDao<Permiso> {
         }
     }
 
-    public List<Permiso> getPermisoDeRol(String rolId) {
+    public List<Permiso> getAllByRole(String rolId) {
 		try {
             List<Permiso> list = new ArrayList<Permiso>();
 			con = new Conne();
             con.open();
 			String sql = "SELECT p.id, p.descripcion FROM rol_permiso rp"
                 + " JOIN permiso p ON rp.permiso_id = p.id"
-                + " WHERE rol_id = ? AND p.deleted_at IS NULL";
+                + " WHERE rp.rol_id = ? AND p.deleted_at IS NULL";
             String[] params = {
                 rolId
             };

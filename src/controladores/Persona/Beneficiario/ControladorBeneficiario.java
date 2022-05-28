@@ -1,7 +1,6 @@
-package controladores;
+package controladores.Persona.Beneficiario;
 
-import DAO.EmpleadoDao;
-
+import DAO.BeneficiarioDao;
 import DAO.general.DaoFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -9,9 +8,12 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import modelos.Usuario;
 import javax.swing.JLabel;
-import modelos.Empleado;
+
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
+import modelos.Beneficiario;
 import vistas.swing.VentanaGestionarBackOffice;
 
 /*
@@ -22,44 +24,46 @@ import vistas.swing.VentanaGestionarBackOffice;
  *
  * @author juanperez
  */
-public class ControladorEmpleado extends ControladorGeneral implements ListSelectionListener {
+public class ControladorBeneficiario extends ControladorGeneral implements ListSelectionListener {
 
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
 
-    public ControladorEmpleado(Usuario user) {
-        super(user);
+    public ControladorBeneficiario(Router router) {
+        super("beneficiario", router);
         daoFactory = new DaoFactory();
-        window = new VentanaGestionarBackOffice("Gestionar Empleados", this, this);
+    }
+
+    public void initGUI(){
+        window = new VentanaGestionarBackOffice("Gestionar Beneficiarios", this, this);
         window.setVisible(true);
-        init();
+        fillBeneficiarios();
     }
 
-    public void init() {
-        fillEmpleados();
-
+    public void closeGUI(){
+        window.dispose();
     }
 
-    public void fillEmpleados() {
-        DefaultTableModel modelEmpleados = new DefaultTableModel();
-        EmpleadoDao empleadoDao = new EmpleadoDao();
-        List<Empleado> eList = empleadoDao.getAll();
-        modelEmpleados.setColumnCount(4);
-        modelEmpleados.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Apellido", "Cedula", "Correo"});
-        for (Empleado e : eList) {
-            modelEmpleados.addRow(new Object[]{
-                e.getId(),
-                e.getPersona().getNombre(),
-                e.getPersona().getApellido(),
-                e.getPersona().getCedula(),
-                e.getPersona().getCorreo()});
+    public void fillBeneficiarios() {
+        DefaultTableModel modelBeneficiarios = new DefaultTableModel();
+        BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+        List<Beneficiario> bList = beneficiarioDao.getAll();
+        modelBeneficiarios.setColumnCount(4);
+        modelBeneficiarios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Apellido", "Cedula", "Correo"});
+        for (Beneficiario b : bList) {
+            modelBeneficiarios.addRow(new Object[]{
+                b.getId(),
+                b.getNombre(),
+                b.getApellido(),
+                b.getCedula(),
+                b.getCorreo()});
         }
-        window.setModeloTabla(modelEmpleados);
+        window.setModeloTabla(modelBeneficiarios);
     }
 
     @Override
     public void valueChanged(ListSelectionEvent l) {
-
+     
     }
 
     @Override
@@ -71,11 +75,11 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
-                EmpleadoDao empDao = new EmpleadoDao();
-                Empleado emp = new Empleado();
-                emp.setId(idString);
-                empDao.delete(emp);
-                init();
+                BeneficiarioDao benDao = new BeneficiarioDao();
+                Beneficiario ben = new Beneficiario();
+                ben.setId(idString);
+                benDao.delete(ben);
+                fillBeneficiarios();
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -87,20 +91,19 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
-                window.dispose();
-                new ControladorPersona(user, "empleado", idString);
+                router.notify(this, "update-updatebeneficiario-" + idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
-
-            //  window.dispose();
-            //  new ControladorPersona(user, "beneficiario", null);
         }
         if (source == window.getCrear()) {
-            window.dispose();
-            new ControladorPersona(user, "empleado", null);
+            router.notify(this, "go-addBeneficiario");
         }
 
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
 
     @Override
@@ -108,18 +111,16 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
         //  System.out.println("t" + String.valueOf(calcCosto()));
     }
 
-    @Override
+  @Override
     public void mouseClicked(MouseEvent e) {
         String source = e.getSource().getClass().getName();
-        if (source.equals("javax.swing.JLabel")) {
-            JLabel lbl = (JLabel) e.getSource();
-            if (lbl.getName() == "goHome") {
-                window.setVisible(false);
-                new ControladorHome(user);
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorRegistros(user);
+                router.notify(this, "go-registros");
             }
         }
     }

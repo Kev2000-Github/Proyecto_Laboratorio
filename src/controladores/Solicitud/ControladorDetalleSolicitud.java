@@ -1,23 +1,18 @@
-package controladores;
+package controladores.Solicitud;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.Year;
 
 import modelos.Beneficiario;
-import modelos.Empleado;
 import modelos.Fundacion;
 import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import utils.Utils;
 import vistas.swing.VentanaDetallesSolicitud;
-import vistas.swing.VentanaGestionarSolicitud;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +21,11 @@ import javax.swing.JLabel;
 
 import DAO.BeneficiarioDao;
 import DAO.CharlaDao;
-import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
+import controladores.ControladorComponente.ControladorDetailsGeneral;
+import controladores.Mediator.Router;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,21 +35,35 @@ import DAO.SolicitudDao;
  *
  * @author juanperez
  */
-public class ControladorDetalleSolicitud extends ControladorGeneral {
+public class ControladorDetalleSolicitud extends ControladorDetailsGeneral {
 
     private VentanaDetallesSolicitud window;
     private ServicioDao servicioDao;
     private Map<String,String> solicitudInfo;
     private SolicitudDao solicitudDao;
 
-    public ControladorDetalleSolicitud(Usuario user, Map<String,String> solicitudInfo) {
-        super(user);
+    public ControladorDetalleSolicitud(Router route) {
+        super("detalleSolicitud", route);
+        this.servicioDao = new ServicioDao();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
+    public void updateMap(Map<String,String> map){
+        this.solicitudInfo = map;
+        this.solicitudDao = new SolicitudDao();
+        fillSolicitud(this.solicitudInfo);
+    }
+
+    public void initGUI(){
         window = new VentanaDetallesSolicitud(this, this);
         window.setVisible(true);
-        this.servicioDao = new ServicioDao();
-        this.solicitudInfo = solicitudInfo;
-        this.solicitudDao = new SolicitudDao();
-        fillSolicitud(solicitudInfo);
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillSolicitud(Map<String,String> solicitudInfo) {
@@ -119,7 +129,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
             window.mostrarMensaje("Existen otras solicitudes con mayor prioridad, procesa esas primero");
             return false;
         }
-        if(partidaRestante < costoTotal){
+        if(fundacion.getPresupuesto() < costoTotal){
             window.mostrarMensaje("No hay suficientes fondos para aprobar esto");
             return false;
         }
@@ -127,8 +137,21 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
     }
 
     private void goBack(){
-        window.dispose();
-        new ControladorGestionarSolicitudes(user);
+        router.notify(this, "go-solicitudes");
+    }
+
+    private void aprobarSolicitud(){
+        String solicitudId = solicitudInfo.get("solicitudId");
+        solicitudDao.updateStatus(solicitudId, "aprobado");
+        
+        FundacionDao fundacionDao = new FundacionDao();
+        Fundacion fundacion = fundacionDao.getFromSolicitud(solicitudId);
+        float costo = window.getCosto();
+        float updatedPresupuesto = fundacion.getPresupuesto() - costo;
+        fundacion.setPresupuesto(updatedPresupuesto);
+        fundacionDao.update(fundacion);
+        
+        window.mostrarMensaje("La solicitud fue aprobada con exito");
     }
 
     @Override
@@ -139,9 +162,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
             String name = btn.getName();
             if(name.equals("aprobar")){
                 if(checkConditions()){
-                    String solicitudId = solicitudInfo.get("solicitudId");
-                    solicitudDao.updateStatus(solicitudId, "aprobado");
-                    window.mostrarMensaje("La solicitud fue aprobada con exito");
+                    aprobarSolicitud();
                     goBack();
                 }
             }
@@ -160,8 +181,7 @@ public class ControladorDetalleSolicitud extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
                 goBack();

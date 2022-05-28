@@ -1,22 +1,18 @@
 package vistas.general;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import javax.swing.WindowConstants;
-
 import utils.Utils;
 
-public class MetodosGenerales extends javax.swing.JFrame {
+public class VentanaGeneral extends javax.swing.JFrame {
 
     protected JPanel mainContainer;
     private Color background;
 
-    public MetodosGenerales() {
+    public VentanaGeneral() {
         super();
 
     }

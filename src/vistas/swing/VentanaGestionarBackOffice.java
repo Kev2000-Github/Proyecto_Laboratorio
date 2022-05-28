@@ -4,7 +4,7 @@
  */
 package vistas.swing;
 
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASRock
  */
-public class VentanaGestionarBackOffice extends MetodosGenerales {
+public class VentanaGestionarBackOffice extends VentanaGeneral {
 
     /**
      * Creates new form VentanaGestionarSolicitud

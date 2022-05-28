@@ -1,13 +1,12 @@
-package controladores;
+package controladores.Menu;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import modelos.Usuario;
+
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 import vistas.swing.VentanaBackOffice;
-import vistas.swing.VentanaHome;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,27 +20,33 @@ public class ControladorBackOffice extends ControladorGeneral {
 
     VentanaBackOffice window;
 
-    public ControladorBackOffice(Usuario user) {
-        super(user);
+    public ControladorBackOffice(Router router) {
+        super("backOffice", router);
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
+    public void initGUI(){
         window = new VentanaBackOffice(this, this);
         window.setVisible(true);
     }
 
-   
+    public void closeGUI(){
+        window.dispose();
+    }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
 
         if (source == window.getRegistros()) {
-            window.dispose();
-            new ControladorRegistros(user);
+            router.notify(this, "go-registros");
         }
         
         if (source == window.getReportes()) {
-         window.dispose();
-            new ControladorReportes(user);
-
+            router.notify(this, "go-reportes");
         }
     }
 
@@ -51,12 +56,10 @@ public class ControladorBackOffice extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
             if(lbl.getName() == "goBack"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
         }
     }

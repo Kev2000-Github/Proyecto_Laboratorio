@@ -108,15 +108,14 @@ public class FundacionDao implements IDao<Fundacion> {
         try {
             con = new Conne();
             con.open();
+            String presupuesto = String.valueOf(fundacion.getPresupuesto());
+            String partidoAnual = String.valueOf(fundacion.getPorcentajePartidoAnual());
             String sql = "UPDATE fundacion SET"
-                    + " nombre=?, presupuesto=?, porcentaje_partido_anual=?"
+                    + " nombre=?, presupuesto=" + presupuesto + ", porcentaje_partido_anual=" + partidoAnual
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
                     fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual()),
                     fundacion.getId()
-
             };
             con.execMutation(sql, params);
         } catch (Exception e) {
@@ -249,7 +248,7 @@ public class FundacionDao implements IDao<Fundacion> {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT s.id, nombre, presupuesto, porcentaje_partido_anual"
+            String sql = "SELECT f.id, nombre, presupuesto, porcentaje_partido_anual"
                     + " FROM fundacion f JOIN solicitud s ON s.fundacion_id = f.id"
                     + " WHERE s.id = ? AND f.deleted_at IS NULL AND s.deleted_at IS NULL";
             String[] params = { solicitudId };

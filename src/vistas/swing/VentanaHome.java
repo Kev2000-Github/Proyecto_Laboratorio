@@ -6,13 +6,13 @@ package vistas.swing;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 
 /**
  *
  * @author juanperez
  */
-public class VentanaHome extends MetodosGenerales {
+public class VentanaHome extends VentanaGeneral {
 
     /**
      * Creates new form VentanaHome

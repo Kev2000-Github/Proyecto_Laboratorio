@@ -1,19 +1,15 @@
-package controladores;
+package controladores.Solicitud;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.Servicio;
 import modelos.Solicitud;
-import modelos.Usuario;
 import vistas.swing.VentanaGestionarSolicitud;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +21,8 @@ import DAO.EmpleadoDao;
 import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -37,16 +35,28 @@ import DAO.SolicitudDao;
 public class ControladorGestionarSolicitudes extends ControladorGeneral {
 
     VentanaGestionarSolicitud window;
+    Map<String, String> solicitudInfo;
     SolicitudDao solicitudDao;
     ServicioDao servicioDao;
 
-    public ControladorGestionarSolicitudes(Usuario user) {
-        super(user);
-        window = new VentanaGestionarSolicitud(this, this);
-        window.setVisible(true);
+    public ControladorGestionarSolicitudes(Router router) {
+        super("solicitudes", router);
         solicitudDao = new SolicitudDao();
         servicioDao = new ServicioDao();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
+    }
+
+    public void initGUI(){
+        window = new VentanaGestionarSolicitud(this, this);
+        window.setVisible(true);
         fillSolicitudes();
+    }
+
+    public void closeGUI(){
+        window.dispose();
     }
 
     public void fillSolicitudes() {
@@ -65,8 +75,8 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
             modelSolicitudes.addRow(new Object[]{
                 s.getId(), 
                 fundacion.getNombre(), 
-                beneficiario.getPersona().getNombre(), 
-                empleado.getPersona().getNombre(),
+                beneficiario.getNombre() + " " + beneficiario.getApellido(), 
+                empleado.getNombre() + " " + empleado.getApellido(),
                 s.getPrioridad().toString()
             });
         }
@@ -98,8 +108,8 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
             if(name.equals("verSolicitud")){
                 if(window.getSolicitudes().getSelectedRow() != -1){
                     window.dispose();
-                    Map<String, String> solicitudInfo = getSelectedSolicitud();
-                    new ControladorDetalleSolicitud(user, solicitudInfo);
+                    this.solicitudInfo = getSelectedSolicitud();
+                    router.notify(this, "go-detalleSolicitud");
                 }
                 else{
                     window.mostrarMensaje("No se ha seleccionado ninguna solicitud");
@@ -114,8 +124,7 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
         if(source.equals("javax.swing.JLabel")){
             JLabel lbl = (JLabel)e.getSource();
             if(lbl.getName() == "goHome"){
-                window.dispose();
-                new ControladorHome(user);
+                router.notify(this, "go-home");
             }
         }
     }

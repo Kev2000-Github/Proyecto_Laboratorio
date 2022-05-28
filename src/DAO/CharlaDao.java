@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
-import javax.swing.table.DefaultTableModel;
 import modelos.Charla;
 
 public class CharlaDao implements IDao<Charla> {

@@ -2,16 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
+package controladores.Charla;
 
 import DAO.CharlaDao;
 import DAO.general.DaoFactory;
+import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.Router;
+
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelos.Charla;
-import modelos.Usuario;
 import vistas.swing.VentanaCharlas;
 
 
@@ -21,27 +23,28 @@ import vistas.swing.VentanaCharlas;
  */
 public class ControladorCharla extends ControladorGeneral implements ListSelectionListener{
 
-    VentanaCharlas ventana;
+    VentanaCharlas window;
     DaoFactory daoFactory;
     
-        public ControladorCharla(Usuario user) {
-        super(user);
-        //Inicializo las vars de arriba
+    public ControladorCharla(Router router) {
+        super("charla", router);
         daoFactory = new DaoFactory();
-        ventana = new VentanaCharlas(this, this, this);
-        //Seteo la config inicial de la ventana
-        ventana.setVisible(true);
-        //Ejecuto metodo local que llena datos de la ventana y dao
-        initCrear();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        window.mostrarMensaje(mensaje);
     }
     
-   public void initCrear() {
-
-        //CONECCION DE DAO - VENTANA
-        //PARA ENVIAR COMO PARAM A fillCharlas() String fundacion_id = ((ComboboxItem) windowCrear.getFundacion().getSelectedItem()).getId();
+    public void initGUI(){
+        window = new VentanaCharlas(this, this, this);
+        window.setVisible(true);
         fillCharlas();
+    }
 
-    }     
+    public void closeGUI(){
+        window.dispose();
+    }
+ 
     //TRAER EL/LOS PARAM/S AL METODO TAMBIEN:
     public void fillCharlas() {
         DefaultTableModel modelCharlas = new DefaultTableModel() {
@@ -58,7 +61,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         for (Charla c : ch_list) {
             modelCharlas.addRow(new Object[]{Boolean.FALSE, c.getId(), c.getTema(), c.getDireccion(), c.getOrganismo(), c.getFecha()});
         }
-        ventana.setModelTablaCharla(modelCharlas);
+        window.setModelTablaCharla(modelCharlas);
     }
     
     @Override

@@ -6,15 +6,16 @@ package vistas.swing;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 /**
  *
  * @author prometheus
  */
-public class VentanaReportes extends MetodosGenerales {
+public class VentanaReportes extends VentanaGeneral {
 
     /**
-     * Creates new form VentanaReportes
+     * Creates new form
+     * @param accion
      */
     public VentanaReportes(ActionListener accion, MouseListener ml) {
         initComponents();
@@ -23,15 +24,18 @@ public class VentanaReportes extends MetodosGenerales {
         this.agregarMouseListener(ml);
         topMenu.setMenuFunctions(this, ml, "Reportes");
     }
+    
+    private void agregarMouseListener(MouseListener ml) {
+        goBackLbl.addMouseListener(ml);
+    }
 
     private void agregarListener(ActionListener accion){
         listadoSolibtn.addActionListener(accion);
-        
+        listadoPrepBtn.addActionListener(accion);
+        listadoRespBtn.addActionListener(accion);
     }
     
-    private void agregarMouseListener(MouseListener ml) {
-        
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,16 +45,16 @@ public class VentanaReportes extends MetodosGenerales {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        topMenu = new vistas.swing.componentes.topMenu();
         listadoSolibtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        topMenu = new vistas.swing.componentes.topMenu();
+        goBackLbl = new javax.swing.JLabel();
+        listadoPrepBtn = new javax.swing.JButton();
+        listadoRespBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-
-        jPanel1.setBackground(new java.awt.Color(233, 233, 233));
 
         listadoSolibtn.setText("Listado Solicitante");
         listadoSolibtn.addActionListener(new java.awt.event.ActionListener() {
@@ -60,47 +64,59 @@ public class VentanaReportes extends MetodosGenerales {
         });
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Serif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel1.setText("Bienvenido,");
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setText("BIENVENIDO,");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(listadoSolibtn)
-                .addGap(27, 27, 27))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(listadoSolibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(142, Short.MAX_VALUE))
-        );
+        goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
+        goBackLbl.setName("goBack"); // NOI18N
+
+        listadoPrepBtn.setText("Listado Presupuestos");
+        listadoPrepBtn.setToolTipText("");
+        listadoPrepBtn.setInheritsPopupMenu(true);
+        listadoPrepBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listadoPrepBtnActionPerformed(evt);
+            }
+        });
+
+        listadoRespBtn.setLabel("Listado Responsable");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(goBackLbl)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 46, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(listadoSolibtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(topMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(goBackLbl)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listadoSolibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,6 +125,10 @@ public class VentanaReportes extends MetodosGenerales {
     private void listadoSolibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoSolibtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listadoSolibtnActionPerformed
+
+    private void listadoPrepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoPrepBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listadoPrepBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,20 +160,29 @@ public class VentanaReportes extends MetodosGenerales {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            
+               // new VentanaHome().setVisible(true);
             }
         });
     }
-     public JButton getSolicitantes_list() {
+     public JButton getSolicitantesList() {
         return listadoSolibtn;
     }
+
+    public JButton getPresupuestosList() {
+        return listadoPrepBtn;
+    }
     
-   
+    public JButton getResponsableList() {
+        return listadoRespBtn;
+    }
     
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton listadoPrepBtn;
+    private javax.swing.JButton listadoRespBtn;
     private javax.swing.JButton listadoSolibtn;
     private vistas.swing.componentes.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
