@@ -2,26 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vistas.swing.componentes;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
+package vistas.swing.componentes.textInput;
 
 /**
  *
  * @author ASRock
  */
-public class textInputSearch extends javax.swing.JPanel {
+public class textInput extends javax.swing.JPanel {
 
     /**
      * Creates new form textInput
      */
-    public textInputSearch() {
+    public textInput() {
         initComponents();
-    }
-
-    public void agregarListener(ActionListener accion){
-        buscarBtn.addActionListener(accion);
     }
 
     public void setTextLabel(String text){
@@ -40,13 +33,8 @@ public class textInputSearch extends javax.swing.JPanel {
         return inputLbl.getText();
     }
 
-    public JButton getSourceButton(){
-        return buscarBtn;
-    }
-
     public void setEnabled(boolean state){
         inputField.setEnabled(state);
-        buscarBtn.setEnabled(state);
     }
 
     /**
@@ -60,18 +48,10 @@ public class textInputSearch extends javax.swing.JPanel {
 
         inputLbl = new javax.swing.JLabel();
         inputField = new javax.swing.JTextField();
-        buscarBtn = new javax.swing.JButton();
 
         inputLbl.setBackground(new java.awt.Color(255, 255, 255));
         inputLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inputLbl.setText("TextLbl");
-
-        buscarBtn.setText("buscar");
-        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,10 +60,7 @@ public class textInputSearch extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscarBtn))
+                    .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(inputLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -95,20 +72,13 @@ public class textInputSearch extends javax.swing.JPanel {
                 .addGap(1, 1, 1)
                 .addComponent(inputLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarBtn))
+                .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarBtn;
     private javax.swing.JTextField inputField;
     private javax.swing.JLabel inputLbl;
     // End of variables declaration//GEN-END:variables

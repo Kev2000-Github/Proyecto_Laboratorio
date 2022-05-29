@@ -45,7 +45,7 @@ public class VentanaHome extends VentanaGeneral {
         crear_solicitud = new javax.swing.JButton();
         gestionar_solicitud = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        topMenuLogin = new vistas.swing.componentes.topMenuLogin();
+        topMenuLogin = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
         back_office1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -198,7 +198,7 @@ public class VentanaHome extends VentanaGeneral {
     private javax.swing.JButton crear_solicitud;
     private javax.swing.JButton gestionar_solicitud;
     private javax.swing.JLabel jLabel1;
-    private vistas.swing.componentes.topMenuLogin topMenuLogin;
+    private vistas.swing.componentes.topMenuLogin.topMenuLogin topMenuLogin;
     private javax.swing.JButton updateFondos;
     // End of variables declaration//GEN-END:variables
 }

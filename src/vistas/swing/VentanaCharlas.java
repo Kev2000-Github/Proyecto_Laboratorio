@@ -50,7 +50,7 @@ public class VentanaCharlas extends VentanaGeneral {
         jScrollPane2 = new javax.swing.JScrollPane();
         charlas = new javax.swing.JTable();
         BtnRegistrarAsistentes = new javax.swing.JButton();
-        topMenu = new vistas.swing.componentes.topMenuLogin();
+        topMenu = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
 
         jMenu1.setText("jMenu1");
 
@@ -259,6 +259,6 @@ public class VentanaCharlas extends VentanaGeneral {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTipodeCharla;
     private javax.swing.JLabel lblTitle;
-    private vistas.swing.componentes.topMenuLogin topMenu;
+    private vistas.swing.componentes.topMenuLogin.topMenuLogin topMenu;
     // End of variables declaration//GEN-END:variables
 }

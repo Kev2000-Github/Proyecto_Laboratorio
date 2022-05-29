@@ -50,7 +50,7 @@ public class VentanaRegistros extends VentanaGeneral {
         empleados = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -158,6 +158,6 @@ public class VentanaRegistros extends VentanaGeneral {
     private javax.swing.JButton empleados;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

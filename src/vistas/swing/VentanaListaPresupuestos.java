@@ -67,7 +67,7 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
         jLabel1 = new javax.swing.JLabel();
         status = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -216,6 +216,6 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<ComboboxItem> status;
     private javax.swing.JTable tablaPresupuestos;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

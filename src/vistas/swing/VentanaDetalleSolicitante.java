@@ -68,7 +68,7 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
         tablaSolicitantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -197,6 +197,6 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaSolicitantes;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

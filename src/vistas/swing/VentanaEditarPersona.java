@@ -13,8 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import vistas.swing.componentes.textInput;
-import vistas.swing.componentes.textInputSearch;
+import vistas.swing.componentes.textInput.textInput;
+import vistas.swing.componentes.textInputSearch.textInputSearch;
 
 /**
  *
@@ -137,14 +137,14 @@ public class VentanaEditarPersona extends VentanaGeneral {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         jPanel1 = new javax.swing.JPanel();
         panelInputs = new javax.swing.JPanel();
-        nombre = new vistas.swing.componentes.textInput();
-        apellido = new vistas.swing.componentes.textInput();
-        telefono = new vistas.swing.componentes.textInput();
-        correo = new vistas.swing.componentes.textInput();
-        direccion = new vistas.swing.componentes.textInput();
+        nombre = new vistas.swing.componentes.textInput.textInput();
+        apellido = new vistas.swing.componentes.textInput.textInput();
+        telefono = new vistas.swing.componentes.textInput.textInput();
+        correo = new vistas.swing.componentes.textInput.textInput();
+        direccion = new vistas.swing.componentes.textInput.textInput();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -354,11 +354,11 @@ public class VentanaEditarPersona extends VentanaGeneral {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vistas.swing.componentes.textInput apellido;
+    private vistas.swing.componentes.textInput.textInput apellido;
     private javax.swing.JLabel cedula;
     private javax.swing.JLabel cedulaLbl;
-    private vistas.swing.componentes.textInput correo;
-    private vistas.swing.componentes.textInput direccion;
+    private vistas.swing.componentes.textInput.textInput correo;
+    private vistas.swing.componentes.textInput.textInput direccion;
     private javax.swing.JComboBox fundaciones;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
@@ -367,10 +367,10 @@ public class VentanaEditarPersona extends VentanaGeneral {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private vistas.swing.componentes.textInput nombre;
+    private vistas.swing.componentes.textInput.textInput nombre;
     private javax.swing.JPanel panelInputs;
     private javax.swing.JButton save;
-    private vistas.swing.componentes.textInput telefono;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.textInput.textInput telefono;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }
