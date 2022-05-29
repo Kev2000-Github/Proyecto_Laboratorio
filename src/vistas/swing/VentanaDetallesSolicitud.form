@@ -82,13 +82,13 @@
             <Property name="axis" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="vistas.swing.componentes.textInput" name="fundacionInput">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="fundacionInput">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="beneficiarioInput">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="beneficiarioInput">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="encargadoInput">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="encargadoInput">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="costoInput">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="costoInput">
             </Component>
           </SubComponents>
         </Container>

@@ -59,7 +59,7 @@ public class VentanaRegistros extends VentanaGeneral {
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
 
         beneficiarios.setText("Beneficiarios");
-        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 117, 38));
+        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 117, 38));
 
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
@@ -67,12 +67,12 @@ public class VentanaRegistros extends VentanaGeneral {
                 empleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 117, 35));
+        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 117, 35));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 0));
         jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
