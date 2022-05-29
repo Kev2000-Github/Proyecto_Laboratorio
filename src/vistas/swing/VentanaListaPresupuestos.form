@@ -186,7 +186,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu1">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu1">
     </Component>
   </SubComponents>
 </Form>

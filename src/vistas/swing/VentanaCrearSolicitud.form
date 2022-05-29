@@ -408,7 +408,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu">
     </Component>
   </SubComponents>
 </Form>
