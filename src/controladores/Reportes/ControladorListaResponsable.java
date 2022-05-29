@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import DAO.EmpleadoDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 /**
  *
  * @author prometheus
@@ -23,7 +23,7 @@ public class ControladorListaResponsable extends ControladorGeneral {
     VentanaListaResponsable window;
     SolicitudDao solicitudDao;
     
-      public ControladorListaResponsable(Router router) {
+      public ControladorListaResponsable(IRouter router) {
         super("listaResponsable", router);
         solicitudDao = new SolicitudDao();
       }

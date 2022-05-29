@@ -25,7 +25,7 @@ import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorDetailsGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -42,7 +42,7 @@ public class ControladorDetalleSolicitud extends ControladorDetailsGeneral {
     private Map<String,String> solicitudInfo;
     private SolicitudDao solicitudDao;
 
-    public ControladorDetalleSolicitud(Router route) {
+    public ControladorDetalleSolicitud(IRouter route) {
         super("detalleSolicitud", route);
         this.servicioDao = new ServicioDao();
     }

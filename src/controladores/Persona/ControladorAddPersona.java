@@ -7,7 +7,7 @@ import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -40,7 +40,7 @@ public class ControladorAddPersona extends ControladorGeneral implements ListSel
     private String type;
     private String id;
 
-    public ControladorAddPersona(Router router, String type, String id) {
+    public ControladorAddPersona(IRouter router, String type, String id) {
         super("persona", router);
         daoFactory = new DaoFactory();
         this.type = type;

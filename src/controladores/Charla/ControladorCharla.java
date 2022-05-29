@@ -7,7 +7,7 @@ package controladores.Charla;
 import DAO.CharlaDao;
 import DAO.general.DaoFactory;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
@@ -26,7 +26,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     VentanaCharlas window;
     DaoFactory daoFactory;
     
-    public ControladorCharla(Router router) {
+    public ControladorCharla(IRouter router) {
         super("charla", router);
         daoFactory = new DaoFactory();
     }

@@ -10,7 +10,7 @@ import modelos.Permiso;
 import modelos.Rol;
 import modelos.Usuario;
 
-public class Router implements IRouterMediator<ControladorGeneral> {
+public class Router implements IRouter {
     private List<ControladorGeneral> controladores;
 
     public Router(){
@@ -87,13 +87,6 @@ public class Router implements IRouterMediator<ControladorGeneral> {
             System.out.println("Controller doesn't exist");
             return;
         }
-        Usuario user = component.getUser();
-        boolean isPermitted = hasPermissions(user, to);
-        if(!isPermitted){
-            System.out.println("User does not have required permissions");
-            component.mostrarMensaje("El usuario no tiene los permisos requeridos");
-            return;
-        }
         switch(action){
             case "go":
                 if(to.equals("detallesolicitud")){
@@ -109,6 +102,7 @@ public class Router implements IRouterMediator<ControladorGeneral> {
             case "update":
                 String id = eventContent[2];
                 toUpdate(component, (ControladorUpdateGeneral)newControlador, id);
+                break;
         }
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import DAO.FundacionDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import modelos.Fundacion;
 import utils.Utils;
 import vistas.swing.VentanaHome;
@@ -22,7 +22,7 @@ import vistas.swing.VentanaHome;
 public class ControladorHome extends ControladorGeneral {
     VentanaHome window;
 
-    public ControladorHome(Router router) {
+    public ControladorHome(IRouter router) {
         super("home", router);
     }
 

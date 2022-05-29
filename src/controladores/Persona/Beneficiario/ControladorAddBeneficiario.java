@@ -6,7 +6,7 @@ import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -38,7 +38,7 @@ public class ControladorAddBeneficiario extends ControladorGeneral implements Li
     DaoFactory daoFactory;
     private String beneficiarioId;
 
-    public ControladorAddBeneficiario(Router router) {
+    public ControladorAddBeneficiario(IRouter router) {
         super("addBeneficiario", router);
         daoFactory = new DaoFactory();
     }

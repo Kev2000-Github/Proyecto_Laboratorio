@@ -1,6 +1,6 @@
 package controladores.ControladorComponente;
 
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
 import controladores.Charla.ControladorCharla;
 import controladores.Menu.ControladorBackOffice;
@@ -42,7 +42,7 @@ public class ControladorFactory {
         "detalleSolicitud"
     };
 
-    public ControladorGeneral getControlador(String nombre, Router router) {
+    public ControladorGeneral getControlador(String nombre, IRouter router) {
 		switch(nombre){
             //LOGIN
             case "login":

@@ -7,7 +7,7 @@ import modelos.Permiso;
 import modelos.Rol;
 import modelos.Usuario;
 
-public class AuthDecorator implements IRouterMediator<ControladorGeneral> {
+public class AuthDecorator implements IRouter {
     protected Router wrapee;
 
     public AuthDecorator(Router router){
@@ -22,15 +22,17 @@ public class AuthDecorator implements IRouterMediator<ControladorGeneral> {
         List<Permiso> rolePermissions = userRole.getPermisos();
         boolean hasPermission = false;
         for(Permiso permission : rolePermissions){
-            if(permission.getId() == locationId){
+            if(locationId.equals(permission.getId())){
                 hasPermission = true;
+                break;
             }
         }
         if(hasPermission){
             wrapee.notify(component, event);
         }
         else{
-            System.out.println("Tu usuario no tiene los permisos para entrar");
+            System.out.println("User does not have required permissions");
+            component.mostrarMensaje("El usuario no tiene los permisos requeridos");
         }
     }
 

@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import vistas.swing.VentanaBackOffice;
 
 /*
@@ -20,7 +20,7 @@ public class ControladorBackOffice extends ControladorGeneral {
 
     VentanaBackOffice window;
 
-    public ControladorBackOffice(Router router) {
+    public ControladorBackOffice(IRouter router) {
         super("backOffice", router);
     }
 

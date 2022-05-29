@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import vistas.swing.VentanaReportes;
 
 /**
@@ -18,7 +18,7 @@ import vistas.swing.VentanaReportes;
 public class ControladorReportes extends ControladorGeneral {
     VentanaReportes window;
 
-    public ControladorReportes(Router router) {
+    public ControladorReportes(IRouter router) {
         super("reportes", router);
         this.router = router;
     }

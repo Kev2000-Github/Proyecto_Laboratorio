@@ -5,14 +5,17 @@ import java.util.List;
 
 import controladores.ControladorComponente.ControladorFactory;
 import controladores.ControladorComponente.ControladorGeneral;
+import controladores.Mediator.AuthDecorator;
+import controladores.Mediator.IRouter;
 import controladores.Mediator.Router;
 
 public class ControladorPrincipal {
-    Router router;
+    IRouter router;
     private List<ControladorGeneral> controladores;
 
     public ControladorPrincipal(){
-        router = new Router();
+        Router _router = new Router();
+        router = new AuthDecorator(_router);
         initControladores();
         ControladorGeneral login = getControlador("login");
         login.initGUI();
