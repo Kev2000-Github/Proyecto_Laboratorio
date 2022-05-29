@@ -199,7 +199,7 @@
             <Property name="text" type="java.lang.String" value="Registrar Asistentes"/>
           </Properties>
         </Component>
-        <Component class="vistas.swing.componentes.topMenuLogin" name="topMenu">
+        <Component class="vistas.swing.componentes.topMenuLogin.topMenuLogin" name="topMenu">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>

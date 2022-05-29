@@ -3,7 +3,6 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,15 +11,9 @@ import java.util.Map;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Beneficiario;
-import modelos.Empleado;
-import modelos.Servicio;//?
+
 import modelos.Solicitud;
-import java.util.Date;
 import utils.Constants;
-import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SolicitudDao implements IDao<Solicitud> {
 

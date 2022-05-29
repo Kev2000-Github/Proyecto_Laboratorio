@@ -10,7 +10,6 @@ import java.util.List;
 import DAO.general.IDao;
 import config.Connection.Conne;
 import modelos.Beneficiario;
-import modelos.Persona;
 
 public class BeneficiarioDao implements IDao<Beneficiario> {
 
@@ -23,7 +22,6 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             beneficiario.setCedula(rs.getString("cedula"));
             beneficiario.setId(rs.getString("id"));
             beneficiario.setFundacionId(rs.getString("fundacion_id"));
-            Persona persona = new Persona();
             beneficiario.setNombre(rs.getString("nombre"));
             beneficiario.setCedula(rs.getString("cedula"));
             beneficiario.setApellido(rs.getString("apellido"));

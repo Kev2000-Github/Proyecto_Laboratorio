@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistas.swing;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +13,7 @@ import javax.swing.JTable;
  *
  * @author prometheus
  */
-public class VentanaListaResponsable extends MetodosGenerales {
+public class VentanaListaResponsable extends VentanaGeneral {
 
     /**
      * Creates new form VentanaListaResponsable
@@ -62,7 +62,7 @@ public class VentanaListaResponsable extends MetodosGenerales {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaResponsables = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         goBackLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,6 +176,6 @@ public class VentanaListaResponsable extends MetodosGenerales {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaResponsables;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

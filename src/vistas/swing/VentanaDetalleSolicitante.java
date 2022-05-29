@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistas.swing;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
@@ -19,7 +19,7 @@ import vistas.general.ComboboxItem;
  *
  * @author prometheus
  */
-public class VentanaDetalleSolicitante extends MetodosGenerales {
+public class VentanaDetalleSolicitante extends VentanaGeneral {
     String selectedRow;
     /**
      * Creates new form VentanaDetalleSolicitante
@@ -68,7 +68,7 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
         tablaSolicitantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -197,6 +197,6 @@ public class VentanaDetalleSolicitante extends MetodosGenerales {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaSolicitantes;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

@@ -90,7 +90,7 @@
         <Property name="name" type="java.lang.String" value="goBack" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu">
     </Component>
   </SubComponents>
 </Form>

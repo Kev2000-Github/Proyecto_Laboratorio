@@ -85,7 +85,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vistas.swing.componentes.topMenuLogin" name="topMenuLogin1">
+            <Component class="vistas.swing.componentes.topMenuLogin.topMenuLogin" name="topMenuLogin1">
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel1">
 

@@ -131,7 +131,7 @@
         <Property name="text" type="java.lang.String" value="Lista de Responsables por solicitud"/>
       </Properties>
     </Component>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu1">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu1">
     </Component>
     <Component class="javax.swing.JLabel" name="goBackLbl">
       <Properties>

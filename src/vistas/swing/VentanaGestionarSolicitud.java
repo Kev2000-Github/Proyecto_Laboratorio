@@ -4,7 +4,7 @@
  */
 package vistas.swing;
 
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +14,7 @@ import javax.swing.JTable;
  *
  * @author ASRock
  */
-public class VentanaGestionarSolicitud extends MetodosGenerales {
+public class VentanaGestionarSolicitud extends VentanaGeneral {
     String selectedRow;
     /**
      * Creates new form VentanaGestionarSolicitud
@@ -46,7 +46,7 @@ public class VentanaGestionarSolicitud extends MetodosGenerales {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSolicitudes = new javax.swing.JTable();
@@ -222,6 +222,6 @@ public class VentanaGestionarSolicitud extends MetodosGenerales {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton solicitudBtn;
     private javax.swing.JTable tableSolicitudes;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

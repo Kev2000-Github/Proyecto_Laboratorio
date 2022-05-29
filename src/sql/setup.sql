@@ -230,16 +230,46 @@ INSERT INTO rol(id, nombre)
 		  ('c5067a41-1389-493b-84b9-4b277cd733ee','operador');
 
 INSERT INTO permiso(id, descripcion)
-	VALUES('bck001','backoffice'),
-		  ('hom001','home'),
-		  ('sup001','supervisor'),
-		  ('opr001','operador');
+	VALUES('backOffice',''),
+		  ('home',''),
+		  ('login',''),
+		  ('charla',''),
+		  ('registros',''),
+		  ('reportes',''),
+		  ('persona',''),
+		  ('addBeneficiario',''),
+		  ('beneficiario',''),
+		  ('updateBeneficiario',''),
+		  ('addEmpleado',''),
+		  ('empleado',''),
+		  ('updateEmpleado',''),
+		  ('listaPresupuesto',''),
+		  ('listaResponsable',''),
+		  ('listaSolicitante',''),
+		  ('addSolicitud',''),
+		  ('detalleSolicitud',''),
+		  ('solicitudes','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
-	VALUES('c603f913-2ac5-4353-b2aa-776d222af6ca', 'bck001'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'hom001'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'sup001'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'opr001');
+	VALUES('c603f913-2ac5-4353-b2aa-776d222af6ca', 'backOffice'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'home'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'login'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'charla'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'registros'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'reportes'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'persona'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addBeneficiario'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'beneficiario'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'updateBeneficiario'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addEmpleado'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'empleado'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'updateEmpleado'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaPresupuesto'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaResponsable'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaSolicitante'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addSolicitud'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'detalleSolicitud'),
+		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'solicitudes');
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
 	VALUES('5c84c51a-0470-4fef-8456-c4f61822c610','e81a71bf-413a-4554-bcd7-834f7d4fafd8','c603f913-2ac5-4353-b2aa-776d222af6ca','admin','admin');

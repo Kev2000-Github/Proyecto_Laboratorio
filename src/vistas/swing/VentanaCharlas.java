@@ -13,11 +13,11 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import vistas.general.ComboboxItem;
 import vistas.general.MyTableModel;
 
-public class VentanaCharlas extends MetodosGenerales {
+public class VentanaCharlas extends VentanaGeneral {
 
     /**
      @param accion
@@ -57,7 +57,7 @@ public class VentanaCharlas extends MetodosGenerales {
         jScrollPane2 = new javax.swing.JScrollPane();
         charlas = new javax.swing.JTable();
         BtnRegistrarAsistentes = new javax.swing.JButton();
-        topMenu = new vistas.swing.componentes.topMenuLogin();
+        topMenu = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
 
         jMenu1.setText("jMenu1");
 
@@ -287,6 +287,6 @@ public class VentanaCharlas extends MetodosGenerales {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTipodeCharla;
     private javax.swing.JLabel lblTitle;
-    private vistas.swing.componentes.topMenuLogin topMenu;
-    // End of variables declaration                   
+    private vistas.swing.componentes.topMenuLogin.topMenuLogin topMenu;
+    // End of variables declaration//GEN-END:variables
 }

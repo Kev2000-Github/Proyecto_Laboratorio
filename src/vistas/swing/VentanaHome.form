@@ -107,7 +107,7 @@
         <Property name="text" type="java.lang.String" value="Inicio"/>
       </Properties>
     </Component>
-    <Component class="vistas.swing.componentes.topMenuLogin" name="topMenuLogin">
+    <Component class="vistas.swing.componentes.topMenuLogin.topMenuLogin" name="topMenuLogin">
     </Component>
     <Component class="javax.swing.JButton" name="back_office1">
       <Properties>

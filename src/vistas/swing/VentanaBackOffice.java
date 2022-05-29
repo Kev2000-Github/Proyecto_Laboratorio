@@ -6,14 +6,14 @@ package vistas.swing;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import java.awt.event.MouseListener;
 
 /**
  *
  * @author juanperez
  */
-public class VentanaBackOffice extends MetodosGenerales {
+public class VentanaBackOffice extends VentanaGeneral {
 
     /**
      * Creates new form VentanaHome
@@ -49,7 +49,7 @@ public class VentanaBackOffice extends MetodosGenerales {
         reportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -154,6 +154,6 @@ public class VentanaBackOffice extends MetodosGenerales {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton registros;
     private javax.swing.JButton reportes;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

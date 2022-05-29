@@ -70,7 +70,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu">
     </Component>
     <Component class="javax.swing.JButton" name="listadoSolibtn">
       <Properties>

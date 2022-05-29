@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 
-public class VentanaGeneralLista<T> extends MetodosGenerales {
+public class VentanaGeneralLista<T> extends VentanaGeneral {
 	private String entityName = "default";
     private JLabel lblTitulo;
 	private JList<String> itemList;

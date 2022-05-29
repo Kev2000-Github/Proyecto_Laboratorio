@@ -20,14 +20,14 @@ import modelos.Servicio;
 import modelos.Solicitud;
 import utils.Constants;
 import vistas.general.ComboboxItem;
-import vistas.general.MetodosGenerales;
+import vistas.general.VentanaGeneral;
 import vistas.general.MyTableModel;
 
 /**
  *
  * @author juanperez
  */
-public class VentanaCrearSolicitud extends MetodosGenerales {
+public class VentanaCrearSolicitud extends VentanaGeneral {
 
     /**
      * Creates new form VentanaHome
@@ -100,7 +100,7 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
         empleadoId = new javax.swing.JLabel();
         empleadoName = new javax.swing.JLabel();
         empleadoLbl = new javax.swing.JLabel();
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -469,7 +469,7 @@ public class VentanaCrearSolicitud extends MetodosGenerales {
     private javax.swing.JLabel precio;
     private javax.swing.JComboBox<ComboboxItem> prioridad;
     private javax.swing.JTable servicios;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 
 }

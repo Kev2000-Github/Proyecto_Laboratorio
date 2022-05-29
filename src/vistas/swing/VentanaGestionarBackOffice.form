@@ -44,7 +44,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu1">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu1">
     </Component>
     <Container class="javax.swing.JPanel" name="Jpanel23">
 
