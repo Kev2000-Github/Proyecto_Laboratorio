@@ -48,7 +48,7 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
     private void initComponents() {
 
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         Jpanel23 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         crear = new javax.swing.JButton();
@@ -250,6 +250,6 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

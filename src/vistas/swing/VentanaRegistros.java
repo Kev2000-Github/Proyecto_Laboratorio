@@ -46,7 +46,7 @@ public class VentanaRegistros extends VentanaGeneral {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
         beneficiarios = new javax.swing.JButton();
         empleados = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -143,6 +143,6 @@ public class VentanaRegistros extends VentanaGeneral {
     private javax.swing.JButton empleados;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

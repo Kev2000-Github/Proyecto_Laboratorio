@@ -49,7 +49,7 @@ public class VentanaBackOffice extends VentanaGeneral {
         reportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,6 +130,6 @@ public class VentanaBackOffice extends VentanaGeneral {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton registros;
     private javax.swing.JButton reportes;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

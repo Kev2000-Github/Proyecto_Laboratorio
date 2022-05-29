@@ -101,7 +101,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         empleadoName = new javax.swing.JLabel();
         empleadoLbl = new javax.swing.JLabel();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
-        topMenu = new vistas.swing.componentes.topMenu();
+        topMenu = new vistas.swing.componentes.topMenu.topMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -382,7 +382,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
     private javax.swing.JLabel precio;
     private javax.swing.JComboBox<ComboboxItem> prioridad;
     private javax.swing.JTable servicios;
-    private vistas.swing.componentes.topMenu topMenu;
+    private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 
 }

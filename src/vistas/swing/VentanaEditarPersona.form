@@ -73,7 +73,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="vistas.swing.componentes.topMenu" name="topMenu1">
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu1">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
@@ -110,15 +110,15 @@
             <Property name="axis" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="vistas.swing.componentes.textInput" name="nombre">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="nombre">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="apellido">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="apellido">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="telefono">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="telefono">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="correo">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="correo">
             </Component>
-            <Component class="vistas.swing.componentes.textInput" name="direccion">
+            <Component class="vistas.swing.componentes.textInput.textInput" name="direccion">
             </Component>
           </SubComponents>
         </Container>

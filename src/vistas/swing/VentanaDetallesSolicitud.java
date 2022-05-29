@@ -88,13 +88,13 @@ public class VentanaDetallesSolicitud extends VentanaGeneral {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         jPanel1 = new javax.swing.JPanel();
         panelInputs = new javax.swing.JPanel();
-        fundacionInput = new vistas.swing.componentes.textInput();
-        beneficiarioInput = new vistas.swing.componentes.textInput();
-        encargadoInput = new vistas.swing.componentes.textInput();
-        costoInput = new vistas.swing.componentes.textInput();
+        fundacionInput = new vistas.swing.componentes.textInput.textInput();
+        beneficiarioInput = new vistas.swing.componentes.textInput.textInput();
+        encargadoInput = new vistas.swing.componentes.textInput.textInput();
+        costoInput = new vistas.swing.componentes.textInput.textInput();
         jPanel3 = new javax.swing.JPanel();
         rechazarBtn = new javax.swing.JButton();
         aprobarBtn = new javax.swing.JButton();
@@ -274,10 +274,10 @@ public class VentanaDetallesSolicitud extends VentanaGeneral {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aprobarBtn;
-    private vistas.swing.componentes.textInput beneficiarioInput;
-    private vistas.swing.componentes.textInput costoInput;
-    private vistas.swing.componentes.textInput encargadoInput;
-    private vistas.swing.componentes.textInput fundacionInput;
+    private vistas.swing.componentes.textInput.textInput beneficiarioInput;
+    private vistas.swing.componentes.textInput.textInput costoInput;
+    private vistas.swing.componentes.textInput.textInput encargadoInput;
+    private vistas.swing.componentes.textInput.textInput fundacionInput;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -287,6 +287,6 @@ public class VentanaDetallesSolicitud extends VentanaGeneral {
     private javax.swing.JPanel panelInputs;
     private javax.swing.JButton rechazarBtn;
     private javax.swing.JTable servicios;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

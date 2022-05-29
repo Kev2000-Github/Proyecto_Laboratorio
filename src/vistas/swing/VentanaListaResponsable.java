@@ -62,7 +62,7 @@ public class VentanaListaResponsable extends VentanaGeneral {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaResponsables = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        topMenu1 = new vistas.swing.componentes.topMenu();
+        topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         goBackLbl = new javax.swing.JLabel();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
@@ -148,6 +148,6 @@ public class VentanaListaResponsable extends VentanaGeneral {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaResponsables;
-    private vistas.swing.componentes.topMenu topMenu1;
+    private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
 }

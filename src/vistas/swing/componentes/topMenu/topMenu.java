@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vistas.swing.componentes;
+package vistas.swing.componentes.topMenu;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import java.awt.event.MouseMotionAdapter;
-
+import java.io.Serializable;
 import java.awt.Frame;
 
 /**
  *
  * @author ASRock
  */
-public class topMenu extends javax.swing.JPanel {
+public class topMenu extends javax.swing.JPanel implements Serializable {
     private int mouseX;
     private int mouseY;
 

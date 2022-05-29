@@ -78,7 +78,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="vistas.swing.componentes.topMenuLogin" name="topMenuLogin">
+    <Component class="vistas.swing.componentes.topMenuLogin.topMenuLogin" name="topMenuLogin">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="0" width="580" height="-1"/>

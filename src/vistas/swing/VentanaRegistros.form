@@ -90,6 +90,7 @@
           <AbsoluteConstraints x="0" y="0" width="-1" height="530"/>
         </Constraint>
       </Constraints>
+    <Component class="vistas.swing.componentes.topMenu.topMenu" name="topMenu">
     </Component>
   </SubComponents>
 </Form>

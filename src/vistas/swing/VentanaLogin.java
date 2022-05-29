@@ -53,6 +53,7 @@ public class VentanaLogin extends VentanaGeneral {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        topMenuLogin1 = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
@@ -65,7 +66,7 @@ public class VentanaLogin extends VentanaGeneral {
         password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
-        topMenuLogin1 = new vistas.swing.componentes.topMenuLogin();
+        topMenuLogin1 = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -272,7 +273,7 @@ public class VentanaLogin extends VentanaGeneral {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JPasswordField password;
-    private vistas.swing.componentes.topMenuLogin topMenuLogin1;
+    private vistas.swing.componentes.topMenuLogin.topMenuLogin topMenuLogin1;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
