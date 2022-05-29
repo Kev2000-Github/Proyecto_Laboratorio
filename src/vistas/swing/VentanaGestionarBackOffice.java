@@ -47,6 +47,7 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
         topMenu1 = new vistas.swing.componentes.topMenu();
         Jpanel23 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -241,6 +242,7 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel23;
+    private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JButton crear;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;

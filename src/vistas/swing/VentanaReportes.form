@@ -35,7 +35,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" pref="157" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" pref="46" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" pref="195" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="listadoPrepBtn" max="32767" attributes="0"/>
@@ -45,6 +45,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="backgroundImage1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -64,7 +71,14 @@
               <Component id="listadoPrepBtn" min="-2" pref="59" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="listadoRespBtn" min="-2" pref="59" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="212" max="32767" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="backgroundImage1" min="-2" pref="530" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,6 +127,8 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Listado Responsable"/>
       </Properties>
+    </Component>
+    <Component class="vistas.swing.componentes.backgroundImage.backgroundImage" name="backgroundImage1">
     </Component>
   </SubComponents>
 </Form>

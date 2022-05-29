@@ -47,19 +47,20 @@ public class VentanaHome extends VentanaGeneral {
         jLabel1 = new javax.swing.JLabel();
         topMenuLogin = new vistas.swing.componentes.topMenuLogin();
         back_office1 = new javax.swing.JButton();
+        backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         updateFondos.setText("asignar partida");
         updateFondos.setName("asignarPartida"); // NOI18N
         updateFondos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateFondosActionPerformed(evt);
-
             }
         });
+        getContentPane().add(updateFondos, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 142, 144, 37));
 
         crear_solicitud.setText("Crear Solicitud");
         crear_solicitud.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +68,7 @@ public class VentanaHome extends VentanaGeneral {
                 crear_solicitudActionPerformed(evt);
             }
         });
+        getContentPane().add(crear_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 87, 155, 37));
 
         gestionar_solicitud.setText("Gestionar Solicitud");
         gestionar_solicitud.addActionListener(new java.awt.event.ActionListener() {
@@ -74,53 +76,16 @@ public class VentanaHome extends VentanaGeneral {
                 gestionar_solicitudActionPerformed(evt);
             }
         });
+        getContentPane().add(gestionar_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 87, 144, 37));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Inicio");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 38, -1, -1));
+        getContentPane().add(topMenuLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
 
         back_office1.setText("BackOffice");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenuLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(back_office1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(crear_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(updateFondos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gestionar_solicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
-                .addContainerGap(18, Short.MAX_VALUE))
-
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topMenuLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gestionar_solicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateFondos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(back_office1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-
-        );
+        getContentPane().add(back_office1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 142, 155, 37));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 530));
 
         pack();
         setLocationRelativeTo(null);
@@ -195,6 +160,7 @@ public class VentanaHome extends VentanaGeneral {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_office1;
+    private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JButton crear_solicitud;
     private javax.swing.JButton gestionar_solicitud;
     private javax.swing.JLabel jLabel1;

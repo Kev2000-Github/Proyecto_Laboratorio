@@ -159,6 +159,9 @@ public class VentanaEditarPersona extends VentanaGeneral {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
+        jPanel1.setOpaque(false);
+
         panelInputs.setLayout(new javax.swing.BoxLayout(panelInputs, javax.swing.BoxLayout.Y_AXIS));
         panelInputs.add(nombre);
         panelInputs.add(apellido);

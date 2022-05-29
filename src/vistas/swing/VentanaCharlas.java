@@ -51,25 +51,32 @@ public class VentanaCharlas extends VentanaGeneral {
         charlas = new javax.swing.JTable();
         BtnRegistrarAsistentes = new javax.swing.JButton();
         topMenu = new vistas.swing.componentes.topMenuLogin();
+        backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Background.setBackground(new java.awt.Color(255, 255, 255));
+        Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblTitle.setText("Charlas");
+        Background.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 52, -1, -1));
 
         lblTipodeCharla.setText("Tipo de Charla");
+        Background.add(lblTipodeCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, 20));
 
         CmBoxTipodeCharla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CmBoxTipodeCharlaActionPerformed(evt);
             }
         });
+        Background.add(CmBoxTipodeCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 200, -1));
 
         BtnMostrar.setText("Mostrar");
+        Background.add(BtnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         charlas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,66 +107,16 @@ public class VentanaCharlas extends VentanaGeneral {
         });
         jScrollPane2.setViewportView(charlas);
 
+        Background.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 142, 340, 220));
+
         BtnRegistrarAsistentes.setText("Registrar Asistentes");
+        Background.add(BtnRegistrarAsistentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
 
         topMenu.setToolTipText("");
+        Background.add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
+        Background.add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
-        javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
-        Background.setLayout(BackgroundLayout);
-        BackgroundLayout.setHorizontalGroup(
-            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                        .addComponent(lblTipodeCharla)
-                        .addGap(14, 14, 14)
-                        .addComponent(CmBoxTipodeCharla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(BtnMostrar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))))
-            .addGroup(BackgroundLayout.createSequentialGroup()
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(lblTitle))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(BtnRegistrarAsistentes)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        BackgroundLayout.setVerticalGroup(
-            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BackgroundLayout.createSequentialGroup()
-                .addComponent(topMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(lblTitle)
-                .addGap(18, 18, 18)
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTipodeCharla)
-                    .addComponent(CmBoxTipodeCharla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnMostrar))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BtnRegistrarAsistentes)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 375, Short.MAX_VALUE)
-        );
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -254,6 +211,7 @@ public class VentanaCharlas extends VentanaGeneral {
     private javax.swing.JButton BtnMostrar;
     private javax.swing.JButton BtnRegistrarAsistentes;
     private javax.swing.JComboBox<ComboboxItem> CmBoxTipodeCharla;
+    private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JTable charlas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane2;
