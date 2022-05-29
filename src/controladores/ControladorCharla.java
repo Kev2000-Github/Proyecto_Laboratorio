@@ -64,8 +64,8 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
             }
         };
-        List<Charla> ch_list = charlaDao.getCharlasByType(selection);
-        modelCharlas.setColumnCount(5);
+        List<Charla> ch_list = charlaDao.getCharlasPorEmpezar();
+        modelCharlas.setColumnCount(6);
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
         for (Charla c : ch_list) {
