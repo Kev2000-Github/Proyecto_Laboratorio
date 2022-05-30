@@ -272,12 +272,14 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
-		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud');
+		  ('P62ZT9JUGH789WT54H', 'login'),
+		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud')
+		  ('QS0YGF5RCQ3F7UMSE4', 'login');
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
 	VALUES('BXQPP9YHGLOM9RHU19','QG7Y54GAZAVRB1S2KD','OPTE5KYCY3M4BL49N9','admin','admin'),
-		  ('HWQI6NKX4WADFDHHRJ','QG7Y54GAZAVRB1S2KD','P62ZT9JUGH789WT54H','supervisor','supervisor'),
-		  ('LJDBOOW0F4JL1MKHLO','QG7Y54GAZAVRB1S2KD','QS0YGF5RCQ3F7UMSE4','operador','operador');
+		  ('HWQI6NKX4WADFDHHRJ','B54W9JZ3FU4H4WC8Y8','P62ZT9JUGH789WT54H','supervisor','supervisor'),
+		  ('LJDBOOW0F4JL1MKHLO','W15T033XKAVIZVK95X','QS0YGF5RCQ3F7UMSE4','operador','operador');
 	
 -- ids are placeholders at the moment
 INSERT INTO servicio(id, nombre, tipo)

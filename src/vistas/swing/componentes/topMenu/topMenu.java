@@ -52,6 +52,7 @@ public class topMenu extends javax.swing.JPanel implements Serializable {
             }
         });
         goHomeLbl.addMouseListener(ml);
+        logoutLbl.addMouseListener(ml);
     }
 
 
@@ -70,6 +71,7 @@ public class topMenu extends javax.swing.JPanel implements Serializable {
         title = new javax.swing.JPanel();
         goHomeLbl = new javax.swing.JLabel();
         titleLbl = new javax.swing.JLabel();
+        logoutLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(36, 51, 60));
         setLayout(new java.awt.BorderLayout());
@@ -96,7 +98,7 @@ public class topMenu extends javax.swing.JPanel implements Serializable {
         actionLayoutLayout.setVerticalGroup(
             actionLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionLayoutLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(actionLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(exitLbl)
                     .addComponent(minimizeLbl))
@@ -115,25 +117,34 @@ public class topMenu extends javax.swing.JPanel implements Serializable {
         titleLbl.setForeground(new java.awt.Color(255, 255, 255));
         titleLbl.setText("Title");
 
+        logoutLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/logout (2).png"))); // NOI18N
+        logoutLbl.setAlignmentX(0.5F);
+        logoutLbl.setName("logout"); // NOI18N
+
         javax.swing.GroupLayout titleLayout = new javax.swing.GroupLayout(title);
         title.setLayout(titleLayout);
         titleLayout.setHorizontalGroup(
             titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(goHomeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goHomeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoutLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(titleLbl)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         titleLayout.setVerticalGroup(
             titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(titleLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(goHomeLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logoutLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, titleLayout.createSequentialGroup()
+                        .addComponent(titleLbl)
+                        .addGap(0, 6, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         add(title, java.awt.BorderLayout.LINE_START);
@@ -144,6 +155,7 @@ public class topMenu extends javax.swing.JPanel implements Serializable {
     private javax.swing.JPanel actionLayout;
     private javax.swing.JLabel exitLbl;
     private javax.swing.JLabel goHomeLbl;
+    private javax.swing.JLabel logoutLbl;
     private javax.swing.JLabel minimizeLbl;
     private javax.swing.JPanel title;
     private javax.swing.JLabel titleLbl;

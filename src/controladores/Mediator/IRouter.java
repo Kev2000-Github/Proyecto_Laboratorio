@@ -15,5 +15,13 @@ public interface IRouter {
 
     public boolean removeControlador(String id);
 
+    public void addRoute(String location);
+
+    public void popRoute();
+
+    public String getURI();
+    
+    public void clearURI();
+
     public ControladorGeneral getControlador(String id);
 }

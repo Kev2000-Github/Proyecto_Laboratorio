@@ -3,6 +3,8 @@ package controladores.ControladorComponente;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
+
 import controladores.Mediator.IRouter;
 import modelos.Usuario;
 
@@ -51,6 +53,27 @@ public abstract class ControladorGeneral implements ActionListener, MouseListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                router.clearURI();
+                router.addRoute("login");
+                router.notify(this, "go-home");
+            }
+            if(lbl.getName() == "goBack"){
+                router.popRoute();
+                String uri = router.getURI();
+                String[] uriSplitted = uri.split("/");
+                String lastLocation = uriSplitted[uriSplitted.length - 1];
+                router.popRoute();
+                router.notify(this, "go-" + lastLocation);
+            }
+            if(lbl.getName() == "logout"){
+                router.clearURI();
+                router.notify(this, "go-login");
+            }
+        }
     }
 
     @Override

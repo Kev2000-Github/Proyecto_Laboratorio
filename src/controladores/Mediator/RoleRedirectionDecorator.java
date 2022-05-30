@@ -49,4 +49,20 @@ public class RoleRedirectionDecorator implements IRouter {
     public ControladorGeneral getControlador(String id){
         return wrapee.getControlador(id);
     }
+
+    public void addRoute(String location){
+        wrapee.addRoute(location);
+    }
+
+    public void popRoute(){
+        wrapee.popRoute();
+    }
+
+    public String getURI(){
+        return wrapee.getURI();
+    }
+
+    public void clearURI(){
+        wrapee.clearURI();
+    }
 }

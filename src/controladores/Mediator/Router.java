@@ -9,8 +9,10 @@ import controladores.Solicitud.ControladorGestionarSolicitudes;
 
 public class Router implements IRouter {
     private List<ControladorGeneral> controladores;
+    private List<String> route;
 
     public Router(){
+        route = new ArrayList<String>();
         controladores = new ArrayList<ControladorGeneral>();
     }
 
@@ -47,8 +49,27 @@ public class Router implements IRouter {
         controladores.add(controller);
     }
 
+    public void addRoute(String location){
+        route.add(location);
+    }
+
+    public void popRoute(){
+        int lastIndex = route.size() - 1;
+        route.remove(lastIndex);
+    }
+
+    public String getURI(){
+        String URI = String.join("/", route);
+        return URI;
+    }
+
     public void clear() {
         controladores.clear();
+        route.clear();
+    }
+
+    public void clearURI(){
+        route.clear();
     }
 
     public void setControladores(List<ControladorGeneral> controladores){
@@ -74,6 +95,7 @@ public class Router implements IRouter {
     }
 
     public void notify(ControladorGeneral component, String event){
+        System.out.println(getURI());
         String[] eventContent = getRoutingInfo(event);
         String action = eventContent[0];
         String to = eventContent[1];

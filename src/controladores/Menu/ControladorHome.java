@@ -27,6 +27,7 @@ public class ControladorHome extends ControladorGeneral {
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaHome(this);
         window.setVisible(true);
     }

@@ -48,6 +48,7 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaGuardarPersona("Crear Empleado", this, this);
         window.setVisible(true);
         init();
@@ -262,16 +263,7 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if (source.equals("javax.swing.JLabel")) {
-            JLabel lbl = (JLabel) e.getSource();
-            if (lbl.getName() == "goHome") {
-                router.notify(this, "go-home");
-            }
-            if (lbl.getName() == "goBack") {
-                goBack();
-            }
-        }
+        super.mouseClicked(e);
     }
 
 }

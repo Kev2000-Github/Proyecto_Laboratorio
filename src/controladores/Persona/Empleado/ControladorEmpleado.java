@@ -35,6 +35,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaGestionarBackOffice("Gestionar Empleados", this, this);
         window.setVisible(true);
         fillEmpleados();
@@ -112,16 +113,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if (source.equals("javax.swing.JLabel")) {
-            JLabel lbl = (JLabel) e.getSource();
-            if (lbl.getName() == "goHome") {
-                router.notify(this, "go-home");
-            }
-            if(lbl.getName() == "goBack"){
-                router.notify(this, "go-registros");
-            }
-        }
+        super.mouseClicked(e);
     }
 
 }

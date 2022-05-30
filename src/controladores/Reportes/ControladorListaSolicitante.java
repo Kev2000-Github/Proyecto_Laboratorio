@@ -37,6 +37,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaDetalleSolicitante(this, this);
         window.setVisible(true);
         fillSolicitantes();
@@ -80,16 +81,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JLabel")){
-            JLabel lbl = (JLabel)e.getSource();
-            if(lbl.getName() == "goHome"){
-                router.notify(this, "go-home");
-            }
-            if(lbl.getName() == "goBack"){
-                router.notify(this, "go-reportes");
-            }
-        }
+        super.mouseClicked(e);
     }
     
     
