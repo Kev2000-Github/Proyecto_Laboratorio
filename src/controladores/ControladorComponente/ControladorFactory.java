@@ -37,7 +37,7 @@ public class ControladorFactory {
         "listaPresupuesto",
         "listaResponsable",
         "listaSolicitante",
-        "gestionarSolicitudes",
+        "solicitudes",
         "addSolicitud",
         "detalleSolicitud"
     };
@@ -80,7 +80,7 @@ public class ControladorFactory {
             case "listaSolicitante":
                 return new ControladorListaSolicitante(router);
             //SOLICITUD
-            case "gestionarSolicitudes":
+            case "solicitudes":
                 return new ControladorGestionarSolicitudes(router);
             case "addSolicitud":
                 return new ControladorAddSolicitud(router);

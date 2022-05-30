@@ -209,25 +209,25 @@ INSERT INTO gobernacion(id, nombre, fondos)
 		  
 
 INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual, gobernacion_id)
-	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a','Fundacion de Ayuda a Niños, Niñas y Adolescentes',100,50, 'gb001'),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82','Fundacion para la Atencion al Discapacitado',100,30, 'gb001'),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43','Fundacion Regional de la Mujer',100,20, 'gb001');
+	VALUES('PRRV06ODH1G4XM1RH9','Fundacion de Ayuda a Niños, Niñas y Adolescentes',100,50, 'gb001'),
+		  ('N1RXIYLQ9E6DXTFA54','Fundacion para la Atencion al Discapacitado',100,30, 'gb001'),
+		  ('YBGLMAYHG4ZA699Q5O','Fundacion Regional de la Mujer',100,20, 'gb001');
 		  
 INSERT INTO empleado(id, cedula, fundacion_id)
-	VALUES('e81a71bf-413a-4554-bcd7-834f7d4fafd8','27317962','43422123-da06-4890-8e3a-7131e32e5c2a'),
-		  ('78fe4548-d818-429f-b5d4-65388fba3738','27317963','309899e5-3dae-4d58-83c3-8cec9763db82'),
-		  ('32ded874-6467-4463-bf01-cc37490bd381','27317964','0832688e-e376-4e20-bbf7-3d7be51e9d43');
+	VALUES('QG7Y54GAZAVRB1S2KD','27317962','PRRV06ODH1G4XM1RH9'),
+		  ('B54W9JZ3FU4H4WC8Y8','27317963','N1RXIYLQ9E6DXTFA54'),
+		  ('W15T033XKAVIZVK95X','27317964','YBGLMAYHG4ZA699Q5O');
 
 INSERT INTO beneficiario(id, cedula, fundacion_id)
-	VALUES('7552170102','27317962','43422123-da06-4890-8e3a-7131e32e5c2a'),
-		  ('9038677715','27317963','309899e5-3dae-4d58-83c3-8cec9763db82'),
-		  ('8865837763','27317964','0832688e-e376-4e20-bbf7-3d7be51e9d43');
+	VALUES('7552170102','27317962','PRRV06ODH1G4XM1RH9'),
+		  ('9038677715','27317963','N1RXIYLQ9E6DXTFA54'),
+		  ('8865837763','27317964','YBGLMAYHG4ZA699Q5O');
 		  		  
 
 INSERT INTO rol(id, nombre)
-	VALUES('c603f913-2ac5-4353-b2aa-776d222af6ca','admin'),
-		  ('336a1ef0-e552-4506-9f91-b2400e08a3b5','supervisor'),
-		  ('c5067a41-1389-493b-84b9-4b277cd733ee','operador');
+	VALUES('OPTE5KYCY3M4BL49N9','admin'),
+		  ('P62ZT9JUGH789WT54H','supervisor'),
+		  ('QS0YGF5RCQ3F7UMSE4','operador');
 
 INSERT INTO permiso(id, descripcion)
 	VALUES('backOffice',''),
@@ -251,28 +251,33 @@ INSERT INTO permiso(id, descripcion)
 		  ('solicitudes','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
-	VALUES('c603f913-2ac5-4353-b2aa-776d222af6ca', 'backOffice'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'home'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'login'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'charla'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'registros'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'reportes'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'persona'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addBeneficiario'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'beneficiario'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'updateBeneficiario'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addEmpleado'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'empleado'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'updateEmpleado'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaPresupuesto'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaResponsable'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'listaSolicitante'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'addSolicitud'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'detalleSolicitud'),
-		  ('c603f913-2ac5-4353-b2aa-776d222af6ca', 'solicitudes');
+	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
+		  ('OPTE5KYCY3M4BL49N9', 'home'),
+		  ('OPTE5KYCY3M4BL49N9', 'login'),
+		  ('OPTE5KYCY3M4BL49N9', 'charla'),
+		  ('OPTE5KYCY3M4BL49N9', 'registros'),
+		  ('OPTE5KYCY3M4BL49N9', 'reportes'),
+		  ('OPTE5KYCY3M4BL49N9', 'persona'),
+		  ('OPTE5KYCY3M4BL49N9', 'addBeneficiario'),
+		  ('OPTE5KYCY3M4BL49N9', 'beneficiario'),
+		  ('OPTE5KYCY3M4BL49N9', 'updateBeneficiario'),
+		  ('OPTE5KYCY3M4BL49N9', 'addEmpleado'),
+		  ('OPTE5KYCY3M4BL49N9', 'empleado'),
+		  ('OPTE5KYCY3M4BL49N9', 'updateEmpleado'),
+		  ('OPTE5KYCY3M4BL49N9', 'listaPresupuesto'),
+		  ('OPTE5KYCY3M4BL49N9', 'listaResponsable'),
+		  ('OPTE5KYCY3M4BL49N9', 'listaSolicitante'),
+		  ('OPTE5KYCY3M4BL49N9', 'addSolicitud'),
+		  ('OPTE5KYCY3M4BL49N9', 'detalleSolicitud'),
+		  ('OPTE5KYCY3M4BL49N9', 'solicitudes'),
+		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
+		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
+		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud');
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
-	VALUES('5c84c51a-0470-4fef-8456-c4f61822c610','e81a71bf-413a-4554-bcd7-834f7d4fafd8','c603f913-2ac5-4353-b2aa-776d222af6ca','admin','admin');
+	VALUES('BXQPP9YHGLOM9RHU19','QG7Y54GAZAVRB1S2KD','OPTE5KYCY3M4BL49N9','admin','admin'),
+		  ('HWQI6NKX4WADFDHHRJ','QG7Y54GAZAVRB1S2KD','P62ZT9JUGH789WT54H','supervisor','supervisor'),
+		  ('LJDBOOW0F4JL1MKHLO','QG7Y54GAZAVRB1S2KD','QS0YGF5RCQ3F7UMSE4','operador','operador');
 	
 -- ids are placeholders at the moment
 INSERT INTO servicio(id, nombre, tipo)
@@ -286,19 +291,19 @@ INSERT INTO servicio(id, nombre, tipo)
 		  ('8', 'tanques de agua', 'otros');
 
 INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
-	VALUES('43422123-da06-4890-8e3a-7131e32e5c2a', '1', 10),
-		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '2', 20),
-		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '3', 30),
-		  ('43422123-da06-4890-8e3a-7131e32e5c2a', '4', 40),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '1', 30),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '5', 50),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '6', 10),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '7', 20),
-		  ('309899e5-3dae-4d58-83c3-8cec9763db82', '8', 20),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '8', 50),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '5', 65),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '3', 30),
-		  ('0832688e-e376-4e20-bbf7-3d7be51e9d43', '7', 20);
+	VALUES('PRRV06ODH1G4XM1RH9', '1', 10),
+		  ('PRRV06ODH1G4XM1RH9', '2', 20),
+		  ('PRRV06ODH1G4XM1RH9', '3', 30),
+		  ('PRRV06ODH1G4XM1RH9', '4', 40),
+		  ('N1RXIYLQ9E6DXTFA54', '1', 30),
+		  ('N1RXIYLQ9E6DXTFA54', '5', 50),
+		  ('N1RXIYLQ9E6DXTFA54', '6', 10),
+		  ('N1RXIYLQ9E6DXTFA54', '7', 20),
+		  ('N1RXIYLQ9E6DXTFA54', '8', 20),
+		  ('YBGLMAYHG4ZA699Q5O', '8', 50),
+		  ('YBGLMAYHG4ZA699Q5O', '5', 65),
+		  ('YBGLMAYHG4ZA699Q5O', '3', 30),
+		  ('YBGLMAYHG4ZA699Q5O', '7', 20);
 		  
 INSERT INTO charla(id, tema, lugar, organismo, fecha)
 	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),

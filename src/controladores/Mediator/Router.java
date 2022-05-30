@@ -6,9 +6,6 @@ import controladores.ControladorComponente.ControladorDetailsGeneral;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.ControladorComponente.ControladorUpdateGeneral;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
-import modelos.Permiso;
-import modelos.Rol;
-import modelos.Usuario;
 
 public class Router implements IRouter {
     private List<ControladorGeneral> controladores;
@@ -37,15 +34,13 @@ public class Router implements IRouter {
         newLocation.initGUI();
     }
 
-    private boolean hasPermissions(Usuario user, String locationId){
-        Rol userRole = user.getRol();
-        List<Permiso> rolePermissions = userRole.getPermisos();
-        for(Permiso permission : rolePermissions){
-            if(locationId.equals(permission.getId())){
-                return true;
-            }
+    private String[] getRoutingInfo(String event){
+        String[] eventContent = event.split("-");
+        if(eventContent.length < 2){
+            String[] result = {eventContent[0], null};
+            return result;
         }
-        return false;
+        return eventContent;
     }
 
     public void addControlador(ControladorGeneral controller){
@@ -79,7 +74,7 @@ public class Router implements IRouter {
     }
 
     public void notify(ControladorGeneral component, String event){
-        String[] eventContent = event.split("-");
+        String[] eventContent = getRoutingInfo(event);
         String action = eventContent[0];
         String to = eventContent[1];
         ControladorGeneral newControlador = getControlador(to);
@@ -89,7 +84,7 @@ public class Router implements IRouter {
         }
         switch(action){
             case "go":
-                if(to.equals("detallesolicitud")){
+                if(to.equals("detalleSolicitud")){
                     toDetails(
                             (ControladorGestionarSolicitudes) component, 
                             (ControladorDetailsGeneral) newControlador

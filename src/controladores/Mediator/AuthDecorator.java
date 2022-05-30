@@ -8,9 +8,9 @@ import modelos.Rol;
 import modelos.Usuario;
 
 public class AuthDecorator implements IRouter {
-    protected Router wrapee;
+    protected IRouter wrapee;
 
-    public AuthDecorator(Router router){
+    public AuthDecorator(IRouter router){
         wrapee = router;
     }
 

@@ -7,6 +7,7 @@ import controladores.ControladorComponente.ControladorFactory;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.AuthDecorator;
 import controladores.Mediator.IRouter;
+import controladores.Mediator.RoleRedirectionDecorator;
 import controladores.Mediator.Router;
 
 public class ControladorPrincipal {
@@ -16,6 +17,7 @@ public class ControladorPrincipal {
     public ControladorPrincipal(){
         Router _router = new Router();
         router = new AuthDecorator(_router);
+        router = new RoleRedirectionDecorator(router);
         initControladores();
         ControladorGeneral login = getControlador("login");
         login.initGUI();
