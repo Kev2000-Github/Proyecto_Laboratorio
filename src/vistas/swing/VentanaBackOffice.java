@@ -57,21 +57,22 @@ public class VentanaBackOffice extends VentanaGeneral {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registros.setText("Registros");
-        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 117, 38));
+        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 117, 38));
 
         reportes.setText("Reportes");
-        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 117, 35));
+        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 117, 35));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
+        goBackLbl.setForeground(new java.awt.Color(255, 255, 255));
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 38, -1, -1));
-        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 30));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
+        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 30));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 300));
 
         pack();
         setLocationRelativeTo(null);

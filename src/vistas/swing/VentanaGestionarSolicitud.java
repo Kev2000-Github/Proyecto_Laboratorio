@@ -104,7 +104,7 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 386, -1, -1));
 
-        solicitudBtn.setText("ver solicitud");
+        solicitudBtn.setText("Ver solicitud");
         solicitudBtn.setName("verSolicitud"); // NOI18N
         solicitudBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,9 +122,9 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Solicitudes");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
-        jPanel3.add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, -1, 560));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 640, -1));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
 
         pack();
         setLocationRelativeTo(null);

@@ -56,10 +56,10 @@ public class VentanaRegistros extends VentanaGeneral {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
+        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
         beneficiarios.setText("Beneficiarios");
-        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 117, 38));
+        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 117, 38));
 
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
@@ -67,17 +67,17 @@ public class VentanaRegistros extends VentanaGeneral {
                 empleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 117, 35));
+        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 117, 35));
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 44, -1, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 220));
 
         pack();
         setLocationRelativeTo(null);

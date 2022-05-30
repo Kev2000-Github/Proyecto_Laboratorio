@@ -57,7 +57,7 @@ public class VentanaReportes extends VentanaGeneral {
         setLocationByPlatform(true);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
+        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, -1));
 
         listadoSolibtn.setText("Listado Solicitante");
         listadoSolibtn.addActionListener(new java.awt.event.ActionListener() {
@@ -65,12 +65,12 @@ public class VentanaReportes extends VentanaGeneral {
                 listadoSolibtnActionPerformed(evt);
             }
         });
-        getContentPane().add(listadoSolibtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 94, 157, 59));
+        getContentPane().add(listadoSolibtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 160, 59));
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Serif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 94, 157, 31));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 157, 31));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
@@ -84,7 +84,7 @@ public class VentanaReportes extends VentanaGeneral {
                 listadoPrepBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(listadoPrepBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 182, -1, 59));
+        getContentPane().add(listadoPrepBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 160, 59));
 
         listadoRespBtn.setLabel("Listado Responsable");
         listadoRespBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -92,8 +92,8 @@ public class VentanaReportes extends VentanaGeneral {
                 listadoRespBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(listadoRespBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 259, 183, 59));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
+        getContentPane().add(listadoRespBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 160, 59));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

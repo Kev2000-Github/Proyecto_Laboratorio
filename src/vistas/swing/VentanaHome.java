@@ -53,7 +53,7 @@ public class VentanaHome extends VentanaGeneral {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        updateFondos.setText("asignar partida");
+        updateFondos.setText("Asignar partida");
         updateFondos.setName("asignarPartida"); // NOI18N
         updateFondos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class VentanaHome extends VentanaGeneral {
         });
         getContentPane().add(crear_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 87, 155, 37));
 
-        gestionar_solicitud.setText("Gestionar Solicitud");
+        gestionar_solicitud.setText("Gestionar solicitud");
         gestionar_solicitud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gestionar_solicitudActionPerformed(evt);
@@ -79,13 +79,14 @@ public class VentanaHome extends VentanaGeneral {
         getContentPane().add(gestionar_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 87, 144, 37));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Inicio");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 38, -1, -1));
-        getContentPane().add(topMenuLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+        getContentPane().add(topMenuLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
         back_office1.setText("BackOffice");
         getContentPane().add(back_office1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 142, 155, 37));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 530));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 250));
 
         pack();
         setLocationRelativeTo(null);

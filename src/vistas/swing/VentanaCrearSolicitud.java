@@ -156,13 +156,15 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        precio.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         precio.setForeground(new java.awt.Color(255, 255, 255));
         precio.setText("0");
         jPanel6.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Precio Total:");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 120, -1));
 
@@ -257,7 +259,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         empleadoLbl.setForeground(new java.awt.Color(255, 255, 255));
         empleadoLbl.setText("Empleado:");
         jPanel1.add(empleadoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 30, -1, -1));
-        jPanel1.add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 460));
+        jPanel1.add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 480));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));
