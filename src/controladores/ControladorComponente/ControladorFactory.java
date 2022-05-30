@@ -1,6 +1,6 @@
 package controladores.ControladorComponente;
 
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
 import controladores.Charla.ControladorCharla;
 import controladores.Menu.ControladorBackOffice;
@@ -37,12 +37,12 @@ public class ControladorFactory {
         "listaPresupuesto",
         "listaResponsable",
         "listaSolicitante",
-        "gestionarSolicitudes",
+        "solicitudes",
         "addSolicitud",
         "detalleSolicitud"
     };
 
-    public ControladorGeneral getControlador(String nombre, Router router) {
+    public ControladorGeneral getControlador(String nombre, IRouter router) {
 		switch(nombre){
             //LOGIN
             case "login":
@@ -80,7 +80,7 @@ public class ControladorFactory {
             case "listaSolicitante":
                 return new ControladorListaSolicitante(router);
             //SOLICITUD
-            case "gestionarSolicitudes":
+            case "solicitudes":
                 return new ControladorGestionarSolicitudes(router);
             case "addSolicitud":
                 return new ControladorAddSolicitud(router);

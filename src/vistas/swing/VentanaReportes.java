@@ -51,10 +51,13 @@ public class VentanaReportes extends VentanaGeneral {
         goBackLbl = new javax.swing.JLabel();
         listadoPrepBtn = new javax.swing.JButton();
         listadoRespBtn = new javax.swing.JButton();
+        backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, -1));
 
         listadoSolibtn.setText("Listado Solicitante");
         listadoSolibtn.addActionListener(new java.awt.event.ActionListener() {
@@ -62,13 +65,16 @@ public class VentanaReportes extends VentanaGeneral {
                 listadoSolibtnActionPerformed(evt);
             }
         });
+        getContentPane().add(listadoSolibtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 160, 59));
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Serif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BIENVENIDO,");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 157, 31));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
+        getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 44, -1, -1));
 
         listadoPrepBtn.setText("Listado Presupuestos");
         listadoPrepBtn.setToolTipText("");
@@ -78,46 +84,16 @@ public class VentanaReportes extends VentanaGeneral {
                 listadoPrepBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(listadoPrepBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 160, 59));
 
         listadoRespBtn.setLabel("Listado Responsable");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(goBackLbl)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 46, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(listadoSolibtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(topMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(goBackLbl)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listadoSolibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(listadoPrepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listadoRespBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        listadoRespBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listadoRespBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(listadoRespBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 160, 59));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -129,6 +105,10 @@ public class VentanaReportes extends VentanaGeneral {
     private void listadoPrepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoPrepBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listadoPrepBtnActionPerformed
+
+    private void listadoRespBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoRespBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listadoRespBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +159,7 @@ public class VentanaReportes extends VentanaGeneral {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton listadoPrepBtn;

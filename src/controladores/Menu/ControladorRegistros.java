@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import vistas.swing.VentanaRegistros;
 
 /*
@@ -20,7 +20,7 @@ public class ControladorRegistros extends ControladorGeneral {
 
     VentanaRegistros window;
 
-    public ControladorRegistros(Router router) {
+    public ControladorRegistros(IRouter router) {
         super("registros", router);
     }
 

@@ -8,7 +8,7 @@ import DAO.PermisoDao;
 import DAO.RolDao;
 import DAO.UsuarioDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import modelos.Empleado;
 import modelos.Permiso;
 import modelos.Rol;
@@ -18,7 +18,7 @@ import vistas.swing.VentanaLogin;
 public class ControladorLogin extends ControladorGeneral {
     VentanaLogin window;
 
-    public ControladorLogin(Router router) {
+    public ControladorLogin(IRouter router) {
         super("login", router);
     }
 

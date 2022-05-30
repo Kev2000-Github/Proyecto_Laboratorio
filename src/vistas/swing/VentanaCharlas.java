@@ -58,18 +58,23 @@ public class VentanaCharlas extends VentanaGeneral {
         charlas = new javax.swing.JTable();
         BtnRegistrarAsistentes = new javax.swing.JButton();
         topMenu = new vistas.swing.componentes.topMenuLogin.topMenuLogin();
+        backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Background.setBackground(new java.awt.Color(255, 255, 255));
+        Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblTitle.setText("Charlas");
+        Background.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 52, -1, -1));
 
         lblTipodeCharla.setText("Tipo de Charla");
+        Background.add(lblTipodeCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, 20));
 
         CmBoxTipodeCharla.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -81,8 +86,10 @@ public class VentanaCharlas extends VentanaGeneral {
                 CmBoxTipodeCharlaActionPerformed(evt);
             }
         });
+        Background.add(CmBoxTipodeCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 200, -1));
 
         BtnMostrar.setText("Mostrar");
+        Background.add(BtnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         charlas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,10 +120,15 @@ public class VentanaCharlas extends VentanaGeneral {
         });
         jScrollPane2.setViewportView(charlas);
 
+        Background.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 142, 340, 220));
+
         BtnRegistrarAsistentes.setText("Registrar Asistentes");
         BtnRegistrarAsistentes.setEnabled(false);
+        Background.add(BtnRegistrarAsistentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
 
         topMenu.setToolTipText("");
+        Background.add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
+        Background.add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
@@ -174,6 +186,7 @@ public class VentanaCharlas extends VentanaGeneral {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 500));
 
         pack();
     }// </editor-fold>                        
@@ -282,6 +295,7 @@ public class VentanaCharlas extends VentanaGeneral {
     private javax.swing.JButton BtnMostrar;
     private javax.swing.JButton BtnRegistrarAsistentes;
     private javax.swing.JComboBox<ComboboxItem> CmBoxTipodeCharla;
+    private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JTable charlas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -3,7 +3,7 @@ package controladores.ControladorComponente;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 import modelos.Usuario;
 
 import java.awt.event.ActionEvent;
@@ -11,10 +11,10 @@ import java.awt.event.MouseEvent;
 
 public abstract class ControladorGeneral implements ActionListener, MouseListener {
     protected String id;
-    protected Router router;
+    protected IRouter router;
     protected Usuario user;
     
-    public ControladorGeneral(String id, Router router){
+    public ControladorGeneral(String id, IRouter router){
         this.id = id;
         this.router = router;
     }

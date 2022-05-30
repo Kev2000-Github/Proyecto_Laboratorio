@@ -6,7 +6,7 @@ import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -38,7 +38,7 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
     DaoFactory daoFactory;
     private String empleadoId;
 
-    public ControladorAddEmpleado(Router router) {
+    public ControladorAddEmpleado(IRouter router) {
         super("addEmpleado", router);
         daoFactory = new DaoFactory();
     }

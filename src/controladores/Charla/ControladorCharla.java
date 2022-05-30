@@ -7,7 +7,7 @@ package controladores.Charla;
 import DAO.CharlaDao;
 import DAO.general.DaoFactory;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     DaoFactory daoFactory;
     CharlaDao charlaDao;
     
-    public ControladorCharla(Router router) {
+    public ControladorCharla(IRouter router) {
         super("charla", router);
         daoFactory = new DaoFactory();
     }

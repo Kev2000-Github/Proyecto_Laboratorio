@@ -15,7 +15,7 @@ import DAO.BeneficiarioDao;
 import DAO.FundacionDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 
 
@@ -27,7 +27,7 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     VentanaDetalleSolicitante window;
     SolicitudDao solicitudDao;
     
-    public ControladorListaSolicitante(Router router) {
+    public ControladorListaSolicitante(IRouter router) {
         super("listaSolicitante", router);
         solicitudDao = new SolicitudDao();     
     }

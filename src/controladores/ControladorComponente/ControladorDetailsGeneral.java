@@ -2,11 +2,11 @@ package controladores.ControladorComponente;
 
 import java.util.Map;
 
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 public abstract class ControladorDetailsGeneral extends ControladorGeneral {
 
-    public ControladorDetailsGeneral(String id, Router router){
+    public ControladorDetailsGeneral(String id, IRouter router){
         super(id, router);
     }
 
