@@ -22,7 +22,7 @@ import DAO.FundacionDao;
 import DAO.ServicioDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,7 +39,7 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
     SolicitudDao solicitudDao;
     ServicioDao servicioDao;
 
-    public ControladorGestionarSolicitudes(Router router) {
+    public ControladorGestionarSolicitudes(IRouter router) {
         super("solicitudes", router);
         solicitudDao = new SolicitudDao();
         servicioDao = new ServicioDao();

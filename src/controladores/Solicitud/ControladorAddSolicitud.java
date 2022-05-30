@@ -6,7 +6,7 @@ import DAO.ServicioDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -38,7 +38,7 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
     VentanaCrearSolicitud window;
     DaoFactory daoFactory;
 
-    public ControladorAddSolicitud(Router router) {
+    public ControladorAddSolicitud(IRouter router) {
         super("addSolicitud", router);
         daoFactory = new DaoFactory();
     }

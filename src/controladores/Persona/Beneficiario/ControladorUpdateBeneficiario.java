@@ -6,7 +6,7 @@ import DAO.PersonaDao;
 import DAO.general.DaoFactory;
 import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorUpdateGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -38,7 +38,7 @@ public class ControladorUpdateBeneficiario extends ControladorUpdateGeneral impl
     DaoFactory daoFactory;
     String beneficiarioId;
 
-    public ControladorUpdateBeneficiario(Router router) {
+    public ControladorUpdateBeneficiario(IRouter router) {
         super("updateBeneficiario", router);
         daoFactory = new DaoFactory();
     }

@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.swing.JLabel;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import javax.swing.DefaultComboBoxModel;
 import vistas.general.ComboboxItem;
@@ -30,7 +30,7 @@ public class ControladorListaPresupuesto extends ControladorGeneral {
     VentanaListaPresupuestos window;
     SolicitudDao solicitudDao;
     
-    public ControladorListaPresupuesto(Router router) {
+    public ControladorListaPresupuesto(IRouter router) {
         super("listaPresupuesto", router);
         solicitudDao = new SolicitudDao();        
     }

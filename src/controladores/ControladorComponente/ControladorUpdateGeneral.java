@@ -1,10 +1,10 @@
 package controladores.ControladorComponente;
 
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 public abstract class ControladorUpdateGeneral extends ControladorGeneral {
 
-    public ControladorUpdateGeneral(String id, Router router){
+    public ControladorUpdateGeneral(String id, IRouter router){
         super(id, router);
     }
 

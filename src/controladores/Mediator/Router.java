@@ -6,11 +6,8 @@ import controladores.ControladorComponente.ControladorDetailsGeneral;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.ControladorComponente.ControladorUpdateGeneral;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
-import modelos.Permiso;
-import modelos.Rol;
-import modelos.Usuario;
 
-public class Router implements IRouterMediator<ControladorGeneral> {
+public class Router implements IRouter {
     private List<ControladorGeneral> controladores;
 
     public Router(){
@@ -37,15 +34,13 @@ public class Router implements IRouterMediator<ControladorGeneral> {
         newLocation.initGUI();
     }
 
-    private boolean hasPermissions(Usuario user, String locationId){
-        Rol userRole = user.getRol();
-        List<Permiso> rolePermissions = userRole.getPermisos();
-        for(Permiso permission : rolePermissions){
-            if(locationId.equals(permission.getId())){
-                return true;
-            }
+    private String[] getRoutingInfo(String event){
+        String[] eventContent = event.split("-");
+        if(eventContent.length < 2){
+            String[] result = {eventContent[0], null};
+            return result;
         }
-        return false;
+        return eventContent;
     }
 
     public void addControlador(ControladorGeneral controller){
@@ -79,7 +74,7 @@ public class Router implements IRouterMediator<ControladorGeneral> {
     }
 
     public void notify(ControladorGeneral component, String event){
-        String[] eventContent = event.split("-");
+        String[] eventContent = getRoutingInfo(event);
         String action = eventContent[0];
         String to = eventContent[1];
         ControladorGeneral newControlador = getControlador(to);
@@ -87,16 +82,9 @@ public class Router implements IRouterMediator<ControladorGeneral> {
             System.out.println("Controller doesn't exist");
             return;
         }
-        Usuario user = component.getUser();
-        boolean isPermitted = hasPermissions(user, to);
-        if(!isPermitted){
-            System.out.println("User does not have required permissions");
-            component.mostrarMensaje("El usuario no tiene los permisos requeridos");
-            return;
-        }
         switch(action){
             case "go":
-                if(to.equals("detallesolicitud")){
+                if(to.equals("detalleSolicitud")){
                     toDetails(
                             (ControladorGestionarSolicitudes) component, 
                             (ControladorDetailsGeneral) newControlador
@@ -109,6 +97,7 @@ public class Router implements IRouterMediator<ControladorGeneral> {
             case "update":
                 String id = eventContent[2];
                 toUpdate(component, (ControladorUpdateGeneral)newControlador, id);
+                break;
         }
     }
 

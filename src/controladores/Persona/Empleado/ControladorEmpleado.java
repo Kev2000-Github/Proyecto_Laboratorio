@@ -4,7 +4,7 @@ import DAO.EmpleadoDao;
 
 import DAO.general.DaoFactory;
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -29,7 +29,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
 
-    public ControladorEmpleado(Router router) {
+    public ControladorEmpleado(IRouter router) {
         super("empleado", router);
         daoFactory = new DaoFactory();
     }

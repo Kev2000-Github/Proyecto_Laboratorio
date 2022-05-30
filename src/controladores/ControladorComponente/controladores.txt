@@ -13,6 +13,6 @@ updateEmpleado
 listaPresupuesto
 listaResponsable
 listaSolicitante
-gestionarSolicitudes
+solicitudes
 addSolicitud
 detalleSolicitud

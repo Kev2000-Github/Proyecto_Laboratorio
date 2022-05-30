@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
-import controladores.Mediator.Router;
+import controladores.Mediator.IRouter;
 
 import modelos.Beneficiario;
 import vistas.swing.VentanaGestionarBackOffice;
@@ -29,7 +29,7 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
 
-    public ControladorBeneficiario(Router router) {
+    public ControladorBeneficiario(IRouter router) {
         super("beneficiario", router);
         daoFactory = new DaoFactory();
     }
