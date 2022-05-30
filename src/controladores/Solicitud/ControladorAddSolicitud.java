@@ -65,6 +65,10 @@ public class ControladorAddSolicitud extends ControladorGeneral implements ListS
         fillPrioridad();
         String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
         fillServicios(fundacionId);
+        String rol = user.getRol().getNombre();
+        if(rol.equals("admin")){
+            window.restrictSensitiveComp(true);
+        }
     }
 
     public void fillFundacion() {
