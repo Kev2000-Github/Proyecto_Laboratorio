@@ -65,7 +65,7 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             String sql = "SELECT id, tema, lugar, organismo, fecha"
-                    + " FROM charla c WHERE c.status = 'fin'";
+                    + " FROM charla c WHERE c.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
                 return list;
@@ -142,7 +142,7 @@ public class CharlaDao implements IDao<Charla> {
             List<Charla> list = new ArrayList<Charla>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, lugar,organismo,fecha"
+            String sql = "SELECT id, tema, lugar, organismo, fecha"
                     + " FROM charla c WHERE c.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))

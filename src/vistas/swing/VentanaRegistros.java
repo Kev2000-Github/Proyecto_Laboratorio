@@ -31,6 +31,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private void agregarListener(ActionListener accion){
         empleados.addActionListener(accion);
         beneficiarios.addActionListener(accion);
+        charlas.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -49,6 +50,7 @@ public class VentanaRegistros extends VentanaGeneral {
         topMenu = new vistas.swing.componentes.topMenu.topMenu();
         beneficiarios = new javax.swing.JButton();
         empleados = new javax.swing.JButton();
+        charlas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
@@ -59,7 +61,7 @@ public class VentanaRegistros extends VentanaGeneral {
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
         beneficiarios.setText("Beneficiarios");
-        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 117, 38));
+        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 117, 38));
 
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +69,15 @@ public class VentanaRegistros extends VentanaGeneral {
                 empleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 117, 35));
+        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 117, 35));
+
+        charlas.setText("Charlas");
+        charlas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                charlasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(charlas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 117, 35));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,6 +96,10 @@ public class VentanaRegistros extends VentanaGeneral {
     private void empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_empleadosActionPerformed
+
+    private void charlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_charlasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_charlasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +147,10 @@ public class VentanaRegistros extends VentanaGeneral {
         return empleados;
     }
     
+    public JButton getCharlas(){
+        return charlas;
+    }
+    
 
  
 
@@ -140,6 +158,7 @@ public class VentanaRegistros extends VentanaGeneral {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JButton beneficiarios;
+    private javax.swing.JButton charlas;
     private javax.swing.JButton empleados;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;

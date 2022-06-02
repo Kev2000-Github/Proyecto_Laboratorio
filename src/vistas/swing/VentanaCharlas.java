@@ -4,17 +4,35 @@
  */
 package vistas.swing;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import vistas.general.VentanaGeneral;
+import vistas.swing.componentes.topMenu.topMenu;
+
 /**
  *
  * @author sarah
  */
-public class VentanaCharlas extends javax.swing.JFrame {
-
+public class VentanaCharlas extends VentanaGeneral {
+    String selectedrow;
     /**
      * Creates new form VentanaCharlas
+     * @param accion
+     * @param listSelection
+     * @param ml
      */
-    public VentanaCharlas() {
+    public VentanaCharlas(ActionListener accion, ListSelectionListener listSelection, MouseListener ml) {
         initComponents();
+        setLocationRelativeTo(null);
+        this.agregarActionListener(accion);
+        this.agregarSelectionListener(listSelection);
+        this.agregarMouseListener(ml);
+        topMenu1.setMenuFunctions(this, ml, "");
+        
     }
 
     /**
@@ -136,7 +154,7 @@ public class VentanaCharlas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaCharlas().setVisible(true);
+                //new VentanaCharlas().setVisible(true);
             }
         });
     }
@@ -155,4 +173,33 @@ public class VentanaCharlas extends javax.swing.JFrame {
     private javax.swing.JTable tblCharlas;
     private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarActionListener(ActionListener accion) {
+        btnRegistrar.addActionListener(accion);
+        btnBuscar.addActionListener(accion);
+    }
+
+    private void agregarSelectionListener(ListSelectionListener lsl) {
+        tblCharlas.getSelectionModel().addListSelectionListener(lsl);
+    }
+
+    private void agregarMouseListener(MouseListener ml) {
+        tblCharlas.addMouseListener(ml);
+    }
+    
+    public JTable gettblCharlas(){
+        return tblCharlas;
+    }
+    
+    public JButton getBtnBuscar(){
+        return btnBuscar;
+    }
+    
+    public JButton getBtnRegistrar(){
+        return btnRegistrar;
+    }
+    
+    public void setModelServicio(DefaultTableModel model) {
+        this.tblCharlas.setModel(model);
+    }
 }

@@ -44,6 +44,10 @@ public class ControladorRegistros extends ControladorGeneral {
         if (source == window.getEmpleados()) {
             router.notify(this, "go-empleado");
         }
+        
+        if (source == window.getCharlas()){
+            router.notify(this, "go-charla");
+        }
 
     }
 

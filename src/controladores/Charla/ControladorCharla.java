@@ -19,7 +19,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -33,6 +36,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     VentanaCharlas window;
     DaoFactory daoFactory;
     CharlaDao charlaDao;
+    Map<String, String> charlaInfo;
     
     public ControladorCharla(IRouter router) {
         super("charla", router);
@@ -46,6 +50,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     public void initGUI(){
         window = new VentanaCharlas(this, this, this);
         window.setVisible(true);
+        charlaDao = new CharlaDao();
         fillCharlas();
     }
 
@@ -62,7 +67,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
             }
         };
         List<Charla> ch_list = charlaDao.getCharlasPorEmpezar();
-        modelCharlas.setColumnCount(6);
+        modelCharlas.setColumnCount(5);
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
         for (Charla c : ch_list) {
@@ -71,39 +76,63 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
             Charla charla = charlaDao.get(c.getId());
             modelCharlas.addRow(new Object[]{Boolean.FALSE, c.getId(), 
                 c.getTema(), c.getDireccion(), c.getOrganismo(), c.getTema()});
+            
         }
-        window.setModelTablaCharla(modelCharlas);
+        window.setModelServicio(modelCharlas);
     }
+    
+    public Map<String, String> getSelectedCharla(){
+        int row = window.gettblCharlas().getSelectedRow();
+        Map<String, String> rowInfo = new HashMap<String, String>();
+        String charlaId = window.gettblCharlas().getValueAt(row, 0).toString();
+        
+        rowInfo.put("solicitudId",charlaId);
+
+        return rowInfo;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JButton")){
+            JButton btn = (JButton) e.getSource();
+            String name = btn.getName();
+            if(name.equals("btnRegistrar")){
+                if(window.gettblCharlas().getSelectedRow() != -1){
+                    
+                    //TODO: agregar logica de validacion por consulta (rs empty-> abre ventana de RegistrarAsistentes, else -> mensaje "ya los asistentes de esta charla fueron registrados")
+                    //logica empty
+                    window.dispose();
+                    this.charlaInfo = getSelectedCharla();
+                    router.notify(this, "go-detalleSolicitud");
+                    
+                    //logica full(ya registrados)
+                    window.mostrarMensaje("Los asistentes a esta charla ya fueron registrados");
+                }
+                else{
+                    window.mostrarMensaje("No se ha seleccionado ninguna solicitud");
+                }
+            }
+        }
+    }
+    
+    
      
     @Override
     public void valueChanged(ListSelectionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void fillDefaultComboBoxValues() {
-
-        DefaultComboBoxModel cmbTipoCharlas = new DefaultComboBoxModel();
-        List<String> tipos = new ArrayList();
-        tipos.add("Finalizadas, sin Registrar");
-        tipos.add("Por empezar, sin Registrar");
-        tipos.add("Finalizadas, Registradas");
-        
-        ventana.setModelTipoCharla(cmbTipoCharlas);
-    }
-
+    @Override
     public void mouseClicked(MouseEvent e) {
-            String source = e.getSource().getClass().getName();
-            if(source.equals("javax.swing.JLabel")){
-                JLabel lbl = (JLabel)e.getSource();
-                if(lbl.getName() == "goHome"){
-                    ventana.dispose();
-                    new ControladorHome(user);
-                }
+        String source = e.getSource().getClass().getName();
+        if(source.equals("javax.swing.JLabel")){
+            JLabel lbl = (JLabel)e.getSource();
+            if(lbl.getName() == "goHome"){
+                router.notify(this, "go-home");
             }
-
-
-
-     }
+        }
+    }
     
     @Override
     public void mousePressed(MouseEvent e) {
