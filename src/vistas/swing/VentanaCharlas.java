@@ -4,6 +4,7 @@
  */
 package vistas.swing;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -177,6 +178,7 @@ public class VentanaCharlas extends VentanaGeneral {
     private void agregarActionListener(ActionListener accion) {
         btnRegistrar.addActionListener(accion);
         btnBuscar.addActionListener(accion);
+
     }
 
     private void agregarSelectionListener(ListSelectionListener lsl) {
@@ -202,4 +204,13 @@ public class VentanaCharlas extends VentanaGeneral {
     public void setModelServicio(DefaultTableModel model) {
         this.tblCharlas.setModel(model);
     }
+    
+    public JDateChooser getDChooserFrom(){
+        return dChFrom;
+    }
+    
+    public JDateChooser getDChooserTo(){
+        return dChTo;
+    }
+
 }

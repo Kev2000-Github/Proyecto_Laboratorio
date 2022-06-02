@@ -136,6 +136,35 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
     
+    public List<Charla> getCharlasByDate(String fecha_f, String fecha_t) {
+        try {
+            List<Charla> list = new ArrayList<Charla>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, tema, lugar,organismo,fecha"
+                    + " FROM charla c WHERE c.fecha BETWEEN " + ""
+                    + "'fecha_f' AND 'fecha_t' AND c.deleted_at IS NULL;";
+            
+            String[] params = { fecha_f, fecha_t };
+            ResultSet rs = con.execQuery(sql,params);
+            
+            if (con.isResultSetEmpty(rs))
+                return list;
+            do {
+                Charla charla = setEntity(rs);
+                list.add(charla);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+    
     @Override
     public List<Charla> getAll() {
         try {

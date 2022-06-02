@@ -60,12 +60,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
  
     //TRAER EL/LOS PARAM/S AL METODO TAMBIEN:
     public void fillCharlas() {
-        DefaultTableModel modelCharlas = new DefaultTableModel() {
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
-            }
-        };
+        DefaultTableModel modelCharlas = new DefaultTableModel();
         List<Charla> ch_list = charlaDao.getCharlasPorEmpezar();
         modelCharlas.setColumnCount(5);
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
@@ -74,11 +69,32 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
             
             CharlaDao charlaDao = new CharlaDao();
             Charla charla = charlaDao.get(c.getId());
-            modelCharlas.addRow(new Object[]{Boolean.FALSE, c.getId(), 
-                c.getTema(), c.getDireccion(), c.getOrganismo(), c.getTema()});
+            modelCharlas.addRow(new Object[]{ c.getId(), 
+                c.getTema(), c.getDireccion(), c.getOrganismo(), c.getFecha()});
             
         }
         window.setModelServicio(modelCharlas);
+    }
+    
+    public void fillBusqueda(String fecha_f, String fecha_t) {
+        DefaultTableModel modelCharlas = new DefaultTableModel();
+        List<Charla> ch_list = charlaDao.getCharlasByDate(fecha_f,fecha_t);
+        modelCharlas.setColumnCount(5);
+        modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
+
+        for (Charla c : ch_list) {
+            
+            CharlaDao charlaDao = new CharlaDao();
+            Charla charla = charlaDao.get(c.getId());
+            modelCharlas.addRow(new Object[]{ c.getId(), 
+                c.getTema(), c.getDireccion(), c.getOrganismo(), c.getFecha()});
+            
+        }
+        window.setModelServicio(modelCharlas);
+    }
+    
+    public void ValidateBtnRegistrar(){
+    
     }
     
     public Map<String, String> getSelectedCharla(){
