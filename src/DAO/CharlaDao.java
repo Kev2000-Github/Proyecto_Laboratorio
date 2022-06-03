@@ -57,7 +57,7 @@ public class CharlaDao implements IDao<Charla> {
             con.close();
         }
     }
-
+    //ELIMINAR, ya que hace lo mismo que getAll();
     public List<Charla> getCharlasPorEmpezar(){
     
         try {

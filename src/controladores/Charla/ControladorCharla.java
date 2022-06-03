@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,8 @@ import javax.swing.JLabel;
 
 import modelos.Charla;
 import vistas.swing.VentanaCharlas;
+import java.util.Date;
+import java.time.LocalDate;
 
 
 public class ControladorCharla extends ControladorGeneral implements ListSelectionListener{
@@ -41,6 +44,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     public ControladorCharla(IRouter router) {
         super("charla", router);
         daoFactory = new DaoFactory();
+        charlaDao = new CharlaDao();
     }
 
     public void mostrarMensaje(String mensaje){
@@ -50,8 +54,8 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     public void initGUI(){
         window = new VentanaCharlas(this, this, this);
         window.setVisible(true);
-        charlaDao = new CharlaDao();
         fillCharlas();
+
     }
 
     public void closeGUI(){
@@ -61,7 +65,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     //TRAER EL/LOS PARAM/S AL METODO TAMBIEN:
     public void fillCharlas() {
         DefaultTableModel modelCharlas = new DefaultTableModel();
-        List<Charla> ch_list = charlaDao.getCharlasPorEmpezar();
+        List<Charla> ch_list = charlaDao.getAll();
         modelCharlas.setColumnCount(5);
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
@@ -92,17 +96,20 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         }
         window.setModelServicio(modelCharlas);
     }
-    
+    //REVISAR Terminar
     public void ValidateBtnRegistrar(){
     
+        
+        window.getBtnBuscar();
+
     }
-    
+    //REVISAR
     public Map<String, String> getSelectedCharla(){
         int row = window.gettblCharlas().getSelectedRow();
         Map<String, String> rowInfo = new HashMap<String, String>();
         String charlaId = window.gettblCharlas().getValueAt(row, 0).toString();
         
-        rowInfo.put("solicitudId",charlaId);
+        rowInfo.put("solicitudId",charlaId);//revisar SOLICITUDID where???
 
         return rowInfo;
     }
@@ -112,7 +119,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         String source = e.getSource().getClass().getName();
         if(source.equals("javax.swing.JButton")){
             JButton btn = (JButton) e.getSource();
-            String name = btn.getName();
+            String name = btn.getName(); //RESOLVE: Is empty
             if(name.equals("btnRegistrar")){
                 if(window.gettblCharlas().getSelectedRow() != -1){
                     
@@ -128,6 +135,32 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                 else{
                     window.mostrarMensaje("No se ha seleccionado ninguna solicitud");
                 }
+            }
+            
+            if(name.equals("btnBuscar")){
+
+                Date fecha_f = window.getDChooserFrom().getDate();
+                Date fecha_t = window.getDChooserTo().getDate();
+
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                
+                if((fecha_f != null) && (fecha_t != null)){
+                    
+                    if(fecha_f.after(fecha_t)==true){
+                        
+                        String f = formato.format(fecha_f);
+                        String t = formato.format(fecha_t);                
+                        fillBusqueda(f,t);
+                    }
+                    else
+                    {
+                        window.mostrarMensaje("La primera fecha seleccionada debe ser anterior a la segunda");
+                    }
+                }else
+                {
+                    window.mostrarMensaje("Debe llenar ambas fechas para hacer la busqueda");
+                }
+
             }
         }
     }
