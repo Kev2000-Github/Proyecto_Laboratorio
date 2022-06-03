@@ -104,14 +104,11 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
     }
     //REVISAR
-    public Map<String, String> getSelectedCharla(){
+    public String getSelectedCharla(){
         int row = window.gettblCharlas().getSelectedRow();
-        Map<String, String> rowInfo = new HashMap<String, String>();
         String charlaId = window.gettblCharlas().getValueAt(row, 0).toString();
-        
-        rowInfo.put("solicitudId",charlaId);//revisar SOLICITUDID where???
 
-        return rowInfo;
+        return charlaId;
     }
 
     @Override
@@ -131,7 +128,9 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                     //TODO: agregar logica de validacion por consulta (rs empty-> abre ventana de RegistrarAsistentes, else -> mensaje "ya los asistentes de esta charla fueron registrados")
                     //logica empty
                     window.dispose();
-                    this.charlaInfo = getSelectedCharla();
+                    String idCharlaSelected = getSelectedCharla();
+                    
+                    
                     router.notify(this, "go-detalleSolicitud");
                     
                     //logica full(ya registrados)

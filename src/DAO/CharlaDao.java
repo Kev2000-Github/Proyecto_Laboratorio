@@ -57,33 +57,6 @@ public class CharlaDao implements IDao<Charla> {
             con.close();
         }
     }
-    //ELIMINAR, ya que hace lo mismo que getAll();
-    public List<Charla> getCharlasPorEmpezar(){
-    
-        try {
-            List<Charla> list = new ArrayList<Charla>();
-            con = new Conne();
-            con.open();
-            String sql = "SELECT id, tema, lugar, organismo, fecha"
-                    + " FROM charla c WHERE c.deleted_at IS NULL";
-            ResultSet rs = con.execQuery(sql);
-            if (con.isResultSetEmpty(rs))
-                return list;
-            do {
-                Charla charla = setEntity(rs);
-                list.add(charla);
-            } while (rs.next());
-            return list;
-        } catch (SQLException e) {
-            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
-            System.out.println(msg);
-            e.printStackTrace();
-            return null;
-        } finally {
-            con.close();
-        }
-          
-    }
     
     public List<Charla> getCharlasByType(String selection) {
         try {
@@ -142,8 +115,8 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             String sql = "SELECT id, tema, lugar,organismo,fecha"
-                    + " FROM charla c WHERE c.fecha BETWEEN " + ""
-                    + "'fecha_f' AND 'fecha_t' AND c.deleted_at IS NULL;";
+                    + " FROM charla c WHERE c.fecha BETWEEN " 
+                    + "? AND ? AND c.deleted_at IS NULL;";
             
             String[] params = { fecha_f, fecha_t };
             ResultSet rs = con.execQuery(sql,params);
