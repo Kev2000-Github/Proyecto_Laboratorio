@@ -116,11 +116,16 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String source = e.getSource().getClass().getName();
+        /*String source = e.getSource().getClass().getName();
         if(source.equals("javax.swing.JButton")){
             JButton btn = (JButton) e.getSource();
-            String name = btn.getName(); //RESOLVE: Is empty
-            if(name.equals("btnRegistrar")){
+            String name = btn.getName(); //RESOLVE: Is empty 
+            if(name.equals("btnRegistrar")){*/
+        
+        var source = e.getSource();
+
+        if (source == window.getBtnRegistrar()) {
+
                 if(window.gettblCharlas().getSelectedRow() != -1){
                     
                     //TODO: agregar logica de validacion por consulta (rs empty-> abre ventana de RegistrarAsistentes, else -> mensaje "ya los asistentes de esta charla fueron registrados")
@@ -137,7 +142,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                 }
             }
             
-            if(name.equals("btnBuscar")){
+            if(source == window.getBtnBuscar()){
 
                 Date fecha_f = window.getDChooserFrom().getDate();
                 Date fecha_t = window.getDChooserTo().getDate();
@@ -146,7 +151,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                 
                 if((fecha_f != null) && (fecha_t != null)){
                     
-                    if(fecha_f.after(fecha_t)==true){
+                    if(fecha_f.before(fecha_t)==true){
                         
                         String f = formato.format(fecha_f);
                         String t = formato.format(fecha_t);                
@@ -163,7 +168,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
             }
         }
-    }
+    
     
     
      
