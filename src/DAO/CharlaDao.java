@@ -109,6 +109,30 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
     
+    public boolean charlaIsRegistered(String id){
+        try {
+                con = new Conne();
+                con.open();
+                String sql = "SELECT DISTINCT id, tema, lugar, organismo, fecha"
+                             + "FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                             + "WHERE c.id = ? AND c.deleted_at IS NULL";
+                String[] params = { id };
+                ResultSet rs = con.execQuery(sql, params);
+
+                if (con.isResultSetEmpty(rs))
+                    return false;
+                return true;
+            } catch (Exception e) {
+                String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+                System.out.println(msg);
+                e.printStackTrace();
+                //REVISAR: Dejo este codigo? es necesario? --> return null;
+            } finally {
+                con.close();
+            }
+        return true;
+    }
+    
     public List<Charla> getCharlasByDate(String fecha_f, String fecha_t) {
         try {
             List<Charla> list = new ArrayList<Charla>();

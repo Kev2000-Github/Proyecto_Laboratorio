@@ -104,7 +104,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
     }
     //REVISAR
-    public String getSelectedCharla(){
+    public String getIdSelectedCharla(){
         int row = window.gettblCharlas().getSelectedRow();
         String charlaId = window.gettblCharlas().getValueAt(row, 0).toString();
 
@@ -124,17 +124,18 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         if (source == window.getBtnRegistrar()) {
 
                 if(window.gettblCharlas().getSelectedRow() != -1){
-                    
-                    //TODO: agregar logica de validacion por consulta (rs empty-> abre ventana de RegistrarAsistentes, else -> mensaje "ya los asistentes de esta charla fueron registrados")
-                    //logica empty
+
+                    String idCharlaSelected = getIdSelectedCharla();
+                   
+                    if(charlaDao.charlaIsRegistered(idCharlaSelected)== false){                    
+                        
                     window.dispose();
-                    String idCharlaSelected = getSelectedCharla();
-                    
-                    
-                    router.notify(this, "go-detalleSolicitud");
-                    
-                    //logica full(ya registrados)
+                    //router.notify(this, "go-detalleSolicitud");
+                    }
+                    else{    
                     window.mostrarMensaje("Los asistentes a esta charla ya fueron registrados");
+                    }
+
                 }
                 else{
                     window.mostrarMensaje("No se ha seleccionado ninguna solicitud");
