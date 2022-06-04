@@ -177,8 +177,8 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             con = new Conne();
             con.open();
             String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono"
-                    + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula"
-                    + " WHERE e.fundacion_id = ? AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+                    + " FROM beneficiario b JOIN persona p ON b.cedula = p.cedula"
+                    + " WHERE b.fundacion_id = ? AND b.deleted_at IS NULL AND p.deleted_at IS NULL";
             String[] params = {fundacionId};
             ResultSet rs = con.execQuery(sql, params);
             if (con.isResultSetEmpty(rs)) {
@@ -199,6 +199,7 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
         }
     }
 
+    
     public Beneficiario getByCedula(String cedula) {
         try {
             con = new Conne();
