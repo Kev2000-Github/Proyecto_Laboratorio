@@ -199,6 +199,34 @@ public class SolicitudDao implements IDao<Solicitud> {
     }
 
                
+         public List<Solicitud> getAllSolicitudFilter(String fundacionId) {
+        try {
+            List<Solicitud> list = new ArrayList<Solicitud>();
+            con = new Conne();
+            con.open();
+            String sql = "SELECT * "
+                    + " FROM solicitud WHERE (status = 'pendiente' OR status = 'rechazado' OR status = 'aprobado') AND deleted_at IS NULL";
+            String[] params = {fundacionId};
+            ResultSet rs = con.execQuery(sql,params);
+            if (con.isResultSetEmpty(rs)) {
+                return list;
+            }
+            do {
+                Solicitud solicitud = setEntity(rs);
+                list.add(solicitud);
+            } while (rs.next());
+            return list;
+        } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+        
+    }
+
         
     public int countNumberSolicitudes(String beneficiarioId, String status, Date from, Date to) {
         try {

@@ -12,14 +12,12 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import DAO.BeneficiarioDao;
 import DAO.FundacionDao;
-import DAO.ServicioDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
+import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
-import modelos.Servicio;
 import vistas.general.ComboboxItem;
-
 
 
 /**
@@ -98,23 +96,50 @@ public class ControladorListaSolicitante extends ControladorGeneral {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
             }
         };
-        BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
-        List<Beneficiario> fsList = beneficiarioDao.getAllFromFundacion(fundacionId);
-        modelDetSoli.setColumnCount(6);
-        modelDetSoli.setColumnIdentifiers(new Object[]{"Cedula", "Nombre", "Apellido", "Direccion","Telefono","Correo"});
+        SolicitudDao solicitudDao = new SolicitudDao();
+        List<Solicitud> fsList = solicitudDao.getAllSolicitudFilter(fundacionId);
+        modelDetSoli.setColumnCount(9);
+        modelDetSoli.setColumnIdentifiers(new Object[]{"Solicitud","Fundacion","Cedula", "Nombre", "Apellido", "Direccion","Telefono","Correo","Status"});
 
-        for (Beneficiario b : fsList) {
-            modelDetSoli.addRow(new Object[]{b.getCedula(), b.getNombre(), b.getApellido(), b.getDireccion(),b.getTelefono(),b.getCorreo()});
+        for (Solicitud s : fsList) {
+            BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
+            Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
+            FundacionDao fundacionDao = new FundacionDao();
+            Fundacion fundacion = fundacionDao.get(s.getFundacionId());
+            
+            modelDetSoli.addRow(new Object[]{
+            s.getId(),
+            fundacion.getNombre(),
+            beneficiario.getCedula(), 
+            beneficiario.getNombre(), 
+            beneficiario.getApellido(), 
+            beneficiario.getDireccion(),
+            beneficiario.getTelefono(),
+            beneficiario.getCorreo(),
+            s.getStatus()
+            });
         }
         window.setModelSolicitantes(modelDetSoli);    
-    } */
+    } 
 
-    
+   */
     
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
     }
     
+    /*
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        var source = arg0.getSource();
+
+        if (source == window.getFundacion()) {
+            String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
+            fillDetSolicitante(fundacion_id);
+        }
+        
+    }
     
+    */
 }
