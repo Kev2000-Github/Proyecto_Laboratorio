@@ -28,6 +28,7 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
         initComponents();
         setLocationRelativeTo(null);
         this.agregarMouseListener(ml);
+        this.agregarActionListener(accion);
         topMenu1.setMenuFunctions(this, ml, "Listado Solicitantes por Fundacion");
         fundacion.setEnabled(true);
     }
@@ -37,7 +38,6 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
     }
     
     private void agregarMouseListener(MouseListener ml) {
-        
         goBackLbl.addMouseListener(ml);
     }
     

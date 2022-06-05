@@ -205,7 +205,7 @@ public class SolicitudDao implements IDao<Solicitud> {
             con = new Conne();
             con.open();
             String sql = "SELECT * "
-                    + " FROM solicitud WHERE (status = 'pendiente' OR status = 'rechazado' OR status = 'aprobado') AND deleted_at IS NULL";
+                    + " FROM solicitud WHERE fundacion_id = ? AND deleted_at IS NULL";
             String[] params = {fundacionId};
             ResultSet rs = con.execQuery(sql,params);
             if (con.isResultSetEmpty(rs)) {

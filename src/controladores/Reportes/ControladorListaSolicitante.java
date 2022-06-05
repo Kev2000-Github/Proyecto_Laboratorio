@@ -43,8 +43,8 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         window.setVisible(true);
         fillSolicitantes();
         fillFundacion();
-        //String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
-        //fillDetSolicitante(fundacionId);
+        String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
+        fillDetSolicitante(fundacionId);
     }
 
     public void closeGUI(){
@@ -88,14 +88,8 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         window.setModelSolicitantes(modelSolicitantes);
     }
     
-    /*
     public void fillDetSolicitante(String fundacionId){
-        DefaultTableModel modelDetSoli = new DefaultTableModel() {
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
-            }
-        };
+        DefaultTableModel modelDetSoli = new DefaultTableModel();
         SolicitudDao solicitudDao = new SolicitudDao();
         List<Solicitud> fsList = solicitudDao.getAllSolicitudFilter(fundacionId);
         modelDetSoli.setColumnCount(9);
@@ -106,7 +100,6 @@ public class ControladorListaSolicitante extends ControladorGeneral {
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             FundacionDao fundacionDao = new FundacionDao();
             Fundacion fundacion = fundacionDao.get(s.getFundacionId());
-            
             modelDetSoli.addRow(new Object[]{
             s.getId(),
             fundacion.getNombre(),
@@ -121,15 +114,12 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         }
         window.setModelSolicitantes(modelDetSoli);    
     } 
-
-   */
     
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
     }
     
-    /*
     @Override
     public void actionPerformed(ActionEvent arg0) {
         var source = arg0.getSource();
@@ -137,9 +127,9 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         if (source == window.getFundacion()) {
             String fundacion_id = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
             fillDetSolicitante(fundacion_id);
+
         }
         
     }
     
-    */
 }
