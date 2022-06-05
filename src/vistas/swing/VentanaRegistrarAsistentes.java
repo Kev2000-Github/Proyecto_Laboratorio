@@ -10,12 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionListener;
+import vistas.general.VentanaGeneral;
 
 /**
  *
  * @author sarah
  */
-public class VentanaRegistrarAsistentes extends javax.swing.JFrame {
+public class VentanaRegistrarAsistentes extends VentanaGeneral {
 
     /**
      * Creates new form VentanaRegistrarAsistentes
@@ -50,6 +51,7 @@ public class VentanaRegistrarAsistentes extends javax.swing.JFrame {
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(topMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, -1));
 

@@ -32,7 +32,7 @@ public class ControladorRegistrarAsistentes extends ControladorUpdateGeneral{
     
     //REVISAR: 
     public void mostrarMensaje(String mensaje){
-        //window.mostrarMensaje(mensaje);
+        window.mostrarMensaje(mensaje);
     }
     
     public void initGUI(){
@@ -66,18 +66,18 @@ public class ControladorRegistrarAsistentes extends ControladorUpdateGeneral{
             
             if(ci != null){
                 if(ci.matches("[+-]?\\d*(\\.\\d+)?")==true && ci.length()==8){
-                    //TODO traer id charla correcto
+                    
                     charlaDao.saveAsistente(ci, charlaId);
                     
                     window.setEntryCedula("");
-                    System.out.println("Registro Exitoso");
+                    mostrarMensaje("Registro Exitoso");
                 }else{
-                    System.out.println("Porfavor ingrese un numero de cedula valido");
+                    mostrarMensaje("Porfavor ingrese un numero de cedula valido");
                     window.setEntryCedula("");
                 }
                 
             }else{
-                System.out.println("Porfavor ingrese cedula");  
+                mostrarMensaje("Porfavor ingrese cedula");  
             }
         }
     
