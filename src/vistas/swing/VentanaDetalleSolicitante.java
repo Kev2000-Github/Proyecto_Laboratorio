@@ -79,9 +79,9 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSolicitantes = new javax.swing.JTable();
-        goBackLbl = new javax.swing.JLabel();
         fundacion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        goBackLbl = new javax.swing.JLabel();
         topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
@@ -115,16 +115,15 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 560, 190));
 
-        goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
-        goBackLbl.setName("goBack"); // NOI18N
-        goBackLbl.setOpaque(true);
-        jPanel1.add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 6, -1, 22));
-
         jPanel1.add(fundacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 300, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fundacion");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
+        goBackLbl.setName("goBack"); // NOI18N
+        jPanel1.add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, -1, -1));
         getContentPane().add(topMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));

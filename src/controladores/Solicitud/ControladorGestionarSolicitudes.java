@@ -3,7 +3,6 @@ package controladores.Solicitud;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
-
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;
@@ -13,9 +12,6 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.JLabel;
-
 import DAO.BeneficiarioDao;
 import DAO.EmpleadoDao;
 import DAO.FundacionDao;
@@ -114,7 +110,7 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
                 }
                 else{
                     window.mostrarMensaje("No se ha seleccionado ninguna solicitud");
-                }
+                }    
             }
         }
     }

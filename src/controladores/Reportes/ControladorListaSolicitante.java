@@ -66,16 +66,13 @@ public class ControladorListaSolicitante extends ControladorGeneral {
     public void fillSolicitantes() {
         DefaultTableModel modelSolicitantes = new DefaultTableModel();
         List<Solicitud> solicitudes = solicitudDao.getAllSolicitud();  
-        modelSolicitantes.setColumnCount(9);
-        modelSolicitantes.setColumnIdentifiers(new String[]{"Solicitud", "Fundacion", "Cedula","Nombre","Apellido","Direccion","Telefono","Correo","Status"});
+        modelSolicitantes.setColumnCount(8);
+        modelSolicitantes.setColumnIdentifiers(new String[]{"Solicitud", "Cedula","Nombre","Apellido","Direccion","Telefono","Correo","Status"});
         for (Solicitud s : solicitudes) {
-            FundacionDao fundacionDao = new FundacionDao();
-            Fundacion fundacion = fundacionDao.get(s.getFundacionId());
             BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
             modelSolicitantes.addRow(new Object[]{ 
                 s.getId(),
-                fundacion.getNombre(),
                 beneficiario.getCedula(),
                 beneficiario.getNombre(),
                 beneficiario.getApellido(),
@@ -92,17 +89,14 @@ public class ControladorListaSolicitante extends ControladorGeneral {
         DefaultTableModel modelDetSoli = new DefaultTableModel();
         SolicitudDao solicitudDao = new SolicitudDao();
         List<Solicitud> fsList = solicitudDao.getAllSolicitudFilter(fundacionId);
-        modelDetSoli.setColumnCount(9);
-        modelDetSoli.setColumnIdentifiers(new Object[]{"Solicitud","Fundacion","Cedula", "Nombre", "Apellido", "Direccion","Telefono","Correo","Status"});
+        modelDetSoli.setColumnCount(8);
+        modelDetSoli.setColumnIdentifiers(new Object[]{"Solicitud","Cedula", "Nombre", "Apellido", "Direccion","Telefono","Correo","Status"});
 
         for (Solicitud s : fsList) {
             BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
             Beneficiario beneficiario = beneficiarioDao.get(s.getBeneficiarioId());
-            FundacionDao fundacionDao = new FundacionDao();
-            Fundacion fundacion = fundacionDao.get(s.getFundacionId());
             modelDetSoli.addRow(new Object[]{
             s.getId(),
-            fundacion.getNombre(),
             beneficiario.getCedula(), 
             beneficiario.getNombre(), 
             beneficiario.getApellido(), 
