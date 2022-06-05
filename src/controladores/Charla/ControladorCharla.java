@@ -118,7 +118,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                     if(charlaDao.charlaIsRegistered(idCharlaSelected)== false){                    
                         
                     window.dispose();
-                    router.notify(this, "go-registrarAsistentes");
+                    router.notify(this, "go-registrarAsistentes-" + idCharlaSelected);
                     }
                     else{    
                     window.mostrarMensaje("Los asistentes a esta charla ya fueron registrados");

@@ -7,19 +7,22 @@ package controladores.Charla;
 import DAO.CharlaDao;
 import DAO.general.DaoFactory;
 import controladores.ControladorComponente.ControladorGeneral;
+import controladores.ControladorComponente.ControladorUpdateGeneral;
 import controladores.Mediator.IRouter;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import vistas.swing.VentanaRegistrarAsistentes;
 
 /**
  *
  * @author sarah
  */
-public class ControladorRegistrarAsistentes extends ControladorGeneral{
+public class ControladorRegistrarAsistentes extends ControladorUpdateGeneral{
     
     VentanaRegistrarAsistentes window;
     DaoFactory daoFactory;
     CharlaDao charlaDao;
+    String charlaId;
     
     public ControladorRegistrarAsistentes(IRouter router) {
         super("registrarAsistentes", router);
@@ -36,12 +39,20 @@ public class ControladorRegistrarAsistentes extends ControladorGeneral{
         router.addRoute(this.id);
         window = new VentanaRegistrarAsistentes(this, this);
         window.setVisible(true);
-        //fillCharlas();
+        setIdLabel(charlaId);
 
     }
 
     public void closeGUI(){
         window.dispose();
+    }
+    
+    public void updateId(String id){
+        charlaId = id;
+    }
+    
+    public void setIdLabel(String id){
+        window.getLblIdCharla().setText(id);
     }
     
     @Override
@@ -56,7 +67,7 @@ public class ControladorRegistrarAsistentes extends ControladorGeneral{
             if(ci != null){
                 if(ci.matches("[+-]?\\d*(\\.\\d+)?")==true && ci.length()==8){
                     //TODO traer id charla correcto
-                    charlaDao.saveAsistente(ci, id);
+                    charlaDao.saveAsistente(ci, charlaId);
                     
                     window.setEntryCedula("");
                     System.out.println("Registro Exitoso");
@@ -65,10 +76,16 @@ public class ControladorRegistrarAsistentes extends ControladorGeneral{
                     window.setEntryCedula("");
                 }
                 
-                System.out.println("Porfavor ingrese cedula");                
+            }else{
+                System.out.println("Porfavor ingrese cedula");  
             }
         }
     
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
     }
     
 }
