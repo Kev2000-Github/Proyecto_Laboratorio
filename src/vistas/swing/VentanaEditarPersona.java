@@ -12,10 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-
 import vistas.swing.componentes.textInput.textInput;
-import vistas.swing.componentes.textInputSearch.textInputSearch;
-
 /**
  *
  * @author ASRock

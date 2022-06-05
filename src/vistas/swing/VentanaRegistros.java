@@ -53,6 +53,7 @@ public class VentanaRegistros extends VentanaGeneral {
         empleados = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
+        servicios = new javax.swing.JButton();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,7 +88,15 @@ public class VentanaRegistros extends VentanaGeneral {
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 44, -1, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 220));
+
+        servicios.setText("Servicios");
+        servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serviciosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 117, 35));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 280));
 
         pack();
         setLocationRelativeTo(null);
@@ -100,6 +109,10 @@ public class VentanaRegistros extends VentanaGeneral {
     private void fundacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fundacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fundacionesActionPerformed
+
+    private void serviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_serviciosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +173,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private javax.swing.JButton fundaciones;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton servicios;
     private vistas.swing.componentes.topMenu.topMenu topMenu;
     // End of variables declaration//GEN-END:variables
 }

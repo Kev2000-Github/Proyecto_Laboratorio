@@ -195,7 +195,7 @@ group by fundacion_id, solicitud_id, s.status, fecha;
 CREATE VIEW view_total_gastado_anual AS
 select fundacion_id, sum(costo_total) total_gastado, EXTRACT(YEAR FROM fecha) annio from view_presupuestos_totales_solicitud
 where status = 'aprobado'
-group by fundacion_id, annio;
+group by fundacion_id, fecha;
 --INSERT DEFAULT VALUES
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
@@ -246,12 +246,9 @@ INSERT INTO permiso(id, descripcion)
 		  ('listaPresupuesto',''),
 		  ('listaResponsable',''),
 		  ('listaSolicitante',''),
-		  ('solicitudes',''),
 		  ('addSolicitud',''),
 		  ('detalleSolicitud',''),
-		  ('fundacion',''),
-		  ('addFundacion',''),
-		  ('updateFundacion','');
+		  ('solicitudes','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
 	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
@@ -273,13 +270,10 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'addSolicitud'),
 		  ('OPTE5KYCY3M4BL49N9', 'detalleSolicitud'),
 		  ('OPTE5KYCY3M4BL49N9', 'solicitudes'),
-		  ('OPTE5KYCY3M4BL49N9', 'fundacion'),
-		  ('OPTE5KYCY3M4BL49N9', 'addFundacion'),
-		  ('OPTE5KYCY3M4BL49N9', 'updateFundacion'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
-		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud'),
+		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud')
 		  ('QS0YGF5RCQ3F7UMSE4', 'login');
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)
