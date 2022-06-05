@@ -58,57 +58,6 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
     
-    public List<Charla> getCharlasByType(String selection) {
-        try {
-           
-            List<Charla> list = new ArrayList<Charla>();
-            con = new Conne();
-            con.open();
-            
-            //Inicializando Consulta
-            String sql = "";
-            
-            //Condicion para Seleccionar el tipo de Consulta a realizar
-            if(selection=="Por empezar, sin Registrar"){
-                
-            sql = "SELECT id, tema, lugar, organismo, fecha"
-                    + " FROM charla c WHERE status = pend c.deleted_at IS NULL";
-            }
-            else if (selection =="Finalizadas, Registradas"){
-                
-            sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
-                  + " FROM charla c JOIN asistenciacharla ac ON c.id = ac.charla_id"
-                  + " WHERE c.status = fin AND c.deleted_at IS NULL";
-
-            }
-            else {//caso Finalizadas sin Registrar
-            
-                sql = "SELECT c.id, c.tema, c.lugar, c.organismo, c.fecha"
-                      + "FROM  charla c LEFT JOIN asistenciacharla ac ON c.id = ac.charla_id"
-                      + "WHERE c.status = 'fin' AND ac.charla_id IS NULL" ;         
-            }
-            
-            ResultSet rs = con.execQuery(sql);
-            
-            if (con.isResultSetEmpty(rs))
-                return list;
-            
-            do {                
-                Charla charla = setEntity(rs);
-                list.add(charla);               
-            } while (rs.next());
-            
-            return list;
-            
-        } catch (SQLException e) {
-            String msg = "Error #7105 obteniendo los datos de la bd\n" + e.getMessage();
-            System.out.println(msg);
-            return null;
-        } finally {
-            con.close();
-        }
-    }
-    
     public boolean charlaIsRegistered(String id){
         try {
                 con = new Conne();
@@ -307,4 +256,20 @@ public class CharlaDao implements IDao<Charla> {
             con.close();
         }
     }
+    
+    public void saveAsistente(String ciAsistente, String idcharla) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "INSERT INTO asistencia_charla(cedula, charla_id) VALUES (?,?)";
+            String[] params = { ciAsistente, idcharla };
+            con.execMutation(sql, params);
+        } catch (Exception e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            con.close();
+        }
+    }
+
 }

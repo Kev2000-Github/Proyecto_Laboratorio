@@ -63,7 +63,6 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         window.dispose();
     }
  
-    //TRAER EL/LOS PARAM/S AL METODO TAMBIEN:
     public void fillCharlas() {
         DefaultTableModel modelCharlas = new DefaultTableModel();
         List<Charla> ch_list = charlaDao.getAll();
@@ -97,14 +96,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         }
         window.setModelServicio(modelCharlas);
     }
-    //REVISAR Terminar
-    public void ValidateBtnRegistrar(){
-    
-        
-        window.getBtnBuscar();
 
-    }
-    //REVISAR
     public String getIdSelectedCharla(){
         int row = window.gettblCharlas().getSelectedRow();
         String charlaId = window.gettblCharlas().getValueAt(row, 0).toString();
@@ -114,11 +106,6 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JButton")){
-            JButton btn = (JButton) e.getSource();
-            String name = btn.getName(); //RESOLVE: Is empty 
-            if(name.equals("btnRegistrar")){*/
         
         var source = e.getSource();
 
@@ -131,7 +118,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
                     if(charlaDao.charlaIsRegistered(idCharlaSelected)== false){                    
                         
                     window.dispose();
-                    //router.notify(this, "go-detalleSolicitud");
+                    router.notify(this, "go-registrarAsistentes");
                     }
                     else{    
                     window.mostrarMensaje("Los asistentes a esta charla ya fueron registrados");
