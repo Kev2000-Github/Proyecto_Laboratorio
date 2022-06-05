@@ -174,19 +174,12 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     
      
     @Override
-    public void valueChanged(ListSelectionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void valueChanged(ListSelectionEvent e) { 
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JLabel")){
-            JLabel lbl = (JLabel)e.getSource();
-            if(lbl.getName() == "goHome"){
-                router.notify(this, "go-home");
-            }
-        }
+        super.mouseClicked(e);
     }
     
     @Override

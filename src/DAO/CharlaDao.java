@@ -114,8 +114,8 @@ public class CharlaDao implements IDao<Charla> {
                 con = new Conne();
                 con.open();
                 String sql = "SELECT DISTINCT id, tema, lugar, organismo, fecha"
-                             + "FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
-                             + "WHERE c.id = ? AND c.deleted_at IS NULL";
+                             + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                             + " WHERE c.id = ? AND c.deleted_at IS NULL";
                 String[] params = { id };
                 ResultSet rs = con.execQuery(sql, params);
 
