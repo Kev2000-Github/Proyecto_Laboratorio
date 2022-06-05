@@ -88,7 +88,7 @@
     <Component class="vistas.swing.componentes.backgroundImage.backgroundImage" name="backgroundImage1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="-1" height="300"/>
+          <AbsoluteConstraints x="0" y="0" width="550" height="300"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -72,7 +72,7 @@ public class VentanaBackOffice extends VentanaGeneral {
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 38, -1, -1));
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 30));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 300));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 300));
 
         pack();
         setLocationRelativeTo(null);

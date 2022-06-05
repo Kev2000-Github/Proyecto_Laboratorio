@@ -113,7 +113,7 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
         });
         jPanel1.add(solicitudBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 88, 610, 360));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 88, 560, 360));
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,7 +123,7 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
         jLabel1.setText("Solicitudes");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 640, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 550, -1));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
 
         pack();

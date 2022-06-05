@@ -6,9 +6,6 @@ package vistas.swing;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,12 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import modelos.Servicio;
-import modelos.Solicitud;
-import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.general.VentanaGeneral;
-import vistas.general.MyTableModel;
 
 /**
  *
@@ -43,6 +36,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         this.agregarSelectionListener(listSelection);
         this.agregarMouseListener(ml);
         topMenu.setMenuFunctions(this, ml, "");
+        fundacion.setEnabled(false);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -64,6 +58,10 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
 
     public void setTextPrecio(String text) {
         this.precio.setText(text);
+    }
+
+    public void restrictSensitiveComp(boolean isPermitted){
+        fundacion.setEnabled(isPermitted);
     }
 
 
@@ -159,7 +157,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         precio.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         precio.setForeground(new java.awt.Color(255, 255, 255));
         precio.setText("0");
-        jPanel6.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, -1));
+        jPanel6.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 0, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -248,7 +246,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         empleadoId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         empleadoId.setForeground(new java.awt.Color(255, 255, 255));
         empleadoId.setText("xxx-xxx-xxx");
-        jPanel1.add(empleadoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 44, -1, 20));
+        jPanel1.add(empleadoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, 20));
 
         empleadoName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         empleadoName.setForeground(new java.awt.Color(255, 255, 255));

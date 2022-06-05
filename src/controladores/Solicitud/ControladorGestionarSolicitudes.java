@@ -50,6 +50,7 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaGestionarSolicitud(this, this);
         window.setVisible(true);
         fillSolicitudes();
@@ -120,12 +121,6 @@ public class ControladorGestionarSolicitudes extends ControladorGeneral {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String source = e.getSource().getClass().getName();
-        if(source.equals("javax.swing.JLabel")){
-            JLabel lbl = (JLabel)e.getSource();
-            if(lbl.getName() == "goHome"){
-                router.notify(this, "go-home");
-            }
-        }
+        super.mouseClicked(e);
     }
 }

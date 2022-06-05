@@ -52,6 +52,7 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     }
     
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaCharlas(this, this, this);
         window.setVisible(true);
         fillCharlas();

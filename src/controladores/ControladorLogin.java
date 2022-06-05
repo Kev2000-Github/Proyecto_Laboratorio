@@ -23,6 +23,7 @@ public class ControladorLogin extends ControladorGeneral {
     }
 
     public void initGUI(){
+        router.addRoute(this.id);
         window = new VentanaLogin(this);
         window.setVisible(true);
     }
