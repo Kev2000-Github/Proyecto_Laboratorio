@@ -195,7 +195,7 @@ group by fundacion_id, solicitud_id, s.status, fecha;
 CREATE VIEW view_total_gastado_anual AS
 select fundacion_id, sum(costo_total) total_gastado, EXTRACT(YEAR FROM fecha) annio from view_presupuestos_totales_solicitud
 where status = 'aprobado'
-group by fundacion_id, fecha;
+group by fundacion_id, annio;
 --INSERT DEFAULT VALUES
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
