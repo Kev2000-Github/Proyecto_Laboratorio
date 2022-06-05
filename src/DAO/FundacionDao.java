@@ -87,12 +87,11 @@ public class FundacionDao implements IDao<Fundacion> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO fundacion(id, nombre, presupuesto, porcentaje_partido_anual, gobernacion_id) "
+                        +"VALUES(?,?," + String.valueOf(fundacion.getPresupuesto()) + "," + String.valueOf(fundacion.getPorcentajePartidoAnual()) + ",'gb001')";
             String[] params = {
                     fundacion.getId(),
-                    fundacion.getNombre(),
-                    String.valueOf(fundacion.getPresupuesto()),
-                    String.valueOf(fundacion.getPorcentajePartidoAnual())
+                    fundacion.getNombre()
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

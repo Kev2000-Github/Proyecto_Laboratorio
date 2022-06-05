@@ -3,6 +3,9 @@ package controladores.ControladorComponente;
 import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
 import controladores.Charla.ControladorCharla;
+import controladores.Fundacion.ControladorAddFundacion;
+import controladores.Fundacion.ControladorFundacion;
+import controladores.Fundacion.ControladorUpdateFundacion;
 import controladores.Menu.ControladorBackOffice;
 import controladores.Menu.ControladorHome;
 import controladores.Menu.ControladorRegistros;
@@ -39,7 +42,10 @@ public class ControladorFactory implements IControladorFactory{
         "listaSolicitante",
         "solicitudes",
         "addSolicitud",
-        "detalleSolicitud"
+        "detalleSolicitud",
+        "fundacion",
+        "addFundacion",
+        "updateFundacion"
     };
 
     public ControladorGeneral getControlador(String nombre, IRouter router) {
@@ -72,6 +78,13 @@ public class ControladorFactory implements IControladorFactory{
                 return new ControladorAddEmpleado(router);
             case "updateEmpleado":
                 return new ControladorUpdateEmpleado(router);
+            //FUNDACION
+            case "fundacion":
+                return new ControladorFundacion(router);
+            case "addFundacion":
+                return new ControladorAddFundacion(router);
+            case "updateFundacion":
+                return new ControladorUpdateFundacion(router);
             //REPORTES
             case "listaPresupuesto":
                 return new ControladorListaPresupuesto(router);

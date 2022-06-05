@@ -46,6 +46,9 @@ public class ControladorRegistros extends ControladorGeneral {
             router.notify(this, "go-empleado");
         }
 
+        if (source == window.getFundaciones()){
+            router.notify(this, "go-fundacion");
+        }
     }
 
     public void mostrarMensaje(String mensaje){

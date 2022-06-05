@@ -31,6 +31,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private void agregarListener(ActionListener accion){
         empleados.addActionListener(accion);
         beneficiarios.addActionListener(accion);
+        fundaciones.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -48,6 +49,7 @@ public class VentanaRegistros extends VentanaGeneral {
 
         topMenu = new vistas.swing.componentes.topMenu.topMenu();
         beneficiarios = new javax.swing.JButton();
+        fundaciones = new javax.swing.JButton();
         empleados = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
@@ -59,7 +61,15 @@ public class VentanaRegistros extends VentanaGeneral {
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
         beneficiarios.setText("Beneficiarios");
-        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 117, 38));
+        getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 117, 38));
+
+        fundaciones.setText("Fundaciones");
+        fundaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fundacionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fundaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 117, 35));
 
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +77,7 @@ public class VentanaRegistros extends VentanaGeneral {
                 empleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 117, 35));
+        getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 117, 35));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,6 +96,10 @@ public class VentanaRegistros extends VentanaGeneral {
     private void empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_empleadosActionPerformed
+
+    private void fundacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fundacionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fundacionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,7 +147,9 @@ public class VentanaRegistros extends VentanaGeneral {
         return empleados;
     }
     
-
+    public JButton getFundaciones() {
+        return fundaciones;
+    }
  
 
     
@@ -141,6 +157,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
     private javax.swing.JButton beneficiarios;
     private javax.swing.JButton empleados;
+    private javax.swing.JButton fundaciones;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private vistas.swing.componentes.topMenu.topMenu topMenu;
