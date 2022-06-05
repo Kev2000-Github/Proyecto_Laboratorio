@@ -163,6 +163,10 @@ public class VentanaRegistros extends VentanaGeneral {
     public JButton getFundaciones() {
         return fundaciones;
     }
+    
+    public JButton getServicios() {
+        return servicios;
+    }
  
 
     
