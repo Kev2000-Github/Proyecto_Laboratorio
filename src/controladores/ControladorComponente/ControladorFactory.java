@@ -20,7 +20,7 @@ import controladores.Solicitud.ControladorAddSolicitud;
 import controladores.Solicitud.ControladorDetalleSolicitud;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
 
-public class ControladorFactory {
+public class ControladorFactory implements IControladorFactory{
     public static final String[] CONTROLADORES = {
         "login",
         "charla",
