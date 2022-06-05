@@ -28,7 +28,9 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
         initComponents();
         setLocationRelativeTo(null);
         this.agregarMouseListener(ml);
+        this.agregarActionListener(accion);
         topMenu1.setMenuFunctions(this, ml, "Listado Solicitantes por Fundacion");
+        fundacion.setEnabled(true);
     }
     
     public void setModelSolicitantes(DefaultTableModel model){
@@ -36,21 +38,31 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
     }
     
     private void agregarMouseListener(MouseListener ml) {
-        //fundacioncb.addMouseListener(ml);
         goBackLbl.addMouseListener(ml);
     }
     
     
 
     private void agregarActionListener(ActionListener accion) {
-        //fundacioncb.addActionListener(accion);
+        fundacion.addActionListener(accion);
         
     }
     
      public JTable getSolicitantes(){
         return tablaSolicitantes;
     }
-     
+    
+    public JComboBox<ComboboxItem> getFundacion() {
+        return fundacion;
+    }
+    
+    public void setModelFundacion(DefaultComboBoxModel model) {
+        this.fundacion.setModel(model);
+    }
+    
+    
+
+ 
     
    
     /**
@@ -67,6 +79,8 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSolicitantes = new javax.swing.JTable();
+        fundacion = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
         topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
@@ -82,33 +96,38 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
 
         jLabel1.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Lista de Solicitantes por fundacion");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        jLabel1.setText("Detalles De Los Solicitantes Por Fundación");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
         tablaSolicitantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Solicitud", "Fundacion", "Beneficiario"
+                "Item1", "Item2", "Item3", "Item4", "Item5"
             }
         ));
         jScrollPane1.setViewportView(tablaSolicitantes);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 560, 189));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 560, 190));
+
+        jPanel1.add(fundacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 300, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Fundacion");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
-        goBackLbl.setOpaque(true);
-        jPanel1.add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 6, -1, 22));
+        jPanel1.add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, -1, -1));
         getContentPane().add(topMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 370));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 390));
 
         pack();
         setLocationRelativeTo(null);
@@ -163,8 +182,10 @@ public class VentanaDetalleSolicitante extends VentanaGeneral {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
+    private javax.swing.JComboBox<ComboboxItem> fundacion;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

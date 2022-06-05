@@ -46,6 +46,8 @@ public class ControladorDetalleSolicitud extends ControladorDetailsGeneral {
         super("detalleSolicitud", route);
         this.servicioDao = new ServicioDao();
     }
+    
+    
 
     public void mostrarMensaje(String mensaje){
         window.mostrarMensaje(mensaje);
