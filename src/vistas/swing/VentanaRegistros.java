@@ -32,6 +32,7 @@ public class VentanaRegistros extends VentanaGeneral {
         empleados.addActionListener(accion);
         beneficiarios.addActionListener(accion);
         fundaciones.addActionListener(accion);
+        servicios.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -164,7 +165,9 @@ public class VentanaRegistros extends VentanaGeneral {
         return fundaciones;
     }
  
-
+    public JButton getServicios() {
+        return servicios;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
