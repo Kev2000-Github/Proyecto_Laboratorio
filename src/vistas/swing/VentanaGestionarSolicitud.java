@@ -32,7 +32,7 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
     private void agregarActionListener(ActionListener accion) {
         solicitudBtn.addActionListener(accion);
     }
-
+    
     public JTable getSolicitudes(){
         return tableSolicitudes;
     }
