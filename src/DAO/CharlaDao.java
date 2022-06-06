@@ -211,7 +211,7 @@ public class CharlaDao implements IDao<Charla> {
             con.open();
             List<Charla> list = new ArrayList<Charla>();
             String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
-                    + " FROM charla c JOIN asistenciacharla ac ON c.id = ac.charlaId"
+                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charlaId"
                     + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
             String[] params = { cedula };
             ResultSet rs = con.execQuery(sql, params);
