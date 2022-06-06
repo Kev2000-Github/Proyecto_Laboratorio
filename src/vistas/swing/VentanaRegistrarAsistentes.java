@@ -80,7 +80,7 @@ public class VentanaRegistrarAsistentes extends VentanaGeneral {
         btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
         btnRegistrar.setText("Registrar");
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 300));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -257,6 +257,29 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
     
+    public boolean existingAsistente(String id){
+         try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM asistencia_charla" 
+                         + "WHERE cedula = ? AND deleted_at IS NULL";
+            String[] params = { id };
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs))
+                return false;
+            return true;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return false;
+        } finally {
+            con.close();
+        }
+    }
+    
+    
     public void saveAsistente(String ciAsistente, String idcharla) {
         try {
             con = new Conne();

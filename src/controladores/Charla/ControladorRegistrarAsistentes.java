@@ -67,10 +67,14 @@ public class ControladorRegistrarAsistentes extends ControladorUpdateGeneral{
             if(ci != null){
                 if(ci.matches("[+-]?\\d*(\\.\\d+)?")==true && ci.length()==8){
                     
-                    charlaDao.saveAsistente(ci, charlaId);
-                    
-                    window.setEntryCedula("");
-                    mostrarMensaje("Registro Exitoso");
+                    if(charlaDao.existingAsistente(ci)==false){
+                        charlaDao.saveAsistente(ci, charlaId);
+                        window.setEntryCedula("");
+                        mostrarMensaje("Registro Exitoso");
+                    }else{
+                        mostrarMensaje("El asistente que desea registrar ya existe");                        
+                    }
+
                 }else{
                     mostrarMensaje("Porfavor ingrese un numero de cedula valido");
                     window.setEntryCedula("");
