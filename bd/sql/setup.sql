@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS asistencia_charla CASCADE;
 DROP VIEW IF EXISTS partida_total_actual;
 DROP VIEW IF EXISTS view_presupuestos_totales_solicitud;
 DROP VIEW IF EXISTS view_total_gastado_anual;
+DROP VIEW IF EXISTS view_lista_presupuestos;
 --ENUM
 DROP TYPE IF EXISTS tipo_servicio;
 DROP TYPE IF EXISTS solicitud_prioridad;
@@ -195,14 +196,28 @@ group by fundacion_id, solicitud_id, s.status, fecha;
 CREATE VIEW view_total_gastado_anual AS
 select fundacion_id, sum(costo_total) total_gastado, EXTRACT(YEAR FROM fecha) annio from view_presupuestos_totales_solicitud
 where status = 'aprobado'
-group by fundacion_id, fecha;
+group by fundacion_id, annio;
+
+CREATE VIEW view_lista_presupuestos AS
+SELECT 
+	s.id,
+	f.nombre as fundacion,
+	e.cedula as empleado,
+	b.cedula as beneficiario,
+	vp.costo_total as presupuesto_total,
+	s.status
+FROM solicitud s
+JOIN fundacion f on s.fundacion_id = f.id
+JOIN view_presupuestos_totales_solicitud vp on vp.solicitud_id = s.id
+JOIN beneficiario b on b.id = s.beneficiario_id
+JOIN empleado e on e.id = s.empleado_id;
 --INSERT DEFAULT VALUES
 
 INSERT INTO persona(cedula, nombre, apellido, telefono, correo, direccion)
 	VALUES('27317962','kevin','cheng','584126796098','chengkev2000@gmail.com','direccion'),
-		  ('27317963','Juan','cheng','584126796098','test@test.com',null),
-		  ('27317964','Carmelo','Perez','584126796099',null,null),
-		  ('27317965','Theo','Bach',null,null,null);
+		  ('27317963','Juan','cheng','584126796098','test@test.com','mi casa'),
+		  ('27317964','Carmelo','Perez','584126796099','carmelo@test.com','mi mansion'),
+		  ('27317965','Theo','Bach','123456789','theo@test.com','mi choza');
 		  
 INSERT INTO gobernacion(id, nombre, fondos)
 	VALUES('gb001','Gobernacion de Lara', 10000);
@@ -255,7 +270,12 @@ INSERT INTO permiso(id, descripcion)
 		  ('updateFundacion',''),
           ('servicio',''),
           ('addServicio',''),
-		  ('solicitudes','');
+		  ('solicitudes',''),
+		  ('usuario',''),
+		  ('updateUsuario',''),
+		  ('addUsuario',''),
+		  ('registrarAsistentes',''),
+		  ('addCharla','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
 	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
@@ -284,6 +304,11 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'updateFundacion'),
           ('OPTE5KYCY3M4BL49N9', 'servicio'),
           ('OPTE5KYCY3M4BL49N9', 'addServicio'),
+		  ('OPTE5KYCY3M4BL49N9', 'usuario'),
+		  ('OPTE5KYCY3M4BL49N9', 'updateUsuario'),
+		  ('OPTE5KYCY3M4BL49N9', 'addUsuario'),
+		  ('OPTE5KYCY3M4BL49N9', 'registrarAsistentes'),
+		  ('OPTE5KYCY3M4BL49N9', 'addCharla'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
@@ -322,20 +347,22 @@ INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 		  ('YBGLMAYHG4ZA699Q5O', '7', 20);
 		  
 INSERT INTO charla(id, tema, lugar, organismo, fecha)
-	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
-		  ('2', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
-		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
-		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01');
+	VALUES('AQI1AUJTVUB0TILVKU', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
+		  ('V6LIWKRZAUPN6O5BTP', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
+		  ('S1R2D917T2IQN23BKA', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
+		  ('X3TK9YL6TSX2PK5Y35', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01'),
+		  ('LNY2BRRWCZCDR6YG03', 'Las consecuencias del Bullying dejan marca en la sociedad', 'Parque Nacional', 'Psicologa', '2022-01-01'),
+		  ('2HTN4O6LWX0XMICPB3', 'Los adultos infantilizados de hoy dia', 'Parque Nacional', 'Platzi', '2022-01-01');
 
 INSERT INTO asistencia_charla(cedula, charla_id)
-	VALUES('27317962','1'),
-		  ('27317962','2'),
-		  ('27317962','3'),
-		  ('27317962','4'),
-		  ('27317963','4'),
-		  ('27317963','3'),
-		  ('27317963','2'), 
-		  ('27317963','1'),
-		  ('27317964','3'),
-		  ('27317964','1'),
-		  ('27317965','3');
+	VALUES('27317962','AQI1AUJTVUB0TILVKU'),
+		  ('27317962','V6LIWKRZAUPN6O5BTP'),
+		  ('27317962','S1R2D917T2IQN23BKA'),
+		  ('27317962','X3TK9YL6TSX2PK5Y35'),
+		  ('27317963','X3TK9YL6TSX2PK5Y35'),
+		  ('27317963','S1R2D917T2IQN23BKA'),
+		  ('27317963','V6LIWKRZAUPN6O5BTP'), 
+		  ('27317963','AQI1AUJTVUB0TILVKU'),
+		  ('27317964','S1R2D917T2IQN23BKA'),
+		  ('27317964','AQI1AUJTVUB0TILVKU'),
+		  ('27317965','S1R2D917T2IQN23BKA');

@@ -112,8 +112,11 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         jLabel1.setText("Crear Solicitud");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
 
+        crearSolicitud.setBackground(new java.awt.Color(110, 217, 161));
+        crearSolicitud.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        crearSolicitud.setForeground(new java.awt.Color(0, 37, 35));
         crearSolicitud.setText("Crear Solicitud");
-        jPanel1.add(crearSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
+        jPanel1.add(crearSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 430, 120, 30));
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,6 +125,7 @@ public class VentanaCrearSolicitud extends VentanaGeneral {
         jLabel5.setText("Servicios");
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        servicios.setBackground(new java.awt.Color(204, 255, 204));
         servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}

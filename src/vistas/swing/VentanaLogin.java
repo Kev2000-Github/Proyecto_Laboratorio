@@ -27,9 +27,14 @@ public class VentanaLogin extends VentanaGeneral {
                  jPanel6.setBackground(new Color(0,0,0,0));
                  jPanel6.setOpaque(false);
                  jPanel6.setLayout(null);
+        setTransparence();
     }
 
-    
+    private void setTransparence(){
+        jToggleButton1.setOpaque(false);
+        username.setOpaque(false);
+        password.setOpaque(false);
+    }
 
     public String getUsername(){
         return username.getText();
@@ -72,8 +77,11 @@ public class VentanaLogin extends VentanaGeneral {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jToggleButton1.setBackground(new java.awt.Color(0, 37, 35));
+        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jToggleButton1.setForeground(new java.awt.Color(110, 217, 161));
         jToggleButton1.setText("Ingresar");
+        jToggleButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(110, 217, 161), 2, true));
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -81,10 +89,10 @@ public class VentanaLogin extends VentanaGeneral {
         });
         jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 240, 40));
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Login");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 58, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 100, -1));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setOpaque(false);
@@ -95,6 +103,8 @@ public class VentanaLogin extends VentanaGeneral {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre de usuario");
 
+        username.setForeground(new java.awt.Color(110, 217, 161));
+        username.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(110, 217, 161), 2, true));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameActionPerformed(evt);
@@ -128,6 +138,8 @@ public class VentanaLogin extends VentanaGeneral {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contraseña");
 
+        password.setForeground(new java.awt.Color(110, 217, 161));
+        password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(110, 217, 161), 2, true));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);

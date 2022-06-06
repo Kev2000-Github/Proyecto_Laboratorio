@@ -62,6 +62,8 @@ public class textInputSearch extends javax.swing.JPanel {
         inputField = new javax.swing.JTextField();
         buscarBtn = new javax.swing.JButton();
 
+        setOpaque(false);
+
         inputLbl.setBackground(new java.awt.Color(255, 255, 255));
         inputLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inputLbl.setText("TextLbl");

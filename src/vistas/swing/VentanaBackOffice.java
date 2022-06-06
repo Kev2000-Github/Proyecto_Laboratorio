@@ -56,11 +56,17 @@ public class VentanaBackOffice extends VentanaGeneral {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        registros.setBackground(new java.awt.Color(110, 217, 161));
+        registros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        registros.setForeground(new java.awt.Color(0, 37, 35));
         registros.setText("Registros");
-        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 117, 38));
+        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 150, 50));
 
+        reportes.setBackground(new java.awt.Color(110, 217, 161));
+        reportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        reportes.setForeground(new java.awt.Color(0, 37, 35));
         reportes.setText("Reportes");
-        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 117, 35));
+        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 150, 50));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -70,7 +76,7 @@ public class VentanaBackOffice extends VentanaGeneral {
         goBackLbl.setForeground(new java.awt.Color(255, 255, 255));
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
-        getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 38, -1, -1));
+        getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 30));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 300));
 

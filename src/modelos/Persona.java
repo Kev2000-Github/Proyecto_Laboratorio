@@ -1,72 +1,83 @@
 package modelos;
 
+import java.util.Date;
+
 public class Persona {
-	private String cedula;
-	private String nombre;
-	private String apellido;
-	private String direccion;
-	private String telefono;
-	private String correo;
 
-	public Persona(String nombre, String apellido, String cedula, String direccion, String telefono, String correo) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cedula = cedula;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.correo = correo;
-	}
+    private String cedula;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String telefono;
+    private String correo;
+    private Date deleteAt;
 
-	public Persona(){
-		
-	}
+    public Persona(String nombre, String apellido, String cedula, String direccion, String telefono, String correo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public Persona() {
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getCedula() {
-		return cedula;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public String getCedula() {
+        return cedula;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public String getCorreo() {
-		return correo;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public Date getDeleteAt() {
+        return deleteAt;
+    }
+
+    public void setDeleteAt(Date deleteAt) {
+        this.deleteAt = deleteAt;
+    }
 }

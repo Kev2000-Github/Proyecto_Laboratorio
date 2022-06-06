@@ -59,6 +59,9 @@ public class VentanaReportes extends VentanaGeneral {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, -1));
 
+        listadoSolibtn.setBackground(new java.awt.Color(110, 217, 161));
+        listadoSolibtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        listadoSolibtn.setForeground(new java.awt.Color(0, 37, 35));
         listadoSolibtn.setText("Listado Solicitante");
         listadoSolibtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,13 +72,16 @@ public class VentanaReportes extends VentanaGeneral {
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Serif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 157, 31));
+        jLabel1.setText("BIENVENIDO");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 157, 31));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 44, -1, -1));
 
+        listadoPrepBtn.setBackground(new java.awt.Color(110, 217, 161));
+        listadoPrepBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        listadoPrepBtn.setForeground(new java.awt.Color(0, 37, 35));
         listadoPrepBtn.setText("Listado Presupuestos");
         listadoPrepBtn.setToolTipText("");
         listadoPrepBtn.setInheritsPopupMenu(true);
@@ -86,6 +92,9 @@ public class VentanaReportes extends VentanaGeneral {
         });
         getContentPane().add(listadoPrepBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 160, 59));
 
+        listadoRespBtn.setBackground(new java.awt.Color(110, 217, 161));
+        listadoRespBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        listadoRespBtn.setForeground(new java.awt.Color(0, 37, 35));
         listadoRespBtn.setLabel("Listado Responsable");
         listadoRespBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

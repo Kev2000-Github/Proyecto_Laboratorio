@@ -1,18 +1,18 @@
-package controladores.Fundacion;
+package controladores.Charla;
 
-import DAO.FundacionDao;
+import DAO.CharlaDao;
 import DAO.general.DaoFactory;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import modelos.Fundacion;
-import vistas.swing.VentanaCrearFundacion;
+
+import modelos.Charla;
+import vistas.swing.VentanaCrearCharla;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,16 +22,17 @@ import vistas.swing.VentanaCrearFundacion;
  *
  * @author juanperez
  */
-public class ControladorAddFundacion extends ControladorGeneral implements ListSelectionListener {
+public class ControladorAddCharla extends ControladorGeneral implements ListSelectionListener {
 
-    VentanaCrearFundacion window;
+    VentanaCrearCharla window;
     DaoFactory daoFactory;
-    FundacionDao fundacionDao;
+    CharlaDao charlaDao;
+    String empleadoId;
 
-    public ControladorAddFundacion(IRouter router) {
-        super("addFundacion", router);
+    public ControladorAddCharla(IRouter router) {
+        super("addCharla", router);
         daoFactory = new DaoFactory();
-        fundacionDao = new FundacionDao();
+        charlaDao = new CharlaDao();
     }
 
     public void mostrarMensaje(String mensaje){
@@ -40,7 +41,7 @@ public class ControladorAddFundacion extends ControladorGeneral implements ListS
 
     public void initGUI(){
         router.addRoute(this.id);
-        window = new VentanaCrearFundacion("Crear Fundacion", this, this);
+        window = new VentanaCrearCharla("Crear Charla", this, this);
         window.setVisible(true);
     }
 
@@ -54,13 +55,13 @@ public class ControladorAddFundacion extends ControladorGeneral implements ListS
     }
 
     public void goBack() {
-        router.notify(this, "go-fundacion");
+        router.notify(this, "go-charla");
     }
 
     public void clear() {
-        window.getNombre().setTextField("");
-        window.getPorcentajeAnual().setTextField("");
-        window.getPresupuesto().setTextField("");
+        window.getLugar().setTextField("");
+        window.getTema().setTextField("");
+        window.getOrganismo().setTextField("");
     }
 
     public void save() {
@@ -68,33 +69,25 @@ public class ControladorAddFundacion extends ControladorGeneral implements ListS
     }
 
     public Boolean validateForm() {
-        return window.getNombre().getTextField().isEmpty()
-                || window.getPresupuesto().getTextField().isEmpty()
-                || window.getPorcentajeAnual().getTextField().isEmpty();
+        return window.getLugar().getTextField().isEmpty()
+                || window.getTema().getTextField().isEmpty()
+                || window.getOrganismo().getTextField().isEmpty();
     }
 
-    public Fundacion getFundacion(){
-        Fundacion fundacion = new Fundacion();
-        fundacion.setId(window.getSaltString());
-        fundacion.setNombre(window.getNombre().getTextField());
-        fundacion.setPorcentajePartidoAnual(Float.parseFloat(window.getPorcentajeAnual().getTextField()));
-        fundacion.setPresupuesto(Float.parseFloat(window.getPresupuesto().getTextField()));
-        return fundacion;
+    public Charla getCharla(){
+        Charla charla = new Charla();
+        charla.setDireccion(window.getLugar().getTextField());
+        charla.setFecha(window.getFecha().getDate());
+        charla.setId(window.getSaltString());
+        charla.setOrganismo(window.getOrganismo().getTextField());
+        charla.setTema(window.getTema().getTextField());
+        return charla;
     }
 
-    public Boolean isCreationValid(Fundacion fundacion){
+    public Boolean isCreationValid(){
         boolean hasEmptyFields = validateForm();
         if (hasEmptyFields) {
             window.mostrarMensaje("Faltan campos por llenar");
-            return false;
-        }
-        List<Fundacion> fundaciones = fundacionDao.getAll();
-        int porcentajeTotal = 0;
-        for(int i = 0; i < fundaciones.size(); i++){
-            porcentajeTotal += fundaciones.get(i).getPorcentajePartidoAnual();
-        }
-        if(porcentajeTotal + fundacion.getPorcentajePartidoAnual() > 100){
-            window.mostrarMensaje("el porcentaje total fue excedido, por favor reducir el de otras fundaciones primero");
             return false;
         }
         return true;
@@ -102,17 +95,17 @@ public class ControladorAddFundacion extends ControladorGeneral implements ListS
 
     public void create() {
         try {
-            Fundacion newFundacion = getFundacion();
-            if(isCreationValid(newFundacion)) {
-                String entity = "fundacion";
+            Charla newCharla = getCharla();
+            if(isCreationValid()) {
+                String entity = "charla";
                 System.out.println("save" + '-' + entity);
-                System.out.println(newFundacion.toString());
-                Fundacion fundacionExiste = fundacionDao.get(newFundacion.getId());
-                if (fundacionExiste != null) {
+                System.out.println(newCharla.toString());
+                Charla charlaExiste = charlaDao.get(newCharla.getId());
+                if (charlaExiste != null) {
                     window.mostrarMensaje("Ya existe un registro de este " + entity);
                     return;
                 }
-                fundacionDao.save(newFundacion);
+                charlaDao.save(newCharla);
                 window.mostrarMensaje("Se agrego el registro con exito ");
                 clear();
             }

@@ -2,7 +2,6 @@ package controladores.Menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
@@ -45,6 +44,10 @@ public class ControladorRegistros extends ControladorGeneral {
         if (source == window.getEmpleados()) {
             router.notify(this, "go-empleado");
         }
+        
+        if (source == window.getCharlas()){
+            router.notify(this, "go-charla");
+        }
 
         if (source == window.getFundaciones()){
             router.notify(this, "go-fundacion");
@@ -52,7 +55,10 @@ public class ControladorRegistros extends ControladorGeneral {
         if (source == window.getServicios()){
             router.notify(this, "go-servicio");
         }
-        
+
+        if (source == window.getUsuarios()){
+            router.notify(this, "go-usuario");
+        }
     }
 
     public void mostrarMensaje(String mensaje){

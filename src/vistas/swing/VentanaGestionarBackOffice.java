@@ -70,6 +70,9 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        crear.setBackground(new java.awt.Color(110, 217, 161));
+        crear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        crear.setForeground(new java.awt.Color(0, 37, 35));
         crear.setText("Crear");
         crear.setToolTipText("");
         crear.addActionListener(new java.awt.event.ActionListener() {
@@ -77,24 +80,30 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
                 crearActionPerformed(evt);
             }
         });
-        jPanel2.add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 30));
+        jPanel2.add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 30));
 
-        Jpanel23.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 130, 40));
+        Jpanel23.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, 40));
 
+        editar.setBackground(new java.awt.Color(110, 217, 161));
+        editar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editar.setForeground(new java.awt.Color(0, 37, 35));
         editar.setText("Editar");
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
             }
         });
-        Jpanel23.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 0, 91, 30));
+        Jpanel23.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 91, 30));
 
+        eliminar.setBackground(new java.awt.Color(110, 217, 161));
+        eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminar.setForeground(new java.awt.Color(0, 37, 35));
         eliminar.setText("Eliminar");
-        Jpanel23.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 121, 30));
+        Jpanel23.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 121, 30));
 
         jScrollPane1.setViewportView(table);
 
-        Jpanel23.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 34, 514, 305));
+        Jpanel23.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 49, 514, 290));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N

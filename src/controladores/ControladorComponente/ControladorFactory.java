@@ -2,10 +2,12 @@ package controladores.ControladorComponente;
 
 import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
+import controladores.Charla.ControladorAddCharla;
 import controladores.Charla.ControladorCharla;
 import controladores.Fundacion.ControladorAddFundacion;
 import controladores.Fundacion.ControladorFundacion;
 import controladores.Fundacion.ControladorUpdateFundacion;
+import controladores.Charla.ControladorRegistrarAsistentes;
 import controladores.Menu.ControladorBackOffice;
 import controladores.Menu.ControladorHome;
 import controladores.Menu.ControladorRegistros;
@@ -25,6 +27,9 @@ import controladores.Solicitud.ControladorGestionarSolicitudes;
 import controladores.Servicio.ControladorServicio;
 import controladores.Servicio.ControladorAddServicio;
 import controladores.Servicio.ControladorUpdateServicio;
+import controladores.Usuario.ControladorAddUsuario;
+import controladores.Usuario.ControladorUpdateUsuario;
+import controladores.Usuario.ControladorUsuario;
 
 public class ControladorFactory implements IControladorFactory{
     public static final String[] CONTROLADORES = {
@@ -46,13 +51,17 @@ public class ControladorFactory implements IControladorFactory{
         "solicitudes",
         "addSolicitud",
         "detalleSolicitud",
+        "registrarAsistentes",
         "fundacion",
         "addFundacion",
         "updateFundacion",
         "servicio",
         "addServicio",
-        "updateServicio"
-            
+        "updateServicio",
+        "usuario",
+        "addUsuario",
+        "updateUsuario",
+        "addCharla"
     };
 
     public ControladorGeneral getControlador(String nombre, IRouter router) {
@@ -63,6 +72,10 @@ public class ControladorFactory implements IControladorFactory{
             //CHARLA
             case "charla":
                 return new ControladorCharla(router);
+            case "registrarAsistentes":
+                return new ControladorRegistrarAsistentes(router);
+            case "addCharla":
+                return new ControladorAddCharla(router);
             //MENUS
             case "home":
                 return new ControladorHome(router);
@@ -102,6 +115,13 @@ public class ControladorFactory implements IControladorFactory{
             case "updateServicio":
                 return new ControladorUpdateServicio(router);    
                 
+            //USUARIO
+            case "usuario":
+                return new ControladorUsuario(router);
+            case "addUsuario":
+                return new ControladorAddUsuario(router);
+            case "updateUsuario":
+                return new ControladorUpdateUsuario(router);
             //REPORTES
             case "listaPresupuesto":
                 return new ControladorListaPresupuesto(router);
