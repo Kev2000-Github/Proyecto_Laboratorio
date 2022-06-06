@@ -55,7 +55,7 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
                 serv.getId(),
                 serv.getNombre(),
                 serv.getTipo(),
-                serv.getCosto()
+                serv.getCosto().toString()
             });
         }
         window.setModeloTabla(modelServicios);
@@ -107,7 +107,7 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //  System.out.println("t" + String.valueOf(calcCosto()));
+
     }
 
   @Override

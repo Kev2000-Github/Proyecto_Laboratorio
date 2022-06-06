@@ -90,8 +90,7 @@ public class ServicioDao implements IDao<Servicio> {
             List<Servicio> list = new ArrayList<Servicio>();
             con = new Conne();
             con.open();
-            String sql = "select * from fundacion_servicio inner join servicio on servicio.id = servicio_id"
-                    + " WHERE fundacion_id = ? AND fs.deleted_at IS NULL AND s.deleted_at IS NULL";
+            String sql = "select id,nombre, tipo, fundacion_servicio.costo from servicio join fundacion_servicio on servicio.id = fundacion_servicio.servicio_id";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs)) {
                 return list;
