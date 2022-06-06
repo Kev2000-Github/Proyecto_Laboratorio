@@ -4,12 +4,14 @@
  */
 package vistas.swing;
 
+import vistas.general.ComboboxItem;
 import vistas.general.VentanaGeneral;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,12 +19,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASRock
  */
-public class VentanaGestionarBackOffice extends VentanaGeneral {
+public class VentanaGestionarServicios extends VentanaGeneral {
 
     /**
      * Creates new form VentanaGestionarSolicitud
      */
-    public VentanaGestionarBackOffice(String title, ActionListener accion, MouseListener ml) {
+    public VentanaGestionarServicios(String title, ActionListener accion, MouseListener ml) {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, title);
         this.agregarListener(accion);
@@ -33,6 +35,7 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
         crear.addActionListener(accion);
         eliminar.addActionListener(accion);
         editar.addActionListener(accion);
+        fundacion.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -51,6 +54,8 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
         topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         Jpanel23 = new javax.swing.JPanel();
+        fundacion = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         crear = new javax.swing.JButton();
         editar = new javax.swing.JButton();
@@ -67,6 +72,13 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
 
         Jpanel23.setOpaque(false);
         Jpanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Jpanel23.add(fundacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 160, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Fundacion");
+        Jpanel23.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,14 +166,30 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaGestionarBackOffice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaGestionarServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaGestionarBackOffice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaGestionarServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaGestionarBackOffice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaGestionarServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaGestionarBackOffice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaGestionarServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -199,6 +227,13 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
         this.table.setModel(m);
     }
 
+    public void setModelFundaciones(DefaultComboBoxModel model) {
+        this.fundacion.setModel(model);
+    }
+
+    public JComboBox<ComboboxItem> getFundacion() {
+        return fundacion;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel23;
@@ -207,7 +242,9 @@ public class VentanaGestionarBackOffice extends VentanaGeneral {
     private javax.swing.JButton crear;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
+    private javax.swing.JComboBox<ComboboxItem> fundacion;
     private javax.swing.JLabel goBackLbl;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;

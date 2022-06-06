@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
@@ -36,8 +38,8 @@ public class ServicioDao implements IDao<Servicio> {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, nombre, tipo"
-                    + " FROM servicio f WHERE id = ? AND f.deleted_at IS NULL";
+            String sql = "SELECT s.id, s.nombre, s.tipo FROM servicio s"
+            + " WHERE s.id = ? AND s.deleted_at IS NULL";
             String[] params = {id};
             ResultSet rs = con.execQuery(sql, params);
 
@@ -45,7 +47,10 @@ public class ServicioDao implements IDao<Servicio> {
                 return null;
             }
 
-            Servicio servicio = setEntity(rs);
+            Servicio servicio = new Servicio();
+            servicio.setId(rs.getString("id"));
+            servicio.setNombre(rs.getString("nombre"));
+            servicio.setTipo("tipo");
             return servicio;
         } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
@@ -85,19 +90,27 @@ public class ServicioDao implements IDao<Servicio> {
     }
     
     
-    public List<Servicio> getAllWithCosto() {
+    public List<Map<String, String>> getAllWithCosto(String fundacionId) {
         try {
-            List<Servicio> list = new ArrayList<Servicio>();
+            List<Map<String, String>> list = new ArrayList<Map<String, String>>();
             con = new Conne();
             con.open();
-            String sql = "select id, nombre, tipo, fundacion_servicio.costo from servicio join fundacion_servicio on servicio.id = fundacion_servicio.servicio_id";
-            ResultSet rs = con.execQuery(sql);
+            String sql = "select s.id, fs.fundacion_id, s.nombre, s.tipo, fs.costo from servicio s "
+                        +"join fundacion_servicio fs on s.id = fs.servicio_id "
+                        +"where fs.fundacion_id = ? AND s.deleted_at IS NULL and fs.deleted_at IS NULL ";
+            String[] params = {fundacionId};
+            ResultSet rs = con.execQuery(sql, params);
             if (con.isResultSetEmpty(rs)) {
                 return list;
             }
             do {
-                Servicio servicio = setEntity(rs);
-                list.add(servicio);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", rs.getString("id"));
+                map.put("fundacionId", rs.getString("fundacion_id"));
+                map.put("nombre", rs.getString("nombre"));
+                map.put("tipo", rs.getString("tipo"));
+                map.put("costo", rs.getString("costo"));
+                list.add(map);
             } while (rs.next());
             return list;
         } catch (SQLException e) {
@@ -222,6 +235,33 @@ public class ServicioDao implements IDao<Servicio> {
             } while (rs.next());
             return list;
         } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public Servicio getWithCosto(String servicioId, String fundacionId) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT s.id, s.nombre, s.tipo, fs.costo FROM servicio s"
+            + " JOIN fundacion_servicio fs"
+            + " ON s.id = fs.servicio_id"
+            + " WHERE s.id = ? AND fs.fundacion_id = ? AND fs.deleted_at IS NULL AND s.deleted_at IS NULL";
+            String[] params = {servicioId, fundacionId};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+
+            Servicio servicio = setEntity(rs);
+            return servicio;
+        } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             e.printStackTrace();

@@ -39,7 +39,7 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
     }
 
     private void agregarActionListener(ActionListener accion) {
-        status.addActionListener(accion);
+        fundacion.addActionListener(accion);
     }
     
      public JTable getPresupuestos(){
@@ -47,7 +47,7 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
     }
     
     public JComboBox getStatuses(){
-        return status;
+        return fundacion;
     }
      
     /**
@@ -65,7 +65,7 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPresupuestos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        status = new javax.swing.JComboBox<>();
+        fundacion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
@@ -106,7 +106,7 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
         jLabel1.setText("Lista de Presupuestos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
-        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 80, 480, -1));
+        jPanel1.add(fundacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 80, 480, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,24 +160,24 @@ public class VentanaListaPresupuestos extends VentanaGeneral {
     }
    
     public JComboBox<ComboboxItem> getFundacion() {
-        return status;
+        return fundacion;
     }
     
     public void setModelStatuses(DefaultComboBoxModel<ComboboxItem> model) {
-        this.status.setModel(model);
+        this.fundacion.setModel(model);
     }
 
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
+    private javax.swing.JComboBox<ComboboxItem> fundacion;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<ComboboxItem> status;
     private javax.swing.JTable tablaPresupuestos;
     private vistas.swing.componentes.topMenu.topMenu topMenu1;
     // End of variables declaration//GEN-END:variables

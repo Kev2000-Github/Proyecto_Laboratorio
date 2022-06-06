@@ -29,7 +29,7 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
     DaoFactory daoFactory;
     ServicioDao servicioDao;
     String servicioId;
-    
+    String fundacionId;
     
     public ControladorUpdateServicio(IRouter router) {
         super("updateServicio", router);
@@ -37,14 +37,14 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
         servicioDao = new ServicioDao();
     }
 
-
-    
         public void mostrarMensaje(String mensaje){
             window.mostrarMensaje(mensaje);
         }
 
         public void updateId(String id){
-            servicioId = id;
+            String[] ids = id.split("/");
+            servicioId = ids[0];
+            fundacionId = ids[1];
         }
         
     public void initGUI(){
@@ -53,7 +53,7 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
         window.setVisible(true);
         fillFundacion();
         if (this.servicioId != null) {
-                Servicio model = servicioDao.get(this.servicioId);
+                Servicio model = servicioDao.getWithCosto(this.servicioId, this.fundacionId);
                 fillModel(
                     model.getId(),
                     model.getNombre(),
@@ -89,6 +89,7 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
             window.getNombre().setTextField(nombre);
             window.getTipo().setTextField(tipo);
             window.getCosto().setTextField(String.valueOf(costo));
+            window.setEnabled(true);
     }
 
     
@@ -120,11 +121,16 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
             DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
             FundacionDao fundacionDao = new FundacionDao();
             List<Fundacion> fundacionList = fundacionDao.getAll();
+            int idx = 0;
         for (Fundacion fund : fundacionList) {
             modelFundacion.addElement(
                 new ComboboxItem(fund.getId(), fund.getNombre()));
+            if(fund.getId() == fundacionId){
+                idx = modelFundacion.getSize() - 1;
+            }
         }
         window.setModelFundaciones(modelFundacion);
+        window.getFundaciones().setSelectedIndex(idx);
     } 
         
   public void update(String servicioId) {

@@ -5,17 +5,26 @@
 package controladores.Servicio;
 
 import DAO.general.DaoFactory;
+import DAO.FundacionDao;
 import DAO.ServicioDao;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import modelos.Fundacion;
 import modelos.Servicio;
+import utils.Constants;
+import vistas.general.ComboboxItem;
 import vistas.swing.VentanaGestionarBackOffice;
+import vistas.swing.VentanaGestionarServicios;
 
 /**
  *
@@ -23,42 +32,58 @@ import vistas.swing.VentanaGestionarBackOffice;
  */
 public class ControladorServicio extends ControladorGeneral implements ListSelectionListener {
     
-    VentanaGestionarBackOffice window;
+    VentanaGestionarServicios window;
     DaoFactory daoFactory;
     ServicioDao  servicioDao;
+    String fundacionId;
     
     public ControladorServicio(IRouter router){
         super("servicio", router);
         daoFactory = new DaoFactory();
-        servicioDao = new ServicioDao();   
+        servicioDao = new ServicioDao(); 
     }
     
       public void initGUI(){
         router.addRoute(this.id);
-        window = new VentanaGestionarBackOffice("Gestionar Servicios", this, this);
+        window = new VentanaGestionarServicios("Gestionar Servicios", this, this);
         window.setVisible(true);
-        fillServicios();
+        fundacionId = "1";
+        fillFundaciones();
+        fillServicios(fundacionId);
     }
     
      public void closeGUI(){
         window.dispose();
     }
      
-    public void fillServicios() {
-       DefaultTableModel modelServicios = new DefaultTableModel();
+    public void fillServicios(String fundacionId) {
+        DefaultTableModel modelServicios = new DefaultTableModel();
         ServicioDao servicioDao = new ServicioDao();
-        List<Servicio> sList = servicioDao.getAllWithCosto();
+        List<Map<String, String>> sList = servicioDao.getAllWithCosto(fundacionId);
         modelServicios.setColumnCount(4);
-        modelServicios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Tipo","Costo"});
-        for (Servicio serv : sList) {
+        modelServicios.setColumnIdentifiers(new Object[]{"Id", "FundacionId", "Nombre", "Tipo","Costo"});
+        for (Map<String, String> serv : sList) {
             modelServicios.addRow(new Object[]{
-                serv.getId(),
-                serv.getNombre(),
-                serv.getTipo(),
-                serv.getCosto().toString()
+                serv.get("id"),
+                serv.get("fundacionId"),
+                serv.get("nombre"),
+                serv.get("tipo"),
+                serv.get("costo")
             });
         }
         window.setModeloTabla(modelServicios);
+    }
+
+    public void fillFundaciones() {
+        DefaultComboBoxModel<ComboboxItem> modelFundaciones = new DefaultComboBoxModel<ComboboxItem>();
+        FundacionDao fundacionDao = new FundacionDao();
+        List<Fundacion> fundaciones = fundacionDao.getAll();
+        fundacionId = fundaciones.get(0).getId();
+        for (Fundacion fund : fundaciones) {
+            modelFundaciones.addElement(
+                    new ComboboxItem(fund.getId(), fund.getNombre()));
+        }
+        window.setModelFundaciones(modelFundaciones);
     }
     
     @Override
@@ -78,7 +103,7 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
                 Servicio serv = new Servicio();
                 serv.setId(servicioId);
                 servicioDao.delete(serv);
-                fillServicios();
+                fillServicios(fundacionId);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -89,8 +114,9 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
             System.out.println("row: " + row);
             if (row != -1) {
                 String servicioId = window.getTable().getModel().getValueAt(row, 0).toString();
+                String fundacionId = window.getTable().getModel().getValueAt(row, 1).toString();
                 System.out.println("ServicioId: " + servicioId);
-                router.notify(this, "update-updateServicio-" + servicioId);
+                router.notify(this, "update-updateServicio-" + servicioId + '/' + fundacionId);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
@@ -98,7 +124,10 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
         if (source == window.getCrear()) {
             router.notify(this, "go-addServicio");
         }
-
+        if (source == window.getFundacion()){
+            String fundacionId = ((ComboboxItem) window.getFundacion().getSelectedItem()).getId();
+            fillServicios(fundacionId);
+        }
     }
 
     public void mostrarMensaje(String mensaje){
