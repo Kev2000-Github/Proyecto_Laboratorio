@@ -25,6 +25,7 @@ public class PersonaDao implements IDao<Persona> {
             persona.setDireccion(rs.getString("direccion"));
             persona.setTelefono(rs.getString("telefono"));
             persona.setCorreo(rs.getString("correo"));
+              persona.setDeleteAt(rs.getDate("deleted_at"));
             return persona;
         } catch (SQLException e) {
             String msg = "Error asignando los datos obtenidos\n" + e.getMessage();
@@ -33,6 +34,29 @@ public class PersonaDao implements IDao<Persona> {
         }
     }
 
+        public Persona getHistoric(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM persona where cedula =?";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Persona persona = setEntity(rs);
+            return persona;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+        
     @Override
     public Persona get(String cedula) {
         try {
