@@ -90,7 +90,7 @@ public class ServicioDao implements IDao<Servicio> {
             List<Servicio> list = new ArrayList<Servicio>();
             con = new Conne();
             con.open();
-            String sql = "select id,nombre, tipo, fundacion_servicio.costo from servicio join fundacion_servicio on servicio.id = fundacion_servicio.servicio_id";
+            String sql = "select id, nombre, tipo, fundacion_servicio.costo from servicio join fundacion_servicio on servicio.id = fundacion_servicio.servicio_id";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs)) {
                 return list;
