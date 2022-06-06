@@ -47,15 +47,16 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
     public void fillServicios() {
        DefaultTableModel modelServicios = new DefaultTableModel();
         ServicioDao servicioDao = new ServicioDao();
-        List<Servicio> sList = servicioDao.getAll();
+        List<Servicio> sList = servicioDao.getAllWithCosto();
         modelServicios.setColumnCount(4);
-        modelServicios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Tipo", "Costo"});
+        modelServicios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Tipo","Costo"});
         for (Servicio serv : sList) {
             modelServicios.addRow(new Object[]{
                 serv.getId(),
                 serv.getNombre(),
                 serv.getTipo(),
-                serv.getCosto()});
+                serv.getCosto()
+            });
         }
         window.setModeloTabla(modelServicios);
     }
