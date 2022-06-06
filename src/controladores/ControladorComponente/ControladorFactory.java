@@ -2,6 +2,7 @@ package controladores.ControladorComponente;
 
 import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
+import controladores.Charla.ControladorAddCharla;
 import controladores.Charla.ControladorCharla;
 import controladores.Fundacion.ControladorAddFundacion;
 import controladores.Fundacion.ControladorFundacion;
@@ -53,7 +54,8 @@ public class ControladorFactory implements IControladorFactory{
         "updateFundacion",
         "usuario",
         "addUsuario",
-        "updateUsuario"
+        "updateUsuario",
+        "addCharla"
     };
 
     public ControladorGeneral getControlador(String nombre, IRouter router) {
@@ -66,6 +68,8 @@ public class ControladorFactory implements IControladorFactory{
                 return new ControladorCharla(router);
             case "registrarAsistentes":
                 return new ControladorRegistrarAsistentes(router);
+            case "addCharla":
+                return new ControladorAddCharla(router);
             //MENUS
             case "home":
                 return new ControladorHome(router);

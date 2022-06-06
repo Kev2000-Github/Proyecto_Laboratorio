@@ -13,6 +13,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import com.toedter.calendar.JDateChooser;
+
 import vistas.swing.componentes.textInput.textInput;
 import vistas.swing.componentes.textInputSearch.textInputSearch;
 
@@ -20,67 +22,56 @@ import vistas.swing.componentes.textInputSearch.textInputSearch;
  *
  * @author ASRock
  */
-public class VentanaCrearUsuario extends VentanaGeneral {
+public class VentanaCrearCharla extends VentanaGeneral {
 
     /**
      * Creates new form VentanaDetallesSolicitud
      */
-    public VentanaCrearUsuario(String title, ActionListener accion, MouseListener ml) {
+    public VentanaCrearCharla(String title, ActionListener accion, MouseListener ml) {
         initComponents();
         topMenu1.setMenuFunctions(this, ml, title);
         this.agregarMouseListener(ml);
         this.agregarListener(accion);
-        username.setTextLabel("Username:");
-        password.setTextLabel("Password:");
-        cedula.setTextLabel("cedula");
-        setEnabled(false);
+        tema.setTextLabel("Tema:");
+        lugar.setTextLabel("Lugar:");
+        organismo.setTextLabel("Organismo:");
     }
 
     private void agregarMouseListener(MouseListener ml) {
         goBackLbl.addMouseListener(ml);
     }
 
-    public textInput getUsername() {
-        return username;
+    public textInput getTema() {
+        return tema;
     }
 
-    public void setUsername(textInput username) {
-        this.username = username;
+    public void setTema(textInput tema) {
+        this.tema = tema;
     }
 
-    public textInput getPassword() {
-        return password;
+    public textInput getLugar() {
+        return lugar;
     }
 
-    public void setPassword(textInput password) {
-        this.password = password;
+    public void setLugar(textInput lugar) {
+        this.lugar = lugar;
     }
 
-    public textInputSearch getCedula() {
-        return cedula;
+    public textInput getOrganismo() {
+        return organismo;
     }
 
-    public void setCedula(textInputSearch cedula) {
-        this.cedula = cedula;
-    }
-
-    public JComboBox<ComboboxItem> getRol() {
-        return rol;
-    }
-
-    public void setModelRol(DefaultComboBoxModel<ComboboxItem> model) {
-        this.rol.setModel(model);
+    public void setOrganismo(textInput organismo) {
+        this.organismo = organismo;
     }
 
     public void setEnabled(boolean status){
-        username.setEnabled(status);
-        password.setEnabled(status);
-        rol.setEnabled(status);
+        tema.setEnabled(status);
+        lugar.setEnabled(status);
     }
     
     private void agregarListener(ActionListener accion) {
         save.addActionListener(accion);
-        cedula.agregarListener(accion);
     }
     
 
@@ -90,6 +81,10 @@ public class VentanaCrearUsuario extends VentanaGeneral {
 
     public void setSave(JButton save) {
         this.save = save;
+    }
+
+    public JDateChooser getFecha(){
+        return fecha;
     }
 
     /**
@@ -104,12 +99,12 @@ public class VentanaCrearUsuario extends VentanaGeneral {
         topMenu1 = new vistas.swing.componentes.topMenu.topMenu();
         jPanel1 = new javax.swing.JPanel();
         panelInputs = new javax.swing.JPanel();
-        cedula = new vistas.swing.componentes.textInputSearch.textInputSearch();
-        username = new vistas.swing.componentes.textInput.textInput();
-        password = new vistas.swing.componentes.textInput.textInput();
+        tema = new vistas.swing.componentes.textInput.textInput();
+        lugar = new vistas.swing.componentes.textInput.textInput();
+        organismo = new vistas.swing.componentes.textInput.textInput();
         jPanel8 = new javax.swing.JPanel();
-        rol = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        fecha = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         goBackLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -119,33 +114,35 @@ public class VentanaCrearUsuario extends VentanaGeneral {
         setUndecorated(true);
 
         panelInputs.setLayout(new javax.swing.BoxLayout(panelInputs, javax.swing.BoxLayout.Y_AXIS));
-        panelInputs.add(cedula);
-        panelInputs.add(username);
-        panelInputs.add(password);
+        panelInputs.add(tema);
+        panelInputs.add(lugar);
+        panelInputs.add(organismo);
 
         jPanel8.setOpaque(false);
 
-        jLabel7.setText("Rol");
+        lblFecha.setBackground(new java.awt.Color(0, 0, 0));
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblFecha.setText("Fecha:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(rol, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addGap(33, 33, 33)
+                .addComponent(lblFecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -176,7 +173,7 @@ public class VentanaCrearUsuario extends VentanaGeneral {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel1.setText("Usuario");
+        jLabel1.setText("Charla");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -260,14 +257,30 @@ public class VentanaCrearUsuario extends VentanaGeneral {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaCrearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaCrearCharla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaCrearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaCrearCharla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaCrearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaCrearCharla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaCrearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaCrearCharla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -294,18 +307,18 @@ public class VentanaCrearUsuario extends VentanaGeneral {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vistas.swing.componentes.textInputSearch.textInputSearch cedula;
+    private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblFecha;
+    private vistas.swing.componentes.textInput.textInput lugar;
+    private vistas.swing.componentes.textInput.textInput organismo;
     private javax.swing.JPanel panelInputs;
-    private vistas.swing.componentes.textInput.textInput password;
-    private javax.swing.JComboBox<ComboboxItem> rol;
     private javax.swing.JButton save;
+    private vistas.swing.componentes.textInput.textInput tema;
     private vistas.swing.componentes.topMenu.topMenu topMenu1;
-    private vistas.swing.componentes.textInput.textInput username;
     // End of variables declaration//GEN-END:variables
 }

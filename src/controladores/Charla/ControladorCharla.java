@@ -20,12 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import modelos.Charla;
-import vistas.swing.VentanaCharlas;
+import vistas.swing.VentanaCharla;
 import java.util.Date;
 
 public class ControladorCharla extends ControladorGeneral implements ListSelectionListener{
 
-    VentanaCharlas window;
+    VentanaCharla window;
     DaoFactory daoFactory;
     CharlaDao charlaDao;
     Map<String, String> charlaInfo;
@@ -42,10 +42,9 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
     
     public void initGUI(){
         router.addRoute(this.id);
-        window = new VentanaCharlas(this, this, this);
+        window = new VentanaCharla(this, this, this);
         window.setVisible(true);
         fillCharlas();
-
     }
 
     public void closeGUI(){
@@ -119,6 +118,9 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
             else{
                 window.mostrarMensaje("Debe llenar ambas fechas para hacer la busqueda");
             }
+        }
+        if(source == window.getBtnCrearCharla()){
+            router.notify(this, "go-addCharla");
         }
     }
     

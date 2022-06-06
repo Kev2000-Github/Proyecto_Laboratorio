@@ -3,6 +3,7 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -142,14 +143,15 @@ public class CharlaDao implements IDao<Charla> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, tema, lugar,organismo,fecha) VALUES(?,?,?,?,?)";
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String sql = "INSERT INTO charla(id, tema, lugar, organismo, fecha) VALUES(?,?,?,?,?)";
             String[] params = {
                     charla.getId(),
                     charla.getTema(),
                     charla.getDireccion(),
                     charla.getOrganismo(),
-                    String.valueOf(charla.getFecha())
-
+                    simpleDateFormat.format(charla.getFecha())
             };
             con.execMutation(sql, params);
         } catch (Exception e) {

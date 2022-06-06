@@ -270,7 +270,8 @@ INSERT INTO permiso(id, descripcion)
 		  ('usuario',''),
 		  ('updateUsuario',''),
 		  ('addUsuario',''),
-		  ('registrarAsistentes','');
+		  ('registrarAsistentes',''),
+		  ('addCharla','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
 	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
@@ -299,6 +300,7 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'updateUsuario'),
 		  ('OPTE5KYCY3M4BL49N9', 'addUsuario'),
 		  ('OPTE5KYCY3M4BL49N9', 'registrarAsistentes'),
+		  ('OPTE5KYCY3M4BL49N9', 'addCharla'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
@@ -337,22 +339,22 @@ INSERT INTO fundacion_servicio(fundacion_id, servicio_id, costo)
 		  ('YBGLMAYHG4ZA699Q5O', '7', 20);
 		  
 INSERT INTO charla(id, tema, lugar, organismo, fecha)
-	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
-		  ('2', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
-		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
-		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01'),
-		  ('5', 'Las consecuencias del Bullying dejan marca en la sociedad', 'Parque Nacional', 'Psicologa', '2022-01-01'),
-		  ('6', 'Los adultos infantilizados de hoy dia', 'Parque Nacional', 'Platzi', '2022-01-01');
+	VALUES('AQI1AUJTVUB0TILVKU', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
+		  ('V6LIWKRZAUPN6O5BTP', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
+		  ('S1R2D917T2IQN23BKA', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
+		  ('X3TK9YL6TSX2PK5Y35', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01'),
+		  ('LNY2BRRWCZCDR6YG03', 'Las consecuencias del Bullying dejan marca en la sociedad', 'Parque Nacional', 'Psicologa', '2022-01-01'),
+		  ('2HTN4O6LWX0XMICPB3', 'Los adultos infantilizados de hoy dia', 'Parque Nacional', 'Platzi', '2022-01-01');
 
 INSERT INTO asistencia_charla(cedula, charla_id)
-	VALUES('27317962','1'),
-		  ('27317962','2'),
-		  ('27317962','3'),
-		  ('27317962','4'),
-		  ('27317963','4'),
-		  ('27317963','3'),
-		  ('27317963','2'), 
-		  ('27317963','1'),
-		  ('27317964','3'),
-		  ('27317964','1'),
-		  ('27317965','3');
+	VALUES('27317962','AQI1AUJTVUB0TILVKU'),
+		  ('27317962','V6LIWKRZAUPN6O5BTP'),
+		  ('27317962','S1R2D917T2IQN23BKA'),
+		  ('27317962','X3TK9YL6TSX2PK5Y35'),
+		  ('27317963','X3TK9YL6TSX2PK5Y35'),
+		  ('27317963','S1R2D917T2IQN23BKA'),
+		  ('27317963','V6LIWKRZAUPN6O5BTP'), 
+		  ('27317963','AQI1AUJTVUB0TILVKU'),
+		  ('27317964','S1R2D917T2IQN23BKA'),
+		  ('27317964','AQI1AUJTVUB0TILVKU'),
+		  ('27317965','S1R2D917T2IQN23BKA');
