@@ -1,6 +1,8 @@
-package controladores.Persona.Beneficiario;
+package controladores.Usuario;
 
-import DAO.BeneficiarioDao;
+import DAO.EmpleadoDao;
+import DAO.RolDao;
+import DAO.UsuarioDao;
 import DAO.general.DaoFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -12,7 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
 
-import modelos.Beneficiario;
+import modelos.Empleado;
+import modelos.Rol;
+import modelos.Usuario;
 import vistas.swing.VentanaGestionarBackOffice;
 
 /*
@@ -23,42 +27,46 @@ import vistas.swing.VentanaGestionarBackOffice;
  *
  * @author juanperez
  */
-public class ControladorBeneficiario extends ControladorGeneral implements ListSelectionListener {
+public class ControladorUsuario extends ControladorGeneral implements ListSelectionListener {
 
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
+    UsuarioDao usuarioDao;
 
-    public ControladorBeneficiario(IRouter router) {
-        super("beneficiario", router);
+    public ControladorUsuario(IRouter router) {
+        super("usuario", router);
         daoFactory = new DaoFactory();
+        usuarioDao = new UsuarioDao();
     }
 
     public void initGUI(){
         router.addRoute(this.id);
-        window = new VentanaGestionarBackOffice("Gestionar Beneficiarios", this, this);
+        window = new VentanaGestionarBackOffice("Gestionar Usuarios", this, this);
         window.setVisible(true);
-        fillBeneficiarios();
+        fillUsuarios();
     }
 
     public void closeGUI(){
         window.dispose();
     }
 
-    public void fillBeneficiarios() {
-        DefaultTableModel modelBeneficiarios = new DefaultTableModel();
-        BeneficiarioDao beneficiarioDao = new BeneficiarioDao();
-        List<Beneficiario> bList = beneficiarioDao.getAll();
-        modelBeneficiarios.setColumnCount(4);
-        modelBeneficiarios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Apellido", "Cedula", "Correo"});
-        for (Beneficiario b : bList) {
-            modelBeneficiarios.addRow(new Object[]{
-                b.getId(),
-                b.getNombre(),
-                b.getApellido(),
-                b.getCedula(),
-                b.getCorreo()});
+    public void fillUsuarios() {
+        DefaultTableModel modelUsuarios = new DefaultTableModel();
+        List<Usuario> uList = usuarioDao.getAll();
+        modelUsuarios.setColumnCount(4);
+        modelUsuarios.setColumnIdentifiers(new Object[]{"Id", "Empleado", "Username", "Rol"});
+        for (Usuario user : uList) {
+            EmpleadoDao empleadoDao = new EmpleadoDao();
+            Empleado emp = empleadoDao.get(user.getEmpleado().getId());
+            RolDao rolDao = new RolDao();
+            Rol rol = rolDao.get(user.getRol().getId());
+            modelUsuarios.addRow(new Object[]{
+                user.getId(),
+                emp.getNombre() + " " + emp.getApellido(),
+                user.getUsername(),
+                rol.getNombre()});
         }
-        window.setModeloTabla(modelBeneficiarios);
+        window.setModeloTabla(modelUsuarios);
     }
 
     @Override
@@ -73,33 +81,29 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
             int row = window.getTable().getSelectedRow();
             System.out.println("row: " + row);
             if (row != -1) {
-                String idString = window.getTable().getModel().getValueAt(row, 0).toString();
-                    String cedula = window.getTable().getModel().getValueAt(row, 3).toString();
-                System.out.println("ID: " + idString);
-                BeneficiarioDao benDao = new BeneficiarioDao();
-                Beneficiario ben = new Beneficiario();
-                ben.setId(idString);
-                ben.setCedula(cedula);
-                benDao.delete(ben);
-                fillBeneficiarios();
+                String usuarioId = window.getTable().getModel().getValueAt(row, 0).toString();
+                System.out.println("UsuarioId: " + usuarioId);
+                Usuario user = new Usuario();
+                user.setId(usuarioId);
+                usuarioDao.delete(user);
+                fillUsuarios();
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
-
         }
         if (source == window.getEditar()) {
             int row = window.getTable().getSelectedRow();
             System.out.println("row: " + row);
             if (row != -1) {
-                String idString = window.getTable().getModel().getValueAt(row, 0).toString();
-                System.out.println("Cedula: " + idString);
-                router.notify(this, "update-updateBeneficiario-" + idString);
+                String usuarioId = window.getTable().getModel().getValueAt(row, 0).toString();
+                System.out.println("FundacionId: " + usuarioId);
+                router.notify(this, "update-updateUsuario-" + usuarioId);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
         }
         if (source == window.getCrear()) {
-            router.notify(this, "go-addBeneficiario");
+            router.notify(this, "go-addUsuario");
         }
 
     }

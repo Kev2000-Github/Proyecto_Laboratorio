@@ -2,7 +2,6 @@ package controladores.Menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.JLabel;
 
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;

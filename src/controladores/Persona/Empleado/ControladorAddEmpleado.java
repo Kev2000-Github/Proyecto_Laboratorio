@@ -162,7 +162,12 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
     }
 
     public void save() {
-        if (this.empleadoId != null) {
+           PersonaDao personaDao = new PersonaDao();
+        Persona persona = personaDao.getHistoric(window.getCedula().getTextField());
+        if ( persona != null && persona.getDeleteAt() != null) {
+            updateHistoric(window.getCedula().getTextField());
+        }
+        else if (this.empleadoId != null) {
             update(id);
         } else {
             create();
@@ -207,6 +212,32 @@ public class ControladorAddEmpleado extends ControladorGeneral implements ListSe
         }
     }
 
+      public void updateHistoric(String cedula) {
+        try {
+            boolean hasEmptyFields = validateForm();
+            if (hasEmptyFields) {
+                window.mostrarMensaje("Faltan campos por llenar");
+            } 
+            else {
+                Empleado newEmpleado = getEmpleado();
+                    String entity = "empleado";
+                    System.out.println("save" + '-' + entity);
+                    System.out.println(newEmpleado.toString());
+                    IDao entityDao = daoFactory.getDao(entity);
+                    Empleado existenteSolicitud = (Empleado) entityDao.getHistoric(newEmpleado.getCedula());
+                    if (existenteSolicitud == null) {
+                        window.mostrarMensaje("No existe este " + entity);
+                        return;
+                    }
+                    entityDao.update(newEmpleado);
+                    window.mostrarMensaje("Se restauro el registro con exito ");
+            }
+        } catch (Exception e) {
+            System.out.println("controladores.ControladorPersona.update()" + e);
+        }
+    }
+
+      
     public void update(String cedula) {
         try {
             boolean hasEmptyFields = validateForm();

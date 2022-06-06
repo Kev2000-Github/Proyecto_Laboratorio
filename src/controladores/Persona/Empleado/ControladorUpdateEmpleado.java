@@ -17,7 +17,6 @@ import javax.swing.event.ListSelectionListener;
 
 import utils.Utils;
 import vistas.general.ComboboxItem;
-import javax.swing.JLabel;
 import modelos.Beneficiario;
 import modelos.Empleado;
 import modelos.Fundacion;

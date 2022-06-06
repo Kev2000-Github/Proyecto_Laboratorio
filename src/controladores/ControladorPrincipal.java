@@ -15,8 +15,8 @@ public class ControladorPrincipal {
     private List<ControladorGeneral> controladores;
 
     public ControladorPrincipal(){
-        Router _router = new Router();
-        router = new AuthDecorator(_router);
+        router = new Router();
+        router = new AuthDecorator(router);
         router = new RoleRedirectionDecorator(router);
         initControladores();
         ControladorGeneral login = getControlador("login");

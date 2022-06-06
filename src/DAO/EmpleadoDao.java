@@ -65,6 +65,31 @@ public class EmpleadoDao implements IDao<Empleado> {
         }
     }
 
+        @Override
+    public Empleado getHistoric(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono, p.correo, e.fundacion_id"
+                    + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where e.cedula =?";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Empleado empleado = setEntity(rs);
+            return empleado;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
     @Override
     public List<Empleado> getAll() {
         try {
@@ -123,8 +148,8 @@ public class EmpleadoDao implements IDao<Empleado> {
             con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                    + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?"
-                    + " WHERE cedula = ? AND deleted_at IS NULL";
+                    + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?, deleted_at=NULL"
+                    + " WHERE cedula = ?";
             String[] params = {
                 empleado.getNombre(),
                 empleado.getApellido(),
@@ -136,8 +161,8 @@ public class EmpleadoDao implements IDao<Empleado> {
             con.execMutation(sql, params);
 
             String sqlFundacion = "UPDATE empleado SET"
-                    + " fundacion_id=?"
-                    + " WHERE cedula = ? AND deleted_at IS NULL";
+                    + " fundacion_id=?, deleted_at=NULL"
+                    + " WHERE cedula = ?";
             String[] paramsFundacion = {
                 empleado.getFundacionId(),
                 empleado.getCedula()
@@ -162,6 +187,11 @@ public class EmpleadoDao implements IDao<Empleado> {
                 empleado.getId()
             };
             con.execMutation(sql, params);
+            String sql2 = "UPDATE persona SET deleted_at = '" + now.toString() + "' WHERE cedula = ? AND deleted_at IS NULL";
+            String[] params2 = {
+              empleado.getCedula()
+            };
+            con.execMutation(sql2, params2);
         } catch (Exception e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
@@ -189,6 +219,31 @@ public class EmpleadoDao implements IDao<Empleado> {
             } while (rs.next());
             return list;
         } catch (SQLException e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    public Empleado getByCedula(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono, p.correo, e.fundacion_id"
+                    + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where e.cedula =?"
+                    + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Empleado empleado = setEntity(rs);
+            return empleado;
+        } catch (Exception e) {
             String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
             e.printStackTrace();

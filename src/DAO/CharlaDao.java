@@ -295,4 +295,8 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
 
+    @Override
+    public Charla getHistoric(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Permiso;
 import modelos.Rol;
 
 public class RolDao implements IDao<Rol> {
@@ -159,5 +158,10 @@ public class RolDao implements IDao<Rol> {
         finally {
             con.close();
         }		
+    }
+
+    @Override
+    public Rol getHistoric(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

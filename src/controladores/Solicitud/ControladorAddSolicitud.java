@@ -23,7 +23,6 @@ import modelos.Solicitud;
 import utils.Constants;
 import vistas.general.ComboboxItem;
 import vistas.swing.VentanaCrearSolicitud;
-import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

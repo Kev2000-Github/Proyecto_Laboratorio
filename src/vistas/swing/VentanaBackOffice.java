@@ -70,7 +70,7 @@ public class VentanaBackOffice extends VentanaGeneral {
         goBackLbl.setForeground(new java.awt.Color(255, 255, 255));
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
-        getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 38, -1, -1));
+        getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 30));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 300));
 

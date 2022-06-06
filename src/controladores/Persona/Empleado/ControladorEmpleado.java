@@ -75,9 +75,11 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             System.out.println("row: " + row);
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
+                String cedula = window.getTable().getModel().getValueAt(row, 3).toString();
                 System.out.println("Cedula: " + idString);
                 EmpleadoDao empDao = new EmpleadoDao();
                 Empleado emp = new Empleado();
+                emp.setCedula(cedula);
                 emp.setId(idString);
                 empDao.delete(emp);
                 fillEmpleados();
@@ -92,7 +94,7 @@ public class ControladorEmpleado extends ControladorGeneral implements ListSelec
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
                 System.out.println("Cedula: " + idString);
-                router.notify(this, "update-updateempleado-" + idString);
+                router.notify(this, "update-updateEmpleado-" + idString);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }

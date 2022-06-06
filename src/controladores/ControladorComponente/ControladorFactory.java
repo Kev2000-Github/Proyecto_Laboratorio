@@ -3,6 +3,9 @@ package controladores.ControladorComponente;
 import controladores.Mediator.IRouter;
 import controladores.ControladorLogin;
 import controladores.Charla.ControladorCharla;
+import controladores.Fundacion.ControladorAddFundacion;
+import controladores.Fundacion.ControladorFundacion;
+import controladores.Fundacion.ControladorUpdateFundacion;
 import controladores.Charla.ControladorRegistrarAsistentes;
 import controladores.Menu.ControladorBackOffice;
 import controladores.Menu.ControladorHome;
@@ -20,6 +23,9 @@ import controladores.Reportes.ControladorListaSolicitante;
 import controladores.Solicitud.ControladorAddSolicitud;
 import controladores.Solicitud.ControladorDetalleSolicitud;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
+import controladores.Usuario.ControladorAddUsuario;
+import controladores.Usuario.ControladorUpdateUsuario;
+import controladores.Usuario.ControladorUsuario;
 
 public class ControladorFactory implements IControladorFactory{
     public static final String[] CONTROLADORES = {
@@ -41,7 +47,13 @@ public class ControladorFactory implements IControladorFactory{
         "solicitudes",
         "addSolicitud",
         "detalleSolicitud",
-        "registrarAsistentes"
+        "registrarAsistentes",
+        "fundacion",
+        "addFundacion",
+        "updateFundacion",
+        "usuario",
+        "addUsuario",
+        "updateUsuario"
     };
 
     public ControladorGeneral getControlador(String nombre, IRouter router) {
@@ -76,6 +88,20 @@ public class ControladorFactory implements IControladorFactory{
                 return new ControladorAddEmpleado(router);
             case "updateEmpleado":
                 return new ControladorUpdateEmpleado(router);
+            //FUNDACION
+            case "fundacion":
+                return new ControladorFundacion(router);
+            case "addFundacion":
+                return new ControladorAddFundacion(router);
+            case "updateFundacion":
+                return new ControladorUpdateFundacion(router);
+            //USUARIO
+            case "usuario":
+                return new ControladorUsuario(router);
+            case "addUsuario":
+                return new ControladorAddUsuario(router);
+            case "updateUsuario":
+                return new ControladorUpdateUsuario(router);
             //REPORTES
             case "listaPresupuesto":
                 return new ControladorListaPresupuesto(router);
