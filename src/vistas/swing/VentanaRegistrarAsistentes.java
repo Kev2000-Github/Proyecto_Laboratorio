@@ -58,29 +58,30 @@ public class VentanaRegistrarAsistentes extends VentanaGeneral {
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
-        lblIdCharla.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        lblIdCharla.setFont(new java.awt.Font("Liberation Serif", 1, 14)); // NOI18N
         lblIdCharla.setForeground(new java.awt.Color(255, 255, 255));
         lblIdCharla.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblIdCharla.setText("id");
-        getContentPane().add(lblIdCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
+        lblIdCharla.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(lblIdCharla, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
-        lblTitle.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Liberation Serif", 1, 14)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Registrar Asistentes a Charla");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         lblCiDelAsistente.setForeground(new java.awt.Color(255, 255, 255));
         lblCiDelAsistente.setText("C.I. del Asistente:");
-        getContentPane().add(lblCiDelAsistente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        getContentPane().add(lblCiDelAsistente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jtfCedula.setToolTipText("");
-        getContentPane().add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 120, -1));
+        getContentPane().add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 120, -1));
 
         btnRegistrar.setBackground(new java.awt.Color(110, 217, 161));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(0, 37, 35));
         btnRegistrar.setText("Registrar");
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 180));
 
         pack();
