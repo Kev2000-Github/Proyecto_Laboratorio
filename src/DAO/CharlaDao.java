@@ -261,7 +261,7 @@ public class CharlaDao implements IDao<Charla> {
          try {
             con = new Conne();
             con.open();
-            String sql = "SELECT * FROM asistencia_charla" 
+            String sql = "SELECT * FROM asistencia_charla " 
                          + "WHERE cedula = ? AND charla_id = ? AND deleted_at IS NULL";
             String[] params = { ci, id };
             ResultSet rs = con.execQuery(sql, params);

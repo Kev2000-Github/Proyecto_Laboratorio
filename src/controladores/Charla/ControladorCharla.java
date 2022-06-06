@@ -15,24 +15,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 
 import modelos.Charla;
 import vistas.swing.VentanaCharlas;
 import java.util.Date;
-import java.time.LocalDate;
-
 
 public class ControladorCharla extends ControladorGeneral implements ListSelectionListener{
 
@@ -70,12 +59,8 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
         for (Charla c : ch_list) {
-            
-            CharlaDao charlaDao = new CharlaDao();
-            Charla charla = charlaDao.get(c.getId());
             modelCharlas.addRow(new Object[]{ c.getId(), 
                 c.getTema(), c.getDireccion(), c.getOrganismo(), c.getFecha()});
-            
         }
         window.setModelServicio(modelCharlas);
     }
@@ -87,12 +72,8 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
         modelCharlas.setColumnIdentifiers(new Object[]{"Id", "Tema", "Lugar", "Organismo", "Fecha"});
 
         for (Charla c : ch_list) {
-            
-            CharlaDao charlaDao = new CharlaDao();
-            Charla charla = charlaDao.get(c.getId());
             modelCharlas.addRow(new Object[]{ c.getId(), 
                 c.getTema(), c.getDireccion(), c.getOrganismo(), c.getFecha()});
-            
         }
         window.setModelServicio(modelCharlas);
     }
@@ -106,60 +87,41 @@ public class ControladorCharla extends ControladorGeneral implements ListSelecti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         var source = e.getSource();
-
         if (source == window.getBtnRegistrar()) {
-
-                if(window.gettblCharlas().getSelectedRow() != -1){
-
-                    String idCharlaSelected = getIdSelectedCharla();
-                   
-                    if(charlaDao.charlaIsRegistered(idCharlaSelected)== false){                    
-                        
-                    window.dispose();
+            if(window.gettblCharlas().getSelectedRow() != -1){
+                String idCharlaSelected = getIdSelectedCharla();
+                if(charlaDao.charlaIsRegistered(idCharlaSelected)== false){                    
                     router.notify(this, "update-registrarAsistentes-" + idCharlaSelected);
-                    }
-                    else{    
-                    mostrarMensaje("Los asistentes a esta charla ya fueron registrados");
-                    }
-
                 }
-                else{
-                    mostrarMensaje("No se ha seleccionado ninguna solicitud");
+                else{    
+                    mostrarMensaje("Los asistentes a esta charla ya fueron registrados");
                 }
             }
-            
-            if(source == window.getBtnBuscar()){
-
-                Date fecha_f = window.getDChooserFrom().getDate();
-                Date fecha_t = window.getDChooserTo().getDate();
-
-                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                
-                if((fecha_f != null) && (fecha_t != null)){
-                    
-                    if(fecha_f.before(fecha_t)==true){
-                        
-                        String f = formato.format(fecha_f);
-                        String t = formato.format(fecha_t);                
-                        fillBusqueda(f,t);
-                    }
-                    else
-                    {
-                        window.mostrarMensaje("La primera fecha seleccionada debe ser anterior a la segunda");
-                    }
-                }else
-                {
-                    window.mostrarMensaje("Debe llenar ambas fechas para hacer la busqueda");
-                }
-
+            else{
+                mostrarMensaje("No se ha seleccionado ninguna solicitud");
             }
         }
+        if(source == window.getBtnBuscar()){
+            Date fecha_f = window.getDChooserFrom().getDate();
+            Date fecha_t = window.getDChooserTo().getDate();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            if((fecha_f != null) && (fecha_t != null)){
+                if(fecha_f.before(fecha_t)){
+                    String f = formato.format(fecha_f);
+                    String t = formato.format(fecha_t);                
+                    fillBusqueda(f,t);
+                }
+                else{
+                    window.mostrarMensaje("La primera fecha seleccionada debe ser anterior a la segunda");
+                }
+            }
+            else{
+                window.mostrarMensaje("Debe llenar ambas fechas para hacer la busqueda");
+            }
+        }
+    }
     
-    
-    
-     
     @Override
     public void valueChanged(ListSelectionEvent e) { 
     }

@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionListener;
 import vistas.general.VentanaGeneral;
 
 /**
@@ -136,7 +135,7 @@ public class VentanaRegistrarAsistentes extends VentanaGeneral {
     }
 
     private void agregarMouseListener(MouseListener ml) {
-        //REVISAR SI NECESARIO, SINO ELIMINAR
+        goBackLbl.addMouseListener(ml);
     }
     
     public JButton getBtnRegistrar(){
