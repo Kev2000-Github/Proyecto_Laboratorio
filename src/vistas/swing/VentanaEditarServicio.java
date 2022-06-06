@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import vistas.general.ComboboxItem;
 import vistas.general.VentanaGeneral;
 import vistas.swing.componentes.textInput.textInput;
@@ -34,10 +35,18 @@ public class VentanaEditarServicio extends VentanaGeneral {
     }
     
       private void agregarMouseListener(MouseListener ml) {
-        goBackLbl.addMouseListener(ml);
+        goBackLbl1.addMouseListener(ml);
     }
     
     
+     public JLabel getServicioId() {
+        return servicioId;
+    }
+
+    public void setServicioId(JLabel servicioId) {
+        this.servicioId = servicioId;
+    }  
+      
     public textInput getNombre() {
         return nombre;
     }
@@ -178,6 +187,7 @@ public class VentanaEditarServicio extends VentanaGeneral {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         goBackLbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl1.setName("goBack"); // NOI18N
@@ -304,6 +314,7 @@ public class VentanaEditarServicio extends VentanaGeneral {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed

@@ -128,7 +128,7 @@ public class ControladorAddServicio extends ControladorGeneral implements ListSe
 
             //((VentanaCrearSolicitud) window).clear();
         } catch (Exception e) {
-            System.out.println("controladores.ControladorPersona.save()" + e);
+            System.out.println("controladores.ControladorAddServicio.save()" + e);
         }
     }
 
