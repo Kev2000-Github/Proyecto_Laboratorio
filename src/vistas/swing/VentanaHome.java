@@ -23,6 +23,12 @@ public class VentanaHome extends VentanaGeneral {
         setLocationRelativeTo(null);
         this.agregarListener(accion);
         topMenuLogin.setMenuFunctions(this, "");
+        setTransparency();
+    }
+    
+    private void setTransparency(){
+        crear_solicitud.setOpaque(false);
+        gestionar_solicitud.setOpaque(false);
     }
     
     private void agregarListener(ActionListener accion){
@@ -53,39 +59,56 @@ public class VentanaHome extends VentanaGeneral {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        updateFondos.setBackground(new java.awt.Color(110, 217, 161));
+        updateFondos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updateFondos.setForeground(new java.awt.Color(0, 37, 35));
         updateFondos.setText("Asignar partida");
+        updateFondos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 37, 35), 2, true));
         updateFondos.setName("asignarPartida"); // NOI18N
         updateFondos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateFondosActionPerformed(evt);
             }
         });
-        getContentPane().add(updateFondos, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 142, 144, 37));
+        getContentPane().add(updateFondos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 150, 37));
 
+        crear_solicitud.setBackground(new java.awt.Color(0, 37, 35));
+        crear_solicitud.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        crear_solicitud.setForeground(new java.awt.Color(204, 255, 204));
         crear_solicitud.setText("Crear Solicitud");
+        crear_solicitud.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 255, 204), 2, true));
+        crear_solicitud.setOpaque(true);
         crear_solicitud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crear_solicitudActionPerformed(evt);
             }
         });
-        getContentPane().add(crear_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 87, 155, 37));
+        getContentPane().add(crear_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 155, 37));
 
+        gestionar_solicitud.setBackground(new java.awt.Color(0, 37, 35));
+        gestionar_solicitud.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        gestionar_solicitud.setForeground(new java.awt.Color(204, 255, 204));
         gestionar_solicitud.setText("Gestionar solicitud");
+        gestionar_solicitud.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 255, 204), 2, true));
         gestionar_solicitud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gestionar_solicitudActionPerformed(evt);
             }
         });
-        getContentPane().add(gestionar_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 87, 144, 37));
+        getContentPane().add(gestionar_solicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 150, 37));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Inicio");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
         getContentPane().add(topMenuLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
+        back_office1.setBackground(new java.awt.Color(109, 217, 161));
+        back_office1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        back_office1.setForeground(new java.awt.Color(0, 37, 35));
         back_office1.setText("BackOffice");
-        getContentPane().add(back_office1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 142, 155, 37));
+        back_office1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 37, 35), 2, true));
+        getContentPane().add(back_office1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 155, 37));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 250));
 
         pack();
