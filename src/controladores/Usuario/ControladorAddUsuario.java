@@ -117,13 +117,7 @@ public class ControladorAddUsuario extends ControladorGeneral implements ListSel
             empleadoId = empleado.getId();
             Usuario usuario = usuarioDao.getByEmpleadoId(empleadoId, false);
             if(usuario == null){
-                Usuario deletedUser = usuarioDao.getByEmpleadoId(empleadoId, false);
-                if(deletedUser == null){
-                    window.setEnabled(true);
-                }
-                else{
-                    //TODO
-                }
+                window.setEnabled(true);
             }
             else{
                 window.mostrarMensaje("El empleado ya tiene una cuenta activa");
