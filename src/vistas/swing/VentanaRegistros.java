@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import vistas.general.VentanaGeneral;
 import java.awt.event.MouseListener;
+import javax.swing.JComboBox;
+import vistas.general.ComboboxItem;
 
 
 /**
@@ -32,11 +34,13 @@ public class VentanaRegistros extends VentanaGeneral {
         empleados.addActionListener(accion);
         beneficiarios.addActionListener(accion);
         fundaciones.addActionListener(accion);
+        servicios.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
         goBackLbl.addMouseListener(ml);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -4,7 +4,6 @@
  */
 package controladores.Servicio;
 
-import DAO.FundacionDao;
 import DAO.general.DaoFactory;
 import DAO.ServicioDao;
 import controladores.ControladorComponente.ControladorGeneral;
@@ -15,9 +14,7 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import modelos.Fundacion;
 import modelos.Servicio;
-import vistas.general.ComboboxItem;
 import vistas.swing.VentanaGestionarBackOffice;
 
 /**
@@ -50,10 +47,10 @@ public class ControladorServicio extends ControladorGeneral implements ListSelec
     public void fillServicios() {
        DefaultTableModel modelServicios = new DefaultTableModel();
         ServicioDao servicioDao = new ServicioDao();
-        List<Servicio> fList = servicioDao.getAll();
+        List<Servicio> sList = servicioDao.getAll();
         modelServicios.setColumnCount(4);
         modelServicios.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Tipo", "Costo"});
-        for (Servicio serv : fList) {
+        for (Servicio serv : sList) {
             modelServicios.addRow(new Object[]{
                 serv.getId(),
                 serv.getNombre(),
