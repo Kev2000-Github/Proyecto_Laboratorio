@@ -172,7 +172,9 @@ public class VentanaRegistros extends VentanaGeneral {
         return servicios;
     }
  
-
+    public JButton getServicios() {
+        return servicios;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
