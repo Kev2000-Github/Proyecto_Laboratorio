@@ -67,7 +67,7 @@ public class ControladorRegistrarAsistentes extends ControladorUpdateGeneral{
             if(ci != null){
                 if(ci.matches("[+-]?\\d*(\\.\\d+)?")==true && ci.length()==8){
                     
-                    if(charlaDao.existingAsistente(ci)==false){
+                    if(charlaDao.existingAsistente(ci,charlaId)==false){
                         charlaDao.saveAsistente(ci, charlaId);
                         window.setEntryCedula("");
                         mostrarMensaje("Registro Exitoso");

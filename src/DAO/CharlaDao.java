@@ -257,13 +257,13 @@ public class CharlaDao implements IDao<Charla> {
         }
     }
     
-    public boolean existingAsistente(String id){
+    public boolean existingAsistente(String ci, String id){
          try {
             con = new Conne();
             con.open();
             String sql = "SELECT * FROM asistencia_charla" 
-                         + "WHERE cedula = ? AND deleted_at IS NULL";
-            String[] params = { id };
+                         + "WHERE cedula = ? AND charla_id = ? AND deleted_at IS NULL";
+            String[] params = { ci, id };
             ResultSet rs = con.execQuery(sql, params);
 
             if (con.isResultSetEmpty(rs))
