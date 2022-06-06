@@ -275,7 +275,8 @@ INSERT INTO permiso(id, descripcion)
 		  ('updateUsuario',''),
 		  ('addUsuario',''),
 		  ('registrarAsistentes',''),
-		  ('addCharla','');
+		  ('addCharla',''),
+		  ('updateServicio','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
 	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
@@ -309,6 +310,7 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'addUsuario'),
 		  ('OPTE5KYCY3M4BL49N9', 'registrarAsistentes'),
 		  ('OPTE5KYCY3M4BL49N9', 'addCharla'),
+		  ('OPTE5KYCY3M4BL49N9', 'updateServicio'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
