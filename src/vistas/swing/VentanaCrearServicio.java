@@ -28,11 +28,11 @@ public class VentanaCrearServicio extends VentanaGeneral {
         nombre.setTextLabel("Nombre:");
         tipo.setTextLabel("Tipo:"); 
         costo.setTextLabel("Costo:");
-        setEnabled(false);
+        
     }
     
     private void agregarMouseListener(MouseListener ml) {
-        goBackLbl.addMouseListener(ml);
+        goBackLbl1.addMouseListener(ml);
     }
     
     
@@ -154,6 +154,7 @@ public class VentanaCrearServicio extends VentanaGeneral {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         goBackLbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl1.setName("goBack"); // NOI18N
@@ -284,6 +285,7 @@ public class VentanaCrearServicio extends VentanaGeneral {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed

@@ -248,6 +248,13 @@ INSERT INTO permiso(id, descripcion)
 		  ('listaSolicitante',''),
 		  ('addSolicitud',''),
 		  ('detalleSolicitud',''),
+          ('supervisor',''),
+          ('operador',''),
+          ('fundacion',''),
+		  ('addFundacion',''),
+		  ('updateFundacion',''),
+          ('servicio',''),
+          ('addServicio',''),
 		  ('solicitudes','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
@@ -263,6 +270,8 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'updateBeneficiario'),
 		  ('OPTE5KYCY3M4BL49N9', 'addEmpleado'),
 		  ('OPTE5KYCY3M4BL49N9', 'empleado'),
+          ('OPTE5KYCY3M4BL49N9', 'supervisor'),
+          ('OPTE5KYCY3M4BL49N9', 'operador'),
 		  ('OPTE5KYCY3M4BL49N9', 'updateEmpleado'),
 		  ('OPTE5KYCY3M4BL49N9', 'listaPresupuesto'),
 		  ('OPTE5KYCY3M4BL49N9', 'listaResponsable'),
@@ -270,10 +279,15 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'addSolicitud'),
 		  ('OPTE5KYCY3M4BL49N9', 'detalleSolicitud'),
 		  ('OPTE5KYCY3M4BL49N9', 'solicitudes'),
+          ('OPTE5KYCY3M4BL49N9', 'fundacion'),
+		  ('OPTE5KYCY3M4BL49N9', 'addFundacion'),
+		  ('OPTE5KYCY3M4BL49N9', 'updateFundacion'),
+          ('OPTE5KYCY3M4BL49N9', 'servicio'),
+          ('OPTE5KYCY3M4BL49N9', 'addServicio'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
-		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud')
+		  ('QS0YGF5RCQ3F7UMSE4', 'addSolicitud'),
 		  ('QS0YGF5RCQ3F7UMSE4', 'login');
 
 INSERT INTO usuario(id, empleado_id, rol_id, username, password)

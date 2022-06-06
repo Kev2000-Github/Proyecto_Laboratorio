@@ -23,6 +23,7 @@ import controladores.Solicitud.ControladorAddSolicitud;
 import controladores.Solicitud.ControladorDetalleSolicitud;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
 import controladores.Servicio.ControladorServicio;
+import controladores.Servicio.ControladorAddServicio;
 
 public class ControladorFactory implements IControladorFactory{
     public static final String[] CONTROLADORES = {
@@ -47,7 +48,8 @@ public class ControladorFactory implements IControladorFactory{
         "fundacion",
         "addFundacion",
         "updateFundacion",
-        "servicio"
+        "servicio",
+        "addServicio"
             
     };
 
@@ -91,6 +93,9 @@ public class ControladorFactory implements IControladorFactory{
             //SERVICIO    
             case "servicio":
                 return new ControladorServicio(router);
+                
+            case "addServicio":
+                return new ControladorAddServicio(router);    
             //REPORTES
             case "listaPresupuesto":
                 return new ControladorListaPresupuesto(router);
