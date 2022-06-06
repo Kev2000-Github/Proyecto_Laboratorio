@@ -40,6 +40,31 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
     }
 
     @Override
+    public Beneficiario getHistoric(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono, p.correo, e.fundacion_id"
+                    + " FROM beneficiario e JOIN persona p ON e.cedula = p.cedula where e.cedula =?";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Beneficiario beneficiario = setEntity(rs);
+            return beneficiario;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
+
+    @Override
     public Beneficiario get(String id) {
         try {
             con = new Conne();
@@ -124,8 +149,8 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             con = new Conne();
             con.open();
             String sql = "UPDATE persona SET"
-                    + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?"
-                    + " WHERE cedula = ? AND deleted_at IS NULL";
+                    + " nombre=?, apellido=?, telefono=?, direccion=?, correo=?, deleted_at=NULL"
+                    + " WHERE cedula = ? ";
             String[] params = {
                 beneficiario.getNombre(),
                 beneficiario.getApellido(),
@@ -137,8 +162,8 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
             con.execMutation(sql, params);
 
             String sqlFundacion = "UPDATE beneficiario SET"
-                    + " fundacion_id=?"
-                    + " WHERE cedula = ? AND deleted_at IS NULL";
+                    + " fundacion_id=?, deleted_at=NULL"
+                    + " WHERE cedula = ?";
             String[] paramsFundacion = {
                 beneficiario.getFundacionId(),
                 beneficiario.getCedula()
@@ -163,6 +188,11 @@ public class BeneficiarioDao implements IDao<Beneficiario> {
                 beneficiario.getId()
             };
             con.execMutation(sql, params);
+            String sql2 = "UPDATE persona SET deleted_at = '" + now.toString() + "' WHERE cedula = ? AND deleted_at IS NULL";
+            String[] params2 = {
+                beneficiario.getCedula()
+            };
+            con.execMutation(sql2, params2);
         } catch (Exception e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
