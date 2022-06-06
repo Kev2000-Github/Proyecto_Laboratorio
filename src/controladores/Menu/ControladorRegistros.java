@@ -52,6 +52,9 @@ public class ControladorRegistros extends ControladorGeneral {
         if (source == window.getFundaciones()){
             router.notify(this, "go-fundacion");
         }
+        if (source == window.getServicios()){
+            router.notify(this, "go-servicio");
+        }
 
         if (source == window.getUsuarios()){
             router.notify(this, "go-usuario");

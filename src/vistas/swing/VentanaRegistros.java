@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import vistas.general.VentanaGeneral;
 import java.awt.event.MouseListener;
+import javax.swing.JComboBox;
+import vistas.general.ComboboxItem;
 
 
 /**
@@ -33,12 +35,14 @@ public class VentanaRegistros extends VentanaGeneral {
         beneficiarios.addActionListener(accion);
         charlas.addActionListener(accion);
         fundaciones.addActionListener(accion);
+        servicios.addActionListener(accion);
         usuarios.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
         goBackLbl.addMouseListener(ml);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +61,7 @@ public class VentanaRegistros extends VentanaGeneral {
         charlas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         goBackLbl = new javax.swing.JLabel();
+        servicios = new javax.swing.JButton();
         backgroundImage1 = new vistas.swing.componentes.backgroundImage.backgroundImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,7 +127,18 @@ public class VentanaRegistros extends VentanaGeneral {
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 44, -1, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 320));
+
+        servicios.setBackground(new java.awt.Color(110, 217, 161));
+        servicios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        servicios.setForeground(new java.awt.Color(0, 37, 35));
+        servicios.setText("Servicios");
+        servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serviciosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 117, 35));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 380));
 
         pack();
         setLocationRelativeTo(null);
@@ -139,6 +155,9 @@ public class VentanaRegistros extends VentanaGeneral {
         // TODO add your handling code here:
     }//GEN-LAST:event_fundacionesActionPerformed
 
+    private void serviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_serviciosActionPerformed
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usuariosActionPerformed
@@ -192,6 +211,10 @@ public class VentanaRegistros extends VentanaGeneral {
     public JButton getFundaciones() {
         return fundaciones;
     }
+    
+    public JButton getServicios() {
+        return servicios;
+    }
  
     public JButton getUsuarios() {
         return usuarios;
@@ -209,6 +232,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private javax.swing.JButton fundaciones;
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton servicios;
     private vistas.swing.componentes.topMenu.topMenu topMenu;
     private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables

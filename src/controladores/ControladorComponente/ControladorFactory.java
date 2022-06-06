@@ -24,6 +24,9 @@ import controladores.Reportes.ControladorListaSolicitante;
 import controladores.Solicitud.ControladorAddSolicitud;
 import controladores.Solicitud.ControladorDetalleSolicitud;
 import controladores.Solicitud.ControladorGestionarSolicitudes;
+import controladores.Servicio.ControladorServicio;
+import controladores.Servicio.ControladorAddServicio;
+import controladores.Servicio.ControladorUpdateServicio;
 import controladores.Usuario.ControladorAddUsuario;
 import controladores.Usuario.ControladorUpdateUsuario;
 import controladores.Usuario.ControladorUsuario;
@@ -52,6 +55,9 @@ public class ControladorFactory implements IControladorFactory{
         "fundacion",
         "addFundacion",
         "updateFundacion",
+        "servicio",
+        "addServicio",
+        "updateServicio",
         "usuario",
         "addUsuario",
         "updateUsuario",
@@ -99,6 +105,16 @@ public class ControladorFactory implements IControladorFactory{
                 return new ControladorAddFundacion(router);
             case "updateFundacion":
                 return new ControladorUpdateFundacion(router);
+            //SERVICIO    
+            case "servicio":
+                return new ControladorServicio(router);
+                
+            case "addServicio":
+                return new ControladorAddServicio(router);    
+            
+            case "updateServicio":
+                return new ControladorUpdateServicio(router);    
+                
             //USUARIO
             case "usuario":
                 return new ControladorUsuario(router);
