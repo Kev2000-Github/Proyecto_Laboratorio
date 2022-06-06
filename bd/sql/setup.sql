@@ -269,7 +269,8 @@ INSERT INTO permiso(id, descripcion)
 		  ('updateFundacion',''),
 		  ('usuario',''),
 		  ('updateUsuario',''),
-		  ('addUsuario','');
+		  ('addUsuario',''),
+		  ('registrarAsistentes','');
 
 INSERT INTO rol_permiso(rol_id, permiso_id)
 	VALUES('OPTE5KYCY3M4BL49N9', 'backOffice'),
@@ -297,6 +298,7 @@ INSERT INTO rol_permiso(rol_id, permiso_id)
 		  ('OPTE5KYCY3M4BL49N9', 'usuario'),
 		  ('OPTE5KYCY3M4BL49N9', 'updateUsuario'),
 		  ('OPTE5KYCY3M4BL49N9', 'addUsuario'),
+		  ('OPTE5KYCY3M4BL49N9', 'registrarAsistentes'),
 		  ('P62ZT9JUGH789WT54H', 'solicitudes'),
 		  ('P62ZT9JUGH789WT54H', 'detalleSolicitud'),
 		  ('P62ZT9JUGH789WT54H', 'login'),
@@ -338,7 +340,9 @@ INSERT INTO charla(id, tema, lugar, organismo, fecha)
 	VALUES('1', 'Importancia de la Libertad Economica', 'Parque Nacional', 'Econintech', '2022-01-01'),
 		  ('2', 'Crypto: Camino a la Economia Digital', 'Parque Nacional', 'digital Ocean', '2022-01-01'),
 		  ('3', 'Play to Earn: Beware of scams', 'Parque Nacional', 'Google', '2022-01-01'),
-		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01');
+		  ('4', 'Venezuela, posible Silicon Valley de Latinoamerica?', 'Parque Nacional', 'Platzi', '2022-01-01'),
+		  ('5', 'Las consecuencias del Bullying dejan marca en la sociedad', 'Parque Nacional', 'Psicologa', '2022-01-01'),
+		  ('6', 'Los adultos infantilizados de hoy dia', 'Parque Nacional', 'Platzi', '2022-01-01');
 
 INSERT INTO asistencia_charla(cedula, charla_id)
 	VALUES('27317962','1'),

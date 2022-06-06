@@ -19,7 +19,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             Charla charla = new Charla();
             charla.setTema(rs.getString("tema"));
-            charla.setDireccion(rs.getString("direccion"));
+            charla.setDireccion(rs.getString("lugar"));
             charla.setOrganismo(rs.getString("organismo"));
             charla.setFecha(rs.getDate("fecha"));
             charla.setId(rs.getString("id"));
@@ -39,7 +39,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
+            String sql = "SELECT id, tema, lugar,organismo,fecha"
                     + " FROM charla c WHERE id = ? AND c.deleted_at IS NULL";
             String[] params = { id };
             ResultSet rs = con.execQuery(sql, params);
@@ -57,16 +57,43 @@ public class CharlaDao implements IDao<Charla> {
             con.close();
         }
     }
+    
+    public boolean charlaIsRegistered(String id){
+        try {
+                con = new Conne();
+                con.open();
+                String sql = "SELECT DISTINCT id, tema, lugar, organismo, fecha"
+                             + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                             + " WHERE c.id = ? AND c.deleted_at IS NULL";
+                String[] params = { id };
+                ResultSet rs = con.execQuery(sql, params);
 
-    public List<Charla> getCharlasByType() {
+                if (con.isResultSetEmpty(rs))
+                    return false;
+                return true;
+            } catch (Exception e) {
+                String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+                System.out.println(msg);
+                e.printStackTrace();
+                //REVISAR: Dejo este codigo? es necesario? --> return null;
+            } finally {
+                con.close();
+            }
+        return true;
+    }
+    
+    public List<Charla> getCharlasByDate(String fecha_f, String fecha_t) {
         try {
             List<Charla> list = new ArrayList<Charla>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
-                    + " FROM charla c WHERE c.deleted_at IS NULL";
-            //SETEO TYPE : String[] params = {id};
-            ResultSet rs = con.execQuery(sql);
+            String sql = "SELECT id, tema, lugar,organismo,fecha"
+                    + " FROM charla c WHERE c.fecha BETWEEN " 
+                    + "? AND ? AND c.deleted_at IS NULL;";
+            
+            String[] params = { fecha_f, fecha_t };
+            ResultSet rs = con.execQuery(sql,params);
+            
             if (con.isResultSetEmpty(rs))
                 return list;
             do {
@@ -75,8 +102,9 @@ public class CharlaDao implements IDao<Charla> {
             } while (rs.next());
             return list;
         } catch (SQLException e) {
-            String msg = "Error #7105 obteniendo los datos de la bd\n" + e.getMessage();
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
             System.out.println(msg);
+            e.printStackTrace();
             return null;
         } finally {
             con.close();
@@ -89,7 +117,7 @@ public class CharlaDao implements IDao<Charla> {
             List<Charla> list = new ArrayList<Charla>();
             con = new Conne();
             con.open();
-            String sql = "SELECT id, tema, direccion,organismo,fecha"
+            String sql = "SELECT id, tema, lugar, organismo, fecha"
                     + " FROM charla c WHERE c.deleted_at IS NULL";
             ResultSet rs = con.execQuery(sql);
             if (con.isResultSetEmpty(rs))
@@ -114,7 +142,7 @@ public class CharlaDao implements IDao<Charla> {
         try {
             con = new Conne();
             con.open();
-            String sql = "INSERT INTO fundacion(id, tema, direccion,organismo,fecha) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO fundacion(id, tema, lugar,organismo,fecha) VALUES(?,?,?,?,?)";
             String[] params = {
                     charla.getId(),
                     charla.getTema(),
@@ -138,7 +166,7 @@ public class CharlaDao implements IDao<Charla> {
             con = new Conne();
             con.open();
             String sql = "UPDATE charla SET"
-                    + " tema=?, direccion=?, organismo=?, fecha=?"
+                    + " tema=?, lugar=?, organismo=?, fecha=?"
                     + " WHERE id = ? AND deleted_at IS NULL";
             String[] params = {
                     charla.getTema(),
@@ -183,7 +211,7 @@ public class CharlaDao implements IDao<Charla> {
             con.open();
             List<Charla> list = new ArrayList<Charla>();
             String sql = "SELECT c.id, c.tema, c.direccion, c.organismo, c.fecha"
-                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charla_id"
+                    + " FROM charla c JOIN asistencia_charla ac ON c.id = ac.charlaId"
                     + " WHERE ac.cedula = ? AND c.deleted_at IS NULL";
             String[] params = { cedula };
             ResultSet rs = con.execQuery(sql, params);
@@ -224,6 +252,44 @@ public class CharlaDao implements IDao<Charla> {
             System.out.println(msg);
             e.printStackTrace();
             return 0;
+        } finally {
+            con.close();
+        }
+    }
+    
+    public boolean existingAsistente(String ci, String id){
+         try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT * FROM asistencia_charla " 
+                         + "WHERE cedula = ? AND charla_id = ? AND deleted_at IS NULL";
+            String[] params = { ci, id };
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs))
+                return false;
+            return true;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return false;
+        } finally {
+            con.close();
+        }
+    }
+    
+    
+    public void saveAsistente(String ciAsistente, String idcharla) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "INSERT INTO asistencia_charla(cedula, charla_id) VALUES (?,?)";
+            String[] params = { ciAsistente, idcharla };
+            con.execMutation(sql, params);
+        } catch (Exception e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
             con.close();
         }
