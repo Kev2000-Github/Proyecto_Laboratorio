@@ -197,4 +197,29 @@ public class EmpleadoDao implements IDao<Empleado> {
             con.close();
         }
     }
+
+    public Empleado getByCedula(String cedula) {
+        try {
+            con = new Conne();
+            con.open();
+            String sql = "SELECT id, nombre, apellido, p.cedula, direccion, telefono, p.correo, e.fundacion_id"
+                    + " FROM empleado e JOIN persona p ON e.cedula = p.cedula where e.cedula =?"
+                    + " AND e.deleted_at IS NULL AND p.deleted_at IS NULL";
+            String[] params = {cedula};
+            ResultSet rs = con.execQuery(sql, params);
+
+            if (con.isResultSetEmpty(rs)) {
+                return null;
+            }
+            Empleado empleado = setEntity(rs);
+            return empleado;
+        } catch (Exception e) {
+            String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+        } finally {
+            con.close();
+        }
+    }
 }

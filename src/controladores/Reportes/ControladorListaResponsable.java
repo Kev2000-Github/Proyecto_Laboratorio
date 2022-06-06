@@ -10,7 +10,6 @@ import modelos.Solicitud;
 import vistas.swing.VentanaListaResponsable;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.JLabel;
 import DAO.EmpleadoDao;
 import DAO.SolicitudDao;
 import controladores.ControladorComponente.ControladorGeneral;

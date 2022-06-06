@@ -32,6 +32,7 @@ public class VentanaRegistros extends VentanaGeneral {
         empleados.addActionListener(accion);
         beneficiarios.addActionListener(accion);
         fundaciones.addActionListener(accion);
+        usuarios.addActionListener(accion);
     }
 
     private void agregarMouseListener(MouseListener ml) {
@@ -48,6 +49,7 @@ public class VentanaRegistros extends VentanaGeneral {
     private void initComponents() {
 
         topMenu = new vistas.swing.componentes.topMenu.topMenu();
+        usuarios = new javax.swing.JButton();
         beneficiarios = new javax.swing.JButton();
         fundaciones = new javax.swing.JButton();
         empleados = new javax.swing.JButton();
@@ -58,7 +60,15 @@ public class VentanaRegistros extends VentanaGeneral {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
+        getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 30));
+
+        usuarios.setText("Usuarios");
+        usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuariosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 117, 35));
 
         beneficiarios.setText("Beneficiarios");
         getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 117, 38));
@@ -69,7 +79,7 @@ public class VentanaRegistros extends VentanaGeneral {
                 fundacionesActionPerformed(evt);
             }
         });
-        getContentPane().add(fundaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 117, 35));
+        getContentPane().add(fundaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 117, 35));
 
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +97,7 @@ public class VentanaRegistros extends VentanaGeneral {
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N
         getContentPane().add(goBackLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 44, -1, -1));
-        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 220));
+        getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 260));
 
         pack();
         setLocationRelativeTo(null);
@@ -100,6 +110,10 @@ public class VentanaRegistros extends VentanaGeneral {
     private void fundacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fundacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fundacionesActionPerformed
+
+    private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +165,9 @@ public class VentanaRegistros extends VentanaGeneral {
         return fundaciones;
     }
  
-
+    public JButton getUsuarios() {
+        return usuarios;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vistas.swing.componentes.backgroundImage.backgroundImage backgroundImage1;
@@ -161,5 +177,6 @@ public class VentanaRegistros extends VentanaGeneral {
     private javax.swing.JLabel goBackLbl;
     private javax.swing.JLabel jLabel1;
     private vistas.swing.componentes.topMenu.topMenu topMenu;
+    private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
 }

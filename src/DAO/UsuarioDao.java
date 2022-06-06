@@ -161,7 +161,7 @@ public class UsuarioDao implements IDao<Usuario> {
 			con = new Conne();
             con.open();
             Timestamp now = new Timestamp(new Date().getTime());
-			String sql = "UPDATE usuario SET deleted_at = " + now.toString() + " WHERE id = ? AND deleted_at IS NULL";
+			String sql = "UPDATE usuario SET deleted_at = '" + now.toString() + "' WHERE id = ? AND deleted_at IS NULL";
             String[] params = {usuario.getId()};
             con.execMutation(sql, params);
 		} catch (Exception e) {
@@ -172,4 +172,26 @@ public class UsuarioDao implements IDao<Usuario> {
 		}    
     }
 
+    public Usuario getByEmpleadoId(String empleadoId, boolean ignoreDeletedAt) {
+		try {
+			con = new Conne();
+            con.open();
+            String deletedAt = ignoreDeletedAt ? "" : "AND deleted_at IS NULL";
+            String sql = "SELECT * FROM usuario where empleado_id =? " + deletedAt;
+            String[] params = {empleadoId};
+            ResultSet rs = con.execQuery(sql, params);
+            if(con.isResultSetEmpty(rs)) return null;
+            Usuario usuario = setEntity(rs);
+            return usuario;	
+		} 
+        catch (Exception e) {
+			String msg = "Error obteniendo los datos de la bd\n" + e.getMessage();
+            System.out.println(msg);
+            e.printStackTrace();
+            return null;
+		} 
+        finally {
+            con.close();
+        }
+    }
 }

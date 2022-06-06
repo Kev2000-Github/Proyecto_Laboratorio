@@ -17,8 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JLabel;
-
 import DAO.BeneficiarioDao;
 import DAO.CharlaDao;
 import DAO.FundacionDao;

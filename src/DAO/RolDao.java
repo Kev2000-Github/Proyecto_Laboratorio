@@ -9,7 +9,6 @@ import java.util.List;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Permiso;
 import modelos.Rol;
 
 public class RolDao implements IDao<Rol> {

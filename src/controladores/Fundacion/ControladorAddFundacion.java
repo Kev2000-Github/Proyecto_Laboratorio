@@ -1,9 +1,7 @@
 package controladores.Fundacion;
 
 import DAO.FundacionDao;
-import DAO.PersonaDao;
 import DAO.general.DaoFactory;
-import DAO.general.IDao;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
 
@@ -13,10 +11,7 @@ import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import modelos.Beneficiario;
-import modelos.Empleado;
 import modelos.Fundacion;
-import modelos.Persona;
 import vistas.swing.VentanaCrearFundacion;
 
 /*

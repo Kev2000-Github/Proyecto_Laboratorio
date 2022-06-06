@@ -49,7 +49,10 @@ public class textInput extends javax.swing.JPanel {
         inputLbl = new javax.swing.JLabel();
         inputField = new javax.swing.JTextField();
 
-        inputLbl.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 51, 51));
+        setOpaque(false);
+
+        inputLbl.setBackground(new java.awt.Color(255, 51, 51));
         inputLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inputLbl.setText("TextLbl");
 

@@ -1,6 +1,8 @@
-package controladores.Fundacion;
+package controladores.Usuario;
 
-import DAO.FundacionDao;
+import DAO.EmpleadoDao;
+import DAO.RolDao;
+import DAO.UsuarioDao;
 import DAO.general.DaoFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -12,7 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import controladores.ControladorComponente.ControladorGeneral;
 import controladores.Mediator.IRouter;
 
-import modelos.Fundacion;
+import modelos.Empleado;
+import modelos.Rol;
+import modelos.Usuario;
 import vistas.swing.VentanaGestionarBackOffice;
 
 /*
@@ -23,43 +27,46 @@ import vistas.swing.VentanaGestionarBackOffice;
  *
  * @author juanperez
  */
-public class ControladorFundacion extends ControladorGeneral implements ListSelectionListener {
+public class ControladorUsuario extends ControladorGeneral implements ListSelectionListener {
 
     VentanaGestionarBackOffice window;
     DaoFactory daoFactory;
-    FundacionDao fundacionDao;
+    UsuarioDao usuarioDao;
 
-    public ControladorFundacion(IRouter router) {
-        super("fundacion", router);
+    public ControladorUsuario(IRouter router) {
+        super("usuario", router);
         daoFactory = new DaoFactory();
-        fundacionDao = new FundacionDao();
+        usuarioDao = new UsuarioDao();
     }
 
     public void initGUI(){
         router.addRoute(this.id);
-        window = new VentanaGestionarBackOffice("Gestionar Fundaciones", this, this);
+        window = new VentanaGestionarBackOffice("Gestionar Usuarios", this, this);
         window.setVisible(true);
-        fillFundaciones();
+        fillUsuarios();
     }
 
     public void closeGUI(){
         window.dispose();
     }
 
-    public void fillFundaciones() {
-        DefaultTableModel modelFundaciones = new DefaultTableModel();
-        FundacionDao fundacionDao = new FundacionDao();
-        List<Fundacion> fList = fundacionDao.getAll();
-        modelFundaciones.setColumnCount(4);
-        modelFundaciones.setColumnIdentifiers(new Object[]{"Id", "Nombre", "Presupuesto", "Porcentaje anual"});
-        for (Fundacion fund : fList) {
-            modelFundaciones.addRow(new Object[]{
-                fund.getId(),
-                fund.getNombre(),
-                fund.getPresupuesto(),
-                fund.getPorcentajePartidoAnual()});
+    public void fillUsuarios() {
+        DefaultTableModel modelUsuarios = new DefaultTableModel();
+        List<Usuario> uList = usuarioDao.getAll();
+        modelUsuarios.setColumnCount(4);
+        modelUsuarios.setColumnIdentifiers(new Object[]{"Id", "Empleado", "Username", "Rol"});
+        for (Usuario user : uList) {
+            EmpleadoDao empleadoDao = new EmpleadoDao();
+            Empleado emp = empleadoDao.get(user.getEmpleado().getId());
+            RolDao rolDao = new RolDao();
+            Rol rol = rolDao.get(user.getRol().getId());
+            modelUsuarios.addRow(new Object[]{
+                user.getId(),
+                emp.getNombre() + " " + emp.getApellido(),
+                user.getUsername(),
+                rol.getNombre()});
         }
-        window.setModeloTabla(modelFundaciones);
+        window.setModeloTabla(modelUsuarios);
     }
 
     @Override
@@ -74,30 +81,29 @@ public class ControladorFundacion extends ControladorGeneral implements ListSele
             int row = window.getTable().getSelectedRow();
             System.out.println("row: " + row);
             if (row != -1) {
-                String fundacionId = window.getTable().getModel().getValueAt(row, 0).toString();
-                System.out.println("FundacionId: " + fundacionId);
-                Fundacion fund = new Fundacion();
-                fund.setId(fundacionId);
-                fundacionDao.delete(fund);
-                fillFundaciones();
+                String usuarioId = window.getTable().getModel().getValueAt(row, 0).toString();
+                System.out.println("UsuarioId: " + usuarioId);
+                Usuario user = new Usuario();
+                user.setId(usuarioId);
+                usuarioDao.delete(user);
+                fillUsuarios();
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
-
         }
         if (source == window.getEditar()) {
             int row = window.getTable().getSelectedRow();
             System.out.println("row: " + row);
             if (row != -1) {
-                String fundacionId = window.getTable().getModel().getValueAt(row, 0).toString();
-                System.out.println("FundacionId: " + fundacionId);
-                router.notify(this, "update-updateFundacion-" + fundacionId);
+                String usuarioId = window.getTable().getModel().getValueAt(row, 0).toString();
+                System.out.println("FundacionId: " + usuarioId);
+                router.notify(this, "update-updateUsuario-" + usuarioId);
             } else {
                 window.mostrarMensaje("Debes seleccionar un item primero");
             }
         }
         if (source == window.getCrear()) {
-            router.notify(this, "go-addFundacion");
+            router.notify(this, "go-addUsuario");
         }
 
     }

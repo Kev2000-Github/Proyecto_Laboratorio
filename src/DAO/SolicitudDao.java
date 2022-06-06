@@ -11,7 +11,6 @@ import java.util.Map;
 
 import DAO.general.IDao;
 import config.Connection.Conne;
-import modelos.Servicio;
 
 import modelos.Solicitud;
 import utils.Constants;
@@ -316,7 +315,7 @@ public class SolicitudDao implements IDao<Solicitud> {
                 Map<String, String> map = new HashMap<>();
                 map.put("solicitud_id",rs.getString("id"));
                 map.put("fundacion",rs.getString("fundacion"));
-                map.put("empleado",rs.getString("empleado"));
+                map.put("encargado",rs.getString("empleado"));
                 map.put("beneficiario",rs.getString("beneficiario"));
                 map.put("presupuesto_total",rs.getString("presupuesto_total"));
                 map.put("status",rs.getString("status"));
