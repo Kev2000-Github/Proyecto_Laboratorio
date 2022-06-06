@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -160,7 +161,12 @@ public class ControladorAddBeneficiario extends ControladorGeneral implements Li
     }
 
     public void save() {
-        if (this.beneficiarioId != null) {
+        PersonaDao personaDao = new PersonaDao();
+        Persona persona = personaDao.getHistoric(window.getCedula().getTextField());
+        if ( persona != null && persona.getDeleteAt() != null) {
+            updateHistoric(window.getCedula().getTextField());
+        }
+        else if (this.beneficiarioId != null) {
             update(id);
         } else {
             create();
@@ -204,6 +210,32 @@ public class ControladorAddBeneficiario extends ControladorGeneral implements Li
         }
     }
 
+    public void updateHistoric(String cedula) {
+        try {
+            boolean hasEmptyFields = validateForm();
+            if (hasEmptyFields) {
+                window.mostrarMensaje("Faltan campos por llenar");
+            } 
+            else {
+                Beneficiario newBeneficiario = getBeneficiario();
+                    String entity = "beneficiario";
+                    System.out.println("save" + '-' + entity);
+                    System.out.println(newBeneficiario.toString());
+                    IDao entityDao = daoFactory.getDao(entity);
+                    Beneficiario existenteSolicitud = (Beneficiario) entityDao.getHistoric(newBeneficiario.getCedula());
+                    if (existenteSolicitud == null) {
+                        window.mostrarMensaje("No existe este " + entity);
+                        return;
+                    }
+                    entityDao.update(newBeneficiario);
+                    window.mostrarMensaje("Se restauro el registro con exito ");
+                    
+            }
+        } catch (Exception e) {
+            System.out.println("controladores.ControladorPersona.update()" + e);
+        }
+    }
+    
     public void update(String cedula) {
         try {
             boolean hasEmptyFields = validateForm();
@@ -242,8 +274,8 @@ public class ControladorAddBeneficiario extends ControladorGeneral implements Li
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        var source = arg0.getSource();
-        if (source == window.getSave()) {
+        var source = (JButton) arg0.getSource();
+        if ("Guardar".equals(source.getText())) {
             save();
             goBack();
         }

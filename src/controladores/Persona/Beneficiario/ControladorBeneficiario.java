@@ -74,10 +74,12 @@ public class ControladorBeneficiario extends ControladorGeneral implements ListS
             System.out.println("row: " + row);
             if (row != -1) {
                 String idString = window.getTable().getModel().getValueAt(row, 0).toString();
-                System.out.println("Cedula: " + idString);
+                    String cedula = window.getTable().getModel().getValueAt(row, 3).toString();
+                System.out.println("ID: " + idString);
                 BeneficiarioDao benDao = new BeneficiarioDao();
                 Beneficiario ben = new Beneficiario();
                 ben.setId(idString);
+                ben.setCedula(cedula);
                 benDao.delete(ben);
                 fillBeneficiarios();
             } else {

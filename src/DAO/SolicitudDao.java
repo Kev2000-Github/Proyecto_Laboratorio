@@ -337,4 +337,9 @@ public class SolicitudDao implements IDao<Solicitud> {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public Solicitud getHistoric(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

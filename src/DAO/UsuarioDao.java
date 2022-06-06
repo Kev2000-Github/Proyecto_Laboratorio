@@ -194,4 +194,9 @@ public class UsuarioDao implements IDao<Usuario> {
             con.close();
         }
     }
+    
+    @Override
+    public Usuario getHistoric(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
