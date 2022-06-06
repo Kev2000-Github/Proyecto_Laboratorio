@@ -4,46 +4,48 @@
  */
 package controladores.Servicio;
 import DAO.FundacionDao;
-import DAO.general.DaoFactory;
 import DAO.ServicioDao;
-import controladores.ControladorComponente.ControladorUpdateGeneral;
+import DAO.general.DaoFactory;
 import controladores.Mediator.IRouter;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.List;
+import modelos.Servicio;
+import modelos.Fundacion;
+import controladores.ControladorComponente.ControladorUpdateGeneral;
+import vistas.swing.VentanaEditarServicio;
 import javax.swing.DefaultComboBoxModel;
+import vistas.general.ComboboxItem;
+import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
-import modelos.Fundacion;
-import modelos.Servicio;
-import vistas.general.ComboboxItem;
-import vistas.swing.VentanaEditarServicio;
 /**
  *
  * @author prometheus
  */
 public class ControladorUpdateServicio extends ControladorUpdateGeneral implements ListSelectionListener {
-        VentanaEditarServicio window;
-        DaoFactory daoFactory;
-        ServicioDao servicioDao;
-        String servicioId;
-        
-        public ControladorUpdateServicio(IRouter router) {
-            super("updateServicio", router);
-            daoFactory = new DaoFactory();
-             servicioDao = new ServicioDao(); 
-        }
-        
-            public void mostrarMensaje(String mensaje){
+
+    VentanaEditarServicio window;
+    DaoFactory daoFactory;
+    ServicioDao servicioDao;
+    String servicioId;
+    
+    
+    public ControladorUpdateServicio(IRouter router) {
+        super("updateServicio", router);
+        daoFactory = new DaoFactory();
+        servicioDao = new ServicioDao();
+    }
+
+
+    
+        public void mostrarMensaje(String mensaje){
             window.mostrarMensaje(mensaje);
-         }
-            
-          
+        }
+
         public void updateId(String id){
-        servicioId = id;
-        }  
+            servicioId = id;
+        }
         
     public void initGUI(){
         router.addRoute(this.id);
@@ -60,46 +62,51 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
                 );
         }
     }
-        
-       public void closeGUI(){
+    
+    
+    public void closeGUI(){
         window.dispose();
     }
-       
-     @Override
+    
+           
+    @Override
     public void valueChanged(ListSelectionEvent l) {
-
     }
     
-        public void clear() {
+    public void clear() {
         window.getServicioId().setText("");
         window.getNombre().setTextField("");
         window.getTipo().setTextField("");
         window.getCosto().setTextField("");
     }
-    
-            public void fillModel(
-            String fundacionId,
+
+    public void fillModel(
+            String servicioId,
             String nombre, 
             String tipo,
             float costo) {
             window.getServicioId().setText(servicioId);
             window.getNombre().setTextField(nombre);
-            window.getTipo().setTextField(String.valueOf(tipo));
+            window.getTipo().setTextField(tipo);
             window.getCosto().setTextField(String.valueOf(costo));
     }
-                public void save() {
-                update(servicioId);
+
+    
+        public void save() {
+        update(servicioId);
     }
-       public Boolean validateForm() {
-                return window.getServicioId().getText().isEmpty()
+        
+     public Boolean validateForm() {
+        return window.getServicioId().getText().isEmpty()
                 || window.getNombre().getTextField().isEmpty()
                 || window.getTipo().getTextField().isEmpty()
                 || window.getCosto().getTextField().isEmpty();
     }
 
-        public void goBack() {
+    public void goBack() {
         router.notify(this, "go-servicio");
-    }
+    }    
+    
      public Servicio getServicio(){
         Servicio servicio = new Servicio();
         servicio.setId(window.getSaltString());
@@ -109,19 +116,18 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
         return servicio;
     }
     
-    public void fillFundacion() {
-        DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
-        FundacionDao fundacionDao = new FundacionDao();
-        List<Fundacion> fundacionList = fundacionDao.getAll();
+       public void fillFundacion() {
+            DefaultComboBoxModel<ComboboxItem> modelFundacion = new DefaultComboBoxModel<ComboboxItem>();
+            FundacionDao fundacionDao = new FundacionDao();
+            List<Fundacion> fundacionList = fundacionDao.getAll();
         for (Fundacion fund : fundacionList) {
             modelFundacion.addElement(
-                    new ComboboxItem(fund.getId(), fund.getNombre()));
+                new ComboboxItem(fund.getId(), fund.getNombre()));
         }
         window.setModelFundaciones(modelFundacion);
     } 
         
-      
-    public void update(String fundacionId) {
+  public void update(String servicioId) {
         try {
             if (validateForm()) {
                 window.mostrarMensaje("Faltan campos por llenar");
@@ -142,7 +148,7 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
             System.out.println("controladores.ControladorUpdateServicio.update()" + e);
         }
     }
-
+  
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -162,7 +168,7 @@ public class ControladorUpdateServicio extends ControladorUpdateGeneral implemen
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
     }
-   
+    
  }
     
     
