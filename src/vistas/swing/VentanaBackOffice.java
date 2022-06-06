@@ -56,11 +56,17 @@ public class VentanaBackOffice extends VentanaGeneral {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        registros.setBackground(new java.awt.Color(110, 217, 161));
+        registros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        registros.setForeground(new java.awt.Color(0, 37, 35));
         registros.setText("Registros");
-        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 117, 38));
+        getContentPane().add(registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 150, 50));
 
+        reportes.setBackground(new java.awt.Color(110, 217, 161));
+        reportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        reportes.setForeground(new java.awt.Color(0, 37, 35));
         reportes.setText("Reportes");
-        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 117, 35));
+        getContentPane().add(reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 150, 50));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

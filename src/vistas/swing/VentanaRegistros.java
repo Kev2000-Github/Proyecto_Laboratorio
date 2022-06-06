@@ -64,6 +64,9 @@ public class VentanaRegistros extends VentanaGeneral {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(topMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 30));
 
+        usuarios.setBackground(new java.awt.Color(110, 217, 161));
+        usuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        usuarios.setForeground(new java.awt.Color(0, 37, 35));
         usuarios.setText("Usuarios");
         usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,9 +75,15 @@ public class VentanaRegistros extends VentanaGeneral {
         });
         getContentPane().add(usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 117, 35));
 
+        beneficiarios.setBackground(new java.awt.Color(110, 217, 161));
+        beneficiarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        beneficiarios.setForeground(new java.awt.Color(0, 37, 35));
         beneficiarios.setText("Beneficiarios");
         getContentPane().add(beneficiarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 117, 38));
 
+        fundaciones.setBackground(new java.awt.Color(110, 217, 161));
+        fundaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fundaciones.setForeground(new java.awt.Color(0, 37, 35));
         fundaciones.setText("Fundaciones");
         fundaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +92,9 @@ public class VentanaRegistros extends VentanaGeneral {
         });
         getContentPane().add(fundaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 117, 35));
 
+        empleados.setBackground(new java.awt.Color(110, 217, 161));
+        empleados.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        empleados.setForeground(new java.awt.Color(0, 37, 35));
         empleados.setText("Empleados");
         empleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +103,9 @@ public class VentanaRegistros extends VentanaGeneral {
         });
         getContentPane().add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 117, 35));
 
+        charlas.setBackground(new java.awt.Color(110, 217, 161));
+        charlas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        charlas.setForeground(new java.awt.Color(0, 37, 35));
         charlas.setText("Charlas");
         charlas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,10 +114,10 @@ public class VentanaRegistros extends VentanaGeneral {
         });
         getContentPane().add(charlas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 117, 35));
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BIENVENIDO,");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jLabel1.setText("BIENVENIDO");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
         goBackLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/swing/componentes/images/return.png"))); // NOI18N
         goBackLbl.setName("goBack"); // NOI18N

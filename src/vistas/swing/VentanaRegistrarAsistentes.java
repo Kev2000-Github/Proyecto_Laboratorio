@@ -76,7 +76,9 @@ public class VentanaRegistrarAsistentes extends VentanaGeneral {
         jtfCedula.setToolTipText("");
         getContentPane().add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 120, -1));
 
-        btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
+        btnRegistrar.setBackground(new java.awt.Color(110, 217, 161));
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(0, 37, 35));
         btnRegistrar.setText("Registrar");
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 180));

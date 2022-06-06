@@ -95,15 +95,18 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 738, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 31, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 386, -1, -1));
 
+        solicitudBtn.setBackground(new java.awt.Color(110, 217, 161));
+        solicitudBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        solicitudBtn.setForeground(new java.awt.Color(0, 37, 35));
         solicitudBtn.setText("Ver solicitud");
         solicitudBtn.setName("verSolicitud"); // NOI18N
         solicitudBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -111,17 +114,17 @@ public class VentanaGestionarSolicitud extends VentanaGeneral {
                 solicitudBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(solicitudBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+        jPanel1.add(solicitudBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 342, 130, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 88, 560, 360));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 88, 560, 380));
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Solicitudes");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 550, -1));
         getContentPane().add(backgroundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));

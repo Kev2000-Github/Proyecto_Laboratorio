@@ -35,6 +35,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="usuarios">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a1" green="d9" red="6e" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="25" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Usuarios"/>
       </Properties>
       <Events>
@@ -48,6 +57,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="beneficiarios">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a1" green="d9" red="6e" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="25" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Beneficiarios"/>
       </Properties>
       <Constraints>
@@ -58,6 +76,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="fundaciones">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a1" green="d9" red="6e" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="25" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fundaciones"/>
       </Properties>
       <Events>
@@ -71,6 +98,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="empleados">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a1" green="d9" red="6e" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="25" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Empleados"/>
       </Properties>
       <Events>
@@ -84,6 +120,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="charlas">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a1" green="d9" red="6e" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="25" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Charlas"/>
       </Properties>
       <Events>
@@ -98,16 +143,16 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Helvetica Neue" size="14" style="1"/>
+          <Font name="Helvetica Neue" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="BIENVENIDO,"/>
+        <Property name="text" type="java.lang.String" value="BIENVENIDO"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="100" width="-1" height="-1"/>
+          <AbsoluteConstraints x="50" y="160" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
